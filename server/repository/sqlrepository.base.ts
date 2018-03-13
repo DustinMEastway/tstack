@@ -1,4 +1,4 @@
-import { IRepository } from 'dme-modules/server';
+import { IRepository } from './repository.interface';
 
 export class SqlRepositoryBase<T> implements IRepository<T> {
 	get(objectToGet: { id: any }): T {

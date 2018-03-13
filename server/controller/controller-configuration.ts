@@ -1,7 +1,8 @@
 import { Type } from '@angular/core';
 
 import { mapProperties } from 'dme-modules/core';
-import { IControllerConfiguration } from 'dme-modules/server';
+
+import { IControllerConfiguration } from './controller-configuration.interface';
 
 export class ControllerConfiguration<T> implements IControllerConfiguration<T> {
 	entityType: Type<T>;

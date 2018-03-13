@@ -1,7 +1,8 @@
 import { Type } from '@angular/core';
 import * as express from 'express';
 
-import { IControllerConfiguration, ControllerConfiguration } from 'dme-modules/server';
+import { IControllerConfiguration } from './controller-configuration.interface';
+import { ControllerConfiguration } from './controller-configuration';
 
 export class ControllerBase<T> {
 	protected _entityType: Type<T>;

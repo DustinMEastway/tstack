@@ -1,11 +1,6 @@
-import { EntityBase } from 'dme-modules/core';
+import { EntityBase } from './entity.base';
 
 export abstract class Entity extends EntityBase {
-	/**
-	 * [_idProperties array of properties used to compare two objects of this type]
-	 * technically type Array<string> because nested properties seperated by '.' characters are allowed
-	 * @type {Array<keyof(this)>}
-	 */
 	protected abstract _idProperties: Array<string>;
 
 	/**

@@ -26,11 +26,13 @@
 	"homepage": "https://github.com/DustinMEastway/dme-modules#readme",
 	"dependencies": {
 		"@angular/compiler": "^5.2.8",
-		"@angular/core": "^5.2.8"
+		"@angular/core": "^5.2.8",
+		"express": "^4.16.3"
 	},
 	"devDependencies": {
 		"@angular/cli": "^1.7.3",
 		"@angular/compiler-cli": "^5.2.8",
+		"@types/express": "^4.11.1",
 		"codelyzer": "^4.2.1",
 		"tslint": "^5.9.1",
 		"typescript": "^2.7.2"

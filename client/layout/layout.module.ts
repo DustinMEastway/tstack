@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 
-import { TeamAppLayoutComponent } from 'dme-modules/client';
+import { DmeAppLayoutComponent } from './app-layout/app-layout.component';
 
 @NgModule({
 	declarations: [
-		TeamAppLayoutComponent
+		DmeAppLayoutComponent
 	]
 })
-export class TeamLayoutModule {}
+export class DmeLayoutModule {}

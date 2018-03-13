@@ -1,7 +1,8 @@
 import { Input } from '@angular/core';
 
 import { Entity } from 'dme-modules/core';
-import { EntityComponentMode } from 'dme-modules/client';
+
+import { EntityComponentMode } from './entity-component-mode';
 
 export abstract class EntityComponent<EntityType extends Entity> {
 	/**
