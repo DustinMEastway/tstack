@@ -1,6 +1,6 @@
 {
 	"name": "dme-modules",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"description": "Modules leveraging a typecript stack to make building web apps easier",
 	"main": "index.js",
 	"scripts": {
@@ -35,6 +35,6 @@
 		"@types/express": "^4.11.1",
 		"codelyzer": "^4.2.1",
 		"tslint": "^5.9.1",
-		"typescript": "^2.7.2"
+		"typescript": "^2.6.2"
 	}
 }

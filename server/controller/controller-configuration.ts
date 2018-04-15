@@ -2,17 +2,13 @@ import { Type } from '@angular/core';
 
 import { mapProperties } from 'dme-modules/core';
 
-import { IControllerConfiguration } from './controller-configuration.interface';
-
-export class ControllerConfiguration<T> implements IControllerConfiguration<T> {
+/**
+ * configuration for a controller of an api endpoint
+ */
+export interface ControllerConfiguration<T> {
+	/** @property {Type<T>} entityType for the controller to work with */
 	entityType: Type<T>;
+
+	/** @property {string} path to the base api endpoint */
 	path: string;
-
-	constructor(configuration?: IControllerConfiguration<T>) {
-		if (configuration != null) { Object.assign(this, configuration); }
-	}
-
-	static createFromInterface<T>(configuration?: IControllerConfiguration<T>): ControllerConfiguration<T> {
-		return new this(configuration);
-	}
 }

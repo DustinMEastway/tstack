@@ -1,1 +1,2 @@
-export * from './object-functions';
+export * from './array';
+export * from './object';

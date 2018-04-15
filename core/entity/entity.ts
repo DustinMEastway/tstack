@@ -1,11 +1,10 @@
 import { EntityBase } from './entity.base';
 
 export abstract class Entity extends EntityBase {
-	protected abstract _idProperties: Array<string>;
+	protected abstract _idProperties: string[];
 
 	/**
-	 * [idProperties array of properties used to compare two objects of this type]
-	 * technically type Array<string> because nested properties seperated by '.' characters are allowed
+	 * idProperties array of properties used to compare two objects of this type
 	 * @type {Array<keyof(this)>}
 	 */
 	get idProperties(): Array<string> {

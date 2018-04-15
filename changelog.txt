@@ -1,0 +1,2 @@
+1.0.0 - Inital package
+1.0.1 - Added JSDoc comments to most (hopefully all) code and added changelog

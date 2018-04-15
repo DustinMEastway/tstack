@@ -1,22 +1,21 @@
 import { Type } from '@angular/core';
 import * as express from 'express';
 
-import { IControllerConfiguration } from './controller-configuration.interface';
 import { ControllerConfiguration } from './controller-configuration';
 
 export class ControllerBase<T> {
 	protected _entityType: Type<T>;
 	protected _path: string;
-	private _configuration: IControllerConfiguration<T>;
+	private _configuration: ControllerConfiguration<T>;
 
-	get configuration(): IControllerConfiguration<T> {
+	get configuration(): ControllerConfiguration<T> {
 		return this._configuration;
 	}
-	set configuration(configuration: IControllerConfiguration<T>) {
-		this._configuration = ControllerConfiguration.createFromInterface(configuration);
+	set configuration(configuration: ControllerConfiguration<T>) {
+		this._configuration = configuration;
 	}
 
-	constructor(configuration?: IControllerConfiguration<T>) {
-		if (configuration != null) { this.configuration = configuration; }
+	constructor(configuration?: ControllerConfiguration<T>) {
+		this.configuration = configuration;
 	}
 }

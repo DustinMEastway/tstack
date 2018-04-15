@@ -4,14 +4,13 @@ import { Entity } from 'dme-modules/core';
 
 import { EntityComponentMode } from './entity-component-mode';
 
+/**
+ * component used to add, edit & view an entity
+ */
 export abstract class EntityComponent<EntityType extends Entity> {
-	/**
-	 * entity to add, edit or view
-	 */
+	/** @property entity to add, edit or view */
 	@Input() entity: Entity;
 
-	/**
-	 * mode to interact with the entity in
-	 */
+	/** @property mode to interact with the entity in */
 	@Input() mode: EntityComponentMode;
 }

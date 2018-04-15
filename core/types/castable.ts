@@ -1,3 +1,7 @@
-export interface Castable {
-	cast<ReturnT extends this | Array<this>>(objectToCast: any): ReturnT;
+/**
+ * type that has a cast method to create an instance of itself out of anything
+ */
+export interface Castable<T = any> {
+	new(): T;
+	cast<T>(item: any): T;
 }

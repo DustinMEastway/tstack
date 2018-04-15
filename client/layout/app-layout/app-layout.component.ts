@@ -5,5 +5,4 @@ import { Component } from '@angular/core';
 	templateUrl: 'app-layout.component.html',
 	styleUrls: [ 'app-layout.component.scss' ]
 })
-export class DmeAppLayoutComponent {
-}
+export class DmeAppLayoutComponent {}

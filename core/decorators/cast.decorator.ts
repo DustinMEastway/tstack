@@ -1,35 +1,46 @@
+import { getNestedValue, setNestedValue } from '../functions';
+import { Castable } from '../types';
+
+export interface CastDecoratorIdConfig {
+	/** @property {string} getId deepkeyof the set object to get the id property from */
+	getId: string;
+
+	/** @property {string} setId deepkeyof the decorated object (target) to set the id property on */
+	setId: string;
+}
+
 /**
  * Property/Accessor decorator that casts input values before setting them (optionally set and id when set is called)
- * @param {Type<T>} castType - type with a cast method used to convert set values to type T
- * @param {Object?} idConfiguration - used to set an id when set is called
- * @param {keyof(T)} idConfiguration.getId - propertyKey to get off of the the input value when set is called
- * @param {string} idConfiguration.setId - propertyKey to set on target when set is called
+ * @param {T} castType with a cast method used to convert set values to type the needed type
+ * @param {CastDecoratorIdConfig} [idConfig] used to set an id when set is called
  */
-export function Cast<T>(castType: { cast(source: any): T }, idConfiguration?: { getId: keyof(T), setId: string }) {
+export function Cast<T extends Castable>(castType: T, idConfig?: CastDecoratorIdConfig) {
 	return function (target: any, propertyKey: string, descriptor?: PropertyDescriptor): any {
-		let castedObject: T;
-		const propertyObject: TypedPropertyDescriptor<T> = {
+		// stored object casted into the requested type
+		let castedObject: T | T[];
+		// object to store the getter & setter on to return
+		const propertyObject: TypedPropertyDescriptor<T | T[]> = {
 			enumerable: true,
 			configurable: true
 		};
 
-		// make sure that there is not a getter without a setter
+		// throw an error if a there is a getter without a setter since they will not be able to access the casted object
 		if (descriptor && descriptor.set == null) {
 			console.error('Error: property ' + propertyKey + ' is using @Cast with a getter and without a setter');
 		}
 
-		// if descriptor is null then, there isn't a getter or setter so use the default getter
-		if (descriptor == null) {
-			propertyObject.get = () => { return castedObject; };
-		// if the descriptor has a getter then use it
-		} else if (descriptor.get) {
-			propertyObject.get = descriptor.get;
-		}
+		// if the descriptor does not have a getter, then use the default (return casted objected), otherwise use the one in the descriptor
+		propertyObject.get = (descriptor == null || descriptor.get == null) ? () => { return castedObject; } : descriptor.get;
 
-		propertyObject.set = (value: T) => {
-			castedObject = (value != null) ? castType.cast(value) : null;
-			// if the idConfiguration exists the set the target's id to the casted object's id
-			if (idConfiguration != null && castedObject != null) { target[idConfiguration.setId] = castedObject[idConfiguration.getId]; }
+		propertyObject.set = (value: any) => {
+			// cast object to the needed type
+			castedObject = (value != null) ? castType.cast<any>(value) : null;
+
+			// if the ids should be set, then get the getId from the casted object and set it on the target
+			if (idConfig != null) {
+				setNestedValue(target, getNestedValue(castedObject, idConfig.getId), idConfig.setId);
+			}
+
 			// call the existing setter if there was one
 			if (descriptor && descriptor.set) { descriptor.set(castedObject); }
 		};
