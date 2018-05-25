@@ -1,2 +1,3 @@
-1.0.0 - Inital package
-1.0.1 - Added JSDoc comments to most (hopefully all) code and added changelog
+0.0.0 - Inital package
+0.0.1 - Added JSDoc comments to most (hopefully all) code and added changelog
+0.0.2 - Merged local 'dme-modules' files into 'tstack' npm module

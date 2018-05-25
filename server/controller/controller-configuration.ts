@@ -1,6 +1,6 @@
 import { Type } from '@angular/core';
 
-import { mapProperties } from 'dme-modules/core';
+import { mapProperties } from 'core';
 
 /**
  * configuration for a controller of an api endpoint

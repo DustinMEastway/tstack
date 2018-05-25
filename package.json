@@ -1,40 +1,38 @@
 {
-	"name": "dme-modules",
-	"version": "1.0.1",
-	"description": "Modules leveraging a typecript stack to make building web apps easier",
-	"main": "index.js",
-	"scripts": {
-		"lint": "ng lint",
-		"test": "ng test"
-	},
-	"repository": {
-		"type": "git",
-		"url": "git+https://github.com/DustinMEastway/dme-modules.git"
-	},
-	"keywords": [
-		"TypeScript",
-		"Angular",
-		"Node.js",
-		"Web",
-		"Development"
-	],
-	"author": "Dustin M. Eastway",
-	"license": "Apache-2.0",
-	"bugs": {
-		"url": "https://github.com/DustinMEastway/dme-modules/issues"
-	},
-	"homepage": "https://github.com/DustinMEastway/dme-modules#readme",
-	"dependencies": {
-		"@angular/compiler": "^5.2.8",
-		"@angular/core": "^5.2.8",
-		"express": "^4.16.3"
-	},
-	"devDependencies": {
-		"@angular/cli": "^1.7.3",
-		"@angular/compiler-cli": "^5.2.8",
-		"@types/express": "^4.11.1",
-		"codelyzer": "^4.2.1",
-		"tslint": "^5.9.1",
-		"typescript": "^2.6.2"
-	}
+  "name": "tstack",
+  "version": "0.0.2",
+  "description": "A fully TypeScript based stack library to be used used with Angular & Express",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": "github:DustinMEastway/tstack",
+  "keywords": [
+    "TypeScript",
+    "Angular",
+    "Express",
+    "Node.js",
+    "Web Development",
+    "Stack"
+  ],
+  "author": "Dustin M. Eastway <Dustin.Eastway@gmail.com>",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/DustinMEastway/dme-modules/issues"
+  },
+  "homepage": "https://github.com/DustinMEastway/dme-modules#readme",
+  "dependencies": {
+    "@angular/compiler": "^5.2.8",
+    "@angular/core": "^5.2.8",
+    "express": "^4.16.3",
+    "rxjs": "^5.5.11",
+    "zone.js": "^0.8.26"
+  },
+  "devDependencies": {
+    "@angular/cli": "^1.7.3",
+    "@angular/compiler-cli": "^5.2.8",
+    "@types/express": "^4.11.1",
+    "codelyzer": "^4.2.1",
+    "tslint": "^5.9.1",
+    "typescript": "^2.6.2"
+  }
 }

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-	selector: 'dme-app-layout',
+	selector: 'tsk-app-layout',
 	templateUrl: 'app-layout.component.html',
 	styleUrls: [ 'app-layout.component.scss' ]
 })

@@ -3,5 +3,5 @@
  */
 export interface Castable<T = any> {
 	new(): T;
-	cast<T>(item: any): T;
+	cast: (item: any) => T;
 }

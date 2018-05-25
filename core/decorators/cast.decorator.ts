@@ -34,7 +34,7 @@ export function Cast<T extends Castable>(castType: T, idConfig?: CastDecoratorId
 
 		propertyObject.set = (value: any) => {
 			// cast object to the needed type
-			castedObject = (value != null) ? castType.cast<any>(value) : null;
+			castedObject = (value != null) ? castType.cast(value) : null;
 
 			// if the ids should be set, then get the getId from the casted object and set it on the target
 			if (idConfig != null) {

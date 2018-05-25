@@ -14,7 +14,7 @@ export class EntityBase {
 	 * @returns {this[]} items after being cast
 	 */
 	static castArray<ThisT extends EntityBase = any>(items: any[]): ThisT[] {
-		return (items instanceof Array) ? items.map(this.castObject) : [];
+		return (items instanceof Array) ? items.map((item) => this.castObject(item)) : [];
 	}
 
 	/**

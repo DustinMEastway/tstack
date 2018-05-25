@@ -1,6 +1,4 @@
-/**
- * modes available for displaying an EntityComponent
- */
+/** modes available for displaying an EntityComponent */
 export enum EntityComponentMode {
 	Add = 'add',
 	Edit = 'edit',
