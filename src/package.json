@@ -1,0 +1,29 @@
+{
+  "name": "tstack",
+  "version": "0.0.2",
+  "description": "A fully TypeScript based stack library to be used used with Angular & Express",
+  "author": "Dustin M. Eastway <Dustin.Eastway@gmail.com>",
+  "repository": "github:DustinMEastway/tstack",
+  "homepage": "https://github.com/DustinMEastway/dme-modules#readme",
+  "license": "Apache-2.0",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "TypeScript",
+    "Angular",
+    "Express",
+    "Node.js",
+    "Web Development",
+    "Stack"
+  ],
+  "bugs": {
+    "url": "https://github.com/DustinMEastway/dme-modules/issues"
+  },
+  "peerDependencies": {
+    "@angular/core": "^5.0.0",
+    "express": "^4.0.0",
+    "rxjs": "^5.0.0",
+    "zone.js": "^0.8.0"
+  }
+}
