@@ -6,9 +6,7 @@
   "repository": "github:DustinMEastway/tstack",
   "homepage": "https://github.com/DustinMEastway/dme-modules#readme",
   "license": "Apache-2.0",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
+  "module": "index.js",
   "keywords": [
     "TypeScript",
     "Angular",
@@ -27,3 +25,4 @@
     "zone.js": "^0.8.0"
   }
 }
+

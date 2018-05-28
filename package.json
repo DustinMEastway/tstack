@@ -2,10 +2,13 @@
   "name": "tstack",
   "version": "0.0.2",
   "description": "A fully TypeScript based stack library to be used used with Angular & Express",
+  "author": "Dustin M. Eastway <Dustin.Eastway@gmail.com>",
+  "repository": "github:DustinMEastway/tstack",
+  "homepage": "https://github.com/DustinMEastway/dme-modules#readme",
+  "license": "Apache-2.0",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "repository": "github:DustinMEastway/tstack",
   "keywords": [
     "TypeScript",
     "Angular",
@@ -14,25 +17,21 @@
     "Web Development",
     "Stack"
   ],
-  "author": "Dustin M. Eastway <Dustin.Eastway@gmail.com>",
-  "license": "Apache-2.0",
   "bugs": {
     "url": "https://github.com/DustinMEastway/dme-modules/issues"
   },
-  "homepage": "https://github.com/DustinMEastway/dme-modules#readme",
-  "dependencies": {
-    "@angular/compiler": "^5.2.8",
-    "@angular/core": "^5.2.8",
-    "express": "^4.16.3",
-    "rxjs": "^5.5.11",
-    "zone.js": "^0.8.26"
-  },
   "devDependencies": {
-    "@angular/cli": "^1.7.3",
-    "@angular/compiler-cli": "^5.2.8",
+    "@angular/compiler": "^5.2.8",
+    "@angular/compiler-cli": "^5.2.11",
+    "@angular/core": "^5.2.8",
     "@types/express": "^4.11.1",
     "codelyzer": "^4.2.1",
+    "express": "^4.16.3",
+    "rollup": "^0.59.3",
+    "rxjs": "^5.5.11",
     "tslint": "^5.9.1",
-    "typescript": "^2.6.2"
+    "typescript": "^2.6.2",
+    "zone.js": "^0.8.26"
   }
 }
+
