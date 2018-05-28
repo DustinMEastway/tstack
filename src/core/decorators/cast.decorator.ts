@@ -11,10 +11,10 @@ export interface CastDecoratorIdConfig {
 
 /**
  * Property/Accessor decorator that casts input values before setting them (optionally set and id when set is called)
- * @param {T} castType with a cast method used to convert set values to type the needed type
- * @param {CastDecoratorIdConfig} [idConfig] used to set an id when set is called
+ * @param castType with a cast method used to convert set values to type the needed type
+ * @param [idConfig] used to set an id when set is called
  */
-export function Cast<T extends Castable>(castType: T, idConfig?: CastDecoratorIdConfig) {
+export function Cast<T extends Castable>(castType: T, idConfig?: CastDecoratorIdConfig): any {
 	return function (target: any, propertyKey: string, descriptor?: PropertyDescriptor): any {
 		// stored object casted into the requested type
 		let castedObject: T | T[];

@@ -10,8 +10,8 @@ export interface CastStringConfig {
 
 /**
  * casts the given item into a string if possible, if not, an empty string is returned
- * @param {any} item to cast into a string
- * @param {CastStringConfig} [config] options to apply to the string after it has been cast
+ * @param item to cast into a string
+ * @param [config] options to apply to the string after it has been cast
  */
 export function castString(item: any, config?: CastStringConfig): string {
 	if (item == null || (typeof item !== 'string' && typeof item.toString !== 'function')) { return ''; }
@@ -38,9 +38,9 @@ export function castString(item: any, config?: CastStringConfig): string {
 
 /**
  * gets a nested value without throwing an error if the nested property is not on the item
- * @param {any} item to get the value from
- * @param {string} nestedProperty to get
- * @returns {ReturnT} value of nestedProperty pulled from the source object
+ * @param item to get the value from
+ * @param nestedProperty to get
+ * @returns value of nestedProperty pulled from the source object
  */
 export function getNestedValue<ReturnT = any, ItemT = any>(item: ItemT, nestedProperty = ''): ReturnT {
 	const properties = nestedProperty.split(/[\.\[\]]/);
@@ -59,10 +59,10 @@ export function getNestedValue<ReturnT = any, ItemT = any>(item: ItemT, nestedP
 
 /**
  * gets each property from the source and sets them on the target
- * @param {TargetT} target object to map values to
- * @param {any} source object to get values from
- * @param {boolean} overwrite non-null values of target it true
- * @returns {TargetT} target object after the mapping has occurred
+ * @param target object to map values to
+ * @param source object to get values from
+ * @param overwrite non-null values of target it true
+ * @returns target object after the mapping has occurred
  */
 export function mapProperties<TargetT>(target: TargetT, source: any, overwrite = true): TargetT {
 	for (const property in target) {
@@ -79,10 +79,10 @@ export function mapProperties<TargetT>(target: TargetT, source: any, overwrite =
 
 /**
  * sets a nested value without thowing an error if the nested property is not on the item
- * @param {ItemT} item to set a value on
- * @param {any} value to set the property on item to
- * @param {string} nestedProperty to set on the item
- * @returns {ItemT} item after the property has been set to the given value
+ * @param item to set a value on
+ * @param value to set the property on item to
+ * @param nestedProperty to set on the item
+ * @returns item after the property has been set to the given value
  */
 export function setNestedValue<ItemT>(item: ItemT, value: any, nestedProperty: string): ItemT {
 	const properties = (typeof nestedProperty === 'string') ? nestedProperty.trim().split(/[\.\[\]]/) : [];
