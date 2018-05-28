@@ -1,6 +1,6 @@
 # compiled output
 /dist
-/build
+/ngc-out
 
 # dependencies
 /node_modules

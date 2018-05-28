@@ -7,7 +7,7 @@
     "stripInternal": true,
     "experimentalDecorators": true,
     "moduleResolution": "node",
-    "outDir": "../build",
+    "outDir": "../ngc-out",
     "rootDir": ".",
     "noImplicitAny": true,
     "lib": [
