@@ -21,10 +21,9 @@
   ],
   "angularCompilerOptions": {
     "annotateForClosureCompiler": true,
-    "strictmetadataEmit": true,
+    "strictMetadataEmit": true,
     "skipTemplateCodegen": true,
     "flatModuleOutFile": "tstack-lib.js",
     "flatModuleId": "tstack-lib"
   }
 }
-

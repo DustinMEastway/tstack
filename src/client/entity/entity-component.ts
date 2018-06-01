@@ -1,6 +1,6 @@
 import { Input } from '@angular/core';
 
-import { Entity } from 'core';
+import { Entity } from '../../core';
 
 import { EntityComponentMode } from './entity-component-mode';
 

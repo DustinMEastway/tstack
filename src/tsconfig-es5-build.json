@@ -3,18 +3,17 @@
     "declaration": true,
     "module": "es2015",
     "target": "es5",
-    "baseUrl": ".",
+    "baseUrl": "./",
     "stripInternal": true,
     "experimentalDecorators": true,
     "moduleResolution": "node",
     "outDir": "../ngc-out",
-    "rootDir": ".",
+    "rootDir": "./",
     "noImplicitAny": true,
     "lib": [
-      "es2015",
+      "es2017",
       "dom"
     ],
-    "skipLibCheck": true,
     "types": []
   },
   "files": [

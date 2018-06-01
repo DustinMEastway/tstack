@@ -6,7 +6,8 @@
   "repository": "github:DustinMEastway/tstack",
   "homepage": "https://github.com/DustinMEastway/dme-modules#readme",
   "license": "Apache-2.0",
-  "module": "index.js",
+  "module": "tstack-lib.es5.js",
+  "es2015": "tstack-lib.js",
   "keywords": [
     "TypeScript",
     "Angular",

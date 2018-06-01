@@ -5,7 +5,9 @@ export class EntityBase {
 	 * @returns item after being cast
 	 */
 	static castObject<ThisT extends EntityBase = any>(item: any): ThisT {
-		return Object.assign(new this(), item) as any;
+		if (item == null) { return null; }
+
+		return Object.assign(new this(), item) as any;;
 	}
 
 	/**
@@ -14,7 +16,9 @@ export class EntityBase {
 	 * @returns items after being cast
 	 */
 	static castArray<ThisT extends EntityBase = any>(items: any[]): ThisT[] {
-		return (items instanceof Array) ? items.map((item) => this.castObject(item)) : [];
+		if (!(items == null || items instanceof Array)) { throw Error('EntityBase.castArray: called with a non-array type'); }
+
+		return (items != null) ? items.map((item) => this.castObject(item)) : null;
 	}
 
 	/**
@@ -23,7 +27,10 @@ export class EntityBase {
 	 * @returns souce after being cast
 	 */
 	static cast<ReturnT extends EntityBase | EntityBase[] = any>(source: any): ReturnT {
-		return (source instanceof Array) ? this.castArray(source) as any : this.castObject(source);
+		// eastwayd: this should be a one line return, but sadly angular-compiler's strictMetadataEmit errors if it is
+		const newObjectOrArray: any = (source instanceof Array) ? this.castArray(source) : this.castObject(source);
+
+		return newObjectOrArray;
 	}
 
 	/**
