@@ -1,4 +1,4 @@
-import { getNestedValue } from './object';
+import { getValue } from './object';
 
 /**
  * filters an array of values
@@ -11,7 +11,7 @@ import { getNestedValue } from './object';
 export function filter<T>(items: T[], filterValue: any, property?: string, keepMatches = true): T[] {
 	if (!(items instanceof Array)) { return []; }
 
-	return items.filter(item => keepMatches === (getNestedValue(item, property) === filterValue));
+	return items.filter(item => keepMatches === (getValue(item, property) === filterValue));
 }
 
 /**
@@ -37,7 +37,7 @@ export function find<T>(items: T[], valueToFind: any, property?: string): T {
 export function findIndex<T>(items: T[], valueToFind: any, property?: string): number {
 	if (!(items instanceof Array)) { return -1; }
 
-	return items.findIndex((item) => getNestedValue(item, property) === valueToFind);
+	return items.findIndex((item) => getValue(item, property) === valueToFind);
 }
 
 /**
@@ -46,6 +46,6 @@ export function findIndex<T>(items: T[], valueToFind: any, property?: string): n
  * @param property get off of each item
  * @returns the value at the given property for each item in items
  */
- export function pluck<T = any>(items: any[], property: string): T[] {
- 	return (items instanceof Array) ? items.map(i => getNestedValue(i, property)) : [];
- }
+export function pluck<T = any>(items: any[], property: string): T[] {
+	return (items instanceof Array) ? items.map(i => getValue(i, property)) : [];
+}

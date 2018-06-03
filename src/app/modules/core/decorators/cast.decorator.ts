@@ -1,4 +1,4 @@
-import { getNestedValue, setNestedValue } from '../../core/functions/object';
+import { getValue, setValue } from '../../core/functions/object';
 import { Castable } from '../../core/types/castable';
 
 export interface CastDecoratorIdConfig {
@@ -38,7 +38,7 @@ export function Cast<T extends Castable>(castType: T, idConfig?: CastDecoratorId
 
 			// if the ids should be set, then get the getId from the casted object and set it on the target
 			if (idConfig != null) {
-				setNestedValue(target, getNestedValue(castedObject, idConfig.getId), idConfig.setId);
+				setValue(target, getValue(castedObject, idConfig.getId), idConfig.setId);
 			}
 
 			// call the existing setter if there was one

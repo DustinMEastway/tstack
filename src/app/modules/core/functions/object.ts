@@ -42,7 +42,7 @@ export function castString(item: any, config?: CastStringConfig): string {
  * @param property to get
  * @returns value of property pulled from the source object
  */
-export function getNestedValue<ReturnT = any, ItemT = any>(item: ItemT, property = ''): ReturnT {
+export function getValue<ReturnT = any, ItemT = any>(item: ItemT, property = ''): ReturnT {
 	const properties = property.split(/[\.\[\]]/);
 	let valueToReturn: any = item;
 
@@ -84,7 +84,7 @@ export function mapProperties<TargetT>(target: TargetT, source: any, overwrite =
  * @param property to set on the item
  * @returns item after the property has been set to the given value
  */
-export function setNestedValue<ItemT>(item: ItemT, value: any, property: string): ItemT {
+export function setValue<ItemT>(item: ItemT, value: any, property: string): ItemT {
 	const properties = (typeof property === 'string') ? property.trim().split(/[\.\[\]]/) : [];
 
 	// get the last property in the list that is not an empty string to set
@@ -94,7 +94,7 @@ export function setNestedValue<ItemT>(item: ItemT, value: any, property: string)
 	}
 
 	// join the remaining properties to get the object to set the property on
-	const objectToSet = getNestedValue(item, properties.join('.'));
+	const objectToSet = getValue(item, properties.join('.'));
 	if (objectToSet) {
 		objectToSet[propertyToSet] = value;
 	}
