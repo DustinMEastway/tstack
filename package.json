@@ -1,13 +1,64 @@
 {
   "name": "tstack",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "A fully TypeScript based stack library to be used used with Angular & Express",
   "author": "Dustin M. Eastway <Dustin.Eastway@gmail.com>",
   "repository": "github:DustinMEastway/tstack",
   "homepage": "https://github.com/DustinMEastway/dme-modules#readme",
   "license": "Apache-2.0",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "ng": "ng",
+    "start": "ng serve",
+    "build": "ng build --prod",
+    "test": "ng test",
+    "lint": "ng lint",
+    "e2e": "ng e2e",
+    "packagr": "ng-packagr -p package.json"
+  },
+  "bugs": {
+    "url": "https://github.com/DustinMEastway/dme-modules/issues"
+  },
+  "private": false,
+  "peerDependencies": {
+    "@angular/core": "^5.0.0",
+    "rxjs": "^5.0.0"
+  },
+  "devDependencies": {
+    "@angular/cli": "~1.7.4",
+    "@angular/common": "^5.0.0",
+    "@angular/compiler": "^5.2.0",
+    "@angular/compiler-cli": "^5.2.0",
+    "@angular/core": "^5.0.0",
+    "@angular/forms": "^5.0.0",
+    "@angular/http": "^5.0.0",
+    "@angular/language-service": "^5.2.0",
+    "@angular/platform-browser": "^5.2.0",
+    "@angular/platform-browser-dynamic": "^5.2.0",
+    "@angular/router": "^5.2.0",
+    "@types/jasmine": "~2.8.3",
+    "@types/jasminewd2": "~2.0.2",
+    "@types/node": "~6.0.60",
+    "codelyzer": "^4.0.1",
+    "core-js": "^2.0.0",
+    "jasmine-core": "~2.8.0",
+    "jasmine-spec-reporter": "~4.2.1",
+    "karma": "~2.0.0",
+    "karma-chrome-launcher": "~2.2.0",
+    "karma-coverage-istanbul-reporter": "^1.2.1",
+    "karma-jasmine": "~1.1.0",
+    "karma-jasmine-html-reporter": "^0.2.2",
+    "ng-packagr": "^3.0.1",
+    "protractor": "^5.3.2",
+    "rxjs": "^5.0.0",
+    "ts-node": "~4.1.0",
+    "tslint": "~5.9.1",
+    "typescript": "~2.5.3",
+    "zone.js": "^0.8.0"
+  },
+  "ngPackage": {
+    "lib": {
+      "entryFile": "src/app/modules/public_api.ts"
+    }
   },
   "keywords": [
     "TypeScript",
@@ -16,25 +67,5 @@
     "Node.js",
     "Web Development",
     "Stack"
-  ],
-  "bugs": {
-    "url": "https://github.com/DustinMEastway/dme-modules/issues"
-  },
-  "devDependencies": {
-    "@angular/compiler": "^5.2.8",
-    "@angular/compiler-cli": "^5.2.11",
-    "@angular/core": "^5.2.8",
-    "@types/express": "^4.11.1",
-    "codelyzer": "^4.2.1",
-    "express": "^4.16.3",
-    "rollup": "^0.59.4",
-    "rollup-plugin-license": "^0.6.0",
-    "rollup-plugin-local-resolve": "^1.0.7",
-    "rollup-plugin-node-resolve": "^3.3.0",
-    "rollup-plugin-sourcemaps": "^0.4.2",
-    "rxjs": "^5.5.11",
-    "tslint": "^5.9.1",
-    "typescript": "^2.6.2",
-    "zone.js": "^0.8.26"
-  }
+  ]
 }
