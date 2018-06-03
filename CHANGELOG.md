@@ -10,5 +10,8 @@ Add JSDoc comments to most (hopefully all) code and added changelog
 
 ## 0.0.3 - NG-Packagr
 
-Move src into src/modules to allow for a demo app
-Refector to use ng-packagr
+### Features
+
+* Move src into src/modules to allow for a demo app
+* Use ng-packagr to help with following best practices
+* Change license from Apache 2.0 to MIT
