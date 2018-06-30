@@ -1,6 +1,5 @@
 {
   "name": "@tstack/server",
   "version": "0.1.0",
-  "peerDependencies": {
-  }
+  "private": false
 }
