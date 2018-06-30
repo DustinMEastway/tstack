@@ -1,2 +1,1 @@
-export * from './array';
-export * from './object';
+export * from './public_api';

@@ -1,6 +1,6 @@
 import { Input } from '@angular/core';
+import { Entity } from '@tstack/core';
 
-import { Entity } from '../../core/entity';
 import { EntityComponentMode } from './entity-component-mode';
 
 /** component used to add, edit & view an entity */

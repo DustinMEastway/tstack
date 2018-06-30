@@ -1,5 +1,5 @@
-import { getValue, setValue } from '../../core/functions/object';
-import { Castable } from '../../core/types/castable';
+import { getValue, setValue } from '../functions/object';
+import { Castable } from '../types/castable';
 
 export interface CastDecoratorIdConfig {
 	/** @property {string} getId deepkeyof the set object to get the id property from */
