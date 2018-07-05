@@ -18,7 +18,6 @@
 		"forin": true,
 		"import-blacklist": [
 			true,
-			"rxjs",
 			"rxjs/Rx"
 		],
 		"import-spacing": true,
@@ -56,6 +55,7 @@
 		],
 		"no-construct": true,
 		"no-debugger": true,
+		"no-duplicate-imports": true,
 		"no-duplicate-super": true,
 		"no-empty": false,
 		"no-empty-interface": true,
@@ -73,6 +73,7 @@
 		"no-trailing-whitespace": true,
 		"no-unnecessary-initializer": true,
 		"no-unused-expression": true,
+		"no-unused-variable": true,
 		"no-use-before-declare": true,
 		"no-var-keyword": true,
 		"object-literal-sort-keys": false,
@@ -82,6 +83,14 @@
 			"check-catch",
 			"check-else",
 			"check-whitespace"
+		],
+		"ordered-imports": [
+			true,
+			{
+				"import-sources-order": "lowercase-first",
+				"grouped-imports": true,
+				"named-imports-order": "lowercase-first"
+			}
 		],
 		"prefer-const": true,
 		"quotemark": [
@@ -96,6 +105,14 @@
 		"triple-equals": [
 			true,
 			"allow-null-check"
+		],
+		"typedef": [
+			true,
+			"call-signature",
+			"parameter",
+			"property-declaration",
+			"object-destructuring",
+			"array-destructuring"
 		],
 		"typedef-whitespace": [
 			true,
@@ -120,13 +137,13 @@
 		"directive-selector": [
 			true,
 			"attribute",
-			"dme",
+			"app",
 			"camelCase"
 		],
 		"component-selector": [
 			true,
 			"element",
-			"dme",
+			"app",
 			"kebab-case"
 		],
 		"no-output-on-prefix": true,
