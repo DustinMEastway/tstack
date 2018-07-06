@@ -42,7 +42,7 @@ export function castString(item: any, config?: CastStringConfig): string {
  * @param property to get
  * @returns value of property pulled from the source object
  */
-export function getValue<ReturnT = any, ItemT = any>(item: ItemT, property = ''): ReturnT {
+export function getValue<ReturnT = any, ItemT = any>(item: ItemT, property: string = ''): ReturnT {
 	const properties = property.split(/[\.\[\]]/);
 	let valueToReturn: any = item;
 
@@ -64,7 +64,7 @@ export function getValue<ReturnT = any, ItemT = any>(item: ItemT, property = ''
  * @param overwrite non-null values of target it true
  * @returns target object after the mapping has occurred
  */
-export function mapProperties<TargetT>(target: TargetT, source: any, overwrite = true): TargetT {
+export function mapProperties<TargetT>(target: TargetT, source: any, overwrite: boolean = true): TargetT {
 	for (const property in target) {
 		// set the properties value on the target from the source if the source property is getable and the target property is setable
 		if ((!Object.getOwnPropertyDescriptor(target, property) || Object.getOwnPropertyDescriptor(target, property).set)

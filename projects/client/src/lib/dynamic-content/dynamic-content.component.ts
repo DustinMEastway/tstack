@@ -1,7 +1,7 @@
 import {
 	Component,
-	ComponentRef,
 	ComponentFactoryResolver,
+	ComponentRef,
 	Input,
 	OnInit,
 	Type,

@@ -7,6 +7,14 @@ const routes: Routes = [
 		loadChildren: './client/client.module#ClientModule'
 	},
 	{
+		path: 'core',
+		loadChildren: './core/core.module#CoreModule'
+	},
+	{
+		path: 'server',
+		loadChildren: './server/server.module#ServerModule'
+	},
+	{
 		path: '**',
 		redirectTo: 'client'
 	}
