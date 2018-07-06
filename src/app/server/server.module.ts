@@ -2,18 +2,18 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { MatButtonModule, MatToolbarModule } from '@angular/material';
 
-import { ClientRoutingModule } from './client-routing.module';
-import { ClientScreenComponent } from './client-screen/client-screen.component';
+import { ServerRoutingModule } from './server-routing.module';
+import { ServerScreenComponent } from './server-screen/server-screen.component';
 
 @NgModule({
 	imports: [
 		CommonModule,
 		MatButtonModule,
 		MatToolbarModule,
-		ClientRoutingModule
+		ServerRoutingModule
 	],
 	declarations: [
-		ClientScreenComponent
+		ServerScreenComponent
 	]
 })
-export class ClientModule { }
+export class ServerModule { }

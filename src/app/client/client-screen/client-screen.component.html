@@ -1,3 +1,7 @@
-<p>
-  client-screen works!
-</p>
+<mat-toolbar color="primary">
+	{{ title }}
+	<a mat-button routerLink="/client/dynamic-content">Dynamic Content</a>
+	<a mat-button routerLink="/client/table">Table</a>
+</mat-toolbar>
+
+<router-outlet></router-outlet>
