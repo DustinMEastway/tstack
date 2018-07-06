@@ -8,7 +8,7 @@ import { getValue } from './object';
  * @param [keepMatches=true] to filterValue if set to true
  * @returns filtered items
  */
-export function filter<T>(items: T[], filterValue: any, property?: string, keepMatches = true): T[] {
+export function filter<T>(items: T[], filterValue: any, property?: string, keepMatches: boolean = true): T[] {
 	if (!(items instanceof Array)) { return []; }
 
 	return items.filter(item => keepMatches === (getValue(item, property) === filterValue));
