@@ -9,6 +9,10 @@ const routes: Routes = [
 		component: ClientScreenComponent,
 		children: [
 			{
+				path: 'autocomplete',
+				loadChildren: './autocomplete/autocomplete.module#AutocompleteModule'
+			},
+			{
 				path: 'dynamic-content',
 				loadChildren: './dynamic-content/dynamic-content.module#DynamicContentModule'
 			},
