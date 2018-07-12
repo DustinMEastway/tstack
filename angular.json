@@ -11,6 +11,10 @@
       "schematics": {
         "@schematics/angular:component": {
           "styleext": "scss"
+        },
+        "@schematics/angular:module": {
+          "routing": true,
+          "spec": false
         }
       },
       "architect": {
@@ -102,6 +106,14 @@
     "tstack-e2e": {
       "root": "e2e/",
       "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "styleext": "scss"
+        },
+        "@schematics/angular:module": {
+          "spec": false
+        }
+      },
       "architect": {
         "e2e": {
           "builder": "@angular-devkit/build-angular:protractor",
@@ -131,6 +143,14 @@
       "sourceRoot": "projects/client/src",
       "projectType": "library",
       "prefix": "tsk",
+      "schematics": {
+        "@schematics/angular:component": {
+          "styleext": "scss"
+        },
+        "@schematics/angular:module": {
+          "spec": false
+        }
+      },
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-ng-packagr:build",
@@ -171,6 +191,14 @@
       "sourceRoot": "projects/core/src",
       "projectType": "library",
       "prefix": "tsk",
+      "schematics": {
+        "@schematics/angular:component": {
+          "styleext": "scss"
+        },
+        "@schematics/angular:module": {
+          "spec": false
+        }
+      },
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-ng-packagr:build",
