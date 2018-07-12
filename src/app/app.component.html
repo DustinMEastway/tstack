@@ -1,8 +1,29 @@
-<mat-toolbar color="primary">
-	{{ title }}
-	<a mat-button routerLink="client">Client</a>
-	<a mat-button routerLink="core">Core</a>
-	<a mat-button routerLink="server">Server</a>
-</mat-toolbar>
-
-<router-outlet></router-outlet>
+<div class="app-background" [ngClass]="themeClass">
+	<div class="mat-app-background app-container">
+		<mat-toolbar class="mat-elevation-z5 primary-nav" role="heading" color="primary">
+			<a mat-button routerLink="/">{{ title }}</a>
+			<button mat-button type="text" [matMenuTriggerFor]="clientMenu">Client</button>
+			<mat-menu #clientMenu>
+				<a mat-menu-item routerLink="/client">Home</a>
+				<a mat-menu-item routerLink="/client/autocomplete">Autocomplete</a>
+				<a mat-menu-item routerLink="/client/dynamic-content">Dynamic Content</a>
+				<a mat-menu-item routerLink="/client/table">Table</a>
+			</mat-menu>
+			<button mat-button type="text" [matMenuTriggerFor]="coreMenu">Core</button>
+			<mat-menu #coreMenu>
+				<a mat-menu-item routerLink="/core">Home</a>
+			</mat-menu>
+			<button mat-button type="text" [matMenuTriggerFor]="serverMenu">Server</button>
+			<mat-menu #serverMenu>
+				<a mat-menu-item routerLink="/server">Home</a>
+			</mat-menu>
+			<div class="flex-space"></div>
+			<button mat-button type="text" (click)="changeTheme()">Change Theme</button>
+			<a mat-button href="https://github.com/DustinMEastway/tstack">
+				<mat-icon svgIcon="github"></mat-icon>
+				GitHub
+			</a>
+		</mat-toolbar>
+		<router-outlet></router-outlet>
+	</div>
+</div>

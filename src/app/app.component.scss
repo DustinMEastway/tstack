@@ -1,0 +1,36 @@
+@import '~@angular/material/theming';
+
+.app-background {
+	bottom: 0;
+	position: absolute;
+	left: 0;
+	right: 0;
+	top: 0;
+}
+
+.primary-nav {
+	left: 0;
+	position: fixed;
+	right: 0;
+	top: 0;
+	.mat-icon[svgIcon="github"] {
+		height: 30px;
+		width: 30px;
+	}
+}
+
+.app-container {
+	bottom: 0;
+	display: flex;
+	flex-direction: column;
+	left: 0;
+	position: absolute;
+	right: 0;
+	top: 64px;
+}
+
+@media (max-width: 599px) {
+	.app-container {
+		top: 56px;
+	}
+}
