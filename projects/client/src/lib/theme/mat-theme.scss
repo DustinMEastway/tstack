@@ -1,0 +1,15 @@
+@import '~@angular/material/theming';
+
+// create a material theme and allows entry of the background and foreground
+@function tsk-mat-theme($isDark: true, $primary, $accent, $warn: mat-palette($mat-red), $background: $mat-dark-theme-background,
+	$foreground: $mat-dark-theme-foreground) {
+
+	@return (
+		primary: $primary,
+		accent: $accent,
+		warn: $warn,
+		is-dark: $isDark,
+		foreground: $foreground,
+		background: $background,
+	);
+}

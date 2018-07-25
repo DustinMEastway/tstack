@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { DynamicContentScreenComponent } from './dynamic-content-screen.component';
+import { DynamicContentScreenComponent } from './dynamic-content-screen/dynamic-content-screen.component';
 
 const routes: Routes = [
 	{

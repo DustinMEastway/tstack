@@ -1,1 +1,1 @@
-export * from './sqlRepository';
+export * from './index';

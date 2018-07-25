@@ -1,1 +1,1 @@
-export * from './castable';
+export * from './index';

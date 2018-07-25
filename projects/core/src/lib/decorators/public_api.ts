@@ -1,1 +1,1 @@
-export * from './cast.decorator';
+export * from './index';

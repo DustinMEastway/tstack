@@ -42,13 +42,13 @@ export function castString(item: any, config?: CastStringConfig): string {
  * @param property to get
  * @returns value of property pulled from the source object
  */
-export function getValue<ReturnT = any, ItemT = any>(item: ItemT, property: string = ''): ReturnT {
-	const properties = property.split(/[\.\[\]]/);
+export function getValue<ReturnT = any, ItemT = any>(item: ItemT, propertyToGet: string = ''): ReturnT {
+	const properties = propertyToGet.split(/[\.\[\]]/);
 	let valueToReturn: any = item;
 
-	for (const prop of properties) {
-		if (valueToReturn != null && prop.trim() !== '') {
-			valueToReturn = (parseInt(prop, 10) === NaN) ? valueToReturn[prop] : valueToReturn[parseInt(prop, 10)];
+	for (const property of properties) {
+		if (valueToReturn != null && property.trim() !== '') {
+			valueToReturn = (isNaN(parseInt(property, 10))) ? valueToReturn[property] : valueToReturn[parseInt(property, 10)];
 		} else {
 			break;
 		}

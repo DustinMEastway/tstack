@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
+import { HomeScreenComponent } from './home-screen/home-screen.component';
+
 const routes: Routes = [
 	{
 		path: 'client',
@@ -15,8 +17,13 @@ const routes: Routes = [
 		loadChildren: './server/server.module#ServerModule'
 	},
 	{
+		path: '',
+		pathMatch: 'full',
+		component: HomeScreenComponent
+	},
+	{
 		path: '**',
-		redirectTo: 'client'
+		redirectTo: ''
 	}
 ];
 

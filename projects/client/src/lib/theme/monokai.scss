@@ -1,0 +1,29 @@
+@import '~@angular/material/theming';
+@import '~@tstack/core/styles/palettes/monokai';
+
+@import './monokai';
+
+$dark-monokai-background: (
+	status-bar:	black,
+	app-bar:	map_get($monokai-grey, 900),
+	background:	map_get($monokai-grey, 500),
+	hover:		rgba(white, 0.04),
+	card:		map_get($monokai-grey, 800),
+	dialog:		map_get($monokai-grey, 800),
+	disabled-button: rgba(white, 0.12),
+	raised-button: map-get($monokai-grey, 800),
+	focused-button: $light-focused,
+	selected-button: map_get($monokai-grey, 900),
+	selected-disabled-button: map_get($monokai-grey, 800),
+	disabled-button-toggle: black,
+	unselected-chip: map_get($monokai-grey, 700),
+	disabled-list-option: black
+);
+
+$monokai-pink-theme: tsk-mat-theme(
+	true,
+	mat-palette($monokai-pink),
+	mat-palette($monokai-green),
+	mat-palette($monokai-orange),
+	$dark-monokai-background
+);

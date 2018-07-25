@@ -1,0 +1,51 @@
+@import '~@angular/material/theming';
+
+@include mat-core();
+
+// create the available themes
+$mat-deeppurple-amber-theme: mat-light-theme(
+	mat-palette($mat-deep-purple),
+	mat-palette($mat-amber, A200, A100, A400)
+);
+
+$mat-indigo-pink: mat-light-theme(
+	mat-palette($mat-indigo),
+	mat-palette($mat-pink, A200, A100, A400)
+);
+
+$mat-pink-bluegrey: mat-dark-theme(
+	mat-palette($mat-pink),
+	mat-palette($mat-blue-grey, A200, A100, A400)
+);
+
+$mat-purple-green: mat-dark-theme(
+	mat-palette($mat-purple),
+	mat-palette($mat-green, A200, A100, A400)
+);
+
+// components that require special theming
+@import "app/_app.component-theme";
+
+// a mixin that sets the theme for the full application
+@mixin set-themes($theme) {
+	@include angular-material-theme($theme);
+	@include app-theme($theme);
+}
+
+@include set-themes($mat-deeppurple-amber-theme);
+
+.mat-deeppurple-amber-theme {
+	@include set-themes($mat-deeppurple-amber-theme);
+}
+
+.mat-indigo-pink-theme {
+	@include set-themes($mat-indigo-pink);
+}
+
+.mat-pink-bluegrey-theme {
+	@include set-themes($mat-pink-bluegrey);
+}
+
+.mat-purple-green-theme {
+	@include set-themes($mat-purple-green);
+}
