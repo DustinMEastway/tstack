@@ -1,0 +1,12 @@
+@mixin app-theme($theme) {
+	$theme-primary: map-get(map-get($theme, primary), default);
+	$theme-background: map-get(map-get($theme, background), background);
+
+	.app-background {
+		background-color: $theme-primary;
+	}
+
+	.app-container {
+		background-color: $theme-background;
+	}
+}

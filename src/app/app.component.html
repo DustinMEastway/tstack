@@ -1,29 +1,37 @@
-<div class="app-background" [ngClass]="themeClass">
-	<div class="mat-app-background app-container">
-		<mat-toolbar class="mat-elevation-z5 primary-nav" role="heading" color="primary">
-			<a mat-button routerLink="/">{{ title }}</a>
-			<button mat-button type="text" [matMenuTriggerFor]="clientMenu">Client</button>
-			<mat-menu #clientMenu>
-				<a mat-menu-item routerLink="/client">Home</a>
-				<a mat-menu-item routerLink="/client/autocomplete">Autocomplete</a>
-				<a mat-menu-item routerLink="/client/dynamic-content">Dynamic Content</a>
-				<a mat-menu-item routerLink="/client/table">Table</a>
-			</mat-menu>
-			<button mat-button type="text" [matMenuTriggerFor]="coreMenu">Core</button>
-			<mat-menu #coreMenu>
-				<a mat-menu-item routerLink="/core">Home</a>
-			</mat-menu>
-			<button mat-button type="text" [matMenuTriggerFor]="serverMenu">Server</button>
-			<mat-menu #serverMenu>
-				<a mat-menu-item routerLink="/server">Home</a>
-			</mat-menu>
-			<div class="flex-space"></div>
-			<button mat-button type="text" (click)="changeTheme()">Change Theme</button>
-			<a mat-button href="https://github.com/DustinMEastway/tstack">
-				<mat-icon svgIcon="github"></mat-icon>
-				GitHub
-			</a>
-		</mat-toolbar>
-		<router-outlet></router-outlet>
+<!-- apply themes to the full application -->
+<div [ngClass]="themeClass">
+	<!-- background layer used to keep a white spot from appearing when the user scrolls up past the app container -->
+	<div class="mat-app-background app-background">
+		<!-- container for the applications code that is styled for the given theme -->
+		<div class="app-container">
+			<!-- main navigation toolbar at the top of the page -->
+			<mat-toolbar class="mat-elevation-z5 primary-nav" role="heading" color="primary">
+				<a mat-button routerLink="/">{{ title }}</a>
+				<!-- navigation menus for the application -->
+				<button mat-button type="text" [matMenuTriggerFor]="clientMenu">Client</button>
+				<mat-menu #clientMenu>
+					<a mat-menu-item routerLink="/client">Home</a>
+					<a mat-menu-item routerLink="/client/autocomplete">Autocomplete</a>
+					<a mat-menu-item routerLink="/client/dynamic-content">Dynamic Content</a>
+					<a mat-menu-item routerLink="/client/table">Table</a>
+				</mat-menu>
+				<button mat-button type="text" [matMenuTriggerFor]="coreMenu">Core</button>
+				<mat-menu #coreMenu>
+					<a mat-menu-item routerLink="/core">Home</a>
+				</mat-menu>
+				<button mat-button type="text" [matMenuTriggerFor]="serverMenu">Server</button>
+				<mat-menu #serverMenu>
+					<a mat-menu-item routerLink="/server">Home</a>
+				</mat-menu>
+				<div class="flex-space"></div>
+				<!-- theme selector -->
+				<tsk-theme-select></tsk-theme-select>
+				<a mat-button href="https://github.com/DustinMEastway/tstack">
+					<mat-icon svgIcon="github"></mat-icon>
+					GitHub
+				</a>
+			</mat-toolbar>
+			<router-outlet></router-outlet>
+		</div>
 	</div>
 </div>

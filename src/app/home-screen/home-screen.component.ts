@@ -6,4 +6,5 @@ import { Component } from '@angular/core';
 	styleUrls: [ './home-screen.component.scss' ]
 })
 export class HomeScreenComponent {
+	title = 'Home';
 }
