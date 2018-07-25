@@ -1,7 +1,7 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
-    "baseUrl": "./",
+    "baseUrl": "./src",
     "outDir": "./dist/out-tsc",
     "sourceMap": true,
     "declaration": false,
@@ -18,23 +18,8 @@
       "dom"
     ],
     "paths": {
-      "@tstack/client": [
-        "dist/@tstack/client"
-      ],
-      "@tstack/client/*": [
-        "dist/@tstack/client/*"
-      ],
-      "@tstack/core": [
-        "dist/@tstack/core"
-      ],
-      "@tstack/core/*": [
-        "dist/@tstack/core/*"
-      ],
-      "@tstack/server": [
-        "dist/@tstack/server"
-      ],
-      "@tstack/server/*": [
-        "dist/@tstack/server/*"
+      "@tstack/*": [
+        "../dist/@tstack/*"
       ]
     }
   }
