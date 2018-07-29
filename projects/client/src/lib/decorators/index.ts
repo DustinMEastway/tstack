@@ -1,1 +1,1 @@
-export * from './boolean-input';
+export * from './coerce-boolean';

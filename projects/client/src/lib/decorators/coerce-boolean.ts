@@ -1,12 +1,11 @@
 import { coerceBooleanProperty} from '@angular/cdk/coercion';
-import { Input } from '@angular/core';
 
 /**
  * Property/Accessor decorator that casts input values before setting them (optionally set and id when set is called)
  * @param castType with a cast method used to convert set values to type the needed type
  * @param [idConfig] used to set an id when set is called
  */
-export function BooleanInput(bindingPropertyName?: string): any {
+export function CoerceBoolean(): any {
 	return function (target: any, propertyKey: string, descriptor?: PropertyDescriptor): any {
 		// stored object coerced into a boolean value
 		let coercedValue: boolean;
@@ -31,9 +30,6 @@ export function BooleanInput(bindingPropertyName?: string): any {
 			// call the existing setter if there was one
 			if (descriptor && descriptor.set) { descriptor.set(coercedValue); }
 		};
-
-		// apply the input decorator to the object
-		Input(bindingPropertyName)(target, propertyKey, descriptor);
 
 		return propertyObject;
 	};
