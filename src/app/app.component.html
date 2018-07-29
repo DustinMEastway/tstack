@@ -7,22 +7,7 @@
 			<!-- main navigation toolbar at the top of the page -->
 			<mat-toolbar class="mat-elevation-z5 primary-nav" role="heading" color="primary">
 				<a mat-button routerLink="/">{{ title }}</a>
-				<!-- navigation menus for the application -->
-				<button mat-button type="text" [matMenuTriggerFor]="clientMenu">Client</button>
-				<mat-menu #clientMenu>
-					<a mat-menu-item routerLink="/client">Home</a>
-					<a mat-menu-item routerLink="/client/autocomplete">Autocomplete</a>
-					<a mat-menu-item routerLink="/client/dynamic-content">Dynamic Content</a>
-					<a mat-menu-item routerLink="/client/table">Table</a>
-				</mat-menu>
-				<button mat-button type="text" [matMenuTriggerFor]="coreMenu">Core</button>
-				<mat-menu #coreMenu>
-					<a mat-menu-item routerLink="/core">Home</a>
-				</mat-menu>
-				<button mat-button type="text" [matMenuTriggerFor]="serverMenu">Server</button>
-				<mat-menu #serverMenu>
-					<a mat-menu-item routerLink="/server">Home</a>
-				</mat-menu>
+				<tsk-nav-menu *ngFor="let navConfig of navConfigs" navigate [menuConfig]="navConfig"></tsk-nav-menu>
 				<div class="flex-space"></div>
 				<!-- theme selector -->
 				<tsk-theme-select></tsk-theme-select>

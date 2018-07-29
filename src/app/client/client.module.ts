@@ -4,6 +4,7 @@ import { MatButtonModule, MatToolbarModule } from '@angular/material';
 
 import { ClientRoutingModule } from './client-routing.module';
 import { ClientScreenComponent } from './client-screen/client-screen.component';
+import { HomeScreenComponent } from './home-screen/home-screen.component';
 
 @NgModule({
 	imports: [
@@ -13,7 +14,8 @@ import { ClientScreenComponent } from './client-screen/client-screen.component';
 		ClientRoutingModule
 	],
 	declarations: [
-		ClientScreenComponent
+		ClientScreenComponent,
+		HomeScreenComponent
 	]
 })
 export class ClientModule { }

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatIconRegistry } from '@angular/material';
 import { DomSanitizer } from '@angular/platform-browser';
-import { TskThemeSelectionService } from '@tstack/client';
+import { TskNavMenuConfig, TskThemeSelectionService } from '@tstack/client';
 
 interface ThemeGroup {
 	type: string;
@@ -18,7 +18,12 @@ interface ThemeGroup {
 })
 export class AppComponent implements OnInit {
 	title = 'TStack';
+	private _navConfigs: TskNavMenuConfig[];
 	private _themeClass: string;
+
+	get navConfigs(): TskNavMenuConfig[] {
+		return this._navConfigs;
+	}
 
 	get themeClass(): string {
 		return this._tskThemeSelectionService.themeClass;
@@ -30,6 +35,34 @@ export class AppComponent implements OnInit {
 	}
 
 	ngOnInit(): void {
+		this.initializeAppToolbar();
+	}
+
+	private initializeAppToolbar(): void {
+		// create the navigation menus
+		this._navConfigs = [
+			{
+				name: 'Client',
+				value: 'client',
+				items: [
+					{ name: 'Autocomplete', value: 'autocomplete' },
+					{ name: 'Dynamic Content', value: 'dynamic-content' },
+					{ name: 'Nav Menu', value: 'nav-menu' },
+					{ name: 'Table', value: 'table' }
+				]
+			},
+			{
+				name: 'Core',
+				value: 'core',
+				items: []
+			},
+			{
+				name: 'Server',
+				value: 'server',
+				items: []
+			}
+		];
+
 		// add the git icon to the icon registry
 		this._matIconRegistry.addSvgIcon('github', this._domSanitizer.bypassSecurityTrustResourceUrl('../assets/github.svg'));
 
