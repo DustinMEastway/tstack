@@ -58,6 +58,7 @@ export function compareItems<T = any>(item1: T, item2: T, ...compareProperties: 
 	// if there are not any compare properties, then compare the full items
 	if (compareProperties.length < 1) { compareProperties = [ '' ]; }
 
+	let returnValue: -1 | 0 | 1 = 0;
 	for (const compareProperty of compareProperties) {
 		// get the values of each item for the current compare property
 		const property = (typeof compareProperty === 'string') ? compareProperty : compareProperty.property;
@@ -69,17 +70,20 @@ export function compareItems<T = any>(item1: T, item2: T, ...compareProperties: 
 			continue;
 		} else if (value1 === undefined) {
 			// undefined goes at the end of the array (based on JavaScript's default sort)
-			return 1;
+			returnValue = 1;
 		} else if (value1 === null) {
 			// null goes after everything other than undefined
-			return (value2 === undefined) ? -1 : 1;
+			returnValue = (value2 === undefined) ? -1 : 1;
 		} else if (value2 == null) {
 			// if value1 is not null or undefined and value2 is, then value2 goes after value1
-			return -1;
+			returnValue = -1;
 		} else {
 			// if value1 and value2 are not equal or null, then return which one is larger
-			return (value1 > value2) ? 1 : -1;
+			returnValue = (value1 > value2) ? 1 : -1;
 		}
+
+		// swap the return value if the compare property has ascending set to false
+		return (typeof compareProperty === 'string' || compareProperty.ascending) ? returnValue : returnValue * -1 as -1 | 1;
 	}
 
 	return 0;
