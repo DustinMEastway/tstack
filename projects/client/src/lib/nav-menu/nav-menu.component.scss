@@ -1,0 +1,24 @@
+.button-group {
+	display: inline-block;
+	&:hover, &:focus {
+		background-color: rgba(0,0,0,.06);
+	}
+	.mat-button {
+		border-radius: 0;
+		min-width: 0px;
+		padding: 0 8px;
+		&:first-child {
+			border-top-left-radius: 2px;
+			border-bottom-left-radius: 2px;
+			padding-left: 16px;
+		}
+		&:last-child {
+			border-top-right-radius: 2px;
+			border-bottom-right-radius: 2px;
+			padding-right: 16px;
+		}
+		&.thin-button {
+			padding: 0 8px;
+		}
+	}
+}
