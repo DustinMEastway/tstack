@@ -1,10 +1,16 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { coerceBooleanProperty } from '@angular/cdk/coercion';
+import { Component, Input, OnInit, QueryList, ViewChildren } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { Observable, ReplaySubject, Subject } from 'rxjs';
+import { MatOption } from '@angular/material';
+import { Observable, Subject } from 'rxjs';
 import { combineLatest, merge, startWith, tap } from 'rxjs/operators';
+
+import { getValue, pluck } from '@tstack/core';
 
 import { CoerceBoolean } from '../decorators';
 import { TskOption } from '../option';
+
+import { TskFilterConfig } from './filter-config';
 
 @Component({
 	selector: 'tsk-autocomplete',
@@ -14,130 +20,173 @@ import { TskOption } from '../option';
 // TODO: implement ControlValueAccessor
 export class TskAutocompleteComponent<OptionValueT = any> implements OnInit {
 	static maxDisplayedOptions = -1;
-	// TODO: coerce
-	@Input() autoSelect: boolean;
-	@Input() maxDisplayedOptions: number;
-	@Input() name: string;
-	optionFilterControl = new FormControl();
+	@ViewChildren(MatOption) matOptions: QueryList<MatOption>;
 	@Input() placeholder: string;
-	@Input() showFilterType: boolean;
-	@Input() showCaseSensitive: boolean;
-	private _caseSensitive = false;
-	private _caseSensitiveChange = new Subject<boolean>();
-	private _filterType: 'contains' | 'startsWith' = 'contains';
-	private _filterTypeChange = new Subject<'contains' | 'startsWith'>();
+	private _autoSelect: boolean;
+	private _filterConfig: TskFilterConfig;
+	private _filterConfigChange: Subject<TskFilterConfig>;
 	private _filteredOptions: Observable<TskOption<OptionValueT>[]>;
-	private _optionDisplayProperty: string;
-	private _optionDisplayPropertyChange = new Subject<string>();
-	private _optionValues: OptionValueT[];
-	private _optionValuesChange = new Subject<OptionValueT[]>();
+	private _displayProperty: string;
+	private _optionFilterControl = new FormControl();
 	private _options: TskOption<OptionValueT>[];
 	private _optionsChange = new Subject<TskOption<OptionValueT>[]>();
+	private _showFilterType: boolean;
+	private _showCaseSensitive: boolean;
 
-	get caseSensitive(): boolean {
-		return this._caseSensitive;
+	@Input()
+	get autoSelect(): boolean {
+		return this._autoSelect;
 	}
-	@Input() set caseSensitive(caseSensitive: boolean) {
-		this._caseSensitive = caseSensitive;
-		this._caseSensitiveChange.next(caseSensitive);
+	set autoSelect(autoSelect: boolean) {
+		this._autoSelect = coerceBooleanProperty(autoSelect);
+	}
+
+	@Input()
+	get caseSensitive(): boolean {
+		return this._filterConfig.caseSensitive;
+	}
+	set caseSensitive(caseSensitive: boolean) {
+		this._filterConfig.caseSensitive = coerceBooleanProperty(caseSensitive);
+		this._filterConfigChange.next(this._filterConfig);
+	}
+
+	@Input()
+	get displayProperty(): string {
+		return this._displayProperty;
+	}
+	set displayProperty(displayProperty: string) {
+		this._displayProperty = displayProperty;
+		if (this.options) {
+			this.options.forEach(option => { option.displayValue = getValue(option.value, displayProperty); });
+			this._optionsChange.next(this.options);
+		}
+	}
+
+	@Input()
+	get filter(): string {
+		return this._filterConfig.value;
+	}
+	set filter(filter: string) {
+		this._filterConfig.value = filter;
+		this._filterConfigChange.next(this._filterConfig);
+	}
+
+	get filterConfigChanged(): Observable<TskFilterConfig> {
+		return this._filterConfigChange.asObservable();
 	}
 
 	get filteredOptions(): Observable<TskOption<OptionValueT>[]> {
 		return this._filteredOptions;
 	}
 
+	@Input()
 	get filterType(): 'contains' | 'startsWith' {
-		return this._filterType;
+		return this._filterConfig.type;
 	}
-	@Input() set filterType(filterType: 'contains' | 'startsWith') {
-		this._filterType = filterType;
-		this._filterTypeChange.next(filterType);
-	}
-
-	get optionDisplayProperty(): string {
-		return this._optionDisplayProperty;
-	}
-	@Input() set optionDisplayProperty(optionDisplayProperty: string) {
-		this._optionDisplayProperty = optionDisplayProperty;
-		this._optionDisplayPropertyChange.next(optionDisplayProperty);
+	set filterType(filterType: 'contains' | 'startsWith') {
+		this._filterConfig.type = filterType;
+		this._filterConfigChange.next(this._filterConfig);
 	}
 
+	get optionFilterControl(): FormControl {
+		return this._optionFilterControl;
+	}
+
+	@Input()
 	get optionValues(): OptionValueT[] {
-		return this._optionValues;
+		return pluck(this.options, 'value');
 	}
-	@Input() set optionValues(optionValues: OptionValueT[]) {
-		this._optionValues = optionValues;
-		this._optionValuesChange.next(optionValues);
+	set optionValues(optionValues: OptionValueT[]) {
+		this._options = (optionValues instanceof Array) ? TskOption.createOptions(optionValues, this.displayProperty) : [];
+		this._optionsChange.next(this.options);
 	}
 
+	@Input()
 	get options(): TskOption<OptionValueT>[] {
 		return this._options;
 	}
-	@Input() set options(options: TskOption<OptionValueT>[]) {
-		this._options = options;
-		this._optionsChange.next(options);
+	set options(options: TskOption<OptionValueT>[]) {
+		this._options = (options instanceof Array) ? options : [];
+		this._optionsChange.next(this.options);
 	}
 
 	get filterTypeIcon(): string {
 		return (this.filterType === 'contains') ? 'format_align_center' : 'format_align_left';
 	}
 
+	@Input()
+	get maxDisplayedOptions(): number {
+		return this._filterConfig.maxDisplayedOptions;
+	}
+	set maxDisplayedOptions(maxDisplayedOptions: number) {
+		this._filterConfig.maxDisplayedOptions = maxDisplayedOptions;
+		this._filterConfigChange.next(this._filterConfig);
+	}
+
+	@Input()
+	get showFilterType(): boolean {
+		return this._showFilterType;
+	}
+	set showFilterType(showFilterType: boolean) {
+		this._showFilterType = coerceBooleanProperty(showFilterType);
+	}
+
+	@Input()
+	get showCaseSensitive(): boolean {
+		return this._showCaseSensitive;
+	}
+	set showCaseSensitive(showCaseSensitive: boolean) {
+		this._showCaseSensitive = coerceBooleanProperty(showCaseSensitive);
+	}
+
 	constructor() {
-		this.maxDisplayedOptions = TskAutocompleteComponent.maxDisplayedOptions;
+		this._filterConfig = {
+			caseSensitive: false,
+			maxDisplayedOptions: TskAutocompleteComponent.maxDisplayedOptions,
+			type: 'contains',
+			value: ''
+		};
+		this._filterConfigChange = new Subject();
 	}
 
 	ngOnInit(): void {
 		this.setFilteredOptions();
+
+		this.optionFilterControl.valueChanges.subscribe((filterValue) => {
+			this.filter = filterValue;
+		});
 	}
 
 	onChangeFilterTypeClick(): void {
-		this.filterType = (this.filterType === 'contains') ? 'startsWith' : this.filterType = 'contains';
+		this.filterType = (this.filterType === 'contains') ? 'startsWith' : 'contains';
 	}
 
 	private setFilteredOptions(): void {
-		// options start out as options if they are set, otherwise they will try to be created
-		const startingOptions = (this.options) ? this.options : TskOption.createOptions(this.optionValues, this.optionDisplayProperty);
-
-		const optionsObservable = this._optionValuesChange.pipe(
-			// if option values and a display property is specified, then the options can be created
+		this._filteredOptions = this._optionsChange.pipe(
+			startWith(this.options),
 			combineLatest(
-				this._optionDisplayPropertyChange,
-				(values, displayProperty) =>  TskOption.createOptions(values, displayProperty)
-			),
-			// if the options are directy input, then the options can be used
-			merge(this._optionsChange),
-			startWith(startingOptions),
-			// set the options
-			tap(options => { this._options = options; })
-		);
-
-		this._filteredOptions = optionsObservable.pipe(
-			combineLatest(
-				// combine the filter
-				this.optionFilterControl.valueChanges.pipe(startWith('')),
-				// combine the filter type
-				this._filterTypeChange.pipe(startWith(this.filterType)),
-				// combine whether the filter is case sensitive
-				this._caseSensitiveChange.pipe(startWith(this.caseSensitive)),
-				(options, filter: string, filterType, caseSensitive) => {
-					if (!caseSensitive) { filter = filter.toUpperCase(); }
+				this._filterConfigChange.pipe(startWith(this._filterConfig)),
+				(options, filterConfig) => {
+					const filter = (this.caseSensitive) ? filterConfig.value : filterConfig.value.toUpperCase();
 
 					let returnedOptions = 0;
 
 					return options.filter((option) => {
-						const displayValue = (caseSensitive) ? option.displayValue : option.displayValue.toUpperCase();
+						const displayValue = (this.caseSensitive) ? option.displayValue : option.displayValue.toUpperCase();
 						let includeOption: boolean;
 
-						if (filterType === 'contains') {
+						if (this.filterType === 'contains') {
 							includeOption = displayValue.includes(filter);
-						} else if (filterType === 'startsWith') {
+						} else if (this.filterType === 'startsWith') {
 							includeOption = displayValue.startsWith(filter);
 						} else {
-							throw Error(`TskAutocompleteComponent error: invalid filter type of ${filterType}`);
+							throw Error(`TskAutocompleteComponent error: invalid filter type of ${this.filterType}`);
 						}
 
-						// TODO: implement auto select
-						if (this.autoSelect && filter === displayValue && !option.disabled) {}
+						if (this.autoSelect && filter === displayValue && !option.disabled) {
+							const matchingOption = this.matOptions.find(matOption => matOption.value === option.displayValue);
+							if (!matchingOption.selected) { matchingOption.select(); }
+						}
 
 						return includeOption && (this.maxDisplayedOptions < 0 || returnedOptions++ < this.maxDisplayedOptions);
 					});

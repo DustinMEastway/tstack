@@ -1,6 +1,7 @@
 import { getValue } from '@tstack/core';
 
 export class TskOption<T> {
+	disabled: boolean;
 	displayValue: string;
 	value: T;
 

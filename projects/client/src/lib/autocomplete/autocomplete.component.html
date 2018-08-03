@@ -1,7 +1,7 @@
 <mat-form-field>
-	<input matInput type="text" [formControl]="optionFilterControl" [matAutocomplete]="auto" [name]="name" [placeholder]="placeholder">
+	<input matInput type="text" [formControl]="optionFilterControl" [matAutocomplete]="auto" name="filter" [placeholder]="placeholder">
 	<mat-autocomplete #auto>
-		<mat-option *ngFor="let option of filteredOptions | async" [value]="option.displayValue">
+		<mat-option *ngFor="let option of filteredOptions | async" [disabled]="option.disabled" [value]="option.displayValue">
 			{{ option.displayValue }}
 		</mat-option>
 	</mat-autocomplete>
