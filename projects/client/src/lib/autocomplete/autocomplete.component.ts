@@ -241,7 +241,14 @@ export class TskAutocompleteComponent<OptionValueT = any> implements ControlValu
 		});
 	}
 
-	/* TODO: Move */
+	onChangeFilterTypeClick(): void {
+		this.filterType = (this.filterType === 'contains') ? 'startsWith' : 'contains';
+	}
+
+	onFocus(): void {
+		this._registerTouch();
+	}
+
 	onOptionFilterInput(filter: string): void {
 		this.filter = filter;
 	}
@@ -249,15 +256,6 @@ export class TskAutocompleteComponent<OptionValueT = any> implements ControlValu
 	onOptionSelected(value: OptionValueT): void {
 		this.filter = this.getViewOfValue(value);
 		this._valueChange.next(value);
-	}
-	/* TODO: Move */
-
-	onChangeFilterTypeClick(): void {
-		this.filterType = (this.filterType === 'contains') ? 'startsWith' : 'contains';
-	}
-
-	onFocus(): void {
-		this._registerTouch();
 	}
 
 	registerOnChange(registerChange: (value: OptionValueT) => void): void {
