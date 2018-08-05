@@ -20,6 +20,9 @@
 			[value]="option.value">
 			{{ option.displayValue }}
 		</mat-option>
+		<mat-option *ngIf="!filteredOptionsExist" disabled>
+			No options to display
+		</mat-option>
 	</mat-autocomplete>
 	<button
 		*ngIf="showCaseSensitive"

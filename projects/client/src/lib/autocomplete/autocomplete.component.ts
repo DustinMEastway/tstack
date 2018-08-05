@@ -38,6 +38,7 @@ export class TskAutocompleteComponent<OptionValueT = any> implements ControlValu
 	private _filterConfigChange = new Subject<TskFilterConfig>();
 	private _filteredOptions: Observable<TskOption<OptionValueT>[]>;
 	private _displayProperty: string;
+	private _filteredOptionsExist = false;
 	private _optionFilterControl = new FormControl();
 	private _options: TskOption<OptionValueT>[];
 	private _optionsChange = new Subject<TskOption<OptionValueT>[]>();
@@ -158,6 +159,11 @@ export class TskAutocompleteComponent<OptionValueT = any> implements ControlValu
 	/** @prop mat icon ligature used to represent the current filter type in the filter type button */
 	get filterTypeIcon(): string {
 		return (this.filterType === 'contains') ? 'format_align_center' : 'format_align_left';
+	}
+
+	/** @prop whether there are any options that match the current filter */
+	get filteredOptionsExist(): boolean {
+		return this._filteredOptionsExist;
 	}
 
 	/** @prop form control of the autocomplete's input */
@@ -358,6 +364,8 @@ export class TskAutocompleteComponent<OptionValueT = any> implements ControlValu
 					if (castString(this.getViewOfValue(this.value), castStringConfig) !== filter) {
 						this._valueChange.next(null);
 					}
+
+					this._filteredOptionsExist = filteredOptions.length > 0;
 
 					return filteredOptions;
 				}
