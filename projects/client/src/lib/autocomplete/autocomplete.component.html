@@ -4,14 +4,14 @@
 		name="filter"
 		type="text"
 		(focus)="onFocus()"
-		(input)="onOptionFilterInput($event.target.value)"
+		(input)="filter = $event.target.value"
 		[formControl]="optionFilterControl"
 		[matAutocomplete]="auto"
 		[placeholder]="placeholder">
 	<mat-autocomplete
 		#auto
 		class="tsk-autocomplete"
-		(optionSelected)="onOptionSelected($event.option.value)"
+		(optionSelected)="value = $event.option.value"
 		[displayWith]="getViewOfValue">
 		<mat-option
 			*ngFor="let option of filteredOptions | async"

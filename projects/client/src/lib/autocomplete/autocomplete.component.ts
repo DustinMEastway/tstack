@@ -279,17 +279,6 @@ export class TskAutocompleteComponent<OptionValueT = any> implements ControlValu
 		this._registerTouch();
 	}
 
-	/** @method onOptionFilterInput update the filter */
-	onOptionFilterInput(filter: string): void {
-		this.filter = filter;
-	}
-
-	/** @method onOptionSelected update the selected option */
-	onOptionSelected(value: OptionValueT): void {
-		this.filter = this.getViewOfValue(value);
-		this._valueChange.next(value);
-	}
-
 	/** @method registerOnChange get the method used to notify the form that the autocomplete's value has changed */
 	registerOnChange(registerChange: (value: OptionValueT) => void): void {
 		this._registerChange = registerChange;
@@ -307,8 +296,7 @@ export class TskAutocompleteComponent<OptionValueT = any> implements ControlValu
 
 	/** @method writeValue set the value through the form */
 	writeValue(value: OptionValueT): void {
-		this._value = value;
-		this.filter = getValue(value, this.displayProperty);
+		this.value = value;
 	}
 
 	private onValueChange(value: OptionValueT): void {
