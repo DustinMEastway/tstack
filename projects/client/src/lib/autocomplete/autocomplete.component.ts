@@ -1,5 +1,5 @@
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
-import { forwardRef, Component, Input, OnInit, QueryList, ViewChildren } from '@angular/core';
+import { forwardRef, Component, Input, OnInit, Output, QueryList, ViewChildren } from '@angular/core';
 import { ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { MatAutocomplete, MatOption } from '@angular/material';
 import { Observable, Subject } from 'rxjs';
@@ -65,6 +65,7 @@ export class TskAutocompleteComponent<OptionValueT = any> implements ControlValu
 		this._filterConfigChange.next(this._filterConfig);
 	}
 
+	@Output()
 	get caseSensitiveChange(): Observable<boolean> {
 		return this.filterConfigChange.pipe(map(filterConfig => filterConfig.caseSensitive), distinctUntilChanged());
 	}
@@ -110,14 +111,17 @@ export class TskAutocompleteComponent<OptionValueT = any> implements ControlValu
 		}
 	}
 
+	@Output()
 	get filterChange(): Observable<string> {
 		return this.filterConfigChange.pipe(map(filterConfig => filterConfig.value), distinctUntilChanged());
 	}
 
+	@Output()
 	get filterConfigChange(): Observable<TskFilterConfig> {
 		return this._filterConfigChange.pipe(startWith(this._filterConfig));
 	}
 
+	@Output()
 	get filteredOptions(): Observable<TskOption<OptionValueT>[]> {
 		return this._filteredOptions;
 	}
@@ -131,6 +135,7 @@ export class TskAutocompleteComponent<OptionValueT = any> implements ControlValu
 		this._filterConfigChange.next(this._filterConfig);
 	}
 
+	@Output()
 	get filterTypeChange(): Observable<'contains' | 'startsWith'> {
 		return this.filterConfigChange.pipe(map(filterConfig => filterConfig.type), distinctUntilChanged());
 	}
@@ -170,6 +175,7 @@ export class TskAutocompleteComponent<OptionValueT = any> implements ControlValu
 		this._filterConfigChange.next(this._filterConfig);
 	}
 
+	@Output()
 	get maxDisplayedOptionsChange(): Observable<number> {
 		return this.filterConfigChange.pipe(map(filterConfig => filterConfig.maxDisplayedOptions), distinctUntilChanged());
 	}
@@ -206,6 +212,7 @@ export class TskAutocompleteComponent<OptionValueT = any> implements ControlValu
 		this._valueChange.next(value);
 	}
 
+	@Output()
 	get valueChange(): Observable<OptionValueT> {
 		return this._valueChange.pipe(startWith(this.value), distinctUntilChanged());
 	}
