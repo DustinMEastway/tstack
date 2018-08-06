@@ -33,21 +33,21 @@ export class TskAutocompleteComponent<OptionValueT = any> implements ControlValu
 	@Input() placeholder: string;
 	private _autoSelect = false;
 	private _disabled = false;
-	private _getViewOfValue: (value: OptionValueT) => string;
 	private _filterConfig: TskFilterConfig;
 	private _filterConfigChange = new Subject<TskFilterConfig>();
 	private _filteredOptions: Observable<TskOption<OptionValueT>[]>;
-	private _displayProperty: string;
 	private _filteredOptionsExist = false;
+	private _getViewOfValue: (value: OptionValueT) => string;
 	private _optionFilterControl = new FormControl();
 	private _options: TskOption<OptionValueT>[];
 	private _optionsChange = new Subject<TskOption<OptionValueT>[]>();
 	private _registerChange: (value: OptionValueT) => void;
 	private _registerTouch: () => void;
-	private _showFilterType: boolean;
 	private _showCaseSensitive: boolean;
+	private _showFilterType: boolean;
 	private _value: OptionValueT;
 	private _valueChange = new Subject<OptionValueT>();
+	private _viewProperty: string;
 
 	/** @prop whether typing can select the matching option or if options must be clicked */
 	@Input()
@@ -57,7 +57,7 @@ export class TskAutocompleteComponent<OptionValueT = any> implements ControlValu
 	set autoSelect(autoSelect: boolean) {
 		this._autoSelect = coerceBooleanProperty(autoSelect);
 		if (this.filter) {
-			this.selectedOption = find(this.options, this.filter, 'displayValue');
+			this.selectedOption = find(this.options, this.filter, 'viewValue');
 		}
 	}
 
@@ -91,24 +91,6 @@ export class TskAutocompleteComponent<OptionValueT = any> implements ControlValu
 		}
 	}
 
-	/** @prop property to get off of value to display in the options and use to compare options for auto select */
-	@Input()
-	get displayProperty(): string {
-		return this._displayProperty;
-	}
-	set displayProperty(displayProperty: string) {
-		this._displayProperty = displayProperty;
-		if (this.options) {
-			this.options.forEach(option => { option.displayValue = this.getViewOfValue(option.value); });
-			this._optionsChange.next(this.options);
-		}
-	}
-
-	/** @prop function used to get the view value of a value */
-	get getViewOfValue(): (value: OptionValueT) => string {
-		return this._getViewOfValue;
-	}
-
 	/** @prop value used to filter options, update value if auto select is active and update the autocomplete's input's value */
 	@Input()
 	get filter(): string {
@@ -134,12 +116,6 @@ export class TskAutocompleteComponent<OptionValueT = any> implements ControlValu
 		return this._filterConfigChange.pipe(startWith(this._filterConfig));
 	}
 
-	/** @prop emits when the filtered options change */
-	@Output()
-	get filteredOptions(): Observable<TskOption<OptionValueT>[]> {
-		return this._filteredOptions;
-	}
-
 	/** @prop type of filter used to determine which options should be displayed */
 	@Input()
 	get filterType(): 'contains' | 'startsWith' {
@@ -161,33 +137,20 @@ export class TskAutocompleteComponent<OptionValueT = any> implements ControlValu
 		return (this.filterType === 'contains') ? 'format_align_center' : 'format_align_left';
 	}
 
+	/** @prop emits when the filtered options change */
+	@Output()
+	get filteredOptions(): Observable<TskOption<OptionValueT>[]> {
+		return this._filteredOptions;
+	}
+
 	/** @prop whether there are any options that match the current filter */
 	get filteredOptionsExist(): boolean {
 		return this._filteredOptionsExist;
 	}
 
-	/** @prop form control of the autocomplete's input */
-	get optionFilterControl(): FormControl {
-		return this._optionFilterControl;
-	}
-
-	/** @prop values of the options of the autocomplete */
-	@Input()
-	get optionValues(): OptionValueT[] {
-		return pluck(this.options, 'value');
-	}
-	set optionValues(optionValues: OptionValueT[]) {
-		this.options = TskOption.createOptions(optionValues, this.displayProperty);
-	}
-
-	/** @prop options of the autocomplete */
-	@Input()
-	get options(): TskOption<OptionValueT>[] {
-		return this._options;
-	}
-	set options(options: TskOption<OptionValueT>[]) {
-		this._options = (options instanceof Array) ? options : [];
-		this._optionsChange.next(this.options);
+	/** @prop function used to get the view value of a value */
+	get getViewOfValue(): (value: OptionValueT) => string {
+		return this._getViewOfValue;
 	}
 
 	/** @prop maximum number of options to display at once (-1 to display all) */
@@ -204,6 +167,30 @@ export class TskAutocompleteComponent<OptionValueT = any> implements ControlValu
 	@Output()
 	get maxDisplayedOptionsChange(): Observable<number> {
 		return this.filterConfigChange.pipe(map(filterConfig => filterConfig.maxDisplayedOptions), distinctUntilChanged());
+	}
+
+	/** @prop form control of the autocomplete's input */
+	get optionFilterControl(): FormControl {
+		return this._optionFilterControl;
+	}
+
+	/** @prop values of the options of the autocomplete */
+	@Input()
+	get optionValues(): OptionValueT[] {
+		return pluck(this.options, 'value');
+	}
+	set optionValues(optionValues: OptionValueT[]) {
+		this.options = TskOption.createOptions(optionValues, this.viewProperty);
+	}
+
+	/** @prop options of the autocomplete */
+	@Input()
+	get options(): TskOption<OptionValueT>[] {
+		return this._options;
+	}
+	set options(options: TskOption<OptionValueT>[]) {
+		this._options = (options instanceof Array) ? options : [];
+		this._optionsChange.next(this.options);
 	}
 
 	/** @prop option currently selected by the autocomplete */
@@ -248,6 +235,19 @@ export class TskAutocompleteComponent<OptionValueT = any> implements ControlValu
 		return this._valueChange.pipe(startWith(this.value), distinctUntilChanged());
 	}
 
+	/** @prop property to get off of value to display in the options and use to compare options for auto select */
+	@Input()
+	get viewProperty(): string {
+		return this._viewProperty;
+	}
+	set viewProperty(viewProperty: string) {
+		this._viewProperty = viewProperty;
+		if (this.options) {
+			this.options.forEach(option => { option.viewValue = this.getViewOfValue(option.value); });
+			this._optionsChange.next(this.options);
+		}
+	}
+
 	constructor() {
 		// set the default values for the config
 		this._filterConfig = {
@@ -258,7 +258,7 @@ export class TskAutocompleteComponent<OptionValueT = any> implements ControlValu
 		};
 
 		this._value = null;
-		this._getViewOfValue = value => getValue(value, this.displayProperty);
+		this._getViewOfValue = value => getValue(value, this.viewProperty);
 	}
 
 	/** @method ngOnInit initialize the autocomplete component */
@@ -343,18 +343,18 @@ export class TskAutocompleteComponent<OptionValueT = any> implements ControlValu
 					let returnedOptions = 0;
 
 					const filteredOptions = options.filter((option) => {
-						const displayValue = castString(option.displayValue, castStringConfig);
+						const viewValue = castString(option.viewValue, castStringConfig);
 						let includeOption: boolean;
 
 						if (filterType === 'contains') {
-							includeOption = displayValue.includes(filter);
+							includeOption = viewValue.includes(filter);
 						} else if (filterType === 'startsWith') {
-							includeOption = displayValue.startsWith(filter);
+							includeOption = viewValue.startsWith(filter);
 						} else {
 							throw Error(`TskAutocompleteComponent error: invalid filter type of ${filterType}`);
 						}
 
-						if (this.autoSelect && filter === displayValue && !option.disabled) {
+						if (this.autoSelect && filter === viewValue && !option.disabled) {
 							this._valueChange.next(option.value);
 						}
 
