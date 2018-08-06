@@ -48,6 +48,8 @@ export function findIndex<T>(items: T[], valueToFind: any, property?: string): n
  * @param property get off of each item
  * @returns the value at the given property for each item in items
  */
+export function pluck<T, K extends keyof(T)>(items: T[], property: K): T[K][];
+export function pluck<T = any>(items: any[], property: string): T[];
 export function pluck<T = any>(items: any[], property: string): T[] {
 	return (items instanceof Array) ? items.map(i => getValue(i, property)) : [];
 }

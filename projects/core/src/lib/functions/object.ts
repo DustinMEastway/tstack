@@ -42,6 +42,8 @@ export function castString(item: any, config?: CastStringConfig): string {
  * @param property to get
  * @returns value of property pulled from the source object
  */
+export function getValue<T, K extends keyof(T)>(item: T, propertyToGet: K): T[K];
+export function getValue<ReturnT = any, ItemT = any>(item: ItemT, propertyToGet?: string): ReturnT;
 export function getValue<ReturnT = any, ItemT = any>(item: ItemT, propertyToGet: string = ''): ReturnT {
 	const properties = propertyToGet.split(/[\.\[\]]/);
 	let valueToReturn: any = item;

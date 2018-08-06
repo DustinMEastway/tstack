@@ -1,3 +1,44 @@
-<p>
-  autocomplete works!
-</p>
+<mat-form-field>
+	<input
+		matInput
+		name="filter"
+		type="text"
+		(focus)="onFocus()"
+		(input)="filter = $event.target.value"
+		[formControl]="optionFilterControl"
+		[matAutocomplete]="auto"
+		[placeholder]="placeholder">
+	<mat-autocomplete
+		#auto
+		class="tsk-autocomplete"
+		(optionSelected)="value = $event.option.value"
+		[displayWith]="getViewOfValue">
+		<mat-option
+			*ngFor="let option of filteredOptions | async"
+			class="tsk-option"
+			[disabled]="option.disabled"
+			[value]="option.value">
+			{{ option.viewValue }}
+		</mat-option>
+		<mat-option *ngIf="!filteredOptionsExist" disabled>
+			No options to display
+		</mat-option>
+	</mat-autocomplete>
+	<button
+		*ngIf="showCaseSensitive"
+		mat-icon-button
+		matSuffix
+		type="text"
+		(click)="caseSensitive = !caseSensitive"
+		[color]="(caseSensitive) ? 'primary' : ''">
+		Aa
+	</button>
+	<button
+		*ngIf="showFilterType"
+		mat-icon-button
+		matSuffix
+		type="text"
+		(click)="onChangeFilterTypeClick()">
+		<mat-icon>{{ filterTypeIcon }}</mat-icon>
+	</button>
+</mat-form-field>
