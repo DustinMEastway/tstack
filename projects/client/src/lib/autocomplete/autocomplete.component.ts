@@ -1,13 +1,11 @@
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import { forwardRef, Component, Input, OnInit, Output, QueryList, ViewChildren } from '@angular/core';
 import { ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { MatAutocomplete, MatOption } from '@angular/material';
-import { Observable, Subject } from 'rxjs';
-import { combineLatest, distinctUntilChanged, map, merge, startWith, tap } from 'rxjs/operators';
-
+import { MatOption } from '@angular/material';
 import { castString, find, getValue, pluck, CastStringConfig } from '@tstack/core';
+import { Observable, Subject } from 'rxjs';
+import { combineLatest, distinctUntilChanged, map, startWith } from 'rxjs/operators';
 
-import { CoerceBoolean } from '../decorators';
 import { TskOption } from '../option';
 
 import { TskFilterConfig } from './filter-config';
