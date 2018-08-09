@@ -18,6 +18,7 @@ export class HomeScreenComponent implements OnInit {
 		const moduleNames = [
 			'Autocomplete',
 			'Dynamic Content',
+			'Readonly Field',
 			'Nav Menu'
 		];
 

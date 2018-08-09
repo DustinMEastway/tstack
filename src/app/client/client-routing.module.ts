@@ -22,6 +22,10 @@ const routes: Routes = [
 				loadChildren: './nav-menu/nav-menu.module#NavMenuModule'
 			},
 			{
+				path: 'readonly-field',
+				loadChildren: './readonly-field/readonly-field.module#ReadonlyFieldModule'
+			},
+			{
 				path: 'table',
 				loadChildren: './table/table.module#TableModule'
 			},
