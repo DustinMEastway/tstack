@@ -10,8 +10,9 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TskNavMenuModule, TskThemeModule } from '@tstack/client';
 
-import { AppRoutingModule } from './app-routing.module';
+import { SharedModule } from 'app/shared/shared.module';
 
+import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeScreenComponent } from './home-screen/home-screen.component';
 
@@ -24,6 +25,7 @@ import { HomeScreenComponent } from './home-screen/home-screen.component';
 		MatButtonModule,
 		MatIconModule,
 		MatToolbarModule,
+		SharedModule,
 		TskNavMenuModule,
 		TskThemeModule,
 		AppRoutingModule

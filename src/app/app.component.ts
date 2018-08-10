@@ -48,6 +48,7 @@ export class AppComponent implements OnInit {
 					{ name: 'Autocomplete', value: 'autocomplete' },
 					{ name: 'Dynamic Content', value: 'dynamic-content' },
 					{ name: 'Nav Menu', value: 'nav-menu' },
+					{ name: 'Readonly Field', value: 'readonly-field' },
 					{ name: 'Table', value: 'table' }
 				]
 			},
