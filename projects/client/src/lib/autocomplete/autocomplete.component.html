@@ -1,4 +1,4 @@
-<mat-form-field>
+<mat-form-field [appearance]="appearance">
 	<input
 		matInput
 		name="filter"
@@ -24,21 +24,21 @@
 			No options to display
 		</mat-option>
 	</mat-autocomplete>
-	<button
-		*ngIf="showCaseSensitive"
-		mat-icon-button
-		matSuffix
-		type="text"
-		(click)="caseSensitive = !caseSensitive"
-		[color]="(caseSensitive) ? 'primary' : ''">
-		Aa
-	</button>
-	<button
-		*ngIf="showFilterType"
-		mat-icon-button
-		matSuffix
-		type="text"
-		(click)="onChangeFilterTypeClick()">
-		<mat-icon>{{ filterTypeIcon }}</mat-icon>
-	</button>
+	<div matSuffix>
+		<button
+			*ngIf="showCaseSensitive"
+			mat-icon-button
+			type="text"
+			(click)="caseSensitive = !caseSensitive"
+			[color]="(caseSensitive) ? 'primary' : ''">
+			Aa
+		</button>
+		<button
+			*ngIf="showFilterType"
+			mat-icon-button
+			type="text"
+			(click)="onChangeFilterTypeClick()">
+			<mat-icon>{{ filterTypeIcon }}</mat-icon>
+		</button>
+	</div>
 </mat-form-field>

@@ -1,7 +1,7 @@
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import { forwardRef, Component, Input, OnInit, Output, QueryList, ViewChildren } from '@angular/core';
 import { ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { MatOption } from '@angular/material';
+import { MatFormFieldAppearance, MatOption } from '@angular/material';
 import { castString, find, getValue, pluck, CastStringConfig } from '@tstack/core';
 import { Observable, Subject } from 'rxjs';
 import { combineLatest, distinctUntilChanged, map, startWith } from 'rxjs/operators';
@@ -25,6 +25,7 @@ import { TskFilterConfig } from './filter-config';
 export class TskAutocompleteComponent<OptionValueT = any> implements ControlValueAccessor, OnInit {
 	/** @prop default maximum number of options to display at once for tsk autocomplete components */
 	static maxDisplayedOptions = -1;
+	@Input() appearance: MatFormFieldAppearance;
 	/** @prop list of mat options in the template */
 	@ViewChildren(MatOption) matOptions: QueryList<MatOption>;
 	/** @prop placeholder displayed in the input of the autocomplete */
