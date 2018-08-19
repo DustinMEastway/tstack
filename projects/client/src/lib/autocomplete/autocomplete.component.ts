@@ -1,9 +1,26 @@
-import { coerceBooleanProperty } from '@angular/cdk/coercion';
-import { forwardRef, Component, Input, OnInit, Output, QueryList, ViewChildren } from '@angular/core';
+/* TODOs:
+	* add label property that defaults to placeholder if it is not set
+	* set the matInput's value when writeValue is called
+	* allow for injectable configs like material and move the default maxDisplayedOptions into it
+*/
+
+import { coerceBooleanProperty, coerceNumberProperty } from '@angular/cdk/coercion';
+import {
+	forwardRef,
+	AfterViewInit,
+	ChangeDetectorRef,
+	Component,
+	ElementRef,
+	Input,
+	OnInit,
+	Output,
+	QueryList,
+	ViewChild
+} from '@angular/core';
 import { ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { MatFormFieldAppearance, MatOption } from '@angular/material';
+import { MatAutocomplete, MatFormFieldAppearance, MatOption } from '@angular/material';
 import { castString, find, getValue, pluck, CastStringConfig } from '@tstack/core';
-import { Observable, Subject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { combineLatest, distinctUntilChanged, map, startWith } from 'rxjs/operators';
 
 import { TskOption } from '../option';
@@ -22,30 +39,28 @@ import { TskFilterConfig } from './filter-config';
 		}
 	]
 })
-export class TskAutocompleteComponent<OptionValueT = any> implements ControlValueAccessor, OnInit {
+export class TskAutocompleteComponent<OptionValueT = any> implements AfterViewInit, ControlValueAccessor, OnInit {
 	/** @prop default maximum number of options to display at once for tsk autocomplete components */
 	static maxDisplayedOptions = -1;
+	/** @prop the type of form field to display */
 	@Input() appearance: MatFormFieldAppearance;
-	/** @prop list of mat options in the template */
-	@ViewChildren(MatOption) matOptions: QueryList<MatOption>;
+	/** @prop the material autocomplete */
+	@ViewChild(MatAutocomplete) matAutocomplete: MatAutocomplete;
 	/** @prop placeholder displayed in the input of the autocomplete */
 	@Input() placeholder: string;
 	private _autoSelect = false;
 	private _disabled = false;
-	private _filterConfig: TskFilterConfig;
-	private _filterConfigChange = new Subject<TskFilterConfig>();
+	private _filterConfigChange: BehaviorSubject<TskFilterConfig>;
 	private _filteredOptions: Observable<TskOption<OptionValueT>[]>;
 	private _filteredOptionsExist = false;
 	private _getViewOfValue: (value: OptionValueT) => string;
 	private _optionFilterControl = new FormControl();
-	private _options: TskOption<OptionValueT>[];
-	private _optionsChange = new Subject<TskOption<OptionValueT>[]>();
-	private _registerChange: (value: OptionValueT) => void;
+	private _optionsChange = new BehaviorSubject<TskOption<OptionValueT>[]>([]);
 	private _registerTouch: () => void;
+	private _registerValueChange: (value: OptionValueT) => void;
+	private _selectedValueChange = new BehaviorSubject<OptionValueT>(null);
 	private _showCaseSensitive: boolean;
 	private _showFilterType: boolean;
-	private _value: OptionValueT;
-	private _valueChange = new Subject<OptionValueT>();
 	private _viewProperty: string;
 
 	/** @prop whether typing can select the matching option or if options must be clicked */
@@ -55,7 +70,9 @@ export class TskAutocompleteComponent<OptionValueT = any> implements ControlValu
 	}
 	set autoSelect(autoSelect: boolean) {
 		this._autoSelect = coerceBooleanProperty(autoSelect);
-		if (this.filter) {
+
+		// select the matching option
+		if (this.autoSelect) {
 			this.selectedOption = find(this.options, this.filter, 'viewValue');
 		}
 	}
@@ -63,11 +80,11 @@ export class TskAutocompleteComponent<OptionValueT = any> implements ControlValu
 	/** @prop whether the filter and auto select is case sensitive */
 	@Input()
 	get caseSensitive(): boolean {
-		return this._filterConfig.caseSensitive;
+		return this.filterConfig.caseSensitive;
 	}
 	set caseSensitive(caseSensitive: boolean) {
-		this._filterConfig.caseSensitive = coerceBooleanProperty(caseSensitive);
-		this._filterConfigChange.next(this._filterConfig);
+		this.filterConfig.caseSensitive = coerceBooleanProperty(caseSensitive);
+		this._filterConfigChange.next(this.filterConfig);
 	}
 
 	/** @prop emits when case sensitivity changes */
@@ -93,14 +110,11 @@ export class TskAutocompleteComponent<OptionValueT = any> implements ControlValu
 	/** @prop value used to filter options, update value if auto select is active and update the autocomplete's input's value */
 	@Input()
 	get filter(): string {
-		return this._filterConfig.value;
+		return this.filterConfig.value;
 	}
 	set filter(filter: string) {
-		this._filterConfig.value = filter;
-		this._filterConfigChange.next(this._filterConfig);
-		if (this.optionFilterControl.value !== filter && typeof this.optionFilterControl.value !== 'object') {
-			this.optionFilterControl.setValue(filter);
-		}
+		this.filterConfig.value = filter;
+		this._filterConfigChange.next(this.filterConfig);
 	}
 
 	/** @prop emits when the filter value changes */
@@ -109,20 +123,29 @@ export class TskAutocompleteComponent<OptionValueT = any> implements ControlValu
 		return this.filterConfigChange.pipe(map(filterConfig => filterConfig.value), distinctUntilChanged());
 	}
 
+	/** @prop full configuration used to filter options */
+	get filterConfig(): TskFilterConfig {
+		return this._filterConfigChange.value;
+	}
+	set filterConfig(filterConfig: TskFilterConfig) {
+		Object.assign(this.filterConfig, filterConfig);
+		this._filterConfigChange.next(this.filterConfig);
+	}
+
 	/** @prop emits when any aspect of the filters configuration is updated */
 	@Output()
 	get filterConfigChange(): Observable<TskFilterConfig> {
-		return this._filterConfigChange.pipe(startWith(this._filterConfig));
+		return this._filterConfigChange.asObservable();
 	}
 
 	/** @prop type of filter used to determine which options should be displayed */
 	@Input()
 	get filterType(): 'contains' | 'startsWith' {
-		return this._filterConfig.type;
+		return this.filterConfig.type;
 	}
 	set filterType(filterType: 'contains' | 'startsWith') {
-		this._filterConfig.type = filterType;
-		this._filterConfigChange.next(this._filterConfig);
+		this.filterConfig.type = filterType;
+		this._filterConfigChange.next(this.filterConfig);
 	}
 
 	/** @prop emits when filter type is changed */
@@ -132,7 +155,7 @@ export class TskAutocompleteComponent<OptionValueT = any> implements ControlValu
 	}
 
 	/** @prop mat icon ligature used to represent the current filter type in the filter type button */
-	get filterTypeIcon(): string {
+	get filterTypeIcon(): 'format_align_center' | 'format_align_left' {
 		return (this.filterType === 'contains') ? 'format_align_center' : 'format_align_left';
 	}
 
@@ -155,11 +178,11 @@ export class TskAutocompleteComponent<OptionValueT = any> implements ControlValu
 	/** @prop maximum number of options to display at once (-1 to display all) */
 	@Input()
 	get maxDisplayedOptions(): number {
-		return this._filterConfig.maxDisplayedOptions;
+		return this.filterConfig.maxDisplayedOptions;
 	}
 	set maxDisplayedOptions(maxDisplayedOptions: number) {
-		this._filterConfig.maxDisplayedOptions = maxDisplayedOptions;
-		this._filterConfigChange.next(this._filterConfig);
+		this.filterConfig.maxDisplayedOptions = coerceNumberProperty(maxDisplayedOptions);
+		this._filterConfigChange.next(this.filterConfig);
 	}
 
 	/** @prop emits when maximum number of options to display is changed */
@@ -185,11 +208,10 @@ export class TskAutocompleteComponent<OptionValueT = any> implements ControlValu
 	/** @prop options of the autocomplete */
 	@Input()
 	get options(): TskOption<OptionValueT>[] {
-		return this._options;
+		return this._optionsChange.value;
 	}
 	set options(options: TskOption<OptionValueT>[]) {
-		this._options = (options instanceof Array) ? options : [];
-		this._optionsChange.next(this.options);
+		this._optionsChange.next((options instanceof Array) ? options : []);
 	}
 
 	/** @prop option currently selected by the autocomplete */
@@ -197,7 +219,27 @@ export class TskAutocompleteComponent<OptionValueT = any> implements ControlValu
 		return (this.value != null) ? find(this.options, this.value, 'value') : null;
 	}
 	set selectedOption(selectedOption: TskOption<OptionValueT>) {
-		this.value = (selectedOption) ? selectedOption.value : null;
+		this.selectedValue = (selectedOption) ? selectedOption.value : null;
+	}
+
+	/** @prop the value associated with the selected option */
+	@Input()
+	get selectedValue(): OptionValueT {
+		return this._selectedValueChange.value;
+	}
+	set selectedValue(selectedValue: OptionValueT) {
+		if (this.selectedValue !== selectedValue) {
+			this._selectedValueChange.next(selectedValue);
+			this.value = selectedValue;
+			this.setSelectedMatOption(selectedValue);
+			this._registerValueChange(selectedValue);
+		}
+	}
+
+	/** @prop emits when the selected value of the autocomplete changes */
+	@Output()
+	get selectedValueChange(): Observable<OptionValueT> {
+		return this._selectedValueChange.asObservable();
 	}
 
 	/** @prop whether the case sensitive button should be displayed */
@@ -220,18 +262,18 @@ export class TskAutocompleteComponent<OptionValueT = any> implements ControlValu
 
 	/** @prop selected value of the autocomplete */
 	@Input()
-	get value(): OptionValueT {
-		return this._value;
+	get value(): OptionValueT | string {
+		return this.optionFilterControl.value;
 	}
-	set value(value: OptionValueT) {
-		this.filter = this.getViewOfValue(this.value);
-		this._valueChange.next(value);
+	set value(value: OptionValueT | string) {
+		if (this.value !== value) {
+			this.optionFilterControl.setValue(value);
+		}
 	}
 
-	/** @prop emits when the selected value of the autocomplete changes */
-	@Output()
-	get valueChange(): Observable<OptionValueT> {
-		return this._valueChange.pipe(startWith(this.value), distinctUntilChanged());
+	/** @prop emits when the value of the filter or control changes */
+	get valueChange(): Observable<OptionValueT | string> {
+		return this.optionFilterControl.valueChanges.pipe(distinctUntilChanged());
 	}
 
 	/** @prop property to get off of value to display in the options and use to compare options for auto select */
@@ -241,36 +283,35 @@ export class TskAutocompleteComponent<OptionValueT = any> implements ControlValu
 	}
 	set viewProperty(viewProperty: string) {
 		this._viewProperty = viewProperty;
-		if (this.options) {
-			this.options.forEach(option => { option.viewValue = this.getViewOfValue(option.value); });
-			this._optionsChange.next(this.options);
-		}
+		this.options = TskOption.createOptions(this.optionValues, this.viewProperty);
 	}
 
-	constructor() {
+	constructor(private _changeDetectorRef: ChangeDetectorRef) {
 		// set the default values for the config
-		this._filterConfig = {
+		this._filterConfigChange = new BehaviorSubject<TskFilterConfig>({
 			caseSensitive: false,
 			maxDisplayedOptions: TskAutocompleteComponent.maxDisplayedOptions,
 			type: 'contains',
 			value: ''
-		};
+		});
 
-		this._value = null;
 		this._getViewOfValue = value => getValue(value, this.viewProperty);
 	}
 
 	/** @method ngOnInit initialize the autocomplete component */
 	ngOnInit(): void {
+		this.optionFilterControl.valueChanges.subscribe((controlValue: OptionValueT | string) => {
+			this.filter = (typeof controlValue === 'string') ? controlValue : this.getViewOfValue(controlValue);
+		});
+
 		// set up the filtered options for the autocomplete
 		this.setFilteredOptions();
+	}
 
-		// set the inital value of the option filter
-		this.optionFilterControl.setValue(this._filterConfig.value);
-
-		// set the needed fields & update the mat options when the value changes
-		this.valueChange.subscribe(value => {
-			this.onValueChange(value);
+	/** @method ngAfterViewInit finish itializing properties that are not available by ngOnInit */
+	ngAfterViewInit(): void {
+		this.matAutocomplete.options.changes.subscribe((matOptions: MatOption[]) => {
+			this.setSelectedMatOption(this.selectedValue);
 		});
 	}
 
@@ -285,8 +326,8 @@ export class TskAutocompleteComponent<OptionValueT = any> implements ControlValu
 	}
 
 	/** @method registerOnChange get the method used to notify the form that the autocomplete's value has changed */
-	registerOnChange(registerChange: (value: OptionValueT) => void): void {
-		this._registerChange = registerChange;
+	registerOnChange(registerValueChange: (value: OptionValueT) => void): void {
+		this._registerValueChange = registerValueChange;
 	}
 
 	/** @method registerOnTouched get the method used to notify the form when the autocomplete is touched */
@@ -300,31 +341,8 @@ export class TskAutocompleteComponent<OptionValueT = any> implements ControlValu
 	}
 
 	/** @method writeValue set the value through the form */
-	writeValue(value: OptionValueT): void {
+	writeValue(value: OptionValueT | string): void {
 		this.value = value;
-	}
-
-	private onValueChange(value: OptionValueT): void {
-		if (this._value !== value) {
-			// set the new value
-			this._value = value;
-
-			// update the selected option
-			if (this.matOptions) {
-				this.matOptions.forEach(option => {
-					if (option.value === value) {
-						option.select();
-					} else {
-						option.deselect();
-					}
-				});
-			}
-
-			// register the change
-			if (typeof this._registerChange === 'function') {
-				this._registerChange(this.value);
-			}
-		}
 	}
 
 	private setFilteredOptions(): void {
@@ -337,7 +355,7 @@ export class TskAutocompleteComponent<OptionValueT = any> implements ControlValu
 				this.maxDisplayedOptionsChange,
 				(options, caseSensitive, filter, filterType, maxDisplayedOptions) => {
 					const castStringConfig: CastStringConfig = { case: (caseSensitive) ? 'same' : 'upper' };
-					filter = castString(filter, castStringConfig);
+					const castFilter = castString(filter, castStringConfig);
 
 					let returnedOptions = 0;
 
@@ -346,22 +364,24 @@ export class TskAutocompleteComponent<OptionValueT = any> implements ControlValu
 						let includeOption: boolean;
 
 						if (filterType === 'contains') {
-							includeOption = viewValue.includes(filter);
+							includeOption = viewValue.includes(castFilter);
 						} else if (filterType === 'startsWith') {
-							includeOption = viewValue.startsWith(filter);
+							includeOption = viewValue.startsWith(castFilter);
 						} else {
 							throw Error(`TskAutocompleteComponent error: invalid filter type of ${filterType}`);
 						}
 
-						if (this.autoSelect && filter === viewValue && !option.disabled) {
-							this._valueChange.next(option.value);
+						if (this.autoSelect && viewValue === castFilter) {
+							this.setSelectedMatOption(option.value);
+							this._selectedValueChange.next(option.value);
 						}
 
 						return includeOption && (maxDisplayedOptions < 0 || returnedOptions++ < maxDisplayedOptions);
 					});
 
-					if (castString(this.getViewOfValue(this.value), castStringConfig) !== filter) {
-						this._valueChange.next(null);
+					if (this.autoSelect && this.selectedValue && castString(this.getViewOfValue(this.selectedValue), castStringConfig) !== castFilter) {
+						this.setSelectedMatOption(null);
+						this._selectedValueChange.next(null);
 					}
 
 					this._filteredOptionsExist = filteredOptions.length > 0;
@@ -370,5 +390,15 @@ export class TskAutocompleteComponent<OptionValueT = any> implements ControlValu
 				}
 			)
 		);
+	}
+
+	private setSelectedMatOption(selectedValue: OptionValueT): void {
+		this.matAutocomplete.options.forEach((matOption: MatOption) => {
+			// setting a private property due the deselect method calling optionSelected
+			matOption['_selected'] = matOption.value === selectedValue;
+		});
+
+		// register the changes that just occured
+		this._changeDetectorRef.detectChanges();
 	}
 }

@@ -1,17 +1,18 @@
 <mat-form-field [appearance]="appearance">
 	<input
+		#matAutocompleteTrigger="matAutocompleteTrigger"
 		matInput
 		name="filter"
 		type="text"
+		(click)="matAutocompleteTrigger.openPanel()"
 		(focus)="onFocus()"
-		(input)="filter = $event.target.value"
 		[formControl]="optionFilterControl"
-		[matAutocomplete]="auto"
-		[placeholder]="placeholder">
+		[matAutocomplete]="matAutocomplete"
+		[placeholder]="placeholder" />
 	<mat-autocomplete
-		#auto
+		#matAutocomplete
 		class="tsk-autocomplete"
-		(optionSelected)="value = $event.option.value"
+		(optionSelected)="selectedValue = $event.option.value"
 		[displayWith]="getViewOfValue">
 		<mat-option
 			*ngFor="let option of filteredOptions | async"
@@ -28,7 +29,7 @@
 		<button
 			*ngIf="showCaseSensitive"
 			mat-icon-button
-			type="text"
+			type="button"
 			(click)="caseSensitive = !caseSensitive"
 			[color]="(caseSensitive) ? 'primary' : ''">
 			Aa
@@ -36,7 +37,7 @@
 		<button
 			*ngIf="showFilterType"
 			mat-icon-button
-			type="text"
+			type="button"
 			(click)="onChangeFilterTypeClick()">
 			<mat-icon>{{ filterTypeIcon }}</mat-icon>
 		</button>
