@@ -182,7 +182,8 @@ export class TskAutocompleteComponent<OptionValueT = any> implements AfterViewIn
 		return this.filterConfig.maxDisplayedOptions;
 	}
 	set maxDisplayedOptions(maxDisplayedOptions: number) {
-		this.filterConfig.maxDisplayedOptions = coerceNumberProperty(maxDisplayedOptions);
+		maxDisplayedOptions = coerceNumberProperty(maxDisplayedOptions);
+		this.filterConfig.maxDisplayedOptions = (maxDisplayedOptions > 0) ? maxDisplayedOptions : TskAutocompleteComponent.maxDisplayedOptions;
 		this._filterConfigChange.next(this.filterConfig);
 	}
 
