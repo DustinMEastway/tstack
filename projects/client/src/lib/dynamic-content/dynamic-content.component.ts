@@ -1,3 +1,7 @@
+/* todo:
+	* refactor to make better use of rxjs
+*/
+
 import {
 	Component,
 	ComponentFactoryResolver,
@@ -18,6 +22,7 @@ const errorMessages = {
 	missingComponentType: 'DynamicContentComponent updateContent error: no component type was provided'
 };
 
+/** used to dynamically create Angular entry components */
 @Component({
 	selector: 'tsk-dynamic-content',
 	templateUrl: './dynamic-content.component.html',

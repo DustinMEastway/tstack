@@ -1,4 +1,4 @@
-/* TODOs:
+/* todo:
 	* add label property that defaults to placeholder if it is not set
 	* set the matInput's value when writeValue is called
 	* allow for injectable configs like material and move the default maxDisplayedOptions into it
@@ -27,6 +27,7 @@ import { TskOption } from '../option';
 
 import { TskFilterConfig } from './filter-config';
 
+/** used to display an autocomplete with some features (such as several filter types) built in */
 @Component({
 	selector: 'tsk-autocomplete',
 	templateUrl: './autocomplete.component.html',

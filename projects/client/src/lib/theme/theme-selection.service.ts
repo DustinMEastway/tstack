@@ -7,6 +7,7 @@ import { map, tap } from 'rxjs/operators';
 import { Theme } from './theme';
 import { ThemeGroup } from './theme-group';
 
+/** used to keep track of available themes and the currently selected theme */
 @Injectable()
 export class TskThemeSelectionService<ThemeClassesT extends string | '' = any> {
 	updateOverlay = true;
