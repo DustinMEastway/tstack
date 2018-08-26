@@ -83,6 +83,7 @@ describe('AutocompleteComponent', () => {
 
 	describe('initialization', () => {
 		it('should create', () => {
+			// arrange / act / assert
 			expect(component).toBeTruthy();
 		});
 

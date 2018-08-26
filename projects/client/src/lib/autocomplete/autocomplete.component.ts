@@ -50,7 +50,6 @@ export class TskAutocompleteComponent<OptionValueT = any> implements AfterViewIn
 	/** @prop placeholder displayed in the input of the autocomplete */
 	@Input() placeholder: string;
 	private _autoSelect = false;
-	private _disabled = false;
 	private _filterConfigChange: BehaviorSubject<TskFilterConfig>;
 	private _filteredOptions: Observable<TskOption<OptionValueT>[]>;
 	private _filteredOptionsExist = false;
@@ -97,11 +96,11 @@ export class TskAutocompleteComponent<OptionValueT = any> implements AfterViewIn
 	/** @prop whether the input can be interacted with in the UI */
 	@Input()
 	get disabled(): boolean {
-		return this._disabled;
+		return this.optionFilterControl.disabled;
 	}
 	set disabled(disabled: boolean) {
-		this._disabled = coerceBooleanProperty(disabled);
-		if (this._disabled) {
+		disabled = coerceBooleanProperty(disabled);
+		if (this.disabled !== disabled) {
 			this.optionFilterControl.disable();
 		} else {
 			this.optionFilterControl.enable();
