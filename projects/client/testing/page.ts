@@ -6,6 +6,10 @@ import { By } from '@angular/platform-browser';
 export abstract class Page<FixtureT = any> {
 	protected abstract _fixture: ComponentFixture<FixtureT>;
 
+	protected get _component(): FixtureT {
+		return this._fixture.componentInstance;
+	}
+
 	protected get _debugElement(): DebugElement {
 		return this._fixture.debugElement;
 	}
