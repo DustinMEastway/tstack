@@ -1,3 +1,30 @@
-<p>
-  home-screen works!
-</p>
+<div fxLayout="row wrap">
+	<div fxLayout.xs="column" fxFlex="100">
+		<tsk-readonly-field fxFlex appearance="legacy" placeholder="Legacy Readonly:" value="Foobar"></tsk-readonly-field>
+		<mat-form-field fxFlex appearance="legacy">
+			<mat-label>Legacy Input:</mat-label>
+			<input matInput type="text" name="legacy" value="Foobar">
+		</mat-form-field>
+	</div>
+	<div fxLayout.xs="column" fxFlex="100">
+		<tsk-readonly-field fxFlex appearance="standard" placeholder="Standard Readonly:" value="Foobar"></tsk-readonly-field>
+		<mat-form-field fxFlex appearance="standard">
+			<mat-label>Standard Input:</mat-label>
+			<input matInput type="text" name="standard" value="Foobar">
+		</mat-form-field>
+	</div>
+	<div fxLayout.xs="column" fxFlex="100">
+		<tsk-readonly-field fxFlex appearance="fill" placeholder="Fill Readonly:" value="Foobar"></tsk-readonly-field>
+		<mat-form-field fxFlex appearance="fill">
+			<mat-label>Fill Input:</mat-label>
+			<input matInput type="text" name="fill" value="Foobar">
+		</mat-form-field>
+	</div>
+	<div fxLayout.xs="column" fxFlex="100">
+		<tsk-readonly-field fxFlex appearance="outline" placeholder="Outline Readonly:" value="Foobar"></tsk-readonly-field>
+		<mat-form-field fxFlex appearance="outline">
+			<mat-label>Outline Input:</mat-label>
+			<input matInput type="text" name="outline" value="Foobar">
+		</mat-form-field>
+	</div>
+</div>
