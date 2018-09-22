@@ -5,6 +5,7 @@ import { getValue } from '@tstack/core';
 const floatingLabelScale = 0.75;
 const outlineGapPadding = 5;
 
+/** used to display values in manner that is consistent with material form controls in form fields */
 @Component({
 	selector: 'tsk-readonly-field',
 	templateUrl: './readonly-field.component.html',

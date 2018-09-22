@@ -1,4 +1,4 @@
-/* TODOs:
+/* todo:
 	* add label property that defaults to placeholder if it is not set
 	* set the matInput's value when writeValue is called
 	* allow for injectable configs like material and move the default maxDisplayedOptions into it
@@ -27,6 +27,7 @@ import { TskOption } from '../option';
 
 import { TskFilterConfig } from './filter-config';
 
+/** used to display an autocomplete with some features (such as several filter types) built in */
 @Component({
 	selector: 'tsk-autocomplete',
 	templateUrl: './autocomplete.component.html',
@@ -49,7 +50,6 @@ export class TskAutocompleteComponent<OptionValueT = any> implements AfterViewIn
 	/** @prop placeholder displayed in the input of the autocomplete */
 	@Input() placeholder: string;
 	private _autoSelect = false;
-	private _disabled = false;
 	private _filterConfigChange: BehaviorSubject<TskFilterConfig>;
 	private _filteredOptions: Observable<TskOption<OptionValueT>[]>;
 	private _filteredOptionsExist = false;
@@ -96,11 +96,11 @@ export class TskAutocompleteComponent<OptionValueT = any> implements AfterViewIn
 	/** @prop whether the input can be interacted with in the UI */
 	@Input()
 	get disabled(): boolean {
-		return this._disabled;
+		return this.optionFilterControl.disabled;
 	}
 	set disabled(disabled: boolean) {
-		this._disabled = coerceBooleanProperty(disabled);
-		if (this._disabled) {
+		disabled = coerceBooleanProperty(disabled);
+		if (this.disabled !== disabled) {
 			this.optionFilterControl.disable();
 		} else {
 			this.optionFilterControl.enable();
@@ -181,7 +181,9 @@ export class TskAutocompleteComponent<OptionValueT = any> implements AfterViewIn
 		return this.filterConfig.maxDisplayedOptions;
 	}
 	set maxDisplayedOptions(maxDisplayedOptions: number) {
-		this.filterConfig.maxDisplayedOptions = coerceNumberProperty(maxDisplayedOptions);
+		maxDisplayedOptions = coerceNumberProperty(maxDisplayedOptions);
+		this.filterConfig.maxDisplayedOptions = (maxDisplayedOptions === -1 || maxDisplayedOptions > 0) ?
+			maxDisplayedOptions : TskAutocompleteComponent.maxDisplayedOptions;
 		this._filterConfigChange.next(this.filterConfig);
 	}
 

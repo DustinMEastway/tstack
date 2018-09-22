@@ -5,6 +5,7 @@ import { CoerceBoolean } from '../decorators/coerce-boolean';
 
 import { TskNavMenuConfig } from './nav-menu-config';
 
+/** create a menu used for navigation */
 @Component({
 	selector: 'tsk-nav-menu',
 	templateUrl: './nav-menu.component.html',
@@ -17,6 +18,7 @@ export class TskNavMenuComponent {
 
 	constructor(private _router: Router) {}
 
+	// called when a navigation anchor tag is clicked
 	onNavItemClick(selectedPath: string[]): void {
 		if (this.navigate) {
 			// create the url by joining them together with '/' characters

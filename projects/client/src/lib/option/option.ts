@@ -1,5 +1,6 @@
 import { getValue } from '@tstack/core';
 
+/** used for elements like the autocomeplete that display options */
 export class TskOption<T> {
 	disabled: boolean;
 	viewValue: string;

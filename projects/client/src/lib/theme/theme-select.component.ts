@@ -4,6 +4,7 @@ import { Theme } from './theme';
 import { ThemeGroup } from './theme-group';
 import { TskThemeSelectionService } from './theme-selection.service';
 
+/** used to change themes that exist in the theme selection service */
 @Component({
 	selector: 'tsk-theme-select',
 	templateUrl: './theme-select.component.html',
