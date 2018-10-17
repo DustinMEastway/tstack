@@ -94,5 +94,5 @@ export function compareItems<T = any>(item1: T, item2: T, ...compareProperties: 
 }
 
 export function sort<T = any>(items: T[], ...sortProperties: (string | CompareProperty)[]): T[] {
-	return items.sort((item1, item2) => compareItems(item1, item2, ...sortProperties));
+	return (items instanceof Array) ? items.sort((item1, item2) => compareItems(item1, item2, ...sortProperties)) : [];
 }
