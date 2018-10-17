@@ -1,17 +1,14 @@
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-import { BaseApiService } from './base-api-service';
-
-interface GraphQlData<T = any> {
-	[field: string]: T;
-}
+import { TskBaseApiService } from './base-api-service';
 
 interface GraphQlResult<T = any> {
-	data: GraphQlData<T>;
+	data?: { [key: string]: T };
+	errors?: { message: string}[];
 }
 
-export abstract class BaseGraphqlService extends BaseApiService {
+export abstract class TskBaseGraphqlService extends TskBaseApiService {
 	protected abstract get graphQlUrl(): string;
 
 	protected queryGraphQl<T = any, R = T>(query: string, transformation?: (data: R) => T): Observable<T> {
@@ -26,7 +23,14 @@ export abstract class BaseGraphqlService extends BaseApiService {
 
 	protected queryAll<T>(query: string, castFunction?: (data: any) => T): Observable<T> {
 		return this.queryGraphQl(query, (result: GraphQlResult<T>) => {
-			const data = (result) ? result.data : null;
+			if (!result) {
+				throw new Error(`query '${query}' returned no result`);
+			} else if (result.errors instanceof Array) {
+				const errorMessages = result.errors.map(e => e.message).join('\', \'');
+				throw new Error(`query '${query}' returned the folowing erors ['${errorMessages}']`);
+			}
+
+			const data = result.data;
 
 			if (data == null || Object.keys(data).length < 1) {
 				return null;

@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Castable } from '@tstack/core';
 import { Observable } from 'rxjs';
 
-export abstract class BaseApiService<EntityT = any> {
+export abstract class TskBaseApiService<EntityT = any> {
 	protected abstract _entityType: Castable<EntityT>;
 	protected abstract _httpClient: HttpClient;
 
