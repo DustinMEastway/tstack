@@ -27,7 +27,7 @@ export abstract class TskBaseGraphqlService extends TskBaseApiService {
 				throw new Error(`query '${query}' returned no result`);
 			} else if (result.errors instanceof Array) {
 				const errorMessages = result.errors.map(e => e.message).join('\', \'');
-				throw new Error(`query '${query}' returned the folowing erors ['${errorMessages}']`);
+				throw new Error(`query '${query}' returned the folowing errors ['${errorMessages}']`);
 			}
 
 			const data = result.data;
