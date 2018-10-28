@@ -9,9 +9,28 @@ export interface CastStringConfig {
 }
 
 /**
+ * converts the case of the given string into camel case
+ * @param item to convert to camel case
+ * @returns a camel case version of the input string
+ */
+export function camelCase(item: string): string {
+	if (typeof item !== 'string') {
+		return item;
+	} else if (item.length < 2) {
+		return item.toLowerCase();
+	}
+
+	// lower the first character, then upper case anything following a space, underscore or dash
+	return item.substr(0, 1).toLowerCase() + item.substr(1).replace(/[\s_-]+(.)/g, (match) => {
+		return match.substr(1).toUpperCase();
+	});
+}
+
+/**
  * casts the given item into a string if possible, if not, an empty string is returned
  * @param item to cast into a string
  * @param [config] options to apply to the string after it has been cast
+ * @returns a string value of the given item
  */
 export function castString(item: any, config?: CastStringConfig): string {
 	if (item == null || (typeof item !== 'string' && typeof item.toString !== 'function')) { return ''; }
