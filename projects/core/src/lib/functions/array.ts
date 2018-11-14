@@ -1,19 +1,56 @@
 import { CompareProperty } from '../types/compare-property';
+import { FilterConfig } from '../types/filter-config';
 
-import { getValue } from './object';
+import { castString, getValue } from './object';
 
 /**
  * filters an array of values
  * @param items to filter
  * @param filterValue used to determine whether an item should be kept or not
  * @param [property] to compare with for each item
- * @param [keepMatches=true] to filterValue if set to true
+ * @param [config] to determine how to filter the values
  * @returns filtered items
  */
-export function filter<T>(items: T[], filterValue: any, property?: string, keepMatches: boolean = true): T[] {
+export function filter<T>(items: T[], filterValue: any, property?: string, config?: Partial<FilterConfig>): T[] {
 	if (!(items instanceof Array)) { return []; }
 
-	return items.filter(item => keepMatches === (getValue(item, property) === filterValue));
+	// assign the config values onto the defualt config
+	config = Object.assign<FilterConfig, Partial<FilterConfig>>({
+		keepMatches: true,
+		maxReturnSize: -1,
+		mode: 'equals'
+	}, config);
+
+	let castCase: 'lower' | 'same';
+	if (config.mode === 'contains' || config.mode === 'startsWith') {
+		castCase = (config.caseInsensitive) ? 'lower' : 'same';
+
+		// cast the filter value to a string for string filter modes
+		filterValue = castString(filterValue, { case: castCase });
+	}
+
+	let count = 0;
+	return items.filter(item => {
+		const value = getValue(item, property);
+		let match = false;
+
+		// determine if the item matches the filter
+		if (config.mode === 'equals') {
+			match = value === filterValue;
+		} else {
+			const stringValue = castString(value, { case: castCase });
+
+			if (config.mode === 'contains') {
+				match = stringValue.includes(filterValue);
+			} else if (config.mode === 'startsWith') {
+				match = stringValue.startsWith(filterValue);
+			}
+		}
+
+		// determine if the item should be kept based on its match
+		// match passes, then count is incremented to make sure it stays under max return size if it is used
+		return (config.keepMatches === match && (config.maxReturnSize < 0 || ++count <= config.maxReturnSize));
+	});
 }
 
 /**
