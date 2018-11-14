@@ -1,4 +1,5 @@
 /* todo:
+	* use the @tstack/core filter function
 	* add label property that defaults to placeholder if it is not set
 	* set the matInput's value when writeValue is called
 	* allow for injectable configs like material and move the default maxDisplayedOptions into it

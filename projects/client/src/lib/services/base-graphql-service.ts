@@ -8,6 +8,7 @@ interface GraphQlResult<T = any> {
 	errors?: { message: string}[];
 }
 
+/** base GraphQL api for application services to extend */
 export abstract class TskBaseGraphqlService extends TskBaseApiService {
 	protected abstract get graphQlUrl(): string;
 

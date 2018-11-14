@@ -1,5 +1,6 @@
 /* todo:
 	* refactor to make better use of rxjs
+	* remove html file
 */
 
 import {

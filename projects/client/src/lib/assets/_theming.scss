@@ -1,5 +1,6 @@
 @import './theming/sparkle';
 
+// tstack core themes (only run this once)
 @mixin tsk-core() {
 	@include tsk-spark-core();
 }
