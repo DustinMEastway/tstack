@@ -5,4 +5,5 @@ export * from './nav-menu';
 export * from './option';
 export * from './readonly-field';
 export * from './services';
+export * from './sparkle';
 export * from './theme';

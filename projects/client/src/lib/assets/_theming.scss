@@ -1,0 +1,5 @@
+@import './theming/sparkle';
+
+@mixin tsk-core() {
+	@include tsk-spark-core();
+}
