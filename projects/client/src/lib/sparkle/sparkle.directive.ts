@@ -1,9 +1,13 @@
+/* todo:
+	* move randomInt and randomItem methods out of the file
+*/
+
 import { Directive, ElementRef, HostBinding, Input, OnInit } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { distinctUntilChanged, map } from 'rxjs/operators';
 
+import { TskSparkleConfig } from './sparkle-config';
 import { TskSparkleParticle } from './sparkle-particle';
-import { TskSparkleSettings } from './sparkle-settings';
 
 function randomInt(max: number): number {
 	return Math.floor(Math.random() * max);
@@ -28,6 +32,7 @@ const encodedSparkles = [
 	'fGOf+arOu6jUwS7l6tT/B+xo+aDFRo5BykHfav3/gSYAAtIdQ1IT0puAAAAABJRU5ErkJggg=='
 ].join('');
 
+/** used to make the component that the directive is attached to sparkle */
 @Directive({
 	selector: '[tskSparkle]'
 })
@@ -38,7 +43,7 @@ export class TskSparkleDirective implements OnInit {
 	private _sprite: HTMLImageElement;
 	private _sprites: number[];
 	private _particles: TskSparkleParticle[];
-	private _settings: BehaviorSubject<TskSparkleSettings>;
+	private _settings: BehaviorSubject<TskSparkleConfig>;
 
 	@HostBinding('class.tsk-sparkle')
 	get addTskSparkle(): boolean {
@@ -52,10 +57,10 @@ export class TskSparkleDirective implements OnInit {
 	}
 
 	@Input('tskSparkle')
-	get settings(): TskSparkleSettings {
+	get settings(): TskSparkleConfig {
 		return this._settings.value;
 	}
-	set settings(settings: TskSparkleSettings) {
+	set settings(settings: TskSparkleConfig) {
 		this._settings.next(Object.assign(this._settings.value, settings));
 	}
 
@@ -72,7 +77,7 @@ export class TskSparkleDirective implements OnInit {
 	constructor(private _elementRef: ElementRef) {
 		const count = Math.ceil(this._nativeElement.offsetWidth / 30);
 
-		this._settings = new BehaviorSubject<TskSparkleSettings>({
+		this._settings = new BehaviorSubject<TskSparkleConfig>({
 			color: '#FFF',
 			count: (count > 5) ? count : 5,
 			overlap: 0,
