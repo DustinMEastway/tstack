@@ -1,6 +1,7 @@
 /* todo:
 	* refactor to make better use of rxjs
 	* remove html file
+	* remove data property
 */
 
 import {
@@ -16,7 +17,7 @@ import { BehaviorSubject } from 'rxjs';
 
 import { DynamicContentUpdateType } from './dynamic-content-update-type';
 
-type ConfigMethod<ComponentT = any, DataT = any> =
+export type ConfigMethod<ComponentT = any, DataT = any> =
 	(dynamicComponent: DynamicContentComponent<ComponentT, DataT>, updateType: DynamicContentUpdateType) => void;
 
 const errorMessages = {
