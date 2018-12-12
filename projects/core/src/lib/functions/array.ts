@@ -11,36 +11,40 @@ import { castString, getValue } from './object';
  * @param [config] to determine how to filter the values
  * @returns filtered items
  */
-export function filter<T>(items: T[], filterValue: any, property?: string, config?: Partial<FilterConfig>): T[] {
+export function filter<T>(items: T[], filterValue: any, config?: Partial<FilterConfig>): T[] {
 	if (!(items instanceof Array)) { return []; }
 
 	// assign the config values onto the defualt config
 	config = Object.assign<FilterConfig, Partial<FilterConfig>>({
+		caseInsensitive: false,
 		keepMatches: true,
 		maxReturnSize: -1,
-		mode: 'equals'
+		mode: 'equals',
+		property: ''
 	}, config);
 
-	let castCase: 'lower' | 'same';
-	if (config.mode === 'contains' || config.mode === 'startsWith') {
-		castCase = (config.caseInsensitive) ? 'lower' : 'same';
+	// cast to lower case if filter is case insensitive
+	const castStringConfig: { case: 'lower' | 'same' } = { case: (config.caseInsensitive) ? 'lower' : 'same' };
 
-		// cast the filter value to a string for string filter modes
-		filterValue = castString(filterValue, { case: castCase });
+	// if mode is not equals or filter is case insensitive, then cast the filter value to a string
+	if (config.mode !== 'equals' || config.caseInsensitive) {
+		filterValue = castString(filterValue, castStringConfig);
 	}
 
 	let count = 0;
 	return items.filter(item => {
-		const value = getValue(item, property);
+		const value = getValue(item, config.property);
 		let match = false;
 
 		// determine if the item matches the filter
-		if (config.mode === 'equals') {
+		if (config.mode === 'equals' && !config.caseInsensitive) {
 			match = value === filterValue;
 		} else {
-			const stringValue = castString(value, { case: castCase });
+			const stringValue = castString(value, castStringConfig);
 
-			if (config.mode === 'contains') {
+			if (config.mode === 'equals') {
+				match = stringValue === filterValue;
+			} else if (config.mode === 'contains') {
 				match = stringValue.includes(filterValue);
 			} else if (config.mode === 'startsWith') {
 				match = stringValue.startsWith(filterValue);
@@ -48,7 +52,7 @@ export function filter<T>(items: T[], filterValue: any, property?: string, confi
 		}
 
 		// determine if the item should be kept based on its match
-		// match passes, then count is incremented to make sure it stays under max return size if it is used
+		// if match passes, then count is incremented to make sure it stays under max return size if it is used
 		return (config.keepMatches === match && (config.maxReturnSize < 0 || ++count <= config.maxReturnSize));
 	});
 }
