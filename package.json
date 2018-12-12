@@ -15,7 +15,10 @@
     "buildServer": "ng build server",
     "buildLibs": "npm run buildCore; npm run buildClient; npm run buildServer",
     "copyClientAssets": "cp -R ./projects/client/src/lib/assets/. ./dist/@tstack/client",
-    "prodBuild": "rm -r ./dist; ng build --prod core; ng build --prod client; ng build --prod server",
+    "prodBuildCore": "ng build --prod core",
+    "prodBuildClient": "ng build --prod client && npm run copyClientAssets",
+    "prodBuildServer": "ng build --prod server",
+    "prodBuildLibs": "rm -r ./dist; npm run prodBuildCore; npm run prodBuildClient; npm run prodBuildServer",
     "lint": "ng lint",
     "e2e": "ng e2e"
   },
