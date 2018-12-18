@@ -1,6 +1,5 @@
 /* todo:
 	* refactor to make better use of rxjs
-	* remove html file
 	* remove data property
 */
 
@@ -27,7 +26,7 @@ const errorMessages = {
 /** used to dynamically create Angular entry components */
 @Component({
 	selector: 'tsk-dynamic-content',
-	templateUrl: './dynamic-content.component.html',
+	template: ''
 })
 export class DynamicContentComponent<ComponentT = any, DataT = any> implements OnInit {
 	private _componentRef: ComponentRef<ComponentT>;
