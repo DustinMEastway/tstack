@@ -15,7 +15,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 	selector: 'tsk-dynamic-content',
 	template: ''
 })
-export class DynamicContentComponent<ComponentT = any> implements OnInit {
+export class TskDynamicContentComponent<ComponentT = any> implements OnInit {
 	private _contentChange = new BehaviorSubject<ComponentRef<ComponentT>>(null);
 	private _componentTypeChange = new BehaviorSubject<Type<ComponentT>>(null);
 
