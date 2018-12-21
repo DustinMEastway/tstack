@@ -15,7 +15,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 	selector: 'tsk-dynamic-content',
 	template: ''
 })
-export class TskDynamicContentComponent<ComponentT = any> implements OnInit {
+export class TskDynamicContentComponent<ComponentT = any> {
 	private _contentChange = new BehaviorSubject<ComponentRef<ComponentT>>(null);
 	private _componentTypeChange = new BehaviorSubject<Type<ComponentT>>(null);
 
@@ -35,6 +35,7 @@ export class TskDynamicContentComponent<ComponentT = any> implements OnInit {
 	set componentType(componentType: Type<ComponentT>) {
 		if (this.componentType !== componentType) {
 			this._componentTypeChange.next(componentType);
+			this.updateContent(componentType);
 		}
 	}
 
@@ -48,22 +49,28 @@ export class TskDynamicContentComponent<ComponentT = any> implements OnInit {
 	}
 
 	/**
-	 * @method ngOnInit start dynamically creating content after component is fully initialized
+	 * @method clearContent of the dynamic component
 	 */
-	ngOnInit(): void {
-		this.componentTypeChange.subscribe(componentType => { this.updateContent(); });
+	clearContent(): void {
+		this._viewContainerRef.clear();
+		this._contentChange.next(null);
 	}
 
 	/**
-	 * @method updateContent using the current componentType, configMethod, & data
+	 * @method updateContent using the given component type
 	 * @param updateType to determine what needs to be updated on the dynamic component
 	 */
-	private updateContent(): void {
+	updateContent(componentType: Type<ComponentT>): ComponentRef<ComponentT> {
 		// clear out the previous component and create a new one with the current component type
-		this._viewContainerRef.clear();
-		if (this.componentType) {
-			const componentFactory = this._componentFactoryResolver.resolveComponentFactory(this.componentType);
-			this._contentChange.next(this._viewContainerRef.createComponent(componentFactory));
+		this.clearContent();
+		this._componentTypeChange.next(componentType);
+
+		if (componentType) {
+			const componentFactory = this._componentFactoryResolver.resolveComponentFactory(componentType);
+			const content = this._viewContainerRef.createComponent(componentFactory);
+			this._contentChange.next(content);
+
+			return content;
 		}
 	}
 }
