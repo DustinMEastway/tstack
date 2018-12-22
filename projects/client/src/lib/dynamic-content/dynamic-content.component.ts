@@ -1,110 +1,75 @@
-/* todo:
-	* refactor to make better use of rxjs
-	* remove html file
-*/
-
 import {
 	Component,
 	ComponentFactoryResolver,
 	ComponentRef,
 	Input,
 	OnInit,
+	Output,
 	Type,
 	ViewContainerRef
 } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
-
-import { DynamicContentUpdateType } from './dynamic-content-update-type';
-
-type ConfigMethod<ComponentT = any, DataT = any> =
-	(dynamicComponent: DynamicContentComponent<ComponentT, DataT>, updateType: DynamicContentUpdateType) => void;
-
-const errorMessages = {
-	missingComponentType: 'DynamicContentComponent updateContent error: no component type was provided'
-};
+import { BehaviorSubject, Observable } from 'rxjs';
 
 /** used to dynamically create Angular entry components */
 @Component({
 	selector: 'tsk-dynamic-content',
-	templateUrl: './dynamic-content.component.html',
+	template: ''
 })
-export class DynamicContentComponent<ComponentT = any, DataT = any> implements OnInit {
-	private _componentRef: ComponentRef<ComponentT>;
-	private _componentType: Type<ComponentT>;
-	private _configMethod: ConfigMethod<ComponentT, DataT>;
-	private _data: DataT;
-	private _dynamicContentUpdated: BehaviorSubject<DynamicContentUpdateType>;
+export class TskDynamicContentComponent<ComponentT = any> {
+	private _contentChange = new BehaviorSubject<ComponentRef<ComponentT>>(null);
+	private _componentTypeChange = new BehaviorSubject<Type<ComponentT>>(null);
 
-	get componentRef(): ComponentRef<ComponentT> {
-		return this._componentRef;
+	get content(): ComponentRef<ComponentT> {
+		return this._contentChange.value;
+	}
+
+	@Output()
+	get contentChange(): Observable<ComponentRef<ComponentT>> {
+		return this._contentChange.asObservable();
 	}
 
 	@Input()
 	get componentType(): Type<ComponentT> {
-		return this._componentType;
+		return this._componentTypeChange.value;
 	}
 	set componentType(componentType: Type<ComponentT>) {
-		if (this._componentType !== componentType) {
-			this._componentType = componentType;
-			this.updateContent('componentType');
+		if (this.componentType !== componentType) {
+			this.updateContent(componentType);
 		}
 	}
 
-	@Input()
-	get configMethod(): ConfigMethod {
-		return this._configMethod;
-	}
-	set configMethod(configMethod: ConfigMethod) {
-		if (this._configMethod !== configMethod) {
-			this._configMethod = configMethod;
-			this.updateContent('configMethod');
-		}
-	}
-
-	@Input()
-	get data(): DataT {
-		return this._data;
-	}
-	set data(data: DataT) {
-		if (this._data !== data) {
-			this._data = data;
-			this.updateContent('data');
-		}
+	@Output()
+	get componentTypeChange(): Observable<Type<ComponentT>> {
+		return this._componentTypeChange.asObservable();
 	}
 
 	constructor(private _componentFactoryResolver: ComponentFactoryResolver,
 		private _viewContainerRef: ViewContainerRef) {
-		this._dynamicContentUpdated = new BehaviorSubject<DynamicContentUpdateType>('manual');
 	}
 
 	/**
-	 * @method ngOnInit start dynamically creating content after component is fully initialized
+	 * @method clearContent of the dynamic component
 	 */
-	ngOnInit(): void {
-		this._dynamicContentUpdated.subscribe((updateType: DynamicContentUpdateType) => {
-			this.updateContent(updateType);
-		});
+	clearContent(): void {
+		this._viewContainerRef.clear();
+		this._contentChange.next(null);
 	}
 
 	/**
-	 * @method updateContent using the current componentType, configMethod, & data
+	 * @method updateContent using the given component type
 	 * @param updateType to determine what needs to be updated on the dynamic component
 	 */
-	updateContent(updateType: DynamicContentUpdateType = 'manual'): void {
-		// only swap out the component refrence if the component type is changed or if a manual refresh occurs
-		if (updateType === 'componentType' || updateType === 'manual') {
-			// throw an erorr if no component type was provided
-			if (this.componentType == null) { throw Error(errorMessages.missingComponentType); }
+	updateContent(componentType: Type<ComponentT>): ComponentRef<ComponentT> {
+		// clear out the previous component and create a new one with the current component type
+		this.clearContent();
+		this._componentTypeChange.next(componentType);
 
-			// clear out the previous component and create a new one with the current component type
-			this._viewContainerRef.clear();
-			const componentFactory = this._componentFactoryResolver.resolveComponentFactory(this.componentType);
-			this._componentRef = this._viewContainerRef.createComponent(componentFactory);
-		}
+		if (componentType) {
+			const componentFactory = this._componentFactoryResolver.resolveComponentFactory(componentType);
+			const content = this._viewContainerRef.createComponent(componentFactory);
+			this._contentChange.next(content);
 
-		// call the configuration method if one was provided
-		if (typeof this.configMethod === 'function') {
-			this.configMethod(this, updateType);
+			return content;
 		}
 	}
 }

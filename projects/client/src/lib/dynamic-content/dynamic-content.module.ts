@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
 
-import { DynamicContentComponent } from './dynamic-content.component';
+import { TskDynamicContentComponent } from './dynamic-content.component';
 
 @NgModule({
 	declarations: [
-		DynamicContentComponent
+		TskDynamicContentComponent
 	],
 	exports: [
-		DynamicContentComponent
+		TskDynamicContentComponent
 	]
 })
-export class DynamicContentModule { }
+export class TskDynamicContentModule { }
