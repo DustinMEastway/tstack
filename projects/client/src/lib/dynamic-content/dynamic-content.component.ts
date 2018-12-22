@@ -34,7 +34,6 @@ export class TskDynamicContentComponent<ComponentT = any> {
 	}
 	set componentType(componentType: Type<ComponentT>) {
 		if (this.componentType !== componentType) {
-			this._componentTypeChange.next(componentType);
 			this.updateContent(componentType);
 		}
 	}
