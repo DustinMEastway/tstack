@@ -6,12 +6,10 @@ import { TskDialogComponent } from './dialog.component';
 
 @Injectable()
 export class TskDialogService {
-	static get defaultConfig(): Partial<TskDialogConfig> {
-		return {
-			actionButtons: [ { viewValue: 'Close', value: null } ],
-			disableClose: true
-		};
-	}
+	private static defaultConfig: Partial<TskDialogConfig> = {
+		actionButtons: [ { viewValue: 'Close', value: null } ],
+		disableClose: true
+	};
 
 	constructor(private _matDialog: MatDialog) {}
 
