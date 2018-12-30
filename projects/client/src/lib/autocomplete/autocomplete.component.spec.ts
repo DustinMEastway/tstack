@@ -1,11 +1,12 @@
-import { Component, DebugElement, ViewChild } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatFormFieldAppearance } from '@angular/material';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { TskOption } from '@tstack/client';
-import { getTestObjectWithHost, Page } from '@tstack/client/testing';
-import { filter, find, getValue } from '@tstack/core';
+import { filter, getValue } from '@tstack/core';
 import { Subject } from 'rxjs';
+
+import { getTestObjectWithHost, Page } from '../../../testing';
+import { TskOption } from '../option/option';
 
 import { TskAutocompleteComponent } from './autocomplete.component';
 import { TskAutocompleteModule } from './autocomplete.module';

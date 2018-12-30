@@ -11,11 +11,9 @@ import {
 	AfterViewInit,
 	ChangeDetectorRef,
 	Component,
-	ElementRef,
 	Input,
 	OnInit,
 	Output,
-	QueryList,
 	ViewChild
 } from '@angular/core';
 import { ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR } from '@angular/forms';

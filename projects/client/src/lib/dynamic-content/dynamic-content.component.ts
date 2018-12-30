@@ -3,7 +3,6 @@ import {
 	ComponentFactoryResolver,
 	ComponentRef,
 	Input,
-	OnInit,
 	Output,
 	Type,
 	ViewContainerRef
@@ -57,7 +56,7 @@ export class TskDynamicContentComponent<ComponentT = any> {
 
 	/**
 	 * @method updateContent using the given component type
-	 * @param updateType to determine what needs to be updated on the dynamic component
+	 * @param componentType to fill the content with
 	 */
 	updateContent(componentType: Type<ComponentT>): ComponentRef<ComponentT> {
 		// clear out the previous component and create a new one with the current component type
