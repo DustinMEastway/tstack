@@ -1,4 +1,4 @@
-import { Component, Input, ViewChild } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { MatDialogRef } from '@angular/material';
 import { Type } from '@tstack/core';
 import { Observable } from 'rxjs';
@@ -10,13 +10,14 @@ import { TskDialogActionButton } from './dialog-action-button';
 import { TskDialogConfig } from './dialog-config';
 import { TskDialogType } from './dialog-type';
 
+/** used within a material dialog to display content */
 @Component({
 	selector: 'tsk-dialog',
 	templateUrl: './dialog.component.html',
 	styleUrls: ['./dialog.component.scss']
 })
 export class TskDialogComponent<ContentT = any, ResultT = any> {
-	@Input() title: string;
+	title: string;
 	@ViewChild(TskDynamicContentComponent) dynamicContent: TskDynamicContentComponent<ContentT>;
 	private _actionButtons: TskDialogActionButton<ResultT>[];
 	private _content: string[] | ContentT;

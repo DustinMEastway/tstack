@@ -15,6 +15,9 @@ import { TskDialogService } from './dialog.service';
 	entryComponents: [
 		TskDialogComponent
 	],
+	exports: [
+		TskDialogComponent
+	],
 	imports: [
 		CommonModule,
 		FlexLayoutModule,
