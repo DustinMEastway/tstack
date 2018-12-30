@@ -1,5 +1,3 @@
-import { TskOption } from '../option';
-
 /** configuration to customize the out of the box behavior for autocomplete filtering */
 export interface TskFilterConfig {
 	/** @prop whether the filter is case sensitive */

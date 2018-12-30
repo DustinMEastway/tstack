@@ -1,7 +1,8 @@
 import { Component, ViewChild } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { Router } from '@angular/router';
-import { getTestObjectWithHost, Page } from '@tstack/client/testing';
+
+import { getTestObjectWithHost, Page } from '../../../testing';
 
 import { TskNavMenuConfig } from './nav-menu-config';
 import { TskNavMenuComponent } from './nav-menu.component';

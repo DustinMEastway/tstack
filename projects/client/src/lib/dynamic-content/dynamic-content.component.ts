@@ -3,7 +3,6 @@ import {
 	ComponentFactoryResolver,
 	ComponentRef,
 	Input,
-	OnInit,
 	Output,
 	Type,
 	ViewContainerRef
