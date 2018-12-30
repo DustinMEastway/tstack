@@ -87,14 +87,12 @@ export class TskDialogComponent<ContentT = any, ResultT = any> {
 	}
 
 	/**
-	 * @method onActionClick performs the associated action for the selected action button
-	 * @param actionButton to perform the action of (closes the dialog by default)
+	 * @method close dialog using associated dialog reference
+	 * @param result of the dialog
 	 */
-	onActionClick(actionButton: TskDialogActionButton<ResultT> = null): void {
-		if (actionButton && typeof actionButton.action === 'function') {
-			actionButton.action(actionButton.value);
-		} else {
-			this.dialogRef.close(actionButton ? actionButton.value : null);
+	close(result?: ResultT): void {
+		if (this.dialogRef) {
+			this.dialogRef.close(result);
 		}
 	}
 
@@ -125,6 +123,18 @@ export class TskDialogComponent<ContentT = any, ResultT = any> {
 			this._content = content;
 		} else if (content != null) {
 			this._content = this.dynamicContent.updateContent(content).instance;
+		}
+	}
+
+	/**
+	 * @method onActionClick performs the associated action for the selected action button
+	 * @param actionButton to perform the action of (closes the dialog by default)
+	 */
+	onActionClick(actionButton: TskDialogActionButton<ResultT> = null): void {
+		if (actionButton && typeof actionButton.action === 'function') {
+			actionButton.action(actionButton.value);
+		} else {
+			this.close(actionButton ? actionButton.value : null);
 		}
 	}
 }
