@@ -1,7 +1,33 @@
+/* todo:
+	* add property and sort function as a configuration for hasDuplicates
+*/
+
 import { CompareProperty } from '../types/compare-property';
 import { FilterConfig } from '../types/filter-config';
 
 import { castString, getValue } from './object';
+
+/**
+ * areSame determines if two arrays contain the same values in the same order
+ * @param items1 array of items to compare with items2
+ * @param items2 array of items to compare with items1
+ * @returns whether the two arrays contain the same values in the same order
+ */
+export function areEqual(items1: any[], items2: any[]): boolean {
+	if (items1 === items2) {
+		return true;
+	} else if (items1 == null || items2 == null || items1.length !== items2.length) {
+		return false;
+	}
+
+	for (let i = 0; i < items1.length; ++i) {
+		if (items1[i] !== items2[i]) {
+			return false;
+		}
+	}
+
+	return true;
+}
 
 /**
  * filters an array of values
@@ -86,6 +112,24 @@ export function findIndex<T>(items: T[], valueToFind: any, property?: string): n
 }
 
 /**
+ * hasDuplicates determines if the array contains any duplicate values (must be sortable values like strings or numbers)
+ * @param items array that is checked for duplicates
+ * @returns whether any duplicates were found in the array
+ */
+export function hasDuplicates<T = any>(items: T[]): boolean {
+	// create a copy of the array using slice before sorting to leave original array alone
+	items = items.slice().sort();
+
+	for (let i = 0; i < items.length - 1; ++i) {
+		if (items[i] === items[i + 1]) {
+			return true;
+		}
+	}
+
+	return false;
+}
+
+/**
  * gets the value at a given property off of each element in an array
  * @param items to get values from
  * @param property get off of each item
@@ -134,6 +178,12 @@ export function compareItems<T = any>(item1: T, item2: T, ...compareProperties: 
 	return 0;
 }
 
+/**
+ * sort an array
+ * @param items array to sort
+ * @param sortProperties used to determine which item in the array is larger
+ * @returns the sorted array
+ */
 export function sort<T = any>(items: T[], ...sortProperties: (string | CompareProperty)[]): T[] {
-	return (items instanceof Array) ? items.sort((item1, item2) => compareItems(item1, item2, ...sortProperties)) : [];
+	return (items instanceof Array) ? items.slice().sort((item1, item2) => compareItems(item1, item2, ...sortProperties)) : [];
 }
