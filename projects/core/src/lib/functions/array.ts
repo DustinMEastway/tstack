@@ -13,7 +13,7 @@ import { castString, getValue } from './object';
  * @param items2 array of items to compare with items1
  * @returns whether the two arrays contain the same values in the same order
  */
-export function areSame(items1: any[], items2: any[]): boolean {
+export function areEqual(items1: any[], items2: any[]): boolean {
 	if (items1 === items2) {
 		return true;
 	} else if (items1 == null || items2 == null || items1.length !== items2.length) {
