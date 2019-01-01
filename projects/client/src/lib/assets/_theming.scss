@@ -4,3 +4,44 @@
 @mixin tsk-core() {
 	@include tsk-spark-core();
 }
+
+// tstack theming based on the current theme
+@mixin tsk-themes($theme) {
+	$accent-palette: map-get($theme, accent);
+	$accent-color: mat-color($accent-palette, 500);
+	$accent-contrast-color: mat-contrast($accent-palette, 500);
+	$foreground-text-color: map-get(map-get($theme, foreground), text);
+	$is-dark: map-get($theme, is-dark);
+	$primary-palette: map-get($theme, primary);
+	$primary-color: mat-color($primary-palette, 500);
+	$primary-contrast-color: mat-contrast($primary-palette, 500);
+	$warn-palette: map-get($theme, warn);
+	$warn-color: mat-color($warn-palette, 500);
+	$warn-contrast-color: mat-contrast($warn-palette, 500);
+	$background-color: mat-color(map-get($theme, background), background);
+
+	.tsk-primary-border {
+		border-color: $primary-color;
+	}
+
+	.tsk-accent {
+		background-color: $accent-color;
+		color: $accent-contrast-color;
+	}
+
+	.tsk-primary {
+		background-color: $primary-color;
+		color: $primary-contrast-color;
+	}
+
+	.tsk-warn {
+		background-color: $warn-color;
+		color: $warn-contrast-color;
+	}
+
+	.tsk-background-20 {
+		$amount: 20%;
+		background-color: if($is-dark, lighten($background-color, $amount), darken($background-color, $amount));
+		color: if($is-dark, lighten($foreground-text-color, $amount), darken($foreground-text-color, $amount));
+	}
+}
