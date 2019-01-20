@@ -4,7 +4,6 @@ import { FormsModule } from '@angular/forms';
 import { MatSelectModule } from '@angular/material';
 
 import { TskThemeSelectComponent } from './theme-select.component';
-import { TskThemeSelectionService } from './theme-selection.service';
 
 @NgModule({
 	imports: [
@@ -14,9 +13,6 @@ import { TskThemeSelectionService } from './theme-selection.service';
 	],
 	declarations: [
 		TskThemeSelectComponent
-	],
-	providers: [
-		TskThemeSelectionService
 	],
 	exports: [
 		TskThemeSelectComponent

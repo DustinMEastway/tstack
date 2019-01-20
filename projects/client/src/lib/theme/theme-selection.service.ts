@@ -8,7 +8,9 @@ import { Theme } from './theme';
 import { ThemeGroup } from './theme-group';
 
 /** used to keep track of available themes and the currently selected theme */
-@Injectable()
+@Injectable({
+	providedIn: 'root'
+})
 export class TskThemeSelectionService<ThemeClassesT extends string | '' = any> {
 	updateOverlay = true;
 	private _defaultThemeClass: ThemeClassesT = '' as ThemeClassesT;
