@@ -6,7 +6,6 @@ import { MatButtonModule, MatDialogModule, MatIconModule } from '@angular/materi
 import { TskDynamicContentModule } from '../dynamic-content/dynamic-content.module';
 
 import { TskDialogComponent } from './dialog.component';
-import { TskDialogService } from './dialog.service';
 
 @NgModule({
 	declarations: [
@@ -25,9 +24,6 @@ import { TskDialogService } from './dialog.service';
 		MatDialogModule,
 		MatIconModule,
 		TskDynamicContentModule
-	],
-	providers: [
-		TskDialogService
 	]
 })
 export class TskDialogModule {}
