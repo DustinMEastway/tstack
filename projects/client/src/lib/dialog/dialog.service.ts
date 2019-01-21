@@ -5,9 +5,7 @@ import { TskDialogConfig } from './dialog-config';
 import { TskDialogComponent } from './dialog.component';
 
 /** service to quickly and easily open dialogs */
-@Injectable({
-	providedIn: 'root'
-})
+@Injectable()
 export class TskDialogService {
 	private static defaultConfig: Partial<TskDialogConfig> = {
 		actionButtons: [ { viewValue: 'Close', value: null } ],
