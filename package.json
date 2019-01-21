@@ -1,6 +1,6 @@
 {
   "name": "tstack",
-  "version": "0.1.2-alpha.9",
+  "version": "0.1.2-alpha.10",
   "description": "A fully TypeScript based stack library to be used used with Angular & Express",
   "author": "Dustin M. Eastway <Dustin.Eastway@gmail.com>",
   "repository": "github:DustinMEastway/tstack",
@@ -10,7 +10,7 @@
     "ng": "ng",
     "start": "ng serve",
     "copyClientAssets": "cp -R ./projects/client/src/lib/assets/. ./dist/@tstack/client",
-    "buildAll": "rm -r ./dist; npm run buildCore; npm run buildClient; npm run buildServer",
+    "build": "rm -r ./dist; npm run buildCore; npm run buildClient; npm run buildServer",
     "buildClient": "ng build --prod client && npm run copyClientAssets",
     "buildCore": "ng build --prod core",
     "buildServer": "ng build --prod server",
