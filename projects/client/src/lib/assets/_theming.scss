@@ -20,23 +20,46 @@
 	$warn-contrast-color: mat-contrast($warn-palette, 500);
 	$background-color: mat-color(map-get($theme, background), background);
 
-	.tsk-primary-border {
-		border-color: $primary-color;
-	}
-
-	.tsk-accent {
+	.tsk-accent-background {
 		background-color: $accent-color;
 		color: $accent-contrast-color;
 	}
 
-	.tsk-primary {
+	.tsk-accent-border {
+		border-color: $accent-color;
+	}
+
+	.tsk-accent-color {
+		background-color: $accent-contrast-color;
+		color: $accent-color;
+	}
+
+	.tsk-primary-background {
 		background-color: $primary-color;
 		color: $primary-contrast-color;
 	}
 
-	.tsk-warn {
+	.tsk-primary-border {
+		border-color: $primary-color;
+	}
+
+	.tsk-primary-color {
+		background-color: $primary-contrast-color;
+		color: $primary-color;
+	}
+
+	.tsk-warn-background {
 		background-color: $warn-color;
 		color: $warn-contrast-color;
+	}
+
+	.tsk-warn-border {
+		border-color: $warn-color;
+	}
+
+	.tsk-warn-color {
+		background-color: $warn-contrast-color;
+		color: $warn-color;
 	}
 
 	.tsk-background-20 {
