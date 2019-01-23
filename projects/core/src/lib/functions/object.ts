@@ -71,6 +71,17 @@ export function getValue<ReturnT = any, ItemT = any>(item: ItemT, propertyToGet
 }
 
 /**
+ * gets the values of all of the keys on the given item
+ * @param item to pull values from
+ * @returns values of each property on the item
+ */
+export function values<T, K extends keyof(T)>(item: T): T[K][];
+export function values<T = any>(item: any): T[];
+export function values<T, K extends keyof(T)>(item: T): T[K][] {
+	return (item == null) ? [] : Object.keys(item).map(key => item[key as K]);
+}
+
+/**
  * gets each property from the source and sets them on the target
  * @param target object to map values to
  * @param source object to get values from
