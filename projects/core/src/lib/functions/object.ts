@@ -78,6 +78,17 @@ export function castString(item: any, config?: Partial<CastStringConfig>): strin
 }
 
 /**
+ * create a copy of the given item (resulting object will be a json object without methods)
+ * @param item to copy
+ * @returns a copy of the provided item
+ */
+export function deepCopy<T>(item: any): T;
+export function deepCopy(item: any): any;
+export function deepCopy(item: any): any {
+	return JSON.parse(JSON.stringify(item));
+}
+
+/**
  * gets a value without throwing an error if the property is not on the item
  * @param item to get the value from
  * @param property to get
