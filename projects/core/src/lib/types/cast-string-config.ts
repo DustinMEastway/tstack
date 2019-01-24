@@ -4,6 +4,6 @@
  * @property {boolean} [trim] the string if true
  */
 export interface CastStringConfig {
-	case?: 'lower' | 'same' | 'upper';
-	trim?: boolean;
+	case: 'lower' | 'same' | 'upper';
+	trim: boolean;
 }
