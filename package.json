@@ -1,6 +1,6 @@
 {
   "name": "tstack",
-  "version": "0.1.2-alpha.10",
+  "version": "0.1.2-alpha.11",
   "description": "A fully TypeScript based stack library to be used used with Angular & Express",
   "author": "Dustin M. Eastway <Dustin.Eastway@gmail.com>",
   "repository": "github:DustinMEastway/tstack",

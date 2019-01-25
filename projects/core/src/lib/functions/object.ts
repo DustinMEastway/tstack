@@ -1,3 +1,4 @@
+import { CastIntConfig } from '../types/cast-int-config';
 import { CastStringConfig } from '../types/cast-string-config';
 
 /**
@@ -19,12 +20,41 @@ export function camelCase(item: string): string {
 }
 
 /**
+ * casts the given item into a boolean, empty strings and are concidered true which is needed for attribute to work property
+ * @param value to cast into a boolean
+ * @param defaultValue to use if value is null or undefined
+ * @returns a boolean value of the given item
+ */
+export function castBoolean(value: any, defaultValue: boolean = false): boolean {
+	if ((value && value !== 'false') || value === '') {
+		return true;
+	} else if (value == null && defaultValue !== false) {
+		return  defaultValue;
+	}
+
+	return false;
+}
+
+/**
+ * casts the given item into an int
+ * @param value to cast into an int
+ * @param config options to determine how to cast the item into an int
+ * @returns an int value of the given item (default value or null if item is NaN)
+ */
+export function castInt(item: any, config?: Partial<CastIntConfig>): number {
+	config = Object.assign({ defaultValue: null, radix: 10 } as CastIntConfig, config);
+	item = parseInt(item, config.radix);
+
+	return isNaN(item) ? config.defaultValue : item;
+}
+
+/**
  * casts the given item into a string if possible, if not, an empty string is returned
  * @param item to cast into a string
  * @param [config] options to apply to the string after it has been cast
  * @returns a string value of the given item
  */
-export function castString(item: any, config?: CastStringConfig): string {
+export function castString(item: any, config?: Partial<CastStringConfig>): string {
 	if (item == null || (typeof item !== 'string' && typeof item.toString !== 'function')) { return ''; }
 
 	// try casting into a string
@@ -48,6 +78,17 @@ export function castString(item: any, config?: CastStringConfig): string {
 }
 
 /**
+ * create a copy of the given item (resulting object will be a json object without methods)
+ * @param item to copy
+ * @returns a copy of the provided item
+ */
+export function deepCopy<T>(item: any): T;
+export function deepCopy(item: any): any;
+export function deepCopy(item: any): any {
+	return JSON.parse(JSON.stringify(item));
+}
+
+/**
  * gets a value without throwing an error if the property is not on the item
  * @param item to get the value from
  * @param property to get
@@ -68,6 +109,17 @@ export function getValue<ReturnT = any, ItemT = any>(item: ItemT, propertyToGet
 	}
 
 	return valueToReturn;
+}
+
+/**
+ * gets the values of all of the keys on the given item
+ * @param item to pull values from
+ * @returns values of each property on the item
+ */
+export function values<T, K extends keyof(T)>(item: T): T[K][];
+export function values<T = any>(item: any): T[];
+export function values<T, K extends keyof(T)>(item: T): T[K][] {
+	return (item == null) ? [] : Object.keys(item).map(key => item[key as K]);
 }
 
 /**
