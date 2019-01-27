@@ -63,11 +63,11 @@ export class TskDialogComponent<ContentT = any, ResultT = any> {
 
 	get titleColorClass(): string {
 		switch (this._dialogType) {
-		 	case 'error':
+		 	case TskDialogType.Error:
 		 		return 'tsk-warn-background';
-		 	case 'warn':
+		 	case TskDialogType.Warn:
 	 			return 'tsk-accent-background';
- 			case 'info':
+ 			case TskDialogType.Info:
  				return 'tsk-background-20';
 		 	default:
 		 		return 'tsk-primary-background';
@@ -76,11 +76,11 @@ export class TskDialogComponent<ContentT = any, ResultT = any> {
 
 	get titleIcon(): string {
 		switch (this._dialogType) {
-		 	case 'error':
+		 	case TskDialogType.Error:
 		 		return 'error';
-		 	case 'warn':
+		 	case TskDialogType.Warn:
 	 			return 'warning';
- 			case 'info':
+ 			case TskDialogType.Info:
  				return 'info';
 		 	default:
 		 		return '';

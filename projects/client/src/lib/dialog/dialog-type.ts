@@ -1,2 +1,7 @@
 /** type of dialog box to display */
-export type TskDialogType = 'default' | 'error' | 'info' | 'warn';
+export enum TskDialogType {
+	Default = 'default',
+	Error = 'error',
+	Info = 'info',
+	Warn = 'warn'
+}
