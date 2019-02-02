@@ -41,8 +41,8 @@ export function castBoolean(value: any, defaultValue: boolean = false): boolean 
  * @param config options to determine how to cast the item into an int
  * @returns an int value of the given item (default value or null if item is NaN)
  */
-export function castInt(item: any, config?: Partial<CastIntConfig>): number {
-	config = Object.assign({ defaultValue: null, radix: 10 } as CastIntConfig, config);
+export function castInt(item: any, config?: CastIntConfig): number {
+	config = Object.assign<CastIntConfig, CastIntConfig>({ defaultValue: null, radix: 10 }, config);
 	item = parseInt(item, config.radix);
 
 	return isNaN(item) ? config.defaultValue : item;
@@ -54,7 +54,7 @@ export function castInt(item: any, config?: Partial<CastIntConfig>): number {
  * @param [config] options to apply to the string after it has been cast
  * @returns a string value of the given item
  */
-export function castString(item: any, config?: Partial<CastStringConfig>): string {
+export function castString(item: any, config?: CastStringConfig): string {
 	if (item == null || (typeof item !== 'string' && typeof item.toString !== 'function')) { return ''; }
 
 	// try casting into a string

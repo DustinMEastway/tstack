@@ -29,7 +29,8 @@ export class AppComponent implements OnInit {
 		return this._tskThemeSelectionService.themeClass;
 	}
 
-	constructor(private _domSanitizer: DomSanitizer,
+	constructor(
+		private _domSanitizer: DomSanitizer,
 		private _matIconRegistry: MatIconRegistry,
 		private _tskThemeSelectionService: TskThemeSelectionService) {
 	}

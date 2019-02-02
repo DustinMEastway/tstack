@@ -37,11 +37,11 @@ export function areEqual(items1: any[], items2: any[]): boolean {
  * @param [config] to determine how to filter the values
  * @returns filtered items
  */
-export function filter<T>(items: T[], filterValue: any, config?: Partial<FilterConfig>): T[] {
+export function filter<T>(items: T[], filterValue: any, config?: FilterConfig): T[] {
 	if (!(items instanceof Array)) { return []; }
 
 	// assign the config values onto the defualt config
-	config = Object.assign<FilterConfig, Partial<FilterConfig>>({
+	config = Object.assign<FilterConfig, FilterConfig>({
 		caseInsensitive: false,
 		keepMatches: true,
 		maxReturnSize: -1,
