@@ -355,7 +355,7 @@ export class TskAutocompleteComponent<OptionValueT = any> implements AfterViewIn
 				this.filterTypeChange,
 				this.maxDisplayedOptionsChange,
 				(options, caseSensitive, filter, filterType, maxDisplayedOptions) => {
-					const castStringConfig: CastStringConfig = { case: (caseSensitive) ? 'same' : 'upper' };
+					const castStringConfig: Partial<CastStringConfig> = { case: (caseSensitive) ? 'same' : 'upper' };
 					const castFilter = castString(filter, castStringConfig);
 
 					let returnedOptions = 0;

@@ -4,10 +4,8 @@ import { Type } from '@tstack/core';
 import { Observable } from 'rxjs';
 
 import { TskDynamicContentComponent } from '../dynamic-content/dynamic-content.component';
-import { TskOption } from '../option/option';
 
 import { TskDialogActionButton } from './dialog-action-button';
-import { TskDialogConfig } from './dialog-config';
 import { TskDialogType } from './dialog-type';
 
 /** used within a material dialog to display content */

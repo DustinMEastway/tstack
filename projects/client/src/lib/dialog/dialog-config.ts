@@ -1,5 +1,3 @@
-import { Type } from '@tstack/core';
-
 import { TskDialogActionButton } from './dialog-action-button';
 import { TskDialogType } from './dialog-type';
 
