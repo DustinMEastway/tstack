@@ -42,7 +42,8 @@ export class TskDynamicContentComponent<ComponentT = any> {
 		return this._componentTypeChange.asObservable();
 	}
 
-	constructor(private _componentFactoryResolver: ComponentFactoryResolver,
+	constructor(
+		private _componentFactoryResolver: ComponentFactoryResolver,
 		private _viewContainerRef: ViewContainerRef) {
 	}
 
