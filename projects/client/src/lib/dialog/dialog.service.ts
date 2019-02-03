@@ -30,8 +30,9 @@ export class TskDialogService {
 		dialogRef.disableClose = config.disableClose;
 
 		const dialog = dialogRef.componentInstance;
-		dialog.title = config.title;
+		dialog.dialogRef = dialogRef;
 		dialog.dialogType = config.type;
+		dialog.title = config.title;
 		dialog.createContent((typeof config.content === 'string') ? [ config.content ] : config.content);
 		dialog.actionButtons = (!(config.actionButtons instanceof Array)) ? [] : config.actionButtons.map(button => {
 			if (typeof button === 'string') {
