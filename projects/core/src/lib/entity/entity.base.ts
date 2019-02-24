@@ -26,11 +26,11 @@ export class EntityBase {
 	 * @param source to cast into type this or this[] depending on its type
 	 * @returns souce after being cast
 	 */
-	static cast<ReturnT extends EntityBase | EntityBase[] = any>(source: any): ReturnT {
-		// eastwayd: this should be a one line return, but sadly angular-compiler's strictMetadataEmit errors if it is
-		const newObjectOrArray: any = (source instanceof Array) ? this.castArray(source) : this.castObject(source);
-
-		return newObjectOrArray;
+ 	static cast<ThisT extends EntityBase = any>(source: any): ThisT;
+ 	static cast<ThisT extends EntityBase = any>(source: any[]): ThisT[];
+ 	static cast<ReturnT extends EntityBase | EntityBase[] = any>(source: any): ReturnT;
+	static cast<ThisT extends EntityBase = any>(source: any): ThisT | ThisT[] {
+		return (source instanceof Array) ? this.castArray<ThisT>(source) : this.castObject<ThisT>(source);
 	}
 
 	/**
