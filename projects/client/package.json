@@ -1,11 +1,11 @@
 {
   "name": "@tstack/client",
-  "version": "0.1.2-alpha.12",
+  "version": "0.1.2-alpha.13",
   "private": false,
   "peerDependencies": {
     "@angular/common": "^6.0.0-rc.0 || ^6.0.0",
     "@angular/core": "^6.0.0-rc.0 || ^6.0.0",
     "@angular/material": "^6.0.0",
-    "@tstack/core": "^0.1.2-alpha.12"
+    "@tstack/core": "^0.1.2-alpha.13"
   }
 }
