@@ -90,7 +90,8 @@ export function filter<T>(items: T[], filterValue: any, config?: FilterConfig): 
  * @param [property] to look at when searching to the value to find
  * @returns found value (or null if not found)
  */
-export function find<T, K extends keyof(T)>(items: T[], valueToFind: T[K], property?: K): T;
+export function find<T, K extends keyof(T)>(items: T[], valueToFind: T): T;
+export function find<T, K extends keyof(T)>(items: T[], valueToFind: T[K], property: K): T;
 export function find<T>(items: T[], valueToFind: any, property?: string): T;
 export function find<T>(items: T[], valueToFind: any, property?: string): T {
 	const index = findIndex(items, valueToFind, property);
@@ -105,6 +106,8 @@ export function find<T>(items: T[], valueToFind: any, property?: string): T {
  * @param [property] to look at when searching to the value to find
  * @returns found index (or -1 if not found)
  */
+export function findIndex<T>(items: T[], valueToFind: T): number;
+export function findIndex<T>(items: T[], valueToFind: any, property?: string): number;
 export function findIndex<T>(items: T[], valueToFind: any, property?: string): number {
 	if (!(items instanceof Array)) { return -1; }
 
