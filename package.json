@@ -7,15 +7,15 @@
   "homepage": "https://github.com/DustinMEastway/dme-modules#readme",
   "license": "MIT",
   "scripts": {
-    "ng": "ng",
-    "start": "ng serve",
-    "copyClientAssets": "cp -R ./projects/client/src/lib/assets/. ./dist/@tstack/client",
     "build": "rm -r ./dist; npm run buildCore; npm run buildClient; npm run buildServer",
     "buildClient": "ng build --prod client; npm run copyClientAssets",
     "buildCore": "ng build --prod core",
     "buildServer": "ng build --prod server",
+    "copyClientAssets": "cp -R ./projects/client/src/lib/assets/. ./dist/@tstack/client",
+    "e2e": "ng e2e",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "ng": "ng",
+    "start": "ng serve"
   },
   "private": true,
   "bugs": {

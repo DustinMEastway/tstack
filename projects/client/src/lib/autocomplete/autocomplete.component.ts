@@ -19,8 +19,8 @@ import {
 import { ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { MatAutocomplete, MatFormFieldAppearance, MatOption } from '@angular/material';
 import { castString, find, getValue, pluck, CastStringConfig } from '@tstack/core';
-import { BehaviorSubject, Observable } from 'rxjs';
-import { combineLatest, distinctUntilChanged, map, startWith } from 'rxjs/operators';
+import { combineLatest, BehaviorSubject, Observable } from 'rxjs';
+import { distinctUntilChanged, map, startWith } from 'rxjs/operators';
 
 import { TskOption } from '../option';
 
@@ -347,50 +347,49 @@ export class TskAutocompleteComponent<OptionValueT = any> implements AfterViewIn
 	}
 
 	private setFilteredOptions(): void {
-		this._filteredOptions = this._optionsChange.pipe(
-			startWith(this.options),
-			combineLatest(
-				this.caseSensitiveChange,
-				this.filterChange,
-				this.filterTypeChange,
-				this.maxDisplayedOptionsChange,
-				(options, caseSensitive, filter, filterType, maxDisplayedOptions) => {
-					const castStringConfig: Partial<CastStringConfig> = { case: (caseSensitive) ? 'same' : 'upper' };
-					const castFilter = castString(filter, castStringConfig);
+		this._filteredOptions = combineLatest(
+			this._optionsChange.pipe(startWith(this.options)),
+			this.caseSensitiveChange,
+			this.filterChange,
+			this.filterTypeChange,
+			this.maxDisplayedOptionsChange
+		).pipe(
+			map(([options, caseSensitive, filter, filterType, maxDisplayedOptions]) => {
+				const castStringConfig: Partial<CastStringConfig> = { case: (caseSensitive) ? 'same' : 'upper' };
+				const castFilter = castString(filter, castStringConfig);
 
-					let returnedOptions = 0;
+				let returnedOptions = 0;
 
-					const filteredOptions = options.filter((option) => {
-						const viewValue = castString(option.viewValue, castStringConfig);
-						let includeOption: boolean;
+				const filteredOptions = options.filter((option) => {
+					const viewValue = castString(option.viewValue, castStringConfig);
+					let includeOption: boolean;
 
-						if (filterType === 'contains') {
-							includeOption = viewValue.includes(castFilter);
-						} else if (filterType === 'startsWith') {
-							includeOption = viewValue.startsWith(castFilter);
-						} else {
-							throw Error(`TskAutocompleteComponent error: invalid filter type of ${filterType}`);
-						}
-
-						if (this.autoSelect && viewValue === castFilter) {
-							this.setSelectedMatOption(option.value);
-							this._selectedValueChange.next(option.value);
-						}
-
-						return includeOption && (maxDisplayedOptions < 0 || returnedOptions++ < maxDisplayedOptions);
-					});
-
-					if (this.autoSelect && this.selectedValue && castString(this.getViewOfValue(this.selectedValue), castStringConfig) !== castFilter) {
-						this.setSelectedMatOption(null);
-						this._selectedValueChange.next(null);
+					if (filterType === 'contains') {
+						includeOption = viewValue.includes(castFilter);
+					} else if (filterType === 'startsWith') {
+						includeOption = viewValue.startsWith(castFilter);
+					} else {
+						throw Error(`TskAutocompleteComponent error: invalid filter type of ${filterType}`);
 					}
 
-					this._filteredOptionsExist = filteredOptions.length > 0;
+					if (this.autoSelect && viewValue === castFilter) {
+						this.setSelectedMatOption(option.value);
+						this._selectedValueChange.next(option.value);
+					}
 
-					return filteredOptions;
+					return includeOption && (maxDisplayedOptions < 0 || returnedOptions++ < maxDisplayedOptions);
+				});
+
+				if (this.autoSelect && this.selectedValue && castString(this.getViewOfValue(this.selectedValue), castStringConfig) !== castFilter) {
+					this.setSelectedMatOption(null);
+					this._selectedValueChange.next(null);
 				}
-			)
-		);
+
+				this._filteredOptionsExist = filteredOptions.length > 0;
+
+				return filteredOptions;
+			}
+		));
 	}
 
 	private setSelectedMatOption(selectedValue: OptionValueT): void {

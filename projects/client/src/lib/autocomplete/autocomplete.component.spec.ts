@@ -2,7 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatFormFieldAppearance } from '@angular/material';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { filter, getValue } from '@tstack/core';
+import { getValue } from '@tstack/core';
 import { Subject } from 'rxjs';
 
 import { getTestObjectWithHost, Page } from '../../../testing';
