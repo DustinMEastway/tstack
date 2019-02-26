@@ -1,17 +1,21 @@
-import { of, Observable } from 'rxjs';
-import { zip } from 'rxjs/operators';
+import { zip, Observable } from 'rxjs';
 
 import { TskCancellableEvent } from './cancellable-event';
 
 export class TskDelayableEvent extends TskCancellableEvent {
-	protected _delays: Observable<any> = of(null);
+	protected _delays: Observable<any>[] = [];
 
 	get delays(): Observable<never> {
-		return this._delays as any;
+		return zip(...this._delays) as Observable<never>;
 	}
 
 	addDelay(delay: Observable<any>): void {
-		this._delays = this._delays.pipe(zip(delay));
+		if (delay instanceof Observable) {
+			this._delays.push(delay);
+		} else if (delay != null) {
+			console.error('TskDelayableEvent.addDelay: Non-observable delay was added to a delayable event');
+			console.error(delay);
+		}
 	}
 
 	cancel(): void {
