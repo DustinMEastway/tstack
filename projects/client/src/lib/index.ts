@@ -1,5 +1,4 @@
 export * from './autocomplete';
-export * from './decorators';
 export * from './dynamic-content';
 export * from './dialog';
 export * from './entity';
