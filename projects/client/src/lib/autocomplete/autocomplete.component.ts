@@ -311,7 +311,7 @@ export class TskAutocompleteComponent<OptionValueT = any> implements AfterViewIn
 
 	/** @method ngAfterViewInit finish itializing properties that are not available by ngOnInit */
 	ngAfterViewInit(): void {
-		this.matAutocomplete.options.changes.subscribe((matOptions: MatOption[]) => {
+		this.matAutocomplete.options.changes.subscribe(() => {
 			this.setSelectedMatOption(this.selectedValue);
 		});
 	}
