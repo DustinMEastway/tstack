@@ -1,7 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Router } from '@angular/router';
-
-import { CoerceBoolean } from '../decorators/coerce-boolean';
+import { castBoolean } from '@tstack/core';
 
 import { TskNavMenuConfig } from './nav-menu-config';
 
@@ -14,7 +13,15 @@ import { TskNavMenuConfig } from './nav-menu-config';
 export class TskNavMenuComponent {
 	@Output() navItemSelected = new EventEmitter<string[]>();
 	@Input() menuConfig: TskNavMenuConfig;
-	@Input() @CoerceBoolean() navigate: boolean;
+	private _navigate: boolean;
+
+	@Input()
+	get navigate(): boolean {
+		return this._navigate;
+	}
+	set navigate(navigate: boolean) {
+		this._navigate = castBoolean(navigate);
+	}
 
 	constructor(private _router: Router) {}
 

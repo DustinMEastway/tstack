@@ -3,14 +3,6 @@ import { MatIconRegistry } from '@angular/material';
 import { DomSanitizer } from '@angular/platform-browser';
 import { TskNavMenuConfig, TskThemeSelectionService } from '@tstack/client';
 
-interface ThemeGroup {
-	type: string;
-	themes: {
-		class: string;
-		name: string
-	}[];
-}
-
 @Component({
 	selector: 'app-root',
 	templateUrl: './app.component.html',
@@ -19,7 +11,6 @@ interface ThemeGroup {
 export class AppComponent implements OnInit {
 	title = 'TStack';
 	private _navConfigs: TskNavMenuConfig[];
-	private _themeClass: string;
 
 	get navConfigs(): TskNavMenuConfig[] {
 		return this._navConfigs;

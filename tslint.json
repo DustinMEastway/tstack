@@ -75,7 +75,6 @@
 		"no-trailing-whitespace": true,
 		"no-unnecessary-initializer": true,
 		"no-unused-expression": true,
-		"no-unused-variable": true,
 		"no-use-before-declare": true,
 		"no-var-keyword": true,
 		"object-literal-sort-keys": false,
@@ -90,7 +89,7 @@
 			true,
 			{
 				"import-sources-order": "lowercase-first",
-				"grouped-imports": true,
+				"grouped-imports": false,
 				"named-imports-order": "lowercase-first"
 			}
 		],
