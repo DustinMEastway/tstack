@@ -16,10 +16,11 @@ before_install:
 before_script:
 - npm i -g @angular/cli karma
 - npm i
+- npm run buildCore
 - ng test --watch=false
 - ng lint
 script:
-- ng build --prod
+- npm run build
 after_success:
 notifications:
   email:
