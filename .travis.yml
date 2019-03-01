@@ -15,9 +15,6 @@ before_install:
 - sh -e /etc/init.d/xvfb start
 before_script:
 - npm i
-- npm run buildCore
-- npx ng test --watch=false
-- npx ng lint
 script:
 - npm run build
 after_success:
@@ -27,6 +24,10 @@ notifications:
     on_success: change
 jobs:
   include:
+    - stage: test
+      - npx ng test --watch=false
+    - stage: lint
+      - npx ng lint
     - stage: core npm publish
       if: tag =~ ^[0-9]+.[0-9]+.[0-9]+
       before_deploy:
