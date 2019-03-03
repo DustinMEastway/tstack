@@ -20,15 +20,16 @@ notifications:
     on_success: change
 jobs:
   include:
-    - stage: build
-      script: npm run build
-    - stage: test
-      script: npm run test
-    - stage: lint
-      script: npm run lint
+    - stage: test & lint
+      script:
+        - npm run build
+        - npm run test
+      script:
+        - npm run lint
     - stage: core npm publish
       if: tag =~ ^[0-9]+.[0-9]+.[0-9]+
       before_deploy:
+        - npm run buildCore
         - cd dist/\@tstack/core/
       after_deploy:
         - cd ../../../
@@ -46,6 +47,8 @@ jobs:
     - stage: client npm publish
       if: tag =~ ^[0-9]+.[0-9]+.[0-9]+
       before_deploy:
+        - npm run buildCore
+        - npm run buildClient
         - cd dist/\@tstack/client/
       after_deploy:
         - cd ../../../
@@ -63,6 +66,8 @@ jobs:
     - stage: server npm publish
       if: tag =~ ^[0-9]+.[0-9]+.[0-9]+
       before_deploy:
+        - npm run buildCore
+        - npm run buildServer
         - cd dist/\@tstack/server/
       after_deploy:
         - cd ../../../
