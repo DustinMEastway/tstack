@@ -9,8 +9,12 @@ import { TskNavMenuConfig, TskThemeSelectionService } from '@tstack/client';
 	styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-	title = 'TStack';
+	private _title = 'TStack';
 	private _navConfigs: TskNavMenuConfig[];
+
+	get title(): string {
+		return this._title;
+	}
 
 	get navConfigs(): TskNavMenuConfig[] {
 		return this._navConfigs;
@@ -37,22 +41,8 @@ export class AppComponent implements OnInit {
 				name: 'Client',
 				value: 'client',
 				items: [
-					{ name: 'Autocomplete', value: 'autocomplete' },
-					{ name: 'Dynamic Content', value: 'dynamic-content' },
-					{ name: 'Nav Menu', value: 'nav-menu' },
-					{ name: 'Readonly Field', value: 'readonly-field' },
-					{ name: 'Table', value: 'table' }
+					{ name: 'Readonly Field', value: 'readonly-field' }
 				]
-			},
-			{
-				name: 'Core',
-				value: 'core',
-				items: []
-			},
-			{
-				name: 'Server',
-				value: 'server',
-				items: []
 			}
 		];
 
