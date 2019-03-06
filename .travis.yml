@@ -42,6 +42,17 @@ jobs:
           tag: next
           repo: DustinMEastway/tstack
           branch: master
+    - stage: github pages
+      deploy:
+        provider: pages
+        email: Dustin.Eastway@gmail.com
+        keep-history: true
+        local-dir: ./dist
+        skip-cleanup: true
+        github-token:
+          secure: mIoEjXKU1lIIr9S4ohZF883TPue1Ghb2oJ4MdG17l8LfN2UszWgCAuOtM5nhTVWr5kGf43HvnYdYZSUuOrAphC+ktNkXX2c6vnPNPlRTojimU6wP72JNz1l+lw4Ipldol8GOKlDuUScvK81+vXjYK0iHs4p3+uxi0pzte3UHqpKLaiYDDLIFKatYydFQOOH+grFwx1jFo1D+ZHg82uMcPpfLeGduZlJlGiuUuisHP0Dk9ydtflRcgFkFj2fiRrbrKCLUcN7cIIex2eebhgWrqyFdNX+QgO+DiTVKUn/i8C4pyHC+051rlBnsPrM+PVRud+h+Qvnc82kIRuI1LVNzsFlHbaXRqbfpXpBQazQl1dJSJ5Yi7WNhBEHNnXKuDdMy5FvyGUFkZyJ1YR4b9Dm+Imuwf+qmPHjQRrEGHcPiPbdE29iXp1PbMk06i1FWOzrM4pJbht7oi43sy0xN56Hf+S49SmKCK1upSfRiqD1KDs5q/kBHfLCm0CZW23FuLXMYfwpUociHoOxeVLVYowP/4fdkeBviouy6wFRGc7exEx0PHn8RrGdg4N5oOOlPV958Qqp6RPRexYDhf8KMfrtchcuXnMCWS0tYECn62fX3a/InIq87TslmRrb9mOEWHqfdSVhGdOHNPm/5UWKq5uBMNYXJjnd5VEG0Xf0k4YWpH7E=
+        on:
+          branch: master
     - stage: client npm publish
       if: tag =~ ^[0-9]+.[0-9]+.[0-9]+
       before_deploy:
