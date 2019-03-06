@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
+import { AppComponent } from 'app/app.component';
 import { ModuleRoute } from 'app/shared/module-routes/module-route';
 
 @Component({
@@ -8,22 +9,23 @@ import { ModuleRoute } from 'app/shared/module-routes/module-route';
 	styleUrls: [ './home-screen.component.scss' ]
 })
 export class HomeScreenComponent implements OnInit {
-	title = 'Home';
 	private _moduleRoutes: ModuleRoute[];
+	private _title = 'TStack Modules';
 
 	get moduleRoutes(): ModuleRoute[] {
 		return this._moduleRoutes;
 	}
 
-	ngOnInit(): void {
-		const moduleNames = [
-			'Client',
-			'Core',
-			'Server'
-		];
+	get title(): string {
+		return this._title;
+	}
 
-		this._moduleRoutes = moduleNames.map(moduleName => {
-			return { module: moduleName, route: moduleName.replace(/\s+/, '-').toLowerCase() };
-		});
+	constructor(private _appComponent: AppComponent) {}
+
+	ngOnInit(): void {
+		this._moduleRoutes = this._appComponent.navConfigs.map(navConfig => ({
+			module: navConfig.name,
+			route: navConfig.value
+		}));
 	}
 }

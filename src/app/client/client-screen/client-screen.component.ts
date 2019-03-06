@@ -6,5 +6,9 @@ import { Component } from '@angular/core';
 	styleUrls: ['./client-screen.component.scss']
 })
 export class ClientScreenComponent {
-	title = 'Client';
+	private _title = 'Client';
+
+	get title(): string {
+		return this._title;
+	}
 }

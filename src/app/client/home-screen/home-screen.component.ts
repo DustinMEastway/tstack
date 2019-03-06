@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { find } from '@tstack/core';
 
+import { AppComponent } from 'app/app.component';
 import { ModuleRoute } from 'app/shared/module-routes/module-route';
 
 @Component({
@@ -14,16 +16,12 @@ export class HomeScreenComponent implements OnInit {
 		return this._moduleRoutes;
 	}
 
-	ngOnInit(): void {
-		const moduleNames = [
-			'Autocomplete',
-			'Dynamic Content',
-			'Readonly Field',
-			'Nav Menu'
-		];
+	constructor(private _appComponent: AppComponent) {}
 
-		this._moduleRoutes = moduleNames.map(moduleName => {
-			return { module: moduleName, route: moduleName.replace(/\s+/, '-').toLowerCase() };
-		});
+	ngOnInit(): void {
+		this._moduleRoutes = find(this._appComponent.navConfigs, 'client', 'value').items.map(navConfig => ({
+			module: navConfig.name,
+			route: navConfig.value
+		}));
 	}
 }
