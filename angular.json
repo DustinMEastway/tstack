@@ -206,11 +206,6 @@
           "options": {
             "tsConfig": "projects/core/tsconfig.lib.json",
             "project": "projects/core/ng-package.json"
-          },
-          "configurations": {
-            "production": {
-              "project": "projects/core/ng-package.prod.json"
-            }
           }
         },
         "test": {
@@ -246,11 +241,6 @@
           "options": {
             "tsConfig": "projects/server/tsconfig.lib.json",
             "project": "projects/server/ng-package.json"
-          },
-          "configurations": {
-            "production": {
-              "project": "projects/server/ng-package.prod.json"
-            }
           }
         },
         "test": {

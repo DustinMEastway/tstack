@@ -1,1 +1,2 @@
-export * from './index';
+export * from './base-api-service';
+export * from './base-graphql-service';

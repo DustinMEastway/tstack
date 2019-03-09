@@ -1,2 +1,1 @@
-export * from './entity-component';
-export * from './entity-component-mode';
+export * from './public_api';
