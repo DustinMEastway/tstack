@@ -11,9 +11,14 @@ import { ModuleRoute } from 'app/shared/module-routes/module-route';
 })
 export class HomeScreenComponent implements OnInit {
 	private _moduleRoutes: ModuleRoute[];
+	private _title = 'Client';
 
 	get moduleRoutes(): ModuleRoute[] {
 		return this._moduleRoutes;
+	}
+
+	get title(): string {
+		return this._title;
 	}
 
 	constructor(private _appComponent: AppComponent) {}

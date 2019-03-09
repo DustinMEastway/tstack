@@ -1,1 +1,2 @@
-export * from './index';
+export * from './autocomplete.component';
+export * from './autocomplete.module';
