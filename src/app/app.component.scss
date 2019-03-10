@@ -22,9 +22,8 @@
 
 .app-container {
 	bottom: 0;
-	display: flex;
-	flex-direction: column;
 	left: 0;
+	overflow-y: auto;
 	position: absolute;
 	right: 0;
 	top: 64px;

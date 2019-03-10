@@ -6,7 +6,7 @@
 		<div class="app-container">
 			<!-- main navigation toolbar at the top of the page -->
 			<mat-toolbar class="mat-elevation-z5 primary-nav" role="heading" color="primary">
-				<a mat-button routerLink="/">{{ title }}</a>
+				<a mat-button routerLink="/">{{ appTitle }}</a>
 				<tsk-nav-menu *ngFor="let navConfig of navConfigs" navigate [menuConfig]="navConfig"></tsk-nav-menu>
 				<div class="flex-space"></div>
 				<!-- theme selector -->
@@ -16,7 +16,13 @@
 					GitHub
 				</a>
 			</mat-toolbar>
-			<router-outlet></router-outlet>
+			<mat-toolbar color="primary">
+				{{ activeModule?.name }}
+			</mat-toolbar>
+			<div class="content-container">
+				<router-outlet></router-outlet>
+				<app-module-routes *ngIf="activeModule?.items.length" [moduleRoutes]="activeModule.items"></app-module-routes>
+			</div>
 		</div>
 	</div>
 </div>

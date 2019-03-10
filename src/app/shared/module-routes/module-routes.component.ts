@@ -1,6 +1,5 @@
 import { Component, Input } from '@angular/core';
-
-import { ModuleRoute } from './module-route';
+import { TskNavMenuConfig } from '@tstack/client';
 
 @Component({
 	selector: 'app-module-routes',
@@ -8,5 +7,5 @@ import { ModuleRoute } from './module-route';
 	styleUrls: ['./module-routes.component.scss']
 })
 export class ModuleRoutesComponent {
-	@Input() moduleRoutes: ModuleRoute[];
+	@Input() moduleRoutes: TskNavMenuConfig[];
 }
