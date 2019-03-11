@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { NavMenuScreenComponent } from './nav-menu-screen/nav-menu-screen.component';
+import { NavMenuScreenComponent } from './nav-menu-screen.component';
 
 const routes: Routes = [
 	{

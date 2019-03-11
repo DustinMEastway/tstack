@@ -4,9 +4,9 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatFormFieldModule, MatInputModule } from '@angular/material';
 import { TskReadonlyFieldModule } from '@tstack/client';
 
-import { HomeScreenComponent } from './home-screen/home-screen.component';
+import { ScreenComponent } from './screen/screen.component';
 import { ReadonlyFieldRoutingModule } from './readonly-field-routing.module';
-import { ReadonlyFieldScreenComponent } from './readonly-field-screen/readonly-field-screen.component';
+import { ReadonlyFieldScreenComponent } from './readonly-field-screen.component';
 
 @NgModule({
 	imports: [
@@ -18,7 +18,7 @@ import { ReadonlyFieldScreenComponent } from './readonly-field-screen/readonly-f
 		ReadonlyFieldRoutingModule
 	],
 	declarations: [
-		HomeScreenComponent,
+		ScreenComponent,
 		ReadonlyFieldScreenComponent
 	]
 })

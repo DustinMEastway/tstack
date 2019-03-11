@@ -5,6 +5,4 @@ import { Component } from '@angular/core';
 	templateUrl: './server-screen.component.html',
 	styleUrls: [ './server-screen.component.scss' ]
 })
-export class ServerScreenComponent {
-	title = 'Server';
-}
+export class ServerScreenComponent {}

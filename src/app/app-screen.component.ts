@@ -8,10 +8,10 @@ import { filter, map } from 'rxjs/operators';
 
 @Component({
 	selector: 'app-root',
-	templateUrl: './app.component.html',
-	styleUrls: ['./app.component.scss']
+	templateUrl: './app-screen.component.html',
+	styleUrls: ['./app-screen.component.scss']
 })
-export class AppComponent implements OnInit {
+export class AppScreenComponent implements OnInit {
 	private _activeModule: TskNavMenuConfig;
 	private _appTitle = 'TStack';
 	private _navConfigs: TskNavMenuConfig[];

@@ -13,8 +13,8 @@ import { TskNavMenuModule, TskThemeModule } from '@tstack/client';
 import { SharedModule } from 'app/shared/shared.module';
 
 import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { HomeScreenComponent } from './home-screen/home-screen.component';
+import { AppScreenComponent } from './app-screen.component';
+import { ScreenComponent } from './screen/screen.component';
 
 @NgModule({
 	imports: [
@@ -31,9 +31,9 @@ import { HomeScreenComponent } from './home-screen/home-screen.component';
 		AppRoutingModule
 	],
 	declarations: [
-		AppComponent,
-		HomeScreenComponent
+		AppScreenComponent,
+		ScreenComponent
 	],
-	bootstrap: [ AppComponent ]
+	bootstrap: [ AppScreenComponent ]
 })
 export class AppModule { }

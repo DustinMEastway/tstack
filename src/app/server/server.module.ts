@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { MatButtonModule, MatToolbarModule } from '@angular/material';
 
 import { ServerRoutingModule } from './server-routing.module';
-import { ServerScreenComponent } from './server-screen/server-screen.component';
+import { ServerScreenComponent } from './server-screen.component';
 
 @NgModule({
 	imports: [

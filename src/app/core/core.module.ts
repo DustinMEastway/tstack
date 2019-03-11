@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { MatButtonModule, MatToolbarModule } from '@angular/material';
 
 import { CoreRoutingModule } from './core-routing.module';
-import { CoreScreenComponent } from './core-screen/core-screen.component';
+import { CoreScreenComponent } from './core-screen.component';
 
 @NgModule({
 	imports: [
