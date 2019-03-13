@@ -4,9 +4,9 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatFormFieldModule, MatInputModule } from '@angular/material';
 import { TskReadonlyFieldModule } from '@tstack/client';
 
-import { ScreenComponent } from './screen/screen.component';
 import { ReadonlyFieldRoutingModule } from './readonly-field-routing.module';
 import { ReadonlyFieldScreenComponent } from './readonly-field-screen.component';
+import { ScreenComponent } from './screen/screen.component';
 
 @NgModule({
 	imports: [

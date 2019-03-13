@@ -52,6 +52,13 @@ export class AppScreenComponent implements OnInit {
 				items: [
 					{ name: 'Readonly Field', value: 'readonly-field' }
 				]
+			},
+			{
+				name: 'Core',
+				value: 'core',
+				items: [
+					{ name: 'Entity', value: 'entity' }
+				]
 			}
 		];
 

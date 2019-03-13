@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { ScreenComponent } from './screen/screen.component';
 import { ReadonlyFieldScreenComponent } from './readonly-field-screen.component';
+import { ScreenComponent } from './screen/screen.component';
 
 const routes: Routes = [
 	{
