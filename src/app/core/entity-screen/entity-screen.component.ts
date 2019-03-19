@@ -1,17 +1,8 @@
 import { Component } from '@angular/core';
+import { Observable } from 'rxjs';
 
-import { PropertyDescriptions } from 'app/shared/property-descriptions/property-descriptions';
-
-const staticProperties: PropertyDescriptions[] = [
-	{
-		name: 'cast',
-		description: 'Cast can be used to convert an object, or an array of objects into the given type'
-	},
-	{
-		name: 'clone',
-		description: 'Clone assigns values from the provided object to the entity allowing you to assign values on construction'
-	}
-];
+import { PropertyDescription } from 'app/entities';
+import { DocumentationApiService } from 'app/services';
 
 @Component({
 	selector: 'app-entity-screen',
@@ -19,7 +10,13 @@ const staticProperties: PropertyDescriptions[] = [
 	styleUrls: ['./entity-screen.component.scss']
 })
 export class EntityScreenComponent {
-	get staticProperties(): PropertyDescriptions[] {
-		return staticProperties;
+	private _staticProperties$: Observable<PropertyDescription[]>;
+
+	get staticProperties$(): Observable<PropertyDescription[]> {
+		return this._staticProperties$;
+	}
+
+	constructor(private _documentationApiService: DocumentationApiService) {
+		this._staticProperties$ = this._documentationApiService.getCoreEntityDocumentation();
 	}
 }

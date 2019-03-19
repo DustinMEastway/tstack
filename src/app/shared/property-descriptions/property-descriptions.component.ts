@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 
-import { PropertyDescriptions } from './property-descriptions';
+import { PropertyDescription } from 'app/entities';
 
 @Component({
 	selector: 'app-property-descriptions',
@@ -8,5 +8,5 @@ import { PropertyDescriptions } from './property-descriptions';
 	styleUrls: ['./property-descriptions.component.scss']
 })
 export class PropertyDescriptionsComponent {
-	@Input() properties: PropertyDescriptions[];
+	@Input() properties: PropertyDescription[];
 }
