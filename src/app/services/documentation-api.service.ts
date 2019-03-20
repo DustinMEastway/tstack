@@ -16,7 +16,7 @@ export class DocumentationApiService {
 	}
 
 	private getDocumentation(name: string): Observable<PropertyDescription[]> {
-		return this._httpClient.get<any>(`./assets/examples/${name}.json`).pipe(
+		return this._httpClient.get<object[]>(`./assets/documentation/${name}.json`).pipe(
 			map(result => PropertyDescription.cast<PropertyDescription[]>(result))
 		);
 	}

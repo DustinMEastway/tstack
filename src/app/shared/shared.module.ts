@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { MatButtonModule, MatExpansionModule } from '@angular/material';
+import { MatButtonModule, MatExpansionModule, MatTabsModule } from '@angular/material';
 import { RouterModule } from '@angular/router';
 
 import { ModuleRoutesComponent } from './module-routes/module-routes.component';
@@ -13,6 +13,7 @@ import { PropertyDescriptionsComponent } from './property-descriptions/property-
 		FlexLayoutModule,
 		MatButtonModule,
 		MatExpansionModule,
+		MatTabsModule,
 		RouterModule
 	],
 	declarations: [
