@@ -9,14 +9,12 @@ import { PropertyDescription } from 'app/entities';
 	providedIn: 'root'
 })
 export class DocumentationApiService {
+	getCoreEntityDocumentation = this.createDocumentationGetterMethod('core-entity');
+
 	constructor(private _httpClient: HttpClient) {}
 
-	getCoreEntityDocumentation(): Observable<PropertyDescription[]> {
-		return this.getDocumentation('core-entity');
-	}
-
-	private getDocumentation(name: string): Observable<PropertyDescription[]> {
-		return this._httpClient.get<object[]>(`./assets/documentation/${name}.json`).pipe(
+	private createDocumentationGetterMethod(name: string): () => Observable<PropertyDescription[]> {
+		return () => this._httpClient.get<object[]>(`./assets/documentation/${name}.json`).pipe(
 			map(result => PropertyDescription.cast<PropertyDescription[]>(result))
 		);
 	}
