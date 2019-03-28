@@ -1,2 +1,1 @@
-export * from './readonly-field.component';
-export * from './readonly-field.module';
+export * from './public_api';

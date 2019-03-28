@@ -1,1 +1,2 @@
-export * from './index';
+export * from './dynamic-content.component';
+export * from './dynamic-content.module';

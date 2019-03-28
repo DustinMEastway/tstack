@@ -1,2 +1,1 @@
-export * from './base-api-service';
-export * from './base-graphql-service';
+export * from './public_api';

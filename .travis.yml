@@ -12,71 +12,81 @@ before_install:
 - export CHROME_BIN=chromium-browser
 - export DISPLAY=:99.0
 - sh -e /etc/init.d/xvfb start
-before_script: npm i
+before_script:
+- npm i
+- npm run build
 notifications:
   email:
     on_failure: always
     on_success: change
 jobs:
   include:
-    - stage: test & lint
-      script:
-        - npm run lint
-        - npm run build
-        - npm run test
-    - stage: core npm publish
-      if: tag =~ ^[0-9]+.[0-9]+.[0-9]+
-      before_deploy:
-        - npm run buildCore
-        - cd dist/\@tstack/core/
-      after_deploy:
-        - cd ../../../
-      deploy:
-        provider: npm
-        email: Dustin.Eastway@gmail.com
-        skip_cleanup: true
-        api_key:
-          secure: K2VfYx6Ymik4o8KlOBKiuAkQQn7Jl/HmaFCXGMq4H8S4tW3EIEZ485wl9vWOdjnPQZRerkPS/cVMIg9A8m8aQohGicdp0znfRO3YEmPRXbanQLoYezEJNPLZeSEO4YsrzG2VE3qpHVvJK4oOKqKudQZZGkR3RLzp1JG243c+tN29Q4y9qsrK8A2w+zp4ZV2G2VtgFZQGhVdfJzuIf5aiWKJ62JqjfLYEeC4sKeO5hDZgNiCrfkhsyuDvmYxlAMH39dbK/V/ZYCrg0k3hC728FFyqiWmmg7rVefSqp0+MRpf2qlQWWRC78Hjp4xo2Y7qIN1dOQhhKybt3tVB7+VfJRHRcRb/tqKDX2h2XJxifOyiMVgBX5hQF04EsW30AiI52nyCAyPzF0J14EH5/0cO0O3A14LHLuAcEN01elgCmJ97WenkLbhmXMIuCF9ARSldMJmWSRi7I9rb68d2T13xW4+fAWkpaAeAm0CLROtflT6fBeyThFzOhv8J8yTARJkiBhMcsZp9nWL9mjQevHrQQhi2DhdwEKh8OVnV+4puqDvj8hw0waTuahsaAffSWk9uU9JG6HDKmppK6i3brcQJYiH3a5KC7axkMsm+GOqO6Tz3b+GEhWwWzvbGK7BlD7KUyvFWt0Dv9jq4oeBmG4H+lRWzY6j2Jzn4oJvUDXEANibM=
-        on:
-          tags: true
-          tag: next
-          repo: DustinMEastway/tstack
-          branch: master
-    - stage: client npm publish
-      if: tag =~ ^[0-9]+.[0-9]+.[0-9]+
-      before_deploy:
-        - npm run buildCore
-        - npm run buildClient
-        - cd dist/\@tstack/client/
-      after_deploy:
-        - cd ../../../
-      deploy:
-        provider: npm
-        email: Dustin.Eastway@gmail.com
-        skip_cleanup: true
-        api_key:
-          secure: K2VfYx6Ymik4o8KlOBKiuAkQQn7Jl/HmaFCXGMq4H8S4tW3EIEZ485wl9vWOdjnPQZRerkPS/cVMIg9A8m8aQohGicdp0znfRO3YEmPRXbanQLoYezEJNPLZeSEO4YsrzG2VE3qpHVvJK4oOKqKudQZZGkR3RLzp1JG243c+tN29Q4y9qsrK8A2w+zp4ZV2G2VtgFZQGhVdfJzuIf5aiWKJ62JqjfLYEeC4sKeO5hDZgNiCrfkhsyuDvmYxlAMH39dbK/V/ZYCrg0k3hC728FFyqiWmmg7rVefSqp0+MRpf2qlQWWRC78Hjp4xo2Y7qIN1dOQhhKybt3tVB7+VfJRHRcRb/tqKDX2h2XJxifOyiMVgBX5hQF04EsW30AiI52nyCAyPzF0J14EH5/0cO0O3A14LHLuAcEN01elgCmJ97WenkLbhmXMIuCF9ARSldMJmWSRi7I9rb68d2T13xW4+fAWkpaAeAm0CLROtflT6fBeyThFzOhv8J8yTARJkiBhMcsZp9nWL9mjQevHrQQhi2DhdwEKh8OVnV+4puqDvj8hw0waTuahsaAffSWk9uU9JG6HDKmppK6i3brcQJYiH3a5KC7axkMsm+GOqO6Tz3b+GEhWwWzvbGK7BlD7KUyvFWt0Dv9jq4oeBmG4H+lRWzY6j2Jzn4oJvUDXEANibM=
-        on:
-          tags: true
-          tag: next
-          repo: DustinMEastway/tstack
-          branch: master
-    - stage: server npm publish
-      if: tag =~ ^[0-9]+.[0-9]+.[0-9]+
-      before_deploy:
-        - npm run buildCore
-        - npm run buildServer
-        - cd dist/\@tstack/server/
-      after_deploy:
-        - cd ../../../
-      deploy:
-        provider: npm
-        email: Dustin.Eastway@gmail.com
-        skip_cleanup: true
-        api_key:
-          secure: K2VfYx6Ymik4o8KlOBKiuAkQQn7Jl/HmaFCXGMq4H8S4tW3EIEZ485wl9vWOdjnPQZRerkPS/cVMIg9A8m8aQohGicdp0znfRO3YEmPRXbanQLoYezEJNPLZeSEO4YsrzG2VE3qpHVvJK4oOKqKudQZZGkR3RLzp1JG243c+tN29Q4y9qsrK8A2w+zp4ZV2G2VtgFZQGhVdfJzuIf5aiWKJ62JqjfLYEeC4sKeO5hDZgNiCrfkhsyuDvmYxlAMH39dbK/V/ZYCrg0k3hC728FFyqiWmmg7rVefSqp0+MRpf2qlQWWRC78Hjp4xo2Y7qIN1dOQhhKybt3tVB7+VfJRHRcRb/tqKDX2h2XJxifOyiMVgBX5hQF04EsW30AiI52nyCAyPzF0J14EH5/0cO0O3A14LHLuAcEN01elgCmJ97WenkLbhmXMIuCF9ARSldMJmWSRi7I9rb68d2T13xW4+fAWkpaAeAm0CLROtflT6fBeyThFzOhv8J8yTARJkiBhMcsZp9nWL9mjQevHrQQhi2DhdwEKh8OVnV+4puqDvj8hw0waTuahsaAffSWk9uU9JG6HDKmppK6i3brcQJYiH3a5KC7axkMsm+GOqO6Tz3b+GEhWwWzvbGK7BlD7KUyvFWt0Dv9jq4oeBmG4H+lRWzY6j2Jzn4oJvUDXEANibM=
-        on:
-          tags: true
-          tag: next
-          repo: DustinMEastway/tstack
-          branch: master
+  - stage: test & lint
+    script:
+    - npm run lint
+    - npm run test
+  - stage: core npm publish
+    if: tag =~ ^[0-9]+.[0-9]+.[0-9]+
+    before_deploy:
+    - cd dist/\@tstack/core/
+    after_deploy:
+    - cd ../../../
+    deploy:
+      provider: npm
+      email: Dustin.Eastway@gmail.com
+      skip_cleanup: true
+      api_key:
+        secure: K2VfYx6Ymik4o8KlOBKiuAkQQn7Jl/HmaFCXGMq4H8S4tW3EIEZ485wl9vWOdjnPQZRerkPS/cVMIg9A8m8aQohGicdp0znfRO3YEmPRXbanQLoYezEJNPLZeSEO4YsrzG2VE3qpHVvJK4oOKqKudQZZGkR3RLzp1JG243c+tN29Q4y9qsrK8A2w+zp4ZV2G2VtgFZQGhVdfJzuIf5aiWKJ62JqjfLYEeC4sKeO5hDZgNiCrfkhsyuDvmYxlAMH39dbK/V/ZYCrg0k3hC728FFyqiWmmg7rVefSqp0+MRpf2qlQWWRC78Hjp4xo2Y7qIN1dOQhhKybt3tVB7+VfJRHRcRb/tqKDX2h2XJxifOyiMVgBX5hQF04EsW30AiI52nyCAyPzF0J14EH5/0cO0O3A14LHLuAcEN01elgCmJ97WenkLbhmXMIuCF9ARSldMJmWSRi7I9rb68d2T13xW4+fAWkpaAeAm0CLROtflT6fBeyThFzOhv8J8yTARJkiBhMcsZp9nWL9mjQevHrQQhi2DhdwEKh8OVnV+4puqDvj8hw0waTuahsaAffSWk9uU9JG6HDKmppK6i3brcQJYiH3a5KC7axkMsm+GOqO6Tz3b+GEhWwWzvbGK7BlD7KUyvFWt0Dv9jq4oeBmG4H+lRWzY6j2Jzn4oJvUDXEANibM=
+      on:
+        tags: true
+        tag: next
+        repo: DustinMEastway/tstack
+        branch: master
+  - stage: client npm publish
+    if: tag =~ ^[0-9]+.[0-9]+.[0-9]+
+    before_deploy:
+    - cd dist/\@tstack/client/
+    after_deploy:
+    - cd ../../../
+    deploy:
+      provider: npm
+      email: Dustin.Eastway@gmail.com
+      skip_cleanup: true
+      api_key:
+        secure: K2VfYx6Ymik4o8KlOBKiuAkQQn7Jl/HmaFCXGMq4H8S4tW3EIEZ485wl9vWOdjnPQZRerkPS/cVMIg9A8m8aQohGicdp0znfRO3YEmPRXbanQLoYezEJNPLZeSEO4YsrzG2VE3qpHVvJK4oOKqKudQZZGkR3RLzp1JG243c+tN29Q4y9qsrK8A2w+zp4ZV2G2VtgFZQGhVdfJzuIf5aiWKJ62JqjfLYEeC4sKeO5hDZgNiCrfkhsyuDvmYxlAMH39dbK/V/ZYCrg0k3hC728FFyqiWmmg7rVefSqp0+MRpf2qlQWWRC78Hjp4xo2Y7qIN1dOQhhKybt3tVB7+VfJRHRcRb/tqKDX2h2XJxifOyiMVgBX5hQF04EsW30AiI52nyCAyPzF0J14EH5/0cO0O3A14LHLuAcEN01elgCmJ97WenkLbhmXMIuCF9ARSldMJmWSRi7I9rb68d2T13xW4+fAWkpaAeAm0CLROtflT6fBeyThFzOhv8J8yTARJkiBhMcsZp9nWL9mjQevHrQQhi2DhdwEKh8OVnV+4puqDvj8hw0waTuahsaAffSWk9uU9JG6HDKmppK6i3brcQJYiH3a5KC7axkMsm+GOqO6Tz3b+GEhWwWzvbGK7BlD7KUyvFWt0Dv9jq4oeBmG4H+lRWzY6j2Jzn4oJvUDXEANibM=
+      on:
+        tags: true
+        tag: next
+        repo: DustinMEastway/tstack
+        branch: master
+  - stage: server npm publish
+    if: tag =~ ^[0-9]+.[0-9]+.[0-9]+
+    before_deploy:
+    - cd dist/\@tstack/server/
+    after_deploy:
+    - cd ../../../
+    deploy:
+      provider: npm
+      email: Dustin.Eastway@gmail.com
+      skip_cleanup: true
+      api_key:
+        secure: K2VfYx6Ymik4o8KlOBKiuAkQQn7Jl/HmaFCXGMq4H8S4tW3EIEZ485wl9vWOdjnPQZRerkPS/cVMIg9A8m8aQohGicdp0znfRO3YEmPRXbanQLoYezEJNPLZeSEO4YsrzG2VE3qpHVvJK4oOKqKudQZZGkR3RLzp1JG243c+tN29Q4y9qsrK8A2w+zp4ZV2G2VtgFZQGhVdfJzuIf5aiWKJ62JqjfLYEeC4sKeO5hDZgNiCrfkhsyuDvmYxlAMH39dbK/V/ZYCrg0k3hC728FFyqiWmmg7rVefSqp0+MRpf2qlQWWRC78Hjp4xo2Y7qIN1dOQhhKybt3tVB7+VfJRHRcRb/tqKDX2h2XJxifOyiMVgBX5hQF04EsW30AiI52nyCAyPzF0J14EH5/0cO0O3A14LHLuAcEN01elgCmJ97WenkLbhmXMIuCF9ARSldMJmWSRi7I9rb68d2T13xW4+fAWkpaAeAm0CLROtflT6fBeyThFzOhv8J8yTARJkiBhMcsZp9nWL9mjQevHrQQhi2DhdwEKh8OVnV+4puqDvj8hw0waTuahsaAffSWk9uU9JG6HDKmppK6i3brcQJYiH3a5KC7axkMsm+GOqO6Tz3b+GEhWwWzvbGK7BlD7KUyvFWt0Dv9jq4oeBmG4H+lRWzY6j2Jzn4oJvUDXEANibM=
+      on:
+        tags: true
+        tag: next
+        repo: DustinMEastway/tstack
+        branch: master
+  - stage: github pages
+    if: branch = master
+    before_deploy:
+    - ng build --prod --base-href 'https://dustinmeastway.github.io/tstack/'
+    deploy:
+      provider: pages
+      email: Dustin.Eastway@gmail.com
+      keep-history: true
+      local-dir: ./dist/tstack
+      skip-cleanup: true
+      github-token:
+        secure: mIoEjXKU1lIIr9S4ohZF883TPue1Ghb2oJ4MdG17l8LfN2UszWgCAuOtM5nhTVWr5kGf43HvnYdYZSUuOrAphC+ktNkXX2c6vnPNPlRTojimU6wP72JNz1l+lw4Ipldol8GOKlDuUScvK81+vXjYK0iHs4p3+uxi0pzte3UHqpKLaiYDDLIFKatYydFQOOH+grFwx1jFo1D+ZHg82uMcPpfLeGduZlJlGiuUuisHP0Dk9ydtflRcgFkFj2fiRrbrKCLUcN7cIIex2eebhgWrqyFdNX+QgO+DiTVKUn/i8C4pyHC+051rlBnsPrM+PVRud+h+Qvnc82kIRuI1LVNzsFlHbaXRqbfpXpBQazQl1dJSJ5Yi7WNhBEHNnXKuDdMy5FvyGUFkZyJ1YR4b9Dm+Imuwf+qmPHjQRrEGHcPiPbdE29iXp1PbMk06i1FWOzrM4pJbht7oi43sy0xN56Hf+S49SmKCK1upSfRiqD1KDs5q/kBHfLCm0CZW23FuLXMYfwpUociHoOxeVLVYowP/4fdkeBviouy6wFRGc7exEx0PHn8RrGdg4N5oOOlPV958Qqp6RPRexYDhf8KMfrtchcuXnMCWS0tYECn62fX3a/InIq87TslmRrb9mOEWHqfdSVhGdOHNPm/5UWKq5uBMNYXJjnd5VEG0Xf0k4YWpH7E=
+      on:
+        branch: master
