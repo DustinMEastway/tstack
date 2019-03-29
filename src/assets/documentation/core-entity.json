@@ -1,0 +1,35 @@
+[
+	{
+		"name": "cast",
+		"description": "Cast can be used to convert an object, or an array of objects into the given type",
+		"examples": [
+			{
+				"name": "TS",
+				"content": [
+					"import { Entity } from '@tstack/core';",
+					"",
+					"class Villian extends Entity{",
+					"\tfirstName: string;",
+					"\tlastName: string;",
+					"",
+					"\tget fullName(): string {",
+					"\t\treturn `${this.firstName} ${this.lastName}`;",
+					"\t}",
+					"}",
+					"",
+					"// json data from an api",
+					"const json = { firstName: 'Agent', lastName: 'Smith' }",
+					"",
+					"// cast to the Villian type to access its properties and methods",
+					"const villian = Villian.cast(json);",
+					"",
+					"console.log(villian.firstName); // 'Agent Smith'"
+				]
+			}
+		]
+	},
+	{
+		"name": "clone",
+		"description": "Clone assigns values from the provided object to the entity allowing you to assign values on construction"
+	}
+]

@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { HomeScreenComponent } from './home-screen/home-screen.component';
-import { ReadonlyFieldScreenComponent } from './readonly-field-screen/readonly-field-screen.component';
+import { ReadonlyFieldScreenComponent } from './readonly-field-screen.component';
+import { ScreenComponent } from './screen/screen.component';
 
 const routes: Routes = [
 	{
@@ -12,7 +12,7 @@ const routes: Routes = [
 			{
 				path: '',
 				pathMatch: 'full',
-				component: HomeScreenComponent
+				component: ScreenComponent
 			},
 			{
 				path: '**',

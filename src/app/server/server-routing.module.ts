@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { ServerScreenComponent } from './server-screen/server-screen.component';
+import { ServerScreenComponent } from './server-screen.component';
 
 const routes: Routes = [
 	{

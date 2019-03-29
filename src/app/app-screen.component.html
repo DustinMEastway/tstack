@@ -1,0 +1,28 @@
+<!-- apply themes to the full application -->
+<div [ngClass]="themeClass">
+	<!-- background layer used to keep a white spot from appearing when the user scrolls up past the app container -->
+	<div class="mat-app-background app-background">
+		<!-- container for the applications code that is styled for the given theme -->
+		<div class="app-container">
+			<!-- main navigation toolbar at the top of the page -->
+			<mat-toolbar class="mat-elevation-z5 primary-nav" role="heading" color="primary">
+				<a mat-button routerLink="/">{{ appTitle }}</a>
+				<tsk-nav-menu *ngFor="let navConfig of navConfigs" navigate [menuConfig]="navConfig"></tsk-nav-menu>
+				<div class="flex-space"></div>
+				<!-- theme selector -->
+				<tsk-theme-select></tsk-theme-select>
+				<a mat-button href="https://github.com/DustinMEastway/tstack">
+					<mat-icon svgIcon="github"></mat-icon>
+					GitHub
+				</a>
+			</mat-toolbar>
+			<mat-toolbar color="primary">
+				<h2>{{ activeModule?.name }}</h2>
+			</mat-toolbar>
+			<div class="content-container">
+				<router-outlet></router-outlet>
+				<app-module-routes *ngIf="activeModule?.items.length" [moduleRoutes]="activeModule.items"></app-module-routes>
+			</div>
+		</div>
+	</div>
+</div>

@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { AutocompleteScreenComponent } from './autocomplete-screen/autocomplete-screen.component';
+import { AutocompleteScreenComponent } from './autocomplete-screen.component';
 
 const routes: Routes = [
 	{
