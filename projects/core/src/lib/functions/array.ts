@@ -1,9 +1,6 @@
-/* todo:
-	* add property and sort function as a configuration for hasDuplicates
-*/
-
 import { CompareProperty } from '../types/compare-property';
 import { FilterConfig } from '../types/filter-config';
+import { HasDuplicatesConfig } from '../types/has-duplicates-config';
 
 import { castString, compareItems, getValue } from './object';
 
@@ -34,7 +31,7 @@ export function areEqual(items1: any[], items2: any[]): boolean {
  * @param items to filter
  * @param filterValue used to determine whether an item should be kept or not
  * @param [property] to compare with for each item
- * @param [config] to determine how to filter the values
+ * @param [config] used to determine how to filter the values
  * @returns filtered items
  */
 export function filter<T>(items: T[], filterValue: any, config?: FilterConfig): T[] {
@@ -117,14 +114,25 @@ export function findIndex<T>(items: T[], valueToFind: any, property?: string): n
 /**
  * hasDuplicates determines if the array contains any duplicate values (must be sortable values like strings or numbers)
  * @param items array that is checked for duplicates
+ * @param config to customize how items are compared to determine equality @see HasDuplicatesConfig
  * @returns whether any duplicates were found in the array
  */
-export function hasDuplicates<T = any>(items: T[]): boolean {
+export function hasDuplicates<K extends keyof(T), T = any>(items: T[], config: Required<HasDuplicatesConfig<T[K], K>>): boolean;
+export function hasDuplicates<T = any, C = any>(items: T[], config: Required<HasDuplicatesConfig<C, any>>): boolean;
+export function hasDuplicates<T = any>(items: T[], config: { comparator(item1: T, item2: T): number; }): boolean;
+export function hasDuplicates<K extends keyof(T), T = any, C = any>(items: T[], config?: HasDuplicatesConfig<C, K>): boolean;
+export function hasDuplicates<T = any, C = any>(items: T[], config?: HasDuplicatesConfig<C, any>): boolean;
+export function hasDuplicates(items: any[], config?: HasDuplicatesConfig<any, any>): boolean {
+	config = Object.assign<HasDuplicatesConfig, HasDuplicatesConfig>({
+		comparator: compareItems,
+		property: ''
+	}, config);
+
 	// create a copy of the array using slice before sorting to leave original array alone
-	items = items.slice().sort();
+	items = items.map(item => getValue(item, config.property)).sort(config.comparator);
 
 	for (let i = 0; i < items.length - 1; ++i) {
-		if (items[i] === items[i + 1]) {
+		if (!config.comparator(items[i], items[i + 1])) {
 			return true;
 		}
 	}

@@ -45,7 +45,6 @@
 			}
 		],
 		"no-arg": true,
-		"no-bitwise": true,
 		"no-console": [
 			true,
 			"debug",
@@ -111,9 +110,7 @@
 			true,
 			"call-signature",
 			"parameter",
-			"property-declaration",
-			"object-destructuring",
-			"array-destructuring"
+			"property-declaration"
 		],
 		"typedef-whitespace": [
 			true,
