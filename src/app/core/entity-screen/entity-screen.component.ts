@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Observable } from 'rxjs';
 
-import { PropertyDescription } from 'app/entities';
+import { Documentation } from 'app/entities';
 import { DocumentationApiService } from 'app/services';
 
 @Component({
@@ -10,13 +10,13 @@ import { DocumentationApiService } from 'app/services';
 	styleUrls: ['./entity-screen.component.scss']
 })
 export class EntityScreenComponent {
-	private _staticProperties$: Observable<PropertyDescription[]>;
+	private _staticProperties$: Observable<Documentation[]>;
 
-	get staticProperties$(): Observable<PropertyDescription[]> {
+	get staticProperties$(): Observable<Documentation[]> {
 		return this._staticProperties$;
 	}
 
 	constructor(private _documentationApiService: DocumentationApiService) {
-		this._staticProperties$ = this._documentationApiService.getCoreEntityDocumentation();
+		this._staticProperties$ = this._documentationApiService.getDocumentation('core-entity.json');
 	}
 }

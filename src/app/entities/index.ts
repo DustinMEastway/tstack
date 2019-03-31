@@ -1,1 +1,2 @@
-export * from './property-description';
+export * from './documentation';
+export * from './example';

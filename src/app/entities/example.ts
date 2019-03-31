@@ -1,8 +1,9 @@
 import { Entity } from '@tstack/core';
 
 export class Example extends Entity {
-	private _content: string;
+	contentFile: string;
 	name: string;
+	private _content: string;
 
 	get content(): string | string[] {
 		return this._content;

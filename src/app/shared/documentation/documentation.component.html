@@ -1,0 +1,13 @@
+<mat-accordion>
+	<mat-expansion-panel *ngFor="let documentation of documentationGroup" [disabled]="!documentation.examples?.length">
+		<mat-expansion-panel-header>
+			<mat-panel-title>{{ documentation.name }}</mat-panel-title>
+			<mat-panel-description>{{ documentation.description }}</mat-panel-description>
+		</mat-expansion-panel-header>
+		<mat-tab-group *ngFor="let example of documentation.examples">
+  			<mat-tab [label]="example.name">
+  				<pre>{{ example.content }}</pre>
+  			</mat-tab>
+		</mat-tab-group>
+	</mat-expansion-panel>
+</mat-accordion>
