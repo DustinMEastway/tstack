@@ -1,6 +1,7 @@
 import { CastIntConfig } from '../types/cast-int-config';
 import { CastStringConfig } from '../types/cast-string-config';
 import { CompareProperty } from '../types/compare-property';
+import { IsBetweenConfig } from '../types/is-between-config';
 
 /**
  * converts the case of the given string into camel case
@@ -158,14 +159,25 @@ export function getValue<ReturnT = any, ItemT = any>(item: ItemT, propertyToGet
 }
 
 /**
- * gets the values of all of the keys on the given item
- * @param item to pull values from
- * @returns values of each property on the item
+ * checks if a value is between two other values
+ * @param value checked to see if it is between min and max
+ * @param min value that value must be greater than (or equal too depending on config.endpoints)
+ * @param max value that value must be less than (or equal too depending on config.endpoints)
+ * @param config used to determine if the value is between min and max @see IsBetweenConfig
  */
-export function values<T, K extends keyof(T)>(item: T): T[K][];
-export function values<T = any>(item: any): T[];
-export function values<T, K extends keyof(T)>(item: T): T[K][] {
-	return (item == null) ? [] : Object.keys(item).map(key => item[key as K]);
+export function isBetween<T = any>(value: T, min: T, max: T, config?: IsBetweenConfig<T>): boolean {
+	config = Object.assign<IsBetweenConfig, IsBetweenConfig>({
+		comparator: compareItems,
+		endpoints: 'both'
+	}, config);
+
+	const minComparison = config.comparator(value, min);
+	const maxComparison = config.comparator(value, max);
+
+	// value is greater than min and less than max, or value is equal to an included endpoint
+	return (minComparison > 0  && maxComparison < 0)
+		|| (minComparison === 0 && (config.endpoints === 'both' || config.endpoints === 'min'))
+		|| (maxComparison === 0 && (config.endpoints === 'both' || config.endpoints === 'max'));
 }
 
 /**
@@ -211,4 +223,15 @@ export function setValue<ItemT>(item: ItemT, value: any, property: string): Item
 	}
 
 	return item;
+}
+
+/**
+ * gets the values of all of the keys on the given item
+ * @param item to pull values from
+ * @returns values of each property on the item
+ */
+export function values<T, K extends keyof(T)>(item: T): T[K][];
+export function values<T = any>(item: any): T[];
+export function values<T, K extends keyof(T)>(item: T): T[K][] {
+	return (item == null) ? [] : Object.keys(item).map(key => item[key as K]);
 }
