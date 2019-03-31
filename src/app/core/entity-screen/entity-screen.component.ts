@@ -17,6 +17,6 @@ export class EntityScreenComponent {
 	}
 
 	constructor(private _documentationApiService: DocumentationApiService) {
-		this._staticProperties$ = this._documentationApiService.getCoreEntityDocumentation();
+		this._staticProperties$ = this._documentationApiService.getDocumentation('core-entity.json');
 	}
 }
