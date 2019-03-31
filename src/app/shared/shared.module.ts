@@ -4,8 +4,8 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatButtonModule, MatExpansionModule, MatTabsModule } from '@angular/material';
 import { RouterModule } from '@angular/router';
 
+import { DocumentationComponent } from './documentation/documentation.component';
 import { ModuleRoutesComponent } from './module-routes/module-routes.component';
-import { PropertyDescriptionsComponent } from './property-descriptions/property-descriptions.component';
 
 @NgModule({
 	imports: [
@@ -18,12 +18,12 @@ import { PropertyDescriptionsComponent } from './property-descriptions/property-
 	],
 	declarations: [
 		ModuleRoutesComponent,
-		PropertyDescriptionsComponent
+		DocumentationComponent
 	],
 	exports: [
 		FlexLayoutModule,
 		ModuleRoutesComponent,
-		PropertyDescriptionsComponent
+		DocumentationComponent
 	]
 })
 export class SharedModule {}

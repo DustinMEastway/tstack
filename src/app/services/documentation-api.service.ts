@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-import { PropertyDescription } from 'app/entities';
+import { Documentation } from 'app/entities';
 
 @Injectable({
 	providedIn: 'root'
@@ -13,9 +13,9 @@ export class DocumentationApiService {
 
 	constructor(private _httpClient: HttpClient) {}
 
-	private createDocumentationGetterMethod(name: string): () => Observable<PropertyDescription[]> {
+	private createDocumentationGetterMethod(name: string): () => Observable<Documentation[]> {
 		return () => this._httpClient.get<object[]>(`./assets/documentation/${name}.json`).pipe(
-			map(result => PropertyDescription.cast<PropertyDescription[]>(result))
+			map(result => Documentation.cast<Documentation[]>(result))
 		);
 	}
 }
