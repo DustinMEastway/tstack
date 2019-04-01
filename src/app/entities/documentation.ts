@@ -2,7 +2,7 @@ import { Entity } from '@tstack/core';
 
 import { Example } from './example';
 
-export class PropertyDescription extends Entity {
+export class Documentation extends Entity {
 	description: string;
 	name: string;
 	private _examples: Example[];
