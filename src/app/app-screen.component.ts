@@ -57,7 +57,14 @@ export class AppScreenComponent implements OnInit {
 				name: 'Core',
 				value: 'core',
 				items: [
-					{ name: 'Entity', value: 'entity' }
+					{ name: 'Entity', value: 'entity' },
+					{
+						name: 'Functions',
+						value: 'functions',
+						items: [
+							{ name: 'Object', value: 'object' }
+						]
+					} as TskNavMenuConfig
 				]
 			}
 		];

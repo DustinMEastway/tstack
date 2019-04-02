@@ -15,6 +15,10 @@ const routes: Routes = [
 				component: EntityScreenComponent
 			},
 			{
+				path: 'functions',
+				loadChildren: './functions/functions.module#FunctionsModule'
+			},
+			{
 				path: '',
 				pathMatch: 'full',
 				component: ScreenComponent,
