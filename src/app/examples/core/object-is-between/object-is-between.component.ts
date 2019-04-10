@@ -27,9 +27,9 @@ export class ObjectIsBetweenComponent implements OnInit {
 		this._form = this._formBuilder.group({
 			includeMax: true,
 			includeMin: true,
-			max: '5',
-			min: '0',
-			value: '3'
+			max: 'a',
+			min: 'm',
+			value: 'c'
 		});
 
 		const includeMaxControl = this._form.get('includeMax');

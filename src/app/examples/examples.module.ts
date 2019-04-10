@@ -6,6 +6,10 @@ import { MatFormFieldModule, MatInputModule, MatSelectModule } from '@angular/ma
 
 import { ObjectIsBetweenComponent } from './core/object-is-between/object-is-between.component';
 
+export const ExampleComponents = [
+	ObjectIsBetweenComponent
+];
+
 @NgModule({
 	imports: [
 		CommonModule,
@@ -16,10 +20,15 @@ import { ObjectIsBetweenComponent } from './core/object-is-between/object-is-bet
 		ReactiveFormsModule
 	],
 	declarations: [
-		ObjectIsBetweenComponent
+		...ExampleComponents
+	],
+	entryComponents: [
+		...ExampleComponents
 	],
 	exports: [
-		ObjectIsBetweenComponent
+		...ExampleComponents
 	]
 })
 export class ExamplesModule { }
+
+export { ObjectIsBetweenComponent };
