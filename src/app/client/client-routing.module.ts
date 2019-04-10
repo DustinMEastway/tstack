@@ -10,18 +10,6 @@ const routes: Routes = [
 		component: ClientScreenComponent,
 		children: [
 			{
-				path: 'autocomplete',
-				loadChildren: './autocomplete/autocomplete.module#AutocompleteModule'
-			},
-			{
-				path: 'dynamic-content',
-				loadChildren: './dynamic-content/dynamic-content.module#DynamicContentModule'
-			},
-			{
-				path: 'nav-menu',
-				loadChildren: './nav-menu/nav-menu.module#NavMenuModule'
-			},
-			{
 				path: 'readonly-field',
 				loadChildren: './readonly-field/readonly-field.module#ReadonlyFieldModule'
 			},
