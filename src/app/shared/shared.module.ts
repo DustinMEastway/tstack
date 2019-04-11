@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatButtonModule, MatExpansionModule, MatTabsModule } from '@angular/material';
 import { RouterModule } from '@angular/router';
+import { TskDynamicContentModule } from '@tstack/client';
 
 import { DocumentationComponent } from './documentation/documentation.component';
 import { ModuleRoutesComponent } from './module-routes/module-routes.component';
@@ -14,7 +15,8 @@ import { ModuleRoutesComponent } from './module-routes/module-routes.component';
 		MatButtonModule,
 		MatExpansionModule,
 		MatTabsModule,
-		RouterModule
+		RouterModule,
+		TskDynamicContentModule
 	],
 	declarations: [
 		ModuleRoutesComponent,
