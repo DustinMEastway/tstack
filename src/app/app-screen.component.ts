@@ -62,6 +62,7 @@ export class AppScreenComponent implements OnInit {
 						name: 'Functions',
 						value: 'functions',
 						items: [
+							{ name: 'Array', value: 'array' },
 							{ name: 'Object', value: 'object' }
 						]
 					} as TskNavMenuConfig

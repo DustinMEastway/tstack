@@ -6,8 +6,7 @@ import { map, startWith } from 'rxjs/operators';
 
 @Component({
 	selector: 'app-object-is-between',
-	templateUrl: './object-is-between.component.html',
-	styleUrls: ['./object-is-between.component.scss']
+	templateUrl: './object-is-between.component.html'
 })
 export class ObjectIsBetweenComponent implements OnInit {
 	private _form: FormGroup;
