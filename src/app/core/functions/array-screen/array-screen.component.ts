@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
 
 import { Documentation } from 'app/entities';
-import { ArrayHasDuplicatesComponent } from 'app/examples';
+import { DocumentationApiService } from 'app/services';
 
 @Component({
 	selector: 'app-array-screen',
@@ -9,26 +10,15 @@ import { ArrayHasDuplicatesComponent } from 'app/examples';
 	styleUrls: ['./array-screen.component.scss']
 })
 export class ArrayScreenComponent implements OnInit {
-	private _hasDuplicatesDocumentation: Documentation[];
+	private _hasDuplicatesDocumentation$: Observable<Documentation[]>;
 
-	get hasDuplicatesDocumentation(): Documentation[] {
-		return this._hasDuplicatesDocumentation;
+	get hasDuplicatesDocumentation$(): Observable<Documentation[]> {
+		return this._hasDuplicatesDocumentation$;
 	}
 
-	constructor() { }
+	constructor(private _documentationApiService: DocumentationApiService) {}
 
 	ngOnInit(): void {
-		this._hasDuplicatesDocumentation = Documentation.cast<Documentation[]>([
-			{
-				name: 'Demo',
-				description: 'Play around with various inputs to see what the function will output',
-				examples: [
-					{
-						name: 'TS',
-						content: ArrayHasDuplicatesComponent
-					}
-				]
-			}
-		]);
+		this._hasDuplicatesDocumentation$ = this._documentationApiService.getDocumentation('core-functions-has-duplicates.json');
 	}
 }
