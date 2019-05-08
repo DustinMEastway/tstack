@@ -1,6 +1,5 @@
 const Dgeni = require('dgeni');
 const basePackage = require('dgeni-packages/base');
-const jsdocPackage = require('dgeni-packages/jsdoc');
 const nunjucksPackage = require('dgeni-packages/nunjucks');
 const typeScriptPackage = require('dgeni-packages/typescript');
 
@@ -10,13 +9,15 @@ const { DOCS_OUTPUT_PATH, PROJECTS_PATH, ROOT_PATH, TEMPLATES_PATH } = require('
 
 const tstackDependencies = [
 	basePackage,
-	jsdocPackage,
 	nunjucksPackage,
 	typeScriptPackage
 ];
 
 // this is the primary package used to generate documentation
 var tstackDocsPackage = new Package('tstack-docs', tstackDependencies)
+.factory(function TYPESCRIPT_DOC_TYPES_TO_RENDER() {
+	return [ 'function', 'module' ];
+})
 // configure where files are read from
 .config(function(readFilesProcessor, readTypeScriptModules, tsParser) {
 	tsParser.options.baseUrl = '.';
@@ -44,6 +45,15 @@ var tstackDocsPackage = new Package('tstack-docs', tstackDependencies)
 
 	// Nunjucks and Angular conflict in their template bindings so change Nunjucks
 	templateEngine.config.tags = {variableStart: '{$', variableEnd: '$}'};
+})
+.processor(function removeUnusedTypeScriptDocsProcessor(TYPESCRIPT_DOC_TYPES_TO_RENDER) {
+	return {
+		$process: function(docs) {
+			return docs.filter(doc => TYPESCRIPT_DOC_TYPES_TO_RENDER.includes(doc.docType));
+		},
+		$runAfter: [ 'readTypeScriptModules' ],
+		$runBefore: [ 'linkInheritedDocs' ]
+	}
 });
 
 module.exports = tstackDocsPackage;
