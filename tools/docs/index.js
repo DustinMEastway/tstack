@@ -44,7 +44,7 @@ var tstackDocsPackage = new Package('tstack-docs', tstackDependencies)
 	];
 
 	// Nunjucks and Angular conflict in their template bindings so change Nunjucks
-	templateEngine.config.tags = {variableStart: '{$', variableEnd: '$}'};
+	templateEngine.config.tags = { variableStart: '{$', variableEnd: '$}' };
 })
 .processor(function removeUnusedTypeScriptDocsProcessor(TYPESCRIPT_DOC_TYPES_TO_RENDER) {
 	return {
@@ -54,6 +54,30 @@ var tstackDocsPackage = new Package('tstack-docs', tstackDependencies)
 		$runAfter: [ 'readTypeScriptModules' ],
 		$runBefore: [ 'linkInheritedDocs' ]
 	}
+})
+.processor(function functionProcessor() {
+	return {
+		docTypes: [ 'function' ],
+		$process: function(docs) {
+			docs.filter(doc => this.docTypes.includes(doc.docType)).forEach(doc => {
+				const callDocs = (doc.overloads.length)
+					? doc.overloads
+					: [ doc ];
+
+				doc.data = Object.assign({}, doc.data, {
+					calls: callDocs.map(callDoc => {
+						// TODO: add doc.typeParameters when it is available on overloads
+						const parameters = callDoc.parameters.join(', ');
+
+						return `function ${doc.name}(${parameters}): ${callDoc.type}`
+					}),
+					title: doc.name
+				});
+			});
+		},
+		$runAfter: [ 'removeUnusedTypeScriptDocsProcessor' ],
+		$runBefore: [ 'linkInheritedDocs' ]
+	};
 });
 
 module.exports = tstackDocsPackage;
