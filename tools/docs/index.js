@@ -47,7 +47,8 @@ var tstackDocsPackage = new Package('tstack-docs', tstackDependencies)
 	templateEngine.config.tags = { variableStart: '{$', variableEnd: '$}' };
 })
 .processor(require('./processors/filter-typescript-docs.processor'))
-.processor(require('./processors/function.processor'));
+.processor(require('./processors/function.processor'))
+.processor(require('./processors/doc-type.processor'));
 
 module.exports = tstackDocsPackage;
 
