@@ -18,6 +18,44 @@ var tstackDocsPackage = new Package('tstack-docs', tstackDependencies)
 .factory(function TYPESCRIPT_DOC_TYPES_TO_RENDER() {
 	return [ 'function', 'module' ];
 })
+.factory(function LOGGER () {
+	const LOGGING_LEVEL_NONE = 0;
+	const LOGGING_LEVEL_ERROR = 1;
+	const LOGGING_LEVEL_WARNING = 2;
+	const LOGGING_LEVEL_INFO = 3;
+
+	return {
+		get LOGGING_LEVEL_NONE() {
+			return LOGGING_LEVEL_NONE;
+		},
+		get LOGGING_LEVEL_ERROR() {
+			return LOGGING_LEVEL_ERROR;
+		},
+		get LOGGING_LEVEL_WARNING() {
+			return LOGGING_LEVEL_WARNING;
+		},
+		get LOGGING_LEVEL_INFO() {
+			return LOGGING_LEVEL_INFO;
+		},
+		/** @prop loggingLevel determines which messages are important enough to display */
+		loggingLevel: LOGGING_LEVEL_WARNING,
+		logError(message) {
+			if (this.loggingLevel >= LOGGING_LEVEL_ERROR) {
+				console.error(message);
+			}
+		},
+		logWarning(message) {
+			if (this.loggingLevel >= LOGGING_LEVEL_WARNING) {
+				console.warn(message);
+			}
+		},
+		logInfo(message) {
+			if (this.loggingLevel >= LOGGING_LEVEL_INFO) {
+				console.log(message);
+			}
+		}
+	}
+})
 // configure where files are read from
 .config(function(readFilesProcessor, readTypeScriptModules, tsParser) {
 	tsParser.options.baseUrl = '.';
