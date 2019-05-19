@@ -48,7 +48,8 @@ var tstackDocsPackage = new Package('tstack-docs', tstackDependencies)
 })
 .processor(require('./processors/filter-typescript-docs.processor'))
 .processor(require('./processors/function.processor'))
-.processor(require('./processors/doc-type.processor'));
+.processor(require('./processors/doc-type.processor'))
+.processor(require('./processors/output-path.processor'));
 
 module.exports = tstackDocsPackage;
 
