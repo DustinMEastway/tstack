@@ -84,7 +84,13 @@ var tstackDocsPackage = new Package('tstack-docs', tstackDependencies)
 	// Nunjucks and Angular conflict in their template bindings so change Nunjucks
 	templateEngine.config.tags = { variableStart: '{$', variableEnd: '$}' };
 })
-.processor(require('./processors/filter-typescript-docs.processor'))
+// configure which document types to render
+.config(function(TYPESCRIPT_DOC_TYPES_TO_RENDER, filterDocsProcessor) {
+	filterDocsProcessor.docTypes = filterDocsProcessor.docTypes.concat(
+		TYPESCRIPT_DOC_TYPES_TO_RENDER
+	);
+})
+.processor(require('./processors/filter-docs.processor'))
 .processor(require('./processors/function.processor'))
 .processor(require('./processors/doc-type.processor'))
 .processor(require('./processors/output-path.processor'));

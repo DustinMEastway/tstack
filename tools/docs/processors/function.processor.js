@@ -132,7 +132,7 @@ module.exports = function functionProcessor() {
 				});
 			});
 		},
-		$runAfter: [ 'filterTypescriptDocsProcessor' ],
+		$runAfter: [ 'filterDocsProcessor' ],
 		$runBefore: [ 'linkInheritedDocs' ]
 	};
 }
