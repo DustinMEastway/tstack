@@ -16,7 +16,18 @@ const tstackDependencies = [
 // this is the primary package used to generate documentation
 var tstackDocsPackage = new Package('tstack-docs', tstackDependencies)
 .factory(function TYPESCRIPT_DOC_TYPES_TO_RENDER() {
-	return [ 'function', 'module' ];
+	return [
+		{
+			docType: 'function',
+			title: 'Function(s)',
+			order: 0
+		},
+		{
+			docType: 'module',
+			title: 'Module(s)',
+			order: 1
+		}
+	].sort((docType1, docType2) => docType1.order - docType2.order);
 })
 .factory(function LOGGER () {
 	const LOGGING_LEVEL_NONE = 0;
@@ -87,12 +98,13 @@ var tstackDocsPackage = new Package('tstack-docs', tstackDependencies)
 // configure which document types to render
 .config(function(TYPESCRIPT_DOC_TYPES_TO_RENDER, filterDocsProcessor) {
 	filterDocsProcessor.docTypes = filterDocsProcessor.docTypes.concat(
-		TYPESCRIPT_DOC_TYPES_TO_RENDER
+		TYPESCRIPT_DOC_TYPES_TO_RENDER.map(docTypeToRender => docTypeToRender.docType)
 	);
 })
+.processor(require('./processors/doc-type.processor'))
 .processor(require('./processors/filter-docs.processor'))
 .processor(require('./processors/function.processor'))
-.processor(require('./processors/doc-type.processor'))
+.processor(require('./processors/module.processor'))
 .processor(require('./processors/output-path.processor'));
 
 module.exports = tstackDocsPackage;
