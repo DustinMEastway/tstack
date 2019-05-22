@@ -7,6 +7,7 @@ module.exports = function docTypeProcessor() {
 				});
 			});
 		},
+		$runAfter: [ 'moduleProcessor' ],
 		$runBefore: [ 'renderDocsProcessor' ]
 	}
 }

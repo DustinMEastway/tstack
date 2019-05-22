@@ -27,6 +27,8 @@ module.exports = function moduleProcessor(TYPESCRIPT_DOC_TYPES_TO_RENDER) {
 			const moduleDocs = docs.filter(doc => this.docTypes.includes(doc.docType));
 			const globalModuleDoc = {
 				id: 'public_api',
+				docType: 'module',
+				name: 'Packages',
 				outputPath: 'index.json',
 				exports: moduleDocs.slice()
 			};

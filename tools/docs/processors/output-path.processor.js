@@ -14,7 +14,7 @@ module.exports = function outputPathProcessor () {
 					+ '.json';
 			});
 		},
-		$runAfter: [ 'docTypeProcessor' ],
+		$runAfter: [ 'computePathsProcessor' ],
 		$runBefore: [ 'renderDocsProcessor' ]
 	}
 }
