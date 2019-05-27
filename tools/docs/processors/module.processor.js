@@ -48,8 +48,10 @@ module.exports = function moduleProcessor(TYPESCRIPT_DOC_TYPES_TO_RENDER) {
 					}
 				});
 
+				const moduleName = doc.id.replace('/src', '').replace('/public_api', '');
+
 				doc.data = Object.assign({}, doc.data, {
-					title: doc.name,
+					title: `@tstack/${moduleName}`,
 					sections: moduleSections
 				});
 			});
