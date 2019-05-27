@@ -51,7 +51,7 @@ module.exports = function moduleProcessor(TYPESCRIPT_DOC_TYPES_TO_RENDER) {
 				const moduleName = doc.id.replace('/src', '').replace('/public_api', '');
 
 				doc.data = Object.assign({}, doc.data, {
-					title: `@tstack/${moduleName}`,
+					title: (moduleName === 'public_api') ? '@tstack' : `@tstack/${moduleName}`,
 					sections: moduleSections
 				});
 			});
