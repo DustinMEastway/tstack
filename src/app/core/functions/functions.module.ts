@@ -2,7 +2,6 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 
 import { ExamplesModule } from 'app/examples/examples.module';
-import { SharedModule } from 'app/shared/shared.module';
 
 import { ArrayScreenComponent } from './array-screen/array-screen.component';
 import { FunctionsRoutingModule } from './functions-routing.module';
@@ -14,7 +13,6 @@ import { ScreenComponent } from './screen/screen.component';
 	imports: [
 		CommonModule,
 		ExamplesModule,
-		SharedModule,
 		FunctionsRoutingModule
 	],
 	declarations: [

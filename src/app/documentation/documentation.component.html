@@ -1,0 +1,7 @@
+<div *ngIf="documentation">
+	<mat-toolbar color="primary">
+		<h2>{{ documentation.title }}</h2>
+	</mat-toolbar>
+	<p *ngIf="documentation.description">{{ documentation.description }}</p>
+	<app-documentation-section *ngFor="let section of documentation.sections" [section]="section"></app-documentation-section>
+</div>

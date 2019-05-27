@@ -11,7 +11,11 @@ import { Documentation } from 'app/entities';
 export class DocumentationApiService {
 	constructor(private _httpClient: HttpClient) {}
 
-	public getDocumentation(name: string): Observable<Documentation[]> {
+	getDoc(filePath: string): Observable<any> {
+		return this._httpClient.get(`./assets/generated/docs/${filePath}`);
+	}
+
+	getDocumentation(name: string): Observable<Documentation[]> {
 		return this._httpClient.get<object[]>(`./assets/documentation/${name}`).pipe(
 			map(result => Documentation.cast<Documentation[]>(result)),
 			mergeMap(documentationGroup => this._getExampleContent(documentationGroup))

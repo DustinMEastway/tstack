@@ -8,12 +8,12 @@ import {
 } from '@angular/material';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { TskNavMenuModule, TskThemeModule } from '@tstack/client';
-
-import { SharedModule } from 'app/shared/shared.module';
+import { TskThemeModule } from '@tstack/client';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppScreenComponent } from './app-screen.component';
+import { DocumentationSectionComponent } from './documentation-section/documentation-section.component';
+import { DocumentationComponent } from './documentation/documentation.component';
 import { ScreenComponent } from './screen/screen.component';
 
 @NgModule({
@@ -25,13 +25,13 @@ import { ScreenComponent } from './screen/screen.component';
 		MatButtonModule,
 		MatIconModule,
 		MatToolbarModule,
-		SharedModule,
-		TskNavMenuModule,
 		TskThemeModule,
 		AppRoutingModule
 	],
 	declarations: [
 		AppScreenComponent,
+		DocumentationComponent,
+		DocumentationSectionComponent,
 		ScreenComponent
 	],
 	bootstrap: [ AppScreenComponent ]
