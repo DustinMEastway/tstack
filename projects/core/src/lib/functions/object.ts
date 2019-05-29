@@ -85,7 +85,7 @@ export function castString(item: any, config?: CastStringConfig): string {
  * @param item2 to compare
  * @param compareProperties array of properties that will be used to compare the two items. Set @see CompareProperty.ascending to false for
  * a descending sort on a property
- * @returns
+ * @returns 1 if item1 is larger, -1 if item2 is larger and 0 if they are equal
  */
 export function compareItems<T = any>(item1: T, item2: T, ...compareProperties: (string | CompareProperty)[]): -1 | 0 | 1 {
 	if (item1 === item2) { return 0; }

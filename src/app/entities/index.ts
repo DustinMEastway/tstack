@@ -1,2 +1,2 @@
 export * from './documentation';
-export * from './example';
+export * from './documentation-section';
