@@ -113,6 +113,7 @@ module.exports = function functionProcessor(LOGGER) {
 							title: 'Calls',
 							componentSelector: 'table',
 							data: {
+								columns: [ { id: 'call' } ],
 								rows: getCallDocs(doc)
 							}
 						},
@@ -120,8 +121,19 @@ module.exports = function functionProcessor(LOGGER) {
 							title: 'Parameters',
 							componentSelector: 'table',
 							data: {
-								headers: [ 'Name', 'Description' ],
-								rows: parameterDocs.map(parameterDoc => [ parameterDoc.name, parameterDoc.description ])
+								columns: [
+									{
+										header: 'Name',
+										id: 'name',
+										property: 'name'
+									},
+									{
+										header: 'Description',
+										id: 'description',
+										property: 'description'
+									}
+								],
+								rows: parameterDocs
 							}
 						},
 						{
