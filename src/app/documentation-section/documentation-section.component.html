@@ -1,3 +1,5 @@
-<h3>{{ section.title }}</h3>
-<p *ngIf="section.description">{{ section.description }}</p>
-<tsk-dynamic-content></tsk-dynamic-content>
+<div [class.hide]="!isDisplayed">
+	<h3>{{ section.title }}</h3>
+	<p *ngIf="section.description">{{ section.description }}</p>
+	<tsk-dynamic-content></tsk-dynamic-content>
+</div>
