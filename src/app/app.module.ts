@@ -9,7 +9,7 @@ import {
 } from '@angular/material';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { TskDynamicContentModule, TskThemeModule } from '@tstack/client';
+import { TskDynamicContentModule, TskReadonlyFieldModule, TskThemeModule } from '@tstack/client';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppScreenComponent } from './app-screen.component';
@@ -31,6 +31,7 @@ import { TableComponent } from './table/table.component';
 		MatTableModule,
 		MatToolbarModule,
 		TskDynamicContentModule,
+		TskReadonlyFieldModule,
 		TskThemeModule,
 		AppRoutingModule
 	],
