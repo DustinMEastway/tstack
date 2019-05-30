@@ -1,5 +1,4 @@
-{{ rows | json }}
-<table mat-table [dataSource]="rows">
+<table mat-table [class.hide-headers]="!tableConfig.isHeaderDisplayed" [dataSource]="rows">
 	<ng-container *ngFor="let column of columns" [matColumnDef]="column.id">
 		<td mat-header-cell *matHeaderCellDef>
 			<app-table-header-cell [column]="column"></app-table-header-cell>

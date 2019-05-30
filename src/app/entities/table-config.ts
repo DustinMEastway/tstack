@@ -12,8 +12,10 @@ export interface ITableConfig<RowT = any> {
 export class TableConfig<RowT = any> {
 	private _columns: TableColumn[] = [];
 	private _displayedColumns: string[] = [];
+	private _isHeaderDisplayed: boolean;
 	private _rows: RowT[] = [];
 
+	/** @property columns used to configure the table's columns */
 	get columns(): TableColumn[] {
 		return this._columns;
 	}
@@ -21,6 +23,7 @@ export class TableConfig<RowT = any> {
 		this._columns = (columns instanceof Array) ? columns : [];
 	}
 
+	/** @property displayedColumns columns displayed by the table */
 	get displayedColumns(): string[] {
 		return this._displayedColumns;
 	}
@@ -28,6 +31,12 @@ export class TableConfig<RowT = any> {
 		this._displayedColumns = (displayedColumns instanceof Array) ? displayedColumns : [];
 	}
 
+	/** @property isHeaderDisplayed whether any headers are displayed */
+	get isHeaderDisplayed(): boolean {
+		return this._isHeaderDisplayed;
+	}
+
+	/** @property rows of data to display in the table*/
 	get rows(): RowT[] {
 		return this._rows;
 	}
@@ -35,9 +44,15 @@ export class TableConfig<RowT = any> {
 		this._rows = (rows instanceof Array) ? rows : [];
 	}
 
+	/** assigns the provided object's values to this object */
 	assign(data: ITableConfig): TableConfig {
+		data = Object.assign({
+			columns: [],
+			rows: []
+		}, data);
 		this.columns = data.columns;
-		this.displayedColumns = data.columns.map(column => column.id);
+		this.displayedColumns = this.columns.map(column => column.id);
+		this._isHeaderDisplayed = this.columns.some(column => !!column.header);
 		this.rows = data.rows;
 
 		return this;
