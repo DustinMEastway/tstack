@@ -59,7 +59,7 @@ export class TskDynamicContentComponent<ComponentT = any> {
 	 * @method updateContent using the given component type
 	 * @param componentType to fill the content with
 	 */
-	updateContent(componentType: Type<ComponentT>): ComponentRef<ComponentT> {
+	updateContent<T extends ComponentT>(componentType: Type<T>): ComponentRef<T> {
 		// clear out the previous component and create a new one with the current component type
 		this.clearContent();
 		this._componentTypeChange.next(componentType);
