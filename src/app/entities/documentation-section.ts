@@ -1,6 +1,10 @@
 import { Entity } from '@tstack/core';
 
+import { ComponentSelector } from './component-selector';
+
 export class DocumentationSection extends Entity {
-	title: string;
+	componentSelector?: ComponentSelector;
+	data?: any;
 	description?: string;
+	title: string;
 }
