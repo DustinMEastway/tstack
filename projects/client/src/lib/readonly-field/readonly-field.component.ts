@@ -47,7 +47,7 @@ export class TskReadonlyFieldComponent<ValueT = any> implements OnInit {
 		return this._displayWithFunction;
 	}
 	set displayWith(displayWith: ((value: ValueT) => string) | string) {
-		this._displayWithFunction = (typeof displayWith === 'string') ? (value) => getValue(value, displayWith) : displayWith;
+		this._displayWithFunction = (typeof displayWith === 'function') ? displayWith : (value) => getValue(value, displayWith);
 	}
 
 	get displayWithFunction(): (value: ValueT) => string {

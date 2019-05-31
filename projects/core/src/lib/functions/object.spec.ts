@@ -1,9 +1,38 @@
 import { IsBetweenConfig } from '../types/is-between-config';
-import { isBetween } from './object';
+import { getValue, isBetween } from './object';
 
 class Temp {
 	id: number;
 }
+
+describe('getValue', () => {
+	const value = { foo: { fooId: 1, bar: { barId: 123, barProp: 'FooBar' } } };
+	let property = 'foo';
+
+	it('should get the full input if property is undefined', () => {
+		// arrange
+		property = undefined;
+
+		// act / assert
+		expect(getValue(value, property)).toBe(value);
+	});
+
+	it('should get the full input if property is null', () => {
+		// arrange
+		property = null;
+
+		// act / assert
+		expect(getValue(value, property)).toBe(value);
+	});
+
+	it('should get the full input if property is an empty string', () => {
+		// arrange
+		property = '';
+
+		// act / assert
+		expect(getValue(value, property)).toBe(value);
+	});
+});
 
 describe('isBetween', () => {
 	const min = 0;
