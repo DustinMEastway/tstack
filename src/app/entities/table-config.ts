@@ -1,4 +1,7 @@
+import { ComponentSelector } from './component-selector';
+
 export interface TableColumn {
+	componentSelector?: ComponentSelector;
 	header?: string;
 	id: string;
 	property?: string;

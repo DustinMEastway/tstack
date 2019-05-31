@@ -4,17 +4,30 @@ function createModuleSection(sectionTitle, docsInSection) {
 		title: sectionTitle,
 		componentSelector: 'table',
 		data: {
-			rows: docsInSection.map(docInSection => {
-				const nameCell = {
+			columns: [
+				{
+					id: 'name',
+					header: 'Name',
 					componentSelector: 'link',
-					data: {
-						text: docInSection.name,
-						url: docInSection.outputPath.replace(/(.*)\.\w*$/, '$1')
-					}
+					property: 'name'
+				},
+				{
+					id: 'description',
+					header: 'Description',
+					property: 'description'
+				}
+			],
+			rows: docsInSection.map(docInSection => {
+				const path = docInSection.outputPath.replace(/(.*)\.\w*$/, '$1');
+				const nameRow = {
+					text: (docInSection.docType === 'module') ? `@tstack/${path}` : docInSection.name,
+					url: path
 				};
-				const descriptionCell = (docInSection.data && docInSection.data.description) ? docInSection.data.description : '';
+				const descriptionRow = (docInSection.data && docInSection.data.description)
+					? docInSection.data.description
+					: '';
 
-				return [ nameCell, descriptionCell ];
+				return { name: nameRow, description: descriptionRow };
 			})
 		}
 	}

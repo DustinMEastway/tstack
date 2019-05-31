@@ -1,1 +1,1 @@
-export type ComponentSelector = 'markdown' | 'table';
+export type ComponentSelector = 'link' | 'markdown' | 'table';
