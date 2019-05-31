@@ -144,7 +144,7 @@ export function deepCopy(item: any): any {
 export function getValue<T, K extends keyof(T)>(item: T, propertyToGet: K): T[K];
 export function getValue<ReturnT = any, ItemT = any>(item: ItemT, propertyToGet?: string): ReturnT;
 export function getValue<ReturnT = any, ItemT = any>(item: ItemT, propertyToGet: string = ''): ReturnT {
-	const properties = propertyToGet.split(/[\.\[\]]/);
+	const properties = (typeof propertyToGet === 'string') ? propertyToGet.split(/[\.\[\]]/) : [];
 	let valueToReturn: any = item;
 
 	for (const property of properties) {
