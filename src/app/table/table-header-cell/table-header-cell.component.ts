@@ -8,6 +8,5 @@ import { TableColumn } from 'app/entities';
 	styleUrls: ['./table-header-cell.component.scss']
 })
 export class TableHeaderCellComponent {
-	@Input()
-	column: TableColumn;
+	@Input() column: TableColumn;
 }

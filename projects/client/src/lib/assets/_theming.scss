@@ -62,6 +62,10 @@
 		color: $warn-color;
 	}
 
+	.tsk-foreground-color {
+		color: $foreground-text-color;
+	}
+
 	.tsk-background-20 {
 		$amount: 20%;
 		background-color: if($is-dark, lighten($background-color, $amount), darken($background-color, $amount));

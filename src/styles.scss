@@ -1,8 +1,5 @@
 // theme the application
 @import "./styles-theme";
-@import "../projects/client/src/lib/assets/theming";
-
-@include tsk-core();
 
 html {
 	body {

@@ -3,3 +3,21 @@
 		display: none;
 	}
 }
+
+.table {
+	width: 100%;
+
+	.cell {
+		margin: 0;
+		padding: 0 1em;
+	}
+
+	.header-cell {
+		margin: 0;
+		padding: 0 1em;
+	}
+
+	::ng-deep .mat-form-field {
+		width: 100%;
+	}
+}
