@@ -15,17 +15,27 @@ const tstackDependencies = [
 
 // this is the primary package used to generate documentation
 var tstackDocsPackage = new Package('tstack-docs', tstackDependencies)
+.factory(function DECORATOR_TYPES_TO_RENDER() {
+	return [
+		{
+			docType: 'component',
+			decorator: 'Component',
+			title: 'Component(s)',
+			order: 1
+		}
+	];
+})
 .factory(function TYPESCRIPT_DOC_TYPES_TO_RENDER() {
 	return [
 		{
-			docType: 'function',
-			title: 'Function(s)',
+			docType: 'module',
+			title: 'Module(s)',
 			order: 0
 		},
 		{
-			docType: 'module',
-			title: 'Module(s)',
-			order: 1
+			docType: 'function',
+			title: 'Function(s)',
+			order: 10
 		}
 	].sort((docType1, docType2) => docType1.order - docType2.order);
 })
@@ -83,7 +93,7 @@ var tstackDocsPackage = new Package('tstack-docs', tstackDependencies)
 	readFilesProcessor.sourceFiles = [];
 })
 // configure how & where docs are rendered
-.config(function(templateEngine, templateFinder, writeFilesProcessor) {
+.config(function(computePathsProcessor, templateEngine, templateFinder, writeFilesProcessor, DECORATOR_TYPES_TO_RENDER) {
 	writeFilesProcessor.outputFolder = DOCS_OUTPUT_PATH;
 	templateFinder.templateFolders = [ TEMPLATES_PATH ];
 
@@ -94,13 +104,32 @@ var tstackDocsPackage = new Package('tstack-docs', tstackDependencies)
 
 	// Nunjucks and Angular conflict in their template bindings so change Nunjucks
 	templateEngine.config.tags = { variableStart: '{$', variableEnd: '$}' };
+
+
+	const classPathTemplate = computePathsProcessor.pathTemplates.find(pathTemplate =>
+		pathTemplate.docTypes.includes('class')
+	);
+	computePathsProcessor.pathTemplates = computePathsProcessor.pathTemplates.concat([
+		// copy the class path template for decorated types
+		Object.assign({}, classPathTemplate, {
+			docTypes: DECORATOR_TYPES_TO_RENDER.map(decoratorType => decoratorType.docType)
+		})
+	]);
 })
-// configure which document types to render
-.config(function(TYPESCRIPT_DOC_TYPES_TO_RENDER, filterDocsProcessor) {
-	filterDocsProcessor.docTypes = filterDocsProcessor.docTypes.concat(
-		TYPESCRIPT_DOC_TYPES_TO_RENDER.map(docTypeToRender => docTypeToRender.docType)
+// configure which decorated type to render
+.config(function(decoratorProcessor, DECORATOR_TYPES_TO_RENDER) {
+	decoratorProcessor.decoratorTypes = decoratorProcessor.decoratorTypes.concat(
+		DECORATOR_TYPES_TO_RENDER.map(decoratorType => decoratorType.decorator)
 	);
 })
+// configure which document types to render
+.config(function(filterDocsProcessor, DECORATOR_TYPES_TO_RENDER, TYPESCRIPT_DOC_TYPES_TO_RENDER) {
+	filterDocsProcessor.docTypes = filterDocsProcessor.docTypes.concat(
+		TYPESCRIPT_DOC_TYPES_TO_RENDER.map(docTypeToRender => docTypeToRender.docType),
+		DECORATOR_TYPES_TO_RENDER.map(docTypeToRender => docTypeToRender.docType)
+	);
+})
+.processor(require('./processors/decorator.processor'))
 .processor(require('./processors/doc-type.processor'))
 .processor(require('./processors/filter-docs.processor'))
 .processor(require('./processors/function.processor'))
