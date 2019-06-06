@@ -37,7 +37,13 @@ var tstackDocsPackage = new Package('tstack-docs', tstackDependencies)
 			title: 'Function(s)',
 			order: 10
 		}
-	].sort((docType1, docType2) => docType1.order - docType2.order);
+	];
+})
+.factory(function DOC_TYPES_TO_RENDER(DECORATOR_TYPES_TO_RENDER, TYPESCRIPT_DOC_TYPES_TO_RENDER) {
+	return [].concat(
+		DECORATOR_TYPES_TO_RENDER,
+		TYPESCRIPT_DOC_TYPES_TO_RENDER
+	).sort((docType1, docType2) => docType1.order - docType2.order);
 })
 .factory(function LOGGER () {
 	const LOGGING_LEVEL_NONE = 0;
@@ -123,12 +129,12 @@ var tstackDocsPackage = new Package('tstack-docs', tstackDependencies)
 	);
 })
 // configure which document types to render
-.config(function(filterDocsProcessor, DECORATOR_TYPES_TO_RENDER, TYPESCRIPT_DOC_TYPES_TO_RENDER) {
+.config(function(filterDocsProcessor, DOC_TYPES_TO_RENDER) {
 	filterDocsProcessor.docTypes = filterDocsProcessor.docTypes.concat(
-		TYPESCRIPT_DOC_TYPES_TO_RENDER.map(docTypeToRender => docTypeToRender.docType),
-		DECORATOR_TYPES_TO_RENDER.map(docTypeToRender => docTypeToRender.docType)
+		DOC_TYPES_TO_RENDER.map(docTypeToRender => docTypeToRender.docType)
 	);
 })
+.processor(require('./processors/component.processor'))
 .processor(require('./processors/decorator.processor'))
 .processor(require('./processors/doc-type.processor'))
 .processor(require('./processors/filter-docs.processor'))
