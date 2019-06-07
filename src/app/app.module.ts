@@ -16,6 +16,7 @@ import { AppScreenComponent } from './app-screen.component';
 import { DocumentationSectionComponent } from './documentation-section/documentation-section.component';
 import { DocumentationComponent } from './documentation/documentation.component';
 import { LinkComponent } from './link/link.component';
+import { MarkdownComponent } from './markdown/markdown.component';
 import { ScreenComponent } from './screen/screen.component';
 import { TableCellComponent } from './table/table-cell/table-cell.component';
 import { TableHeaderCellComponent } from './table/table-header-cell/table-header-cell.component';
@@ -41,6 +42,7 @@ import { TableComponent } from './table/table.component';
 		DocumentationComponent,
 		DocumentationSectionComponent,
 		LinkComponent,
+		MarkdownComponent,
 		ScreenComponent,
 		TableComponent,
 		TableCellComponent,
@@ -48,6 +50,7 @@ import { TableComponent } from './table/table.component';
 	],
 	entryComponents: [
 		LinkComponent,
+		MarkdownComponent,
 		TableComponent
 	],
 	bootstrap: [ AppScreenComponent ]

@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
-import { TskDynamicContentComponent, TskReadonlyFieldComponent } from '@tstack/client';
+import { TskDynamicContentComponent } from '@tstack/client';
 
 import { ComponentSelector } from 'app/entities';
 import { LinkComponent } from 'app/link/link.component';
+import { MarkdownComponent } from 'app/markdown/markdown.component';
 import { TableComponent } from 'app/table/table.component';
 
 @Injectable({
@@ -11,7 +12,7 @@ import { TableComponent } from 'app/table/table.component';
 export class DynamicContentService {
 	getComponentBySelector(selector: 'table'): TableComponent;
 	getComponentBySelector(selector: 'link'): LinkComponent;
-	getComponentBySelector(selector: 'markdown'): TskReadonlyFieldComponent;
+	getComponentBySelector(selector: 'markdown'): MarkdownComponent;
 	getComponentBySelector(selector: string): null;
 	getComponentBySelector(selector: ComponentSelector): any {
 		switch (selector) {
@@ -20,7 +21,7 @@ export class DynamicContentService {
 			case 'link':
 				return LinkComponent;
 			case 'markdown':
-				return TskReadonlyFieldComponent;
+				return MarkdownComponent;
 			default:
 				return null;
 		}
@@ -39,7 +40,7 @@ export class DynamicContentService {
 		} else if (selector === 'table') {
 			(component as TableComponent).setData(data);
 		} else if (selector === 'markdown') {
-			(component as TskReadonlyFieldComponent).value = data;
+			(component as MarkdownComponent).setData(data);
 		} else {
 			return false;
 		}
