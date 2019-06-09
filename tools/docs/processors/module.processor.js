@@ -4,17 +4,30 @@ function createModuleSection(sectionTitle, docsInSection) {
 		title: sectionTitle,
 		componentSelector: 'table',
 		data: {
-			rows: docsInSection.map(docInSection => {
-				const nameCell = {
+			columns: [
+				{
+					id: 'name',
+					header: 'Name',
 					componentSelector: 'link',
-					data: {
-						text: docInSection.name,
-						url: docInSection.outputPath.replace(/(.*)\.\w*$/, '$1')
-					}
+					property: 'name'
+				},
+				{
+					id: 'description',
+					header: 'Description',
+					property: 'description'
+				}
+			],
+			rows: docsInSection.map(docInSection => {
+				const path = docInSection.outputPath.replace(/(.*)\.\w*$/, '$1');
+				const nameCellData = {
+					text: (docInSection.docType === 'module') ? `@tstack/${path}` : docInSection.name,
+					url: path
 				};
-				const descriptionCell = (docInSection.data && docInSection.data.description) ? docInSection.data.description : '';
+				const descriptionCellData = (docInSection.data && docInSection.data.description)
+					? docInSection.data.description
+					: '';
 
-				return [ nameCell, descriptionCell ];
+				return { name: nameCellData, description: descriptionCellData };
 			})
 		}
 	}
@@ -48,8 +61,10 @@ module.exports = function moduleProcessor(TYPESCRIPT_DOC_TYPES_TO_RENDER) {
 					}
 				});
 
+				const moduleName = doc.id.replace('/src', '').replace('/public_api', '');
+
 				doc.data = Object.assign({}, doc.data, {
-					title: doc.name,
+					title: (moduleName === 'public_api') ? '@tstack' : `@tstack/${moduleName}`,
 					sections: moduleSections
 				});
 			});

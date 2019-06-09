@@ -1,0 +1,9 @@
+@mixin markdown-themes($theme) {
+	$foreground-text-color: map-get(map-get($theme, foreground), text);
+
+	.markdown-container {
+		a {
+			color: $foreground-text-color;
+		}
+	}
+}

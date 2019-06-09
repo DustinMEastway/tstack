@@ -38,7 +38,7 @@ export class EntityBase {
 	 * @param source to clone the properties of
 	 * @returns this after taking the properties of souce
 	 */
-	public clone(source: any): this {
+	clone(source: any): this {
 		return Object.assign(this, source);
 	}
 }

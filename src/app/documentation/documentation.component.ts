@@ -8,5 +8,5 @@ import { Documentation } from 'app/entities';
 	styleUrls: ['./documentation.component.scss']
 })
 export class DocumentationComponent {
-	@Input() documentationGroup: Documentation[];
+	@Input() documentation: Documentation;
 }

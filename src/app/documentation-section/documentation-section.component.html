@@ -1,0 +1,5 @@
+<div class="section" [class.hide]="!isDisplayed">
+	<h3>{{ section.title }}</h3>
+	<app-markdown *ngIf="section.description" [content]="section.description"></app-markdown>
+	<tsk-dynamic-content></tsk-dynamic-content>
+</div>

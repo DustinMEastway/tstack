@@ -10,7 +10,7 @@ function getCallDocs(functionDoc) {
 	});
 }
 
-function getDocsFromContent(docId, docContent) {
+function getDocsFromContent(docId, docContent, LOGGER) {
 	const parameterSelectors = [ '@parameter', '@param' ];
 	const returnSelectors = [ '@returns', '@return' ];
 	const contentPartSelectors = parameterSelectors.concat(returnSelectors);
@@ -20,12 +20,14 @@ function getDocsFromContent(docId, docContent) {
 		!contentPartSelectors.some(contentPartSelector => contentPart.startsWith(contentPartSelector))
 	);
 
-	const parameterDocs = removeSelectors(contentParts, parameterSelectors).map(splitParameterDocIntoNameAndDescription);
+	const parameterDocs = removeSelectors(contentParts, parameterSelectors).map(paramContent =>
+		splitParameterDocIntoNameAndDescription(docId, paramContent, LOGGER)
+	);
 
 	const returnDocs = removeSelectors(contentParts, returnSelectors);
 
 	if (returnDocs.length > 1) {
-		console.warn(`Multiple @returns located in JSDoc for doc ${docId}`);
+		LOGGER.logWarning(`Multiple @returns located in JSDoc for doc ${docId}`);
 	}
 
 	return {
@@ -46,12 +48,12 @@ function removeSelectors(contentParts, selectors) {
 	);
 }
 
-function splitParameterDocIntoNameAndDescription(description) {
+function splitParameterDocIntoNameAndDescription(docId, description, LOGGER) {
 	const parameterNameMatch = /^\[?(\w+)\]?(.*)/.exec(description);
 	let name = '';
 
 	if (parameterNameMatch == null) {
-		console.warn(`Unable to find a parameter name in doc '${docId}' using description: '${description}'`);
+		LOGGER.logWarning(`Unable to find a parameter name in doc '${docId}' using description: '${description}'`);
 		name = ''
 	} else {
 		name = parameterNameMatch[1];
@@ -88,7 +90,7 @@ function splitAndKeepMatches(searchString, regex) {
 	return splitParts;
 }
 
-module.exports = function functionProcessor() {
+module.exports = function functionProcessor(LOGGER) {
 	return {
 		docTypes: [ 'function' ],
 		$process: function(docs) {
@@ -101,7 +103,7 @@ module.exports = function functionProcessor() {
 					description,
 					parameterDocs,
 					returns
-				} = getDocsFromContent(doc.id, (docWithContent != null) ? docWithContent.content : '');
+				} = getDocsFromContent(doc.id, (docWithContent != null) ? docWithContent.content : '', LOGGER);
 
 				doc.data = Object.assign({}, doc.data, {
 					title: doc.name,
@@ -111,6 +113,7 @@ module.exports = function functionProcessor() {
 							title: 'Calls',
 							componentSelector: 'table',
 							data: {
+								columns: [ { id: 'call' } ],
 								rows: getCallDocs(doc)
 							}
 						},
@@ -118,8 +121,19 @@ module.exports = function functionProcessor() {
 							title: 'Parameters',
 							componentSelector: 'table',
 							data: {
-								headers: [ 'Name', 'Description' ],
-								rows: parameterDocs.map(parameterDoc => [ parameterDoc.name, parameterDoc.description ])
+								columns: [
+									{
+										header: 'Name',
+										id: 'name',
+										property: 'name'
+									},
+									{
+										header: 'Description',
+										id: 'description',
+										property: 'description'
+									}
+								],
+								rows: parameterDocs
 							}
 						},
 						{
