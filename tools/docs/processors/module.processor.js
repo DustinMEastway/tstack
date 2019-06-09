@@ -19,15 +19,15 @@ function createModuleSection(sectionTitle, docsInSection) {
 			],
 			rows: docsInSection.map(docInSection => {
 				const path = docInSection.outputPath.replace(/(.*)\.\w*$/, '$1');
-				const nameRow = {
+				const nameCellData = {
 					text: (docInSection.docType === 'module') ? `@tstack/${path}` : docInSection.name,
 					url: path
 				};
-				const descriptionRow = (docInSection.data && docInSection.data.description)
+				const descriptionCellData = (docInSection.data && docInSection.data.description)
 					? docInSection.data.description
 					: '';
 
-				return { name: nameRow, description: descriptionRow };
+				return { name: nameCellData, description: descriptionCellData };
 			})
 		}
 	}

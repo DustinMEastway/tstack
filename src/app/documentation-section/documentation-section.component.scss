@@ -11,9 +11,4 @@
 		max-width: 100%;
 		padding: 1em;
 	}
-
-	// TODO: remove after markdown component is created
-	::ng-deep .mat-form-field {
-		width: 100%;
-	}
 }
