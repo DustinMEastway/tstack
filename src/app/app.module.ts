@@ -15,6 +15,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppScreenComponent } from './app-screen.component';
 import { DocumentationSectionComponent } from './documentation-section/documentation-section.component';
 import { DocumentationComponent } from './documentation/documentation.component';
+import { ExamplesModule } from './examples/examples.module';
 import { LinkComponent } from './link/link.component';
 import { MarkdownComponent } from './markdown/markdown.component';
 import { ScreenComponent } from './screen/screen.component';
@@ -26,6 +27,7 @@ import { TableComponent } from './table/table.component';
 	imports: [
 		BrowserModule,
 		BrowserAnimationsModule,
+		ExamplesModule,
 		HttpClientModule,
 		FormsModule,
 		MatButtonModule,
