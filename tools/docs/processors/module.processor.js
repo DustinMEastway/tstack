@@ -1,3 +1,5 @@
+const { PROJECTS_PATH } = require('../../config');
+
 /** creates a section for a module out of the provided title and docs */
 function createModuleSection(sectionTitle, docsInSection) {
 	return {
@@ -33,7 +35,7 @@ function createModuleSection(sectionTitle, docsInSection) {
 	}
 }
 
-module.exports = function moduleProcessor(TYPESCRIPT_DOC_TYPES_TO_RENDER) {
+module.exports = function moduleProcessor(FILE_SYSTEM, TYPESCRIPT_DOC_TYPES_TO_RENDER) {
 	return {
 		docTypes: [ 'module' ],
 		$process: function(docs) {
@@ -63,8 +65,14 @@ module.exports = function moduleProcessor(TYPESCRIPT_DOC_TYPES_TO_RENDER) {
 
 				const moduleName = doc.id.replace('/src', '').replace('/public_api', '');
 
+				// get description
+				const moduleDescription = FILE_SYSTEM.tryReadFile(
+					FILE_SYSTEM.joinPaths(PROJECTS_PATH, doc.id.replace(/public_api$/, 'README.md'))
+				);
+
 				doc.data = Object.assign({}, doc.data, {
 					title: (moduleName === 'public_api') ? '@tstack' : `@tstack/${moduleName}`,
+					description: moduleDescription,
 					sections: moduleSections
 				});
 			});
