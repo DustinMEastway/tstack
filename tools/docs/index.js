@@ -2,6 +2,8 @@ const Dgeni = require('dgeni');
 const basePackage = require('dgeni-packages/base');
 const nunjucksPackage = require('dgeni-packages/nunjucks');
 const typeScriptPackage = require('dgeni-packages/typescript');
+const fileSystem = require('fs');
+const path = require('path');
 
 const { Package } = Dgeni;
 
@@ -15,6 +17,34 @@ const tstackDependencies = [
 
 // this is the primary package used to generate documentation
 var tstackDocsPackage = new Package('tstack-docs', tstackDependencies)
+.factory(function FILE_SYSTEM() {
+		function canAccessSync(path) {
+			try {
+				return fileSystem.existsSync(path) && fileSystem.accessSync(path, fileSystem.constants.R_OK) == null;
+			} catch {
+				return false;
+			}
+		}
+		function isFileSync(path) {
+			return canAccessSync(path) && fileSystem.lstatSync(path).isFile();
+		}
+		function joinPaths(...paths) {
+			return path.join(...paths);
+		}
+		function tryReadFile(path) {
+			if (isFileSync(path)) {
+				return fileSystem.readFileSync(path, { encoding: 'utf-8' });
+			} else {
+				return '';
+			}
+		}
+	return {
+		canAccessSync,
+		isFileSync,
+		joinPaths,
+		tryReadFile
+	};
+})
 .factory(function TYPESCRIPT_DOC_TYPES_TO_RENDER() {
 	return [
 		{
