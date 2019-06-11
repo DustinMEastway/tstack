@@ -1,8 +1,7 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { TskDynamicContentComponent, TskReadonlyFieldComponent } from '@tstack/client';
 import { getValue } from '@tstack/core';
-import { BehaviorSubject } from 'rxjs';
-import { combineLatest } from 'rxjs/operators';
+import { combineLatest, BehaviorSubject } from 'rxjs';
 
 import { TableColumn } from 'app/entities';
 import { DynamicContentService } from 'app/services';
@@ -36,7 +35,7 @@ export class TableCellComponent implements OnInit {
 	constructor(private _dynamicContentService: DynamicContentService) {}
 
 	ngOnInit(): void {
-		this._column$.pipe(combineLatest(this._rowData$)).subscribe(([column, rowData]) => {
+		combineLatest(this._column$, this._rowData$).subscribe(([column, rowData]) => {
 			if (column.componentSelector) {
 				this._dynamicContentService.setComponentBySelector(
 					this.dynamicContent,
