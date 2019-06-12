@@ -1,8 +1,10 @@
 import { Component } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 
+import { DynamicComponent } from 'app/decorators';
 import { ITableConfig, TableColumn, TableConfig } from 'app/entities';
 
+@DynamicComponent({ selector: 'table' })
 @Component({
 	selector: 'app-table',
 	templateUrl: './table.component.html',

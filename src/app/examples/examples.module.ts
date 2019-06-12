@@ -24,7 +24,7 @@ export const exampleComponents = [
 		TskReadonlyFieldModule
 	],
 	declarations: [
-		...exampleComponents,
+		...exampleComponents
 	],
 	entryComponents: [
 		...exampleComponents

@@ -2,6 +2,9 @@ import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { parse } from 'marked';
 import { BehaviorSubject } from 'rxjs';
 
+import { DynamicComponent } from 'app/decorators';
+
+@DynamicComponent({ selector: 'markdown' })
 @Component({
 	selector: 'app-markdown',
 	templateUrl: './markdown.component.html',
