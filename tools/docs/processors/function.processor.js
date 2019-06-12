@@ -1,3 +1,7 @@
+const parameterSelectors = [ '@parameter', '@param' ];
+const returnSelectors = [ '@returns', '@return' ];
+const exampleSelector = '@example';
+
 /** gets available call(s) (multiple if the function has overloads) */
 function getCallDocs(functionDoc) {
 	const callDocs = (functionDoc.overloads.length) ? functionDoc.overloads : [ functionDoc ];
@@ -10,14 +14,27 @@ function getCallDocs(functionDoc) {
 	});
 }
 
+function createDescriptionSections(descriptionContentParts) {
+	return (descriptionContentParts || []).map(descriptionContentPart => {
+		if (descriptionContentPart.startsWith(exampleSelector)) {
+			return {
+				componentSelector: removeSelectors([ descriptionContentPart ], [ exampleSelector ])[0]
+			};
+		} else {
+			return {
+				componentSelector: 'markdown',
+				data: descriptionContentPart
+			}
+		}
+	});
+}
+
 function getDocsFromContent(docId, docContent, LOGGER) {
-	const parameterSelectors = [ '@parameter', '@param' ];
-	const returnSelectors = [ '@returns', '@return' ];
-	const contentPartSelectors = parameterSelectors.concat(returnSelectors);
+	const contentPartSelectors = parameterSelectors.concat(returnSelectors, exampleSelector);
 	const contentParts = splitAndKeepMatches(docContent, new RegExp(contentPartSelectors.join('|')));
 
-	const docsWithoutSelectors = contentParts.filter(contentPart =>
-		!contentPartSelectors.some(contentPartSelector => contentPart.startsWith(contentPartSelector))
+	const descriptionContentParts = contentParts.filter(contentPart =>
+		contentPart.startsWith(exampleSelector) || !contentPartSelectors.some(contentPartSelector => contentPart.startsWith(contentPartSelector))
 	);
 
 	const parameterDocs = removeSelectors(contentParts, parameterSelectors).map(paramContent =>
@@ -31,7 +48,7 @@ function getDocsFromContent(docId, docContent, LOGGER) {
 	}
 
 	return {
-		description: docsWithoutSelectors.join('\n'),
+		descriptionSections: createDescriptionSections(descriptionContentParts),
 		parameterDocs,
 		returns: returnDocs[0]
 	};
@@ -100,15 +117,17 @@ module.exports = function functionProcessor(LOGGER) {
 				);
 
 				const {
-					description,
+					descriptionSections,
 					parameterDocs,
 					returns
 				} = getDocsFromContent(doc.id, (docWithContent != null) ? docWithContent.content : '', LOGGER);
 
+				const firstDescriptionSection = descriptionSections.shift();
+
 				doc.data = Object.assign({}, doc.data, {
 					title: doc.name,
-					description: description,
 					sections: [
+						firstDescriptionSection,
 						{
 							title: 'Calls',
 							componentSelector: 'table',
@@ -141,7 +160,8 @@ module.exports = function functionProcessor(LOGGER) {
 							componentSelector: 'markdown',
 							display: typeof returns === 'string' && returns != '',
 							data: returns
-						}
+						},
+						...descriptionSections
 					]
 				});
 			});

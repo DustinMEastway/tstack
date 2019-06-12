@@ -117,6 +117,7 @@ export function findIndex<T>(items: T[], valueToFind: any, property?: string): n
  * @param config to customize how items are compared to determine equality @see HasDuplicatesConfig
  * @returns whether any duplicates were found in the array
  *
+ * @example examples/core/has-duplicates-primatives
  * @example examples/core/has-duplicates-objects
  */
 export function hasDuplicates<K extends keyof(T), T = any>(items: T[], config: Required<HasDuplicatesConfig<T[K], K>>): boolean;
