@@ -126,8 +126,8 @@ module.exports = function functionProcessor(LOGGER) {
 
 				doc.data = Object.assign({}, doc.data, {
 					title: doc.name,
+					description: firstDescriptionSection.data,
 					sections: [
-						firstDescriptionSection,
 						{
 							title: 'Calls',
 							componentSelector: 'table',
