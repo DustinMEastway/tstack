@@ -23,7 +23,7 @@ function createModuleSection(sectionTitle, docsInSection) {
 				const path = docInSection.outputPath.replace(/(.*)\.\w*$/, '$1');
 				const nameCellData = {
 					text: (docInSection.docType === 'module') ? `@tstack/${path}` : docInSection.name,
-					url: path
+					url: `\/${path}`
 				};
 				const descriptionCellData = (docInSection.data && docInSection.data.description)
 					? docInSection.data.description

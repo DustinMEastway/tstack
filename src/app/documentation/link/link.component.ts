@@ -1,5 +1,8 @@
 import { Component, Input } from '@angular/core';
 
+import { DynamicComponent } from 'app/decorators';
+
+@DynamicComponent({ selector: 'link' })
 @Component({
 	selector: 'app-link',
 	templateUrl: './link.component.html',

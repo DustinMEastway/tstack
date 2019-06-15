@@ -1,7 +1,7 @@
 @import '~@angular/material/theming';
 @import '../projects/client/src/lib/assets/theming';
 
-@import './app/markdown/markdown.component';
+@import './app/documentation/markdown/markdown.component';
 
 @include mat-core();
 @include tsk-core();

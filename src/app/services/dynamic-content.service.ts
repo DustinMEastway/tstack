@@ -1,50 +1,48 @@
 import { Injectable } from '@angular/core';
 import { TskDynamicContentComponent } from '@tstack/client';
+import { Type } from '@tstack/core';
 
 import { ComponentSelector } from 'app/entities';
-import { LinkComponent } from 'app/link/link.component';
-import { MarkdownComponent } from 'app/markdown/markdown.component';
-import { TableComponent } from 'app/table/table.component';
 
-@Injectable({
-	providedIn: 'root'
-})
+export interface DynamicComponent<T = any> {
+	setData?(data: T): void;
+}
+
+@Injectable({ providedIn: 'root' })
 export class DynamicContentService {
-	getComponentBySelector(selector: 'table'): TableComponent;
-	getComponentBySelector(selector: 'link'): LinkComponent;
-	getComponentBySelector(selector: 'markdown'): MarkdownComponent;
-	getComponentBySelector(selector: string): null;
-	getComponentBySelector(selector: ComponentSelector): any {
-		switch (selector) {
-			case 'table':
-				return TableComponent;
-			case 'link':
-				return LinkComponent;
-			case 'markdown':
-				return MarkdownComponent;
-			default:
-				return null;
+	protected static dynamicComponents: { [selector: string]: Type<DynamicComponent> } = {};
+
+	static addDynamicComponent(selector: string, component: Type<DynamicComponent>, overwriteExisting: boolean = false): void {
+		if (!overwriteExisting && DynamicContentService.dynamicComponents[selector] != null) {
+			throw new Error(`DynamicComponent with selector '${selector} already exists, use the`
+				+ ` overwriteExisting flag if this is intentional`);
 		}
+
+		DynamicContentService.dynamicComponents[selector] = component;
 	}
 
-	setComponentBySelector(dynamicComponent: TskDynamicContentComponent, selector: ComponentSelector, data: any): void {
+	getComponentBySelector(selector: string): Type<any> {
+		return DynamicContentService.dynamicComponents[selector] || null;
+	}
+
+	setComponentBySelector(dynamicComponent: TskDynamicContentComponent, selector: ComponentSelector, data?: any): void {
 		if (!this.trySetComponentBySelector(dynamicComponent, selector, data)) {
-			console.error(`Unable to dynamically create component with unknown selector "${selector}"`);
+			throw new Error(`Unable to dynamically create component with unknown selector '${selector}'`);
 		}
 	}
 
-	trySetComponentBySelector(dynamicComponent: TskDynamicContentComponent, selector: ComponentSelector, data: any): boolean {
-		const component = dynamicComponent.updateContent<any>(this.getComponentBySelector(selector)).instance;
-		if (selector === 'link') {
-			(component as LinkComponent).setData(data);
-		} else if (selector === 'table') {
-			(component as TableComponent).setData(data);
-		} else if (selector === 'markdown') {
-			(component as MarkdownComponent).setData(data);
-		} else {
-			return false;
+	trySetComponentBySelector(dynamicComponent: TskDynamicContentComponent, selector: ComponentSelector, data?: any): boolean {
+		const componentType = this.getComponentBySelector(selector);
+		const foundComponentType = componentType != null;
+
+		if (foundComponentType) {
+			const component = dynamicComponent.updateContent<DynamicComponent>(componentType).instance;
+
+			if (typeof component.setData === 'function') {
+				component.setData(data);
+			}
 		}
 
-		return true;
+		return foundComponentType;
 	}
 }

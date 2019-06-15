@@ -1,54 +1,205 @@
-/** gets available call(s) (multiple if the function has overloads) */
-function getCallDocs(functionDoc) {
-	const callDocs = (functionDoc.overloads.length) ? functionDoc.overloads : [ functionDoc ];
+const PartKey = {
+	call: 'call',
+	dynamicComponent: 'dynamicComponent',
+	parameter: 'parameter',
+	title: 'title',
+	return: 'return',
+	text: 'text'
+};
+
+const partConfigs = [
+	{
+		key: PartKey.dynamicComponent,
+		order: 0,
+		selectors: [ '@dynamicComponent' ],
+		takeUntil: takeUntilNewLine
+	},
+	{
+		key: PartKey.parameter,
+		order: -200,
+		selectors: [ '@parameter', '@param' ],
+		takeUntil: takeUntilNewLine
+	},
+	{
+		key: PartKey.return,
+		order: -100,
+		selectors: [ '@returns', '@return' ],
+		takeUntil: takeUntilNewLine
+	},
+	{
+		key: PartKey.title,
+		order: 0,
+		selectors: [ '@title' ],
+		takeUntil: takeUntilNewLine
+	}
+];
+
+function convertContentPartsIntoSections(docId, LOGGER, contentParts) {
+	const sections = [];
+
+	const callContentParts = contentParts.filter(contentPart => contentPart.key === PartKey.call);
+	if (callContentParts.length) {
+		sections.push({
+			title: 'Call(s)',
+			componentSelector: 'table',
+			data: {
+				columns: [ { id: 'call' } ],
+				rows: callContentParts.map(contentPart => contentPart.match)
+			}
+		});
+	}
+
+	const parameterContentParts = contentParts.filter(contentPart => contentPart.key === PartKey.parameter);
+	if (parameterContentParts.length) {
+		sections.push({
+			title: 'Parameter(s)',
+			componentSelector: 'table',
+			data: {
+				columns: [
+					{
+						header: 'Name',
+						id: 'name',
+						property: 'name'
+					},
+					{
+						header: 'Description',
+						id: 'description',
+						property: 'description'
+					}
+				],
+				rows: parameterContentParts.map(contentPart => splitIntoNameAndDescription(docId, contentPart.match, LOGGER))
+			}
+		});
+	}
+
+	const returnContentParts = contentParts.filter(contentPart => contentPart.key === PartKey.return);
+	if (returnContentParts.length) {
+		if (returnContentParts.length > 1) {
+			LOGGER.logWarning(`Multiple return docs provided for document ${docId}`);
+		}
+
+		sections.push({
+			title: 'Returns',
+			componentSelector: 'markdown',
+			data: returnContentParts[0].match
+		});
+	}
+
+	let descriptionTextFound = false;
+	contentParts.filter(contentPart =>
+		[ PartKey.dynamicComponent, PartKey.text, PartKey.title ].includes(contentPart.key)
+	).forEach(contentPart => {
+		if (contentPart.key === PartKey.dynamicComponent) {
+			sections.push({
+				componentSelector: contentPart.match
+			});
+		} else if (contentPart.key === PartKey.title) {
+			sections.push({ title: contentPart.match });
+		} else if (!descriptionTextFound) {
+			// do not add a section for the first text block since it is the description
+			descriptionTextFound = true;
+		} else {
+			sections.push({
+				componentSelector: 'markdown',
+				data: contentPart.match
+			});
+		}
+	});
+
+	return sections;
+}
+
+function createContentPartConfig(jsDoc, partConfigs) {
+	const joinedSelectors = flattenArray(partConfigs.map(selectorConfig => selectorConfig.selectors)).join('|');
+
+	return {
+		remainingText: jsDoc,
+		partConfigs: partConfigs,
+		selectorsRegEx: new RegExp(`(${joinedSelectors})\\s`)
+	}
+}
+
+function flattenArray(array) {
+	return array.reduce((flatArray, item) => {
+		return flatArray.concat(item);
+	}, []);
+}
+
+function getCallContentParts(doc) {
+	const callDocs = (doc.overloads.length) ? doc.overloads : [ doc ];
 
 	return callDocs.map(callDoc => {
 		// TODO: add doc.typeParameters when it is available on overloads
 		const parameters = callDoc.parameters.join(', ');
 
-		return `function ${functionDoc.name}(${parameters}): ${callDoc.type}` ;
+		return {
+			key: PartKey.call,
+			match: `function ${doc.name}(${parameters}): ${callDoc.type}`,
+			order: -300
+		};
 	});
 }
 
-function getDocsFromContent(docId, docContent, LOGGER) {
-	const parameterSelectors = [ '@parameter', '@param' ];
-	const returnSelectors = [ '@returns', '@return' ];
-	const contentPartSelectors = parameterSelectors.concat(returnSelectors);
-	const contentParts = splitAndKeepMatches(docContent, new RegExp(contentPartSelectors.join('|')));
+function parseContentParts(jsDoc) {
+	const config = createContentPartConfig(jsDoc, partConfigs);
 
-	const docsWithoutSelectors = contentParts.filter(contentPart =>
-		!contentPartSelectors.some(contentPartSelector => contentPart.startsWith(contentPartSelector))
-	);
+	const contentParts = [];
+	while (config.remainingText) {
+		const matchedConfig = partConfigs.find(partConfigs =>
+			partConfigs.selectors.find(selector => config.remainingText.startsWith(selector))
+		);
 
-	const parameterDocs = removeSelectors(contentParts, parameterSelectors).map(paramContent =>
-		splitParameterDocIntoNameAndDescription(docId, paramContent, LOGGER)
-	);
+		config.remainingText = removeLeadingSelector(config);
 
-	const returnDocs = removeSelectors(contentParts, returnSelectors);
+		const key = (matchedConfig) ? matchedConfig.key : PartKey.text;
+		const takeUntil = (matchedConfig) ? matchedConfig.takeUntil : takeUntilSelector;
+		let [ match, remainingText ] = takeUntil(config);
+		config.remainingText = remainingText;
 
-	if (returnDocs.length > 1) {
-		LOGGER.logWarning(`Multiple @returns located in JSDoc for doc ${docId}`);
+		if (key !== PartKey.text || match) {
+			contentParts.push({
+				index: contentParts.length,
+				key: key,
+				match: match,
+				order: (matchedConfig) ? matchedConfig.order : 0
+			});
+		}
 	}
 
-	return {
-		description: docsWithoutSelectors.join('\n'),
-		parameterDocs,
-		returns: returnDocs[0]
-	};
+	return contentParts;
 }
 
-function removeSelectors(contentParts, selectors) {
-	return (contentParts || []).map(contentPart => ({
-		content: contentPart,
-		selector: selectors.find(selector => contentPart.startsWith(selector))
-	})).filter(contentPart =>
-		contentPart.selector != null
-	).map(contentPart =>
-		contentPart.content.substring(contentPart.selector.length).trim()
-	);
+function removeLeadingSelector(config) {
+	const match = config.selectorsRegEx.exec(config.remainingText);
+
+	return config.remainingText.substring((match && match.index === 0) ? match[0].length : 0).trim();
 }
 
-function splitParameterDocIntoNameAndDescription(docId, description, LOGGER) {
+function splitString(string, regex) {
+	const match = regex.exec(string);
+	const index = (match) ? match.index : string.length;
+
+	return [ string.substring(0, index), string.substring(index) ];
+}
+
+function splitStringAndTrim(string, regex) {
+	const [ match, remainingText ] = splitString(string, regex);
+
+	return [ match.trim(), remainingText.trim() ];
+}
+
+function sortContentParts(contentParts) {
+	return contentParts.slice().sort((part1, part2) => {
+		const part1Order = part1.order;
+		const part2Order = part2.order;
+
+		return (part1Order === part2Order)
+			? part1.index - part2.index
+			: part1Order - part2Order;
+	});
+}
+
+function splitIntoNameAndDescription(docId, description, LOGGER) {
 	const parameterNameMatch = /^\[?(\w+)\]?(.*)/.exec(description);
 	let name = '';
 
@@ -63,31 +214,12 @@ function splitParameterDocIntoNameAndDescription(docId, description, LOGGER) {
 	return { name, description };
 }
 
-/** splits a string using a regular expression at the beginning of each match */
-function splitAndKeepMatches(searchString, regex) {
-	if (typeof searchString !== 'string') {
-		return [];
-	}
+function takeUntilNewLine(config) {
+	return splitStringAndTrim(config.remainingText, /\n/);
+}
 
-	let lastMatchText = '';
-	const splitParts = [];
-
-	do {
-		let match = regex.exec(searchString);
-
-		// if no match was found, then add the rest of the search string
-		if (match == null) {
-			match = Object.assign([ '' ], { index: searchString.length });
-		}
-
-		splitParts.push(lastMatchText + searchString.substring(0, match.index));
-		lastMatchText = match[0];
-
-		// lastMatchText is added to the beginning of the next match so that the same match is not found over and over
-		searchString = searchString.substring(match.index + ((lastMatchText.length !== 0) ? lastMatchText.length : 1));
-	} while (searchString !== '');
-
-	return splitParts;
+function takeUntilSelector(config) {
+	return splitStringAndTrim(config.remainingText, config.selectorsRegEx);
 }
 
 module.exports = function functionProcessor(LOGGER) {
@@ -99,51 +231,18 @@ module.exports = function functionProcessor(LOGGER) {
 					typeof doc.content === 'string' && doc.content !== ''
 				);
 
-				const {
-					description,
-					parameterDocs,
-					returns
-				} = getDocsFromContent(doc.id, (docWithContent != null) ? docWithContent.content : '', LOGGER);
+				const data = { title: doc.name };
 
-				doc.data = Object.assign({}, doc.data, {
-					title: doc.name,
-					description: description,
-					sections: [
-						{
-							title: 'Calls',
-							componentSelector: 'table',
-							data: {
-								columns: [ { id: 'call' } ],
-								rows: getCallDocs(doc)
-							}
-						},
-						{
-							title: 'Parameters',
-							componentSelector: 'table',
-							data: {
-								columns: [
-									{
-										header: 'Name',
-										id: 'name',
-										property: 'name'
-									},
-									{
-										header: 'Description',
-										id: 'description',
-										property: 'description'
-									}
-								],
-								rows: parameterDocs
-							}
-						},
-						{
-							title: 'Returns',
-							componentSelector: 'markdown',
-							display: typeof returns === 'string' && returns != '',
-							data: returns
-						}
-					]
-				});
+				let contentParts = parseContentParts((docWithContent != null) ? docWithContent.content : '');
+				contentParts.concat(getCallContentParts(doc));
+				contentParts = sortContentParts(contentParts);
+				const descriptionContentPart = contentParts.find(contentPart => contentPart.key === PartKey.text);
+				if (descriptionContentPart) {
+					data.description = descriptionContentPart.match;
+				}
+				data.sections = convertContentPartsIntoSections(doc.id, LOGGER, contentParts);
+
+				doc.data = Object.assign({}, doc.data, data);
 			});
 		},
 		$runAfter: [ 'filterDocsProcessor' ],
