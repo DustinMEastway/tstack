@@ -30,7 +30,7 @@ export class DocumentationSectionComponent implements OnInit {
 
 	ngOnInit(): void {
 		this._section.subscribe(section => {
-			if (this.isDisplayed) {
+			if (this.isDisplayed && section.componentSelector) {
 				this._dynamicContentService.setComponentBySelector(
 					this.componentContainer,
 					section.componentSelector,

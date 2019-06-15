@@ -9,7 +9,7 @@ const outlineGapPadding = 5;
  * The tsk-readonly-field component is used to display readonly information in a manor that is consistant with mat-form-field.
  *
  * Four appearance options are available to match the associated mat-form-field appearance options.
- * @example client/readonly-field-appearance
+ * @dynamicComponent client/readonly-field-appearance
  */
 @Component({
 	selector: 'tsk-readonly-field',

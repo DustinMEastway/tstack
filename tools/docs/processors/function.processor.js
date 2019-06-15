@@ -1,6 +1,6 @@
 const PartKey = {
 	call: 'call',
-	example: 'example',
+	dynamicComponent: 'dynamicComponent',
 	parameter: 'parameter',
 	return: 'return',
 	text: 'text'
@@ -8,9 +8,9 @@ const PartKey = {
 
 const partConfigs = [
 	{
-		key: PartKey.example,
+		key: PartKey.dynamicComponent,
 		order: 0,
-		selectors: [ '@example' ],
+		selectors: [ '@dynamicComponent' ],
 		takeUntil: takeUntilNewLine
 	},
 	{
@@ -80,9 +80,9 @@ function convertContentPartsIntoSections(docId, LOGGER, contentParts) {
 
 	let descriptionTextFound = false;
 	contentParts.filter(contentPart =>
-		contentPart.key === PartKey.text || contentPart.key === PartKey.example
+		contentPart.key === PartKey.text || contentPart.key === PartKey.dynamicComponent
 	).forEach(contentPart => {
-		if (contentPart.key === PartKey.example) {
+		if (contentPart.key === PartKey.dynamicComponent) {
 			sections.push({
 				componentSelector: contentPart.match
 			});
@@ -132,7 +132,7 @@ function getCallContentParts(doc) {
 }
 
 function parseContentParts(jsDoc) {
-	const config = createConfig(jsDoc, partConfigs);
+	const config = createContentPartConfig(jsDoc, partConfigs);
 
 	const contentParts = [];
 	while (config.remainingText) {
