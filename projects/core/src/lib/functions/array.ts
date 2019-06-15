@@ -117,6 +117,7 @@ export function findIndex<T>(items: T[], valueToFind: any, property?: string): n
  * @param config to customize how items are compared to determine equality @see HasDuplicatesConfig
  * @returns whether any duplicates were found in the array
  *
+ * @title Example(s)
  * @dynamicComponent examples/core/has-duplicates-primatives
  * @dynamicComponent examples/core/has-duplicates-objects
  */

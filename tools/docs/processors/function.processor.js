@@ -2,6 +2,7 @@ const PartKey = {
 	call: 'call',
 	dynamicComponent: 'dynamicComponent',
 	parameter: 'parameter',
+	title: 'title',
 	return: 'return',
 	text: 'text'
 };
@@ -23,6 +24,12 @@ const partConfigs = [
 		key: PartKey.return,
 		order: -100,
 		selectors: [ '@returns', '@return' ],
+		takeUntil: takeUntilNewLine
+	},
+	{
+		key: PartKey.title,
+		order: 0,
+		selectors: [ '@title' ],
 		takeUntil: takeUntilNewLine
 	}
 ];
@@ -80,12 +87,14 @@ function convertContentPartsIntoSections(docId, LOGGER, contentParts) {
 
 	let descriptionTextFound = false;
 	contentParts.filter(contentPart =>
-		contentPart.key === PartKey.text || contentPart.key === PartKey.dynamicComponent
+		[ PartKey.dynamicComponent, PartKey.text, PartKey.title ].includes(contentPart.key)
 	).forEach(contentPart => {
 		if (contentPart.key === PartKey.dynamicComponent) {
 			sections.push({
 				componentSelector: contentPart.match
 			});
+		} else if (contentPart.key === PartKey.title) {
+			sections.push({ title: contentPart.match });
 		} else if (!descriptionTextFound) {
 			// do not add a section for the first text block since it is the description
 			descriptionTextFound = true;
