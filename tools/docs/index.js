@@ -152,6 +152,23 @@ var tstackDocsPackage = new Package('tstack-docs', tstackDependencies)
 		})
 	]);
 })
+.config(function(functionProcessor, tagPartsProcessor, DOC_TYPES_TO_RENDER) {
+	tagPartsProcessor.docTypes = tagPartsProcessor.docTypes.concat(
+		DOC_TYPES_TO_RENDER.map(docTypeToRender => docTypeToRender.docType)
+	);
+	tagPartsProcessor.tagPreProcessors = tagPartsProcessor.tagPreProcessors.concat([
+		functionProcessor.tagPreProcessor
+	]);
+})
+.config(function(getInjectables, parseTagsProcessor) {
+	parseTagsProcessor.tagDefinitions = parseTagsProcessor.tagDefinitions.concat(
+		getInjectables([
+			require('./tags/call.tag'),
+			require('./tags/dynamic-component.tag'),
+			require('./tags/title.tag')
+		])
+	);
+})
 // configure which decorated type to render
 .config(function(decoratorProcessor, DECORATOR_TYPES_TO_RENDER) {
 	decoratorProcessor.decoratorTypes = decoratorProcessor.decoratorTypes.concat(
@@ -170,7 +187,8 @@ var tstackDocsPackage = new Package('tstack-docs', tstackDependencies)
 .processor(require('./processors/filter-docs.processor'))
 .processor(require('./processors/function.processor'))
 .processor(require('./processors/module.processor'))
-.processor(require('./processors/output-path.processor'));
+.processor(require('./processors/output-path.processor'))
+.processor(require('./processors/tag-part.processor'));
 
 module.exports = tstackDocsPackage;
 
