@@ -1,3 +1,5 @@
+const { PROJECTS_PATH } = require('../../config');
+
 /** creates a section for a module out of the provided title and docs */
 function createModuleSection(sectionTitle, docsInSection) {
 	return {
@@ -19,21 +21,21 @@ function createModuleSection(sectionTitle, docsInSection) {
 			],
 			rows: docsInSection.map(docInSection => {
 				const path = docInSection.outputPath.replace(/(.*)\.\w*$/, '$1');
-				const nameRow = {
+				const nameCellData = {
 					text: (docInSection.docType === 'module') ? `@tstack/${path}` : docInSection.name,
-					url: path
+					url: `\/${path}`
 				};
-				const descriptionRow = (docInSection.data && docInSection.data.description)
+				const descriptionCellData = (docInSection.data && docInSection.data.description)
 					? docInSection.data.description
 					: '';
 
-				return { name: nameRow, description: descriptionRow };
+				return { name: nameCellData, description: descriptionCellData };
 			})
 		}
 	}
 }
 
-module.exports = function moduleProcessor(DOC_TYPES_TO_RENDER) {
+module.exports = function moduleProcessor(DOC_TYPES_TO_RENDER, FILE_SYSTEM) {
 	return {
 		docTypes: [ 'module' ],
 		$process: function(docs) {
@@ -63,8 +65,14 @@ module.exports = function moduleProcessor(DOC_TYPES_TO_RENDER) {
 
 				const moduleName = doc.id.replace('/src', '').replace('/public_api', '');
 
+				// get description
+				const moduleDescription = FILE_SYSTEM.tryReadFile(
+					FILE_SYSTEM.joinPaths(PROJECTS_PATH, doc.id.replace(/public_api$/, 'README.md'))
+				);
+
 				doc.data = Object.assign({}, doc.data, {
 					title: (moduleName === 'public_api') ? '@tstack' : `@tstack/${moduleName}`,
+					description: moduleDescription,
 					sections: moduleSections
 				});
 			});

@@ -1,5 +1,0 @@
-<div *ngIf="documentation" class="documentation">
-	<h2>{{ documentation.title }}</h2>
-	<p *ngIf="documentation.description" class="description">{{ documentation.description }}</p>
-	<app-documentation-section *ngFor="let section of documentation.sections" [section]="section"></app-documentation-section>
-</div>

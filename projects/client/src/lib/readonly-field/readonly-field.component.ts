@@ -5,7 +5,13 @@ import { getValue } from '@tstack/core';
 const floatingLabelScale = 0.75;
 const outlineGapPadding = 5;
 
-/** used to display values in manner that is consistent with material form controls in form fields */
+/**
+ * The tsk-readonly-field component is used to display readonly information in a manor that is consistant with mat-form-field.
+ *
+ * @title Example(s)
+ * Four appearance options are available to match the associated mat-form-field appearance options.
+ * @dynamicComponent client/readonly-field-appearance
+ */
 @Component({
 	selector: 'tsk-readonly-field',
 	templateUrl: './readonly-field.component.html',
