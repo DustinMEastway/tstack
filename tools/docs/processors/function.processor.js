@@ -51,7 +51,7 @@ module.exports = function functionProcessor(LOGGER) {
 				doc.data = Object.assign({}, doc.data, data);
 			});
 		},
-		$runAfter: [ 'tagPartsProcessor' ],
+		$runAfter: [ 'filterDocsProcessor', 'tagPartsProcessor' ],
 		$runBefore: [ 'linkInheritedDocs' ]
 	};
 }
