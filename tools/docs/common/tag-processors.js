@@ -17,7 +17,7 @@ function splitIntoNameAndDescription(docId, description, LOGGER) {
 
 module.exports = {
 	createCallSections(docId, LOGGER, tagParts) {
-		const callTagParts = tagParts.filter(tagPart => tagPart.key === TagKey.call);
+		const callTagParts = (tagParts || []).filter(tagPart => tagPart.key === TagKey.call);
 
 		return (!callTagParts.length) ? [] : [
 			{
@@ -31,7 +31,7 @@ module.exports = {
 		];
 	},
 	createParameterSections(docId, LOGGER, tagParts) {
-		const parameterTagParts = tagParts.filter(tagPart => tagPart.key === TagKey.parameter);
+		const parameterTagParts = (tagParts || []).filter(tagPart => tagPart.key === TagKey.parameter);
 
 		return (!parameterTagParts.length) ? [] : [
 			{
@@ -56,7 +56,7 @@ module.exports = {
 		];
 	},
 	createReturnSections(docId, LOGGER, tagParts) {
-		const returnTagParts = tagParts.filter(tagPart => tagPart.key === TagKey.return);
+		const returnTagParts = (tagParts || []).filter(tagPart => tagPart.key === TagKey.return);
 		if (returnTagParts.length > 1) {
 			LOGGER.logWarning(`Multiple return docs provided for document ${docId}`);
 		}
@@ -71,7 +71,7 @@ module.exports = {
 	},
 	createUsageSections(docId, LOGGER, tagParts) {
 		let descriptionTextFound = false;
-		return tagParts.filter(tagPart =>
+		return (tagParts || []).filter(tagPart =>
 			[ TagKey.dynamicComponent, TagKey.text, TagKey.title ].includes(tagPart.key)
 		).reduce((sections, tagPart) => {
 			if (tagPart.key === TagKey.dynamicComponent) {

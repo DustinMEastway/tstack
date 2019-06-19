@@ -1,8 +1,9 @@
 const { MethodMemberDoc } = require('dgeni-packages/typescript/api-doc-types/MethodMemberDoc');
 const { PropertyMemberDoc } = require('dgeni-packages/typescript/api-doc-types/PropertyMemberDoc');
 const { createDecoratorString } = require('../common/functions');
+const { createUsageSections } = require('../common/tag-processors');
 
-module.exports = function componentProcessor() {
+module.exports = function componentProcessor(LOGGER) {
 	return {
 		docTypes: [ 'component' ],
 		createSectionsForMembers(doc) {
@@ -69,14 +70,15 @@ module.exports = function componentProcessor() {
 			docs.filter(doc => this.docTypes.includes(doc.docType)).forEach(doc => {
 				doc.data = Object.assign({}, doc.data, {
 					title: doc.name,
-					description: doc.content,
+					description: doc.description,
 					sections: [
 						{
 							title: 'Decorator(s)',
 							componentSelector: 'markdown',
 							data: `\`\`\`typescript\n${createDecoratorString(doc.decorators)}\n\`\`\``
 						},
-						...this.createSectionsForMembers(doc)
+						...this.createSectionsForMembers(doc),
+						...createUsageSections(doc.id, LOGGER, doc.tagParts)
 					]
 				});
 			});

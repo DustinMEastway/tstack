@@ -5,7 +5,6 @@ const {
 	createReturnSections,
 	createUsageSections
 } = require('../common/tag-processors');
-const { TagKey } = require('../tags/tag-key');
 
 module.exports = function functionProcessor(LOGGER) {
 	return {
@@ -31,14 +30,6 @@ module.exports = function functionProcessor(LOGGER) {
 		},
 		$process: function(docs) {
 			docs.filter(doc => this.docTypes.includes(doc.docType)).forEach(doc => {
-				const data = { title: doc.name };
-				const tagParts = doc.tagParts || [];
-				const firstTextTag = tagParts.find(contentPart => contentPart.key === TagKey.text);
-
-				if (firstTextTag) {
-					data.description = firstTextTag.match;
-				}
-
 				const sectionParsers = [
 					createCallSections,
 					createParameterSections,
@@ -46,9 +37,13 @@ module.exports = function functionProcessor(LOGGER) {
 					createUsageSections
 				];
 
-				data.sections = flattenArray(sectionParsers.map(sectionParser => sectionParser(doc.id, LOGGER, tagParts)));
-
-				doc.data = Object.assign({}, doc.data, data);
+				doc.data = Object.assign({}, doc.data, {
+					title: doc.name,
+					description: doc.description,
+					sections: flattenArray(sectionParsers.map(sectionParser =>
+						sectionParser(doc.id, LOGGER, doc.tagParts)
+					))
+				});
 			});
 		},
 		$runAfter: [ 'filterDocsProcessor', 'tagPartsProcessor' ],

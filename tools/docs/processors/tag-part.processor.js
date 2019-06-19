@@ -101,6 +101,12 @@ module.exports = function tagPartsProcessor() {
 				if (doc.content) {
 					config.remainingText = doc.content;
 					doc.tagParts = this.parseTagParts(config);
+
+					// set first text part as the description if one does not exist
+					const descriptionTagPart = doc.tagParts.find(tagPart => tagPart.key === TagKey.text);
+					if (!doc.description && descriptionTagPart) {
+						doc.description = descriptionTagPart.match;
+					}
 				}
 			});
 		},
