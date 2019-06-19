@@ -24,6 +24,12 @@ var tstackDocsPackage = new Package('tstack-docs', tstackDependencies)
 			decorator: 'Component',
 			title: 'Component(s)',
 			order: 1
+		},
+		{
+			docType: 'directive',
+			decorator: 'Directive',
+			title: 'Directive(s)',
+			order: 1
 		}
 	];
 })
@@ -61,6 +67,11 @@ var tstackDocsPackage = new Package('tstack-docs', tstackDependencies)
 			docType: 'module',
 			title: 'Module(s)',
 			order: 0
+		},
+		{
+			docType: 'class',
+			title: 'Class(s)',
+			order: 1
 		},
 		{
 			docType: 'function',
@@ -181,7 +192,7 @@ var tstackDocsPackage = new Package('tstack-docs', tstackDependencies)
 		DOC_TYPES_TO_RENDER.map(docTypeToRender => docTypeToRender.docType)
 	);
 })
-.processor(require('./processors/component.processor'))
+.processor(require('./processors/class.processor'))
 .processor(require('./processors/decorator.processor'))
 .processor(require('./processors/doc-type.processor'))
 .processor(require('./processors/filter-docs.processor'))

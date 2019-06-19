@@ -79,7 +79,7 @@ module.exports = function moduleProcessor(DOC_TYPES_TO_RENDER, FILE_SYSTEM) {
 
 			return docs;
 		},
-		$runAfter: [ 'componentProcessor', 'functionProcessor', 'outputPathProcessor' ],
+		$runAfter: [ 'classProcessor', 'functionProcessor', 'outputPathProcessor' ],
 		$runBefore: [ 'renderDocsProcessor' ]
 	};
 }
