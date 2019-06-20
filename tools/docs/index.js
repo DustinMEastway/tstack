@@ -23,18 +23,24 @@ var tstackDocsPackage = new Package('tstack-docs', tstackDependencies)
 			docType: 'component',
 			decorator: 'Component',
 			title: 'Component(s)',
-			order: 1
+			order: 3
 		},
 		{
 			docType: 'directive',
 			decorator: 'Directive',
 			title: 'Directive(s)',
-			order: 1
+			order: 3
 		},
 		{
 			docType: 'injectable',
 			decorator: 'Injectable',
 			title: 'Service(s)',
+			order: 3
+		},
+		{
+			docType: 'ngmodule',
+			decorator: 'NgModule',
+			title: 'NgModule(s)',
 			order: 1
 		}
 	];
@@ -71,18 +77,18 @@ var tstackDocsPackage = new Package('tstack-docs', tstackDependencies)
 	return [
 		{
 			docType: 'module',
-			title: 'Module(s)',
+			title: 'Package(s)',
 			order: 0
 		},
 		{
 			docType: 'class',
 			title: 'Class(s)',
-			order: 1
+			order: 7
 		},
 		{
 			docType: 'interface',
 			title: 'Interface(s)',
-			order: 1
+			order: 7
 		},
 		{
 			docType: 'function',
@@ -210,6 +216,7 @@ var tstackDocsPackage = new Package('tstack-docs', tstackDependencies)
 .processor(require('./processors/filter-docs.processor'))
 .processor(require('./processors/function.processor'))
 .processor(require('./processors/module.processor'))
+.processor(require('./processors/ngmodule.processor'))
 .processor(require('./processors/output-path.processor'))
 .processor(require('./processors/tag-part.processor'));
 

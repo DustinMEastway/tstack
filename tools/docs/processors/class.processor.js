@@ -95,7 +95,7 @@ function classProcessor(LOGGER) {
 				});
 			});
 		},
-		$runAfter: [ 'filterDocsProcessor', 'tagPartsProcessor' ],
+		$runAfter: [ 'decoratorProcessor', 'filterDocsProcessor', 'tagPartsProcessor' ],
 		$runBefore: [ 'renderDocsProcessor' ]
 	};
 }

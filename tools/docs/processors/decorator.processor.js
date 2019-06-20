@@ -10,6 +10,7 @@ module.exports = function decoratorProcessor() {
 
 				if (matchedDecorator) {
 					doc.docType = matchedDecorator.name.toLowerCase();
+					doc.matchedDecorator = matchedDecorator;
 				}
 			});
 		},
