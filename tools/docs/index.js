@@ -30,6 +30,12 @@ var tstackDocsPackage = new Package('tstack-docs', tstackDependencies)
 			decorator: 'Directive',
 			title: 'Directive(s)',
 			order: 1
+		},
+		{
+			docType: 'injectable',
+			decorator: 'Injectable',
+			title: 'Service(s)',
+			order: 1
 		}
 	];
 })
@@ -71,6 +77,11 @@ var tstackDocsPackage = new Package('tstack-docs', tstackDependencies)
 		{
 			docType: 'class',
 			title: 'Class(s)',
+			order: 1
+		},
+		{
+			docType: 'interface',
+			title: 'Interface(s)',
 			order: 1
 		},
 		{
@@ -163,12 +174,13 @@ var tstackDocsPackage = new Package('tstack-docs', tstackDependencies)
 		})
 	]);
 })
-.config(function(functionProcessor, tagPartsProcessor, DOC_TYPES_TO_RENDER) {
+.config(function(classProcessor, functionProcessor, tagPartsProcessor, DOC_TYPES_TO_RENDER) {
 	tagPartsProcessor.docTypes = tagPartsProcessor.docTypes.concat(
-		DOC_TYPES_TO_RENDER.map(docTypeToRender => docTypeToRender.docType)
+		[ 'member' ].concat(DOC_TYPES_TO_RENDER.map(docTypeToRender => docTypeToRender.docType))
 	);
 	tagPartsProcessor.tagPreProcessors = tagPartsProcessor.tagPreProcessors.concat([
-		functionProcessor.tagPreProcessor
+		classProcessor.preTagPartsProcessor,
+		functionProcessor.preTagPartsProcessor
 	]);
 })
 .config(function(getInjectables, parseTagsProcessor) {

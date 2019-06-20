@@ -1,5 +1,6 @@
 const { flattenArray } = require('../common/functions');
 const {
+	callableDocPreTagProcessor,
 	createCallSections,
 	createParameterSections,
 	createReturnSections,
@@ -9,23 +10,9 @@ const {
 module.exports = function functionProcessor(LOGGER) {
 	return {
 		docTypes: [ 'function' ],
-		tagPreProcessor(doc) {
+		preTagPartsProcessor(doc) {
 			if (doc.docType === 'function' && !doc.content) {
-				// get content from an overload if needed
-				const docWithContent = [doc].concat(doc.overloads).find(doc =>
-					typeof doc.content === 'string' && doc.content.trim() !== ''
-				);
-
-				doc.content = (docWithContent && docWithContent.content) || '';
-
-				// add calls to content
-				const callDocs = (doc.overloads.length) ? doc.overloads : [ doc ];
-				doc.content += callDocs.map(callDoc => {
-					// TODO: add doc.typeParameters when it is available on overloads
-					const parameters = callDoc.parameters.join(', ');
-
-					return `\n@call function ${doc.name}(${parameters}): ${callDoc.type}`;
-				});
+				callableDocPreTagProcessor(doc);
 			}
 		},
 		$process: function(docs) {

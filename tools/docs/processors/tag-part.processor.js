@@ -95,6 +95,7 @@ module.exports = function tagPartsProcessor() {
 		},
 		$process(docs) {
 			const config = this.createInitialConfig();
+
 			docs.filter(doc => this.docTypes.includes(doc.docType)).forEach(doc => {
 				this.preParseTagParts(doc);
 
@@ -110,7 +111,7 @@ module.exports = function tagPartsProcessor() {
 				}
 			});
 		},
-		$runAfter: [ 'filterDocsProcessor' ],
-		$runBefore: [ 'linkInheritedDocs' ]
+		$runAfter: [ 'decoratorProcessor' ],
+		$runBefore: [ 'filterDocsProcessor', 'linkInheritedDocs' ]
 	}
 }

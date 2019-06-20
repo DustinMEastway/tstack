@@ -16,6 +16,23 @@ function splitIntoNameAndDescription(docId, description, LOGGER) {
 }
 
 module.exports = {
+	callableDocPreTagProcessor(doc) {
+		// get content from an overload if needed
+		const docWithContent = [doc].concat(doc.overloads).find(doc =>
+			typeof doc.content === 'string' && doc.content.trim() !== ''
+		);
+
+		doc.content = (docWithContent && docWithContent.content) || '';
+
+		// add calls to content
+		const callDocs = (doc.overloads.length) ? doc.overloads : [ doc ];
+		doc.content += callDocs.map(callDoc => {
+			// TODO: add doc.typeParameters when it is available on overloads
+			const parameters = callDoc.parameters.join(', ');
+
+			return `\n@call function ${doc.name}(${parameters}): ${callDoc.type}`;
+		});
+	},
 	createCallSections(docId, LOGGER, tagParts) {
 		const callTagParts = (tagParts || []).filter(tagPart => tagPart.key === TagKey.call);
 

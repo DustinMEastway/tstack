@@ -1,11 +1,10 @@
 const { MethodMemberDoc } = require('dgeni-packages/typescript/api-doc-types/MethodMemberDoc');
 const { PropertyMemberDoc } = require('dgeni-packages/typescript/api-doc-types/PropertyMemberDoc');
 const { createDecoratorString } = require('../common/functions');
-const { createUsageSections } = require('../common/tag-processors');
+const { callableDocPreTagProcessor, createUsageSections } = require('../common/tag-processors');
 
-module.exports = function classProcessor(LOGGER) {
+function classProcessor(LOGGER) {
 	return {
-		docTypes: [ 'class', 'component', 'directive' ],
 		createSectionsForMembers(doc) {
 			const memberSectionConfigs = [
 				{ title: 'Properties', type: PropertyMemberDoc },
@@ -47,7 +46,7 @@ module.exports = function classProcessor(LOGGER) {
 								// add type to name
 								name = `${name}: ${member.type}`;
 
-								let description = member.content;
+								let description = member.description || member.content || '';
 
 								// remove selector from description
 								description = description.replace(/\@\w+\s+/, '');
@@ -66,8 +65,20 @@ module.exports = function classProcessor(LOGGER) {
 				return sections;
 			}, []);
 		},
+		preTagPartsProcessor(doc) {
+			// containerDoc
+			if (doc.docType === 'member'
+				&& !doc.content
+				&& doc.containerDoc
+				&& classProcessor.docTypes.includes(doc.containerDoc.docType)
+				&& doc.accessibility === 'public'
+				&& doc instanceof MethodMemberDoc
+			) {
+				callableDocPreTagProcessor(doc);
+			}
+		},
 		$process: function(docs) {
-			docs.filter(doc => this.docTypes.includes(doc.docType)).forEach(doc => {
+			docs.filter(doc => classProcessor.docTypes.includes(doc.docType)).forEach(doc => {
 				doc.data = Object.assign({}, doc.data, {
 					title: doc.name,
 					description: doc.description,
@@ -89,3 +100,6 @@ module.exports = function classProcessor(LOGGER) {
 	};
 }
 
+classProcessor.docTypes = [ 'class', 'component', 'directive', 'injectable', 'interface' ];
+
+module.exports = classProcessor;
