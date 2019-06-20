@@ -76,6 +76,16 @@ var tstackDocsPackage = new Package('tstack-docs', tstackDependencies)
 .factory(function TYPESCRIPT_DOC_TYPES_TO_RENDER() {
 	return [
 		{
+			docType: 'const',
+			title: 'Constant(s)',
+			order: 15
+		},
+		{
+			docType: 'enum',
+			title: 'Enumerable(s)',
+			order: 13
+		},
+		{
 			docType: 'module',
 			title: 'Package(s)',
 			order: 0
@@ -211,6 +221,7 @@ var tstackDocsPackage = new Package('tstack-docs', tstackDependencies)
 	);
 })
 .processor(require('./processors/class.processor'))
+.processor(require('./processors/const.processor'))
 .processor(require('./processors/decorator.processor'))
 .processor(require('./processors/doc-type.processor'))
 .processor(require('./processors/filter-docs.processor'))
