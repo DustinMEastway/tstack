@@ -1,5 +1,7 @@
 import { CastIntConfig } from '../types/cast-int-config';
 import { CastStringConfig } from '../types/cast-string-config';
+import { CompareProperty } from '../types/compare-property';
+import { IsBetweenConfig } from '../types/is-between-config';
 
 /**
  * converts the case of the given string into camel case
@@ -78,6 +80,51 @@ export function castString(item: any, config?: CastStringConfig): string {
 }
 
 /**
+ * compares two items to determine which item is larger
+ * @param item1 to compare
+ * @param item2 to compare
+ * @param compareProperties array of properties that will be used to compare the two items. Set @see CompareProperty.ascending to false for
+ * a descending sort on a property
+ * @returns 1 if item1 is larger, -1 if item2 is larger and 0 if they are equal
+ */
+export function compareItems<T = any>(item1: T, item2: T, ...compareProperties: (string | CompareProperty)[]): -1 | 0 | 1 {
+	if (item1 === item2) { return 0; }
+
+	// if there are not any compare properties, then compare the full items
+	if (compareProperties.length < 1) { compareProperties = [ '' ]; }
+
+	let returnValue: -1 | 0 | 1 = 0;
+	for (const compareProperty of compareProperties) {
+		// get the values of each item for the current compare property
+		const property = (typeof compareProperty === 'string') ? compareProperty : compareProperty.property;
+		const value1 = getValue(item1, property);
+		const value2 = getValue(item2, property);
+
+		if (value1 === value2) {
+			// if the values are the same, then continue to the next property
+			continue;
+		} else if (value1 === undefined) {
+			// undefined goes at the end of the array (based on JavaScript's default sort)
+			returnValue = 1;
+		} else if (value1 === null) {
+			// null goes after everything other than undefined
+			returnValue = (value2 === undefined) ? -1 : 1;
+		} else if (value2 == null) {
+			// if value1 is not null or undefined and value2 is, then value2 goes after value1
+			returnValue = -1;
+		} else {
+			// if value1 and value2 are not equal or null, then return which one is larger
+			returnValue = (value1 > value2) ? 1 : -1;
+		}
+
+		// swap the return value if the compare property has ascending set to false
+		return (typeof compareProperty === 'string' || compareProperty.ascending) ? returnValue : returnValue * -1 as -1 | 1;
+	}
+
+	return 0;
+}
+
+/**
  * create a copy of the given item (resulting object will be a json object without methods)
  * @param item to copy
  * @returns a copy of the provided item
@@ -97,7 +144,7 @@ export function deepCopy(item: any): any {
 export function getValue<T, K extends keyof(T)>(item: T, propertyToGet: K): T[K];
 export function getValue<ReturnT = any, ItemT = any>(item: ItemT, propertyToGet?: string): ReturnT;
 export function getValue<ReturnT = any, ItemT = any>(item: ItemT, propertyToGet: string = ''): ReturnT {
-	const properties = propertyToGet.split(/[\.\[\]]/);
+	const properties = (typeof propertyToGet === 'string') ? propertyToGet.split(/[\.\[\]]/) : [];
 	let valueToReturn: any = item;
 
 	for (const property of properties) {
@@ -112,14 +159,25 @@ export function getValue<ReturnT = any, ItemT = any>(item: ItemT, propertyToGet
 }
 
 /**
- * gets the values of all of the keys on the given item
- * @param item to pull values from
- * @returns values of each property on the item
+ * checks if a value is between two other values
+ * @param value checked to see if it is between min and max
+ * @param min value that value must be greater than (or equal too depending on config.endpoints)
+ * @param max value that value must be less than (or equal too depending on config.endpoints)
+ * @param config used to determine if the value is between min and max @see IsBetweenConfig
  */
-export function values<T, K extends keyof(T)>(item: T): T[K][];
-export function values<T = any>(item: any): T[];
-export function values<T, K extends keyof(T)>(item: T): T[K][] {
-	return (item == null) ? [] : Object.keys(item).map(key => item[key as K]);
+export function isBetween<T = any>(value: T, min: T, max: T, config?: IsBetweenConfig<T>): boolean {
+	config = Object.assign<IsBetweenConfig, IsBetweenConfig>({
+		comparator: compareItems,
+		endpoints: 'both'
+	}, config);
+
+	const minComparison = config.comparator(value, min);
+	const maxComparison = config.comparator(value, max);
+
+	// value is greater than min and less than max, or value is equal to an included endpoint
+	return (minComparison > 0  && maxComparison < 0)
+		|| (minComparison === 0 && (config.endpoints === 'both' || config.endpoints === 'min'))
+		|| (maxComparison === 0 && (config.endpoints === 'both' || config.endpoints === 'max'));
 }
 
 /**
@@ -165,4 +223,15 @@ export function setValue<ItemT>(item: ItemT, value: any, property: string): Item
 	}
 
 	return item;
+}
+
+/**
+ * gets the values of all of the keys on the given item
+ * @param item to pull values from
+ * @returns values of each property on the item
+ */
+export function values<T, K extends keyof(T)>(item: T): T[K][];
+export function values<T = any>(item: any): T[];
+export function values<T, K extends keyof(T)>(item: T): T[K][] {
+	return (item == null) ? [] : Object.keys(item).map(key => item[key as K]);
 }

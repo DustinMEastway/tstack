@@ -1,6 +1,10 @@
 @import '~@angular/material/theming';
+@import '../projects/client/src/lib/assets/theming';
+
+@import './app/documentation/markdown/markdown.component';
 
 @include mat-core();
+@include tsk-core();
 
 // create the available themes
 $mat-deeppurple-amber-theme: mat-light-theme(
@@ -26,6 +30,8 @@ $mat-purple-green: mat-dark-theme(
 // a mixin that sets the theme for the full application
 @mixin set-themes($theme) {
 	@include angular-material-theme($theme);
+	@include tsk-themes($theme);
+	@include markdown-themes($theme);
 }
 
 @include set-themes($mat-deeppurple-amber-theme);

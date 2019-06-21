@@ -8,25 +8,25 @@ import {
 } from '@angular/material';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { TskNavMenuModule, TskThemeModule } from '@tstack/client';
-
-import { SharedModule } from 'app/shared/shared.module';
+import { TskThemeModule } from '@tstack/client';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppScreenComponent } from './app-screen.component';
+import { DocumentationModule } from './documentation/documentation.module';
+import { ExamplesModule } from './examples/examples.module';
 import { ScreenComponent } from './screen/screen.component';
 
 @NgModule({
 	imports: [
 		BrowserModule,
 		BrowserAnimationsModule,
+		DocumentationModule,
+		ExamplesModule,
 		HttpClientModule,
 		FormsModule,
 		MatButtonModule,
 		MatIconModule,
 		MatToolbarModule,
-		SharedModule,
-		TskNavMenuModule,
 		TskThemeModule,
 		AppRoutingModule
 	],

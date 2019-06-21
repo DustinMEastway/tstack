@@ -1,11 +1,8 @@
-/* todo:
-	* add property and sort function as a configuration for hasDuplicates
-*/
-
 import { CompareProperty } from '../types/compare-property';
 import { FilterConfig } from '../types/filter-config';
+import { HasDuplicatesConfig } from '../types/has-duplicates-config';
 
-import { castString, getValue } from './object';
+import { castString, compareItems, getValue } from './object';
 
 /**
  * areSame determines if two arrays contain the same values in the same order
@@ -34,7 +31,7 @@ export function areEqual(items1: any[], items2: any[]): boolean {
  * @param items to filter
  * @param filterValue used to determine whether an item should be kept or not
  * @param [property] to compare with for each item
- * @param [config] to determine how to filter the values
+ * @param [config] used to determine how to filter the values
  * @returns filtered items
  */
 export function filter<T>(items: T[], filterValue: any, config?: FilterConfig): T[] {
@@ -117,14 +114,29 @@ export function findIndex<T>(items: T[], valueToFind: any, property?: string): n
 /**
  * hasDuplicates determines if the array contains any duplicate values (must be sortable values like strings or numbers)
  * @param items array that is checked for duplicates
+ * @param config to customize how items are compared to determine equality @see HasDuplicatesConfig
  * @returns whether any duplicates were found in the array
+ *
+ * @title Example(s)
+ * @dynamicComponent examples/core/has-duplicates-primatives
+ * @dynamicComponent examples/core/has-duplicates-objects
  */
-export function hasDuplicates<T = any>(items: T[]): boolean {
+export function hasDuplicates<K extends keyof(T), T = any>(items: T[], config: Required<HasDuplicatesConfig<T[K], K>>): boolean;
+export function hasDuplicates<T = any, C = any>(items: T[], config: Required<HasDuplicatesConfig<C, any>>): boolean;
+export function hasDuplicates<T = any>(items: T[], config: { comparator(item1: T, item2: T): number; }): boolean;
+export function hasDuplicates<K extends keyof(T), T = any, C = any>(items: T[], config?: HasDuplicatesConfig<C, K>): boolean;
+export function hasDuplicates<T = any, C = any>(items: T[], config?: HasDuplicatesConfig<C, any>): boolean;
+export function hasDuplicates(items: any[], config?: HasDuplicatesConfig<any, any>): boolean {
+	config = Object.assign<HasDuplicatesConfig, HasDuplicatesConfig>({
+		comparator: compareItems,
+		property: ''
+	}, config);
+
 	// create a copy of the array using slice before sorting to leave original array alone
-	items = items.slice().sort();
+	items = items.map(item => getValue(item, config.property)).sort(config.comparator);
 
 	for (let i = 0; i < items.length - 1; ++i) {
-		if (items[i] === items[i + 1]) {
+		if (!config.comparator(items[i], items[i + 1])) {
 			return true;
 		}
 	}
@@ -142,43 +154,6 @@ export function pluck<T, K extends keyof(T)>(items: T[], property: K): T[K][];
 export function pluck<T = any>(items: any[], property: string): T[];
 export function pluck<T = any>(items: any[], property: string): T[] {
 	return (items instanceof Array) ? items.map(i => getValue(i, property)) : [];
-}
-
-export function compareItems<T = any>(item1: T, item2: T, ...compareProperties: (string | CompareProperty)[]): -1 | 0 | 1 {
-	if (item1 === item2) { return 0; }
-
-	// if there are not any compare properties, then compare the full items
-	if (compareProperties.length < 1) { compareProperties = [ '' ]; }
-
-	let returnValue: -1 | 0 | 1 = 0;
-	for (const compareProperty of compareProperties) {
-		// get the values of each item for the current compare property
-		const property = (typeof compareProperty === 'string') ? compareProperty : compareProperty.property;
-		const value1 = getValue(item1, property);
-		const value2 = getValue(item2, property);
-
-		if (value1 === value2) {
-			// if the values are the same, then continue to the next property
-			continue;
-		} else if (value1 === undefined) {
-			// undefined goes at the end of the array (based on JavaScript's default sort)
-			returnValue = 1;
-		} else if (value1 === null) {
-			// null goes after everything other than undefined
-			returnValue = (value2 === undefined) ? -1 : 1;
-		} else if (value2 == null) {
-			// if value1 is not null or undefined and value2 is, then value2 goes after value1
-			returnValue = -1;
-		} else {
-			// if value1 and value2 are not equal or null, then return which one is larger
-			returnValue = (value1 > value2) ? 1 : -1;
-		}
-
-		// swap the return value if the compare property has ascending set to false
-		return (typeof compareProperty === 'string' || compareProperty.ascending) ? returnValue : returnValue * -1 as -1 | 1;
-	}
-
-	return 0;
 }
 
 /**
