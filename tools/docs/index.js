@@ -179,7 +179,6 @@ var tstackDocsPackage = new Package('tstack-docs', tstackDependencies)
 	// Nunjucks and Angular conflict in their template bindings so change Nunjucks
 	templateEngine.config.tags = { variableStart: '{$', variableEnd: '$}' };
 
-
 	const classPathTemplate = computePathsProcessor.pathTemplates.find(pathTemplate =>
 		pathTemplate.docTypes.includes('class')
 	);
