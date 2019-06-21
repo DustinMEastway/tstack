@@ -1,6 +1,6 @@
 {
   "name": "@tstack/core",
-  "version": "0.1.2-alpha.13",
+  "version": "0.1.2-alpha.14",
   "private": false,
   "peerDependencies": {
     "rxjs": "^6.0.0"
