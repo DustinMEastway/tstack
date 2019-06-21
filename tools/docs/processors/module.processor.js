@@ -35,7 +35,7 @@ function createModuleSection(sectionTitle, docsInSection) {
 	}
 }
 
-module.exports = function moduleProcessor(FILE_SYSTEM, TYPESCRIPT_DOC_TYPES_TO_RENDER) {
+module.exports = function moduleProcessor(DOC_TYPES_TO_RENDER, FILE_SYSTEM) {
 	return {
 		docTypes: [ 'module' ],
 		$process: function(docs) {
@@ -53,7 +53,7 @@ module.exports = function moduleProcessor(FILE_SYSTEM, TYPESCRIPT_DOC_TYPES_TO_R
 
 			moduleDocs.forEach(doc => {
 				const moduleSections = [];
-				TYPESCRIPT_DOC_TYPES_TO_RENDER.forEach(docTypeForSection => {
+				DOC_TYPES_TO_RENDER.forEach(docTypeForSection => {
 					const docsInSection = doc.exports.filter(exportedDoc =>
 						exportedDoc.docType === docTypeForSection.docType
 					);
@@ -79,7 +79,13 @@ module.exports = function moduleProcessor(FILE_SYSTEM, TYPESCRIPT_DOC_TYPES_TO_R
 
 			return docs;
 		},
-		$runAfter: [ 'functionProcessor', 'outputPathProcessor' ],
+		$runAfter: [
+			'classProcessor',
+			'constProcessor',
+			'functionProcessor',
+			'ngmoduleProcessor',
+			'outputPathProcessor'
+		],
 		$runBefore: [ 'renderDocsProcessor' ]
 	};
 }

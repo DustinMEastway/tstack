@@ -17,6 +17,34 @@ const tstackDependencies = [
 
 // this is the primary package used to generate documentation
 var tstackDocsPackage = new Package('tstack-docs', tstackDependencies)
+.factory(function DECORATOR_TYPES_TO_RENDER() {
+	return [
+		{
+			docType: 'component',
+			decorator: 'Component',
+			title: 'Component(s)',
+			order: 3
+		},
+		{
+			docType: 'directive',
+			decorator: 'Directive',
+			title: 'Directive(s)',
+			order: 3
+		},
+		{
+			docType: 'injectable',
+			decorator: 'Injectable',
+			title: 'Service(s)',
+			order: 3
+		},
+		{
+			docType: 'ngmodule',
+			decorator: 'NgModule',
+			title: 'NgModule(s)',
+			order: 1
+		}
+	];
+})
 .factory(function FILE_SYSTEM() {
 		function canAccessSync(path) {
 			try {
@@ -48,16 +76,42 @@ var tstackDocsPackage = new Package('tstack-docs', tstackDependencies)
 .factory(function TYPESCRIPT_DOC_TYPES_TO_RENDER() {
 	return [
 		{
-			docType: 'function',
-			title: 'Function(s)',
-			order: 0
+			docType: 'const',
+			title: 'Constant(s)',
+			order: 15
+		},
+		{
+			docType: 'enum',
+			title: 'Enumerable(s)',
+			order: 13
 		},
 		{
 			docType: 'module',
-			title: 'Module(s)',
-			order: 1
+			title: 'Package(s)',
+			order: 0
+		},
+		{
+			docType: 'class',
+			title: 'Class(s)',
+			order: 7
+		},
+		{
+			docType: 'interface',
+			title: 'Interface(s)',
+			order: 7
+		},
+		{
+			docType: 'function',
+			title: 'Function(s)',
+			order: 10
 		}
-	].sort((docType1, docType2) => docType1.order - docType2.order);
+	];
+})
+.factory(function DOC_TYPES_TO_RENDER(DECORATOR_TYPES_TO_RENDER, TYPESCRIPT_DOC_TYPES_TO_RENDER) {
+	return [].concat(
+		DECORATOR_TYPES_TO_RENDER,
+		TYPESCRIPT_DOC_TYPES_TO_RENDER
+	).sort((docType1, docType2) => docType1.order - docType2.order);
 })
 .factory(function LOGGER () {
 	const LOGGING_LEVEL_NONE = 0;
@@ -113,7 +167,7 @@ var tstackDocsPackage = new Package('tstack-docs', tstackDependencies)
 	readFilesProcessor.sourceFiles = [];
 })
 // configure how & where docs are rendered
-.config(function(templateEngine, templateFinder, writeFilesProcessor) {
+.config(function(computePathsProcessor, templateEngine, templateFinder, writeFilesProcessor, DECORATOR_TYPES_TO_RENDER) {
 	writeFilesProcessor.outputFolder = DOCS_OUTPUT_PATH;
 	templateFinder.templateFolders = [ TEMPLATES_PATH ];
 
@@ -124,18 +178,58 @@ var tstackDocsPackage = new Package('tstack-docs', tstackDependencies)
 
 	// Nunjucks and Angular conflict in their template bindings so change Nunjucks
 	templateEngine.config.tags = { variableStart: '{$', variableEnd: '$}' };
+
+
+	const classPathTemplate = computePathsProcessor.pathTemplates.find(pathTemplate =>
+		pathTemplate.docTypes.includes('class')
+	);
+	computePathsProcessor.pathTemplates = computePathsProcessor.pathTemplates.concat([
+		// copy the class path template for decorated types
+		Object.assign({}, classPathTemplate, {
+			docTypes: DECORATOR_TYPES_TO_RENDER.map(decoratorType => decoratorType.docType)
+		})
+	]);
 })
-// configure which document types to render
-.config(function(TYPESCRIPT_DOC_TYPES_TO_RENDER, filterDocsProcessor) {
-	filterDocsProcessor.docTypes = filterDocsProcessor.docTypes.concat(
-		TYPESCRIPT_DOC_TYPES_TO_RENDER.map(docTypeToRender => docTypeToRender.docType)
+.config(function(classProcessor, functionProcessor, tagPartsProcessor, DOC_TYPES_TO_RENDER) {
+	tagPartsProcessor.docTypes = tagPartsProcessor.docTypes.concat(
+		[ 'member' ].concat(DOC_TYPES_TO_RENDER.map(docTypeToRender => docTypeToRender.docType))
+	);
+	tagPartsProcessor.tagPreProcessors = tagPartsProcessor.tagPreProcessors.concat([
+		classProcessor.preTagPartsProcessor,
+		functionProcessor.preTagPartsProcessor
+	]);
+})
+.config(function(getInjectables, parseTagsProcessor) {
+	parseTagsProcessor.tagDefinitions = parseTagsProcessor.tagDefinitions.concat(
+		getInjectables([
+			require('./tags/call.tag'),
+			require('./tags/dynamic-component.tag'),
+			require('./tags/title.tag')
+		])
 	);
 })
+// configure which decorated type to render
+.config(function(decoratorProcessor, DECORATOR_TYPES_TO_RENDER) {
+	decoratorProcessor.decoratorTypes = decoratorProcessor.decoratorTypes.concat(
+		DECORATOR_TYPES_TO_RENDER.map(decoratorType => decoratorType.decorator)
+	);
+})
+// configure which document types to render
+.config(function(filterDocsProcessor, DOC_TYPES_TO_RENDER) {
+	filterDocsProcessor.docTypes = filterDocsProcessor.docTypes.concat(
+		DOC_TYPES_TO_RENDER.map(docTypeToRender => docTypeToRender.docType)
+	);
+})
+.processor(require('./processors/class.processor'))
+.processor(require('./processors/const.processor'))
+.processor(require('./processors/decorator.processor'))
 .processor(require('./processors/doc-type.processor'))
 .processor(require('./processors/filter-docs.processor'))
 .processor(require('./processors/function.processor'))
 .processor(require('./processors/module.processor'))
-.processor(require('./processors/output-path.processor'));
+.processor(require('./processors/ngmodule.processor'))
+.processor(require('./processors/output-path.processor'))
+.processor(require('./processors/tag-part.processor'));
 
 module.exports = tstackDocsPackage;
 

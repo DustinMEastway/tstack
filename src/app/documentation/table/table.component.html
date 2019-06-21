@@ -1,12 +1,12 @@
-<table mat-table class="mat-elevation-z8 table" [class.hide-headers]="!tableConfig.isHeaderDisplayed" [dataSource]="rows">
+<mat-table mat-table class="mat-elevation-z8 table" [class.hide-headers]="!tableConfig.isHeaderDisplayed" [dataSource]="rows">
 	<ng-container *ngFor="let column of columns" [matColumnDef]="column.id">
-		<td mat-header-cell class="header-cell" *matHeaderCellDef>
+		<mat-header-cell *matHeaderCellDef class="header-cell">
 			<app-table-header-cell [column]="column"></app-table-header-cell>
-		</td>
-		<td mat-cell class="cell" *matCellDef="let rowData">
+		</mat-header-cell>
+		<mat-cell *matCellDef="let rowData" class="cell">
 			<app-table-cell [column]="column" [rowData]="rowData"></app-table-cell>
-		</td>
+		</mat-cell>
 	</ng-container>
-	<tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-	<tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-</table>
+	<mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+	<mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+</mat-table>

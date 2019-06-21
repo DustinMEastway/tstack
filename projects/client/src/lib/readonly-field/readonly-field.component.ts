@@ -10,7 +10,7 @@ const outlineGapPadding = 5;
  *
  * @title Example(s)
  * Four appearance options are available to match the associated mat-form-field appearance options.
- * @dynamicComponent client/readonly-field-appearance
+ * @dynamicComponent examples/client/readonly-field-appearance
  */
 @Component({
 	selector: 'tsk-readonly-field',

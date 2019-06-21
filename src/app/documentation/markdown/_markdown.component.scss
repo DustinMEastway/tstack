@@ -1,9 +1,23 @@
 @mixin markdown-themes($theme) {
+	$background-color: mat-color(map-get($theme, background), background);
 	$foreground-text-color: map-get(map-get($theme, foreground), text);
+	$is-dark: map-get($theme, is-dark);
+	$primary-color: mat-color(map-get($theme, primary), 500);
 
 	.markdown-container {
 		a {
 			color: $foreground-text-color;
+		}
+
+
+		code {
+			$amount: 20%;
+			background-color: if($is-dark, lighten($background-color, $amount), darken($background-color, $amount));
+			color: if($is-dark, lighten($foreground-text-color, $amount), darken($foreground-text-color, $amount));
+
+			&[class|="language"] {
+				border: 1px solid $primary-color;
+			}
 		}
 	}
 }

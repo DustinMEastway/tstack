@@ -20,5 +20,5 @@ module.exports = function filterDocsProcessor(LOGGER) {
 		},
 		$runAfter: [ 'readTypeScriptModules' ],
 		$runBefore: [ 'linkInheritedDocs' ]
-	}
+	};
 }
