@@ -1,0 +1,40 @@
+{
+  "title": "castString",
+  "description": "casts the given item into a string if possible, if not, an empty string is returned",
+  "sections": [
+    {
+      "title": "Parameter(s)",
+      "componentSelector": "table",
+      "data": {
+        "columns": [
+          {
+            "header": "Name",
+            "id": "name",
+            "property": "name"
+          },
+          {
+            "header": "Description",
+            "id": "description",
+            "property": "description"
+          }
+        ],
+        "rows": [
+          {
+            "name": "item",
+            "description": "item to cast into a string"
+          },
+          {
+            "name": "config",
+            "description": "config options to apply to the string after it has been cast"
+          }
+        ]
+      }
+    },
+    {
+      "title": "Returns",
+      "componentSelector": "markdown",
+      "data": "a string value of the given item"
+    }
+  ],
+  "docType": "function"
+}

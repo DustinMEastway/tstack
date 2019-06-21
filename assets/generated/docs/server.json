@@ -1,0 +1,77 @@
+{
+  "title": "@tstack/server",
+  "description": "The server module houses NodeJS server side functionality.\n",
+  "sections": [
+    {
+      "title": "Class(s)",
+      "componentSelector": "table",
+      "data": {
+        "columns": [
+          {
+            "id": "name",
+            "header": "Name",
+            "componentSelector": "link",
+            "property": "name"
+          },
+          {
+            "id": "description",
+            "header": "Description",
+            "property": "description"
+          }
+        ],
+        "rows": [
+          {
+            "name": {
+              "text": "Controller",
+              "url": "/server/Controller"
+            },
+            "description": ""
+          },
+          {
+            "name": {
+              "text": "SqlRepository",
+              "url": "/server/SqlRepository"
+            },
+            "description": ""
+          },
+          {
+            "name": {
+              "text": "Service",
+              "url": "/server/Service"
+            },
+            "description": ""
+          }
+        ]
+      }
+    },
+    {
+      "title": "Constant(s)",
+      "componentSelector": "table",
+      "data": {
+        "columns": [
+          {
+            "id": "name",
+            "header": "Name",
+            "componentSelector": "link",
+            "property": "name"
+          },
+          {
+            "id": "description",
+            "header": "Description",
+            "property": "description"
+          }
+        ],
+        "rows": [
+          {
+            "name": {
+              "text": "fileSystem",
+              "url": "/server/fileSystem"
+            },
+            "description": ""
+          }
+        ]
+      }
+    }
+  ],
+  "docType": "module"
+}

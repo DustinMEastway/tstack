@@ -1,0 +1,22 @@
+[
+	{
+		"name": "hasDuplicates (primatives)",
+		"description": "Has duplicates can be used to tell if an array contains two of the same primative values",
+		"examples": [
+			{
+				"name": "TS",
+				"contentFile": "core/array-has-duplicates/array-has-duplicates-primatives.ts"
+			}
+		]
+	},
+	{
+		"name": "hasDuplicates (objects)",
+		"description": "Has duplicates can also differentiate between objects using a provided property or comparator function",
+		"examples": [
+			{
+				"name": "TS",
+				"contentFile": "core/array-has-duplicates/array-has-duplicates-objects.ts"
+			}
+		]
+	}
+]

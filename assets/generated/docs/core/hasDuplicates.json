@@ -1,0 +1,67 @@
+{
+  "title": "hasDuplicates",
+  "description": "hasDuplicates determines if the array contains any duplicate values (must be sortable values like strings or numbers)",
+  "sections": [
+    {
+      "title": "Call(s)",
+      "componentSelector": "table",
+      "data": {
+        "columns": [
+          {
+            "id": "call"
+          }
+        ],
+        "rows": [
+          "function hasDuplicates(items: T[], config: Required<HasDuplicatesConfig<T[K], K>>): boolean,",
+          "function hasDuplicates(items: T[], config: Required<HasDuplicatesConfig<C, any>>): boolean,",
+          "function hasDuplicates(items: T[], config: { comparator(item1: T, item2: T): number; }): boolean,",
+          "function hasDuplicates(items: T[], config?: HasDuplicatesConfig<C, K>): boolean,",
+          "function hasDuplicates(items: T[], config?: HasDuplicatesConfig<C, any>): boolean"
+        ]
+      }
+    },
+    {
+      "title": "Parameter(s)",
+      "componentSelector": "table",
+      "data": {
+        "columns": [
+          {
+            "header": "Name",
+            "id": "name",
+            "property": "name"
+          },
+          {
+            "header": "Description",
+            "id": "description",
+            "property": "description"
+          }
+        ],
+        "rows": [
+          {
+            "name": "items",
+            "description": "items array that is checked for duplicates"
+          },
+          {
+            "name": "config",
+            "description": "config to customize how items are compared to determine equality @see HasDuplicatesConfig"
+          }
+        ]
+      }
+    },
+    {
+      "title": "Returns",
+      "componentSelector": "markdown",
+      "data": "whether any duplicates were found in the array"
+    },
+    {
+      "title": "Example(s)"
+    },
+    {
+      "componentSelector": "examples/core/has-duplicates-primatives"
+    },
+    {
+      "componentSelector": "examples/core/has-duplicates-objects"
+    }
+  ],
+  "docType": "function"
+}

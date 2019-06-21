@@ -1,0 +1,67 @@
+{
+  "title": "TskDelayableEvent",
+  "description": "",
+  "sections": [
+    {
+      "title": "Decorator(s)",
+      "componentSelector": "markdown",
+      "data": "```typescript\n\n```",
+      "display": false
+    },
+    {
+      "title": "Properties",
+      "componentSelector": "table",
+      "data": {
+        "columns": [
+          {
+            "componentSelector": "markdown",
+            "header": "Name",
+            "id": "name",
+            "property": "name"
+          },
+          {
+            "header": "Description",
+            "id": "description",
+            "property": "description"
+          }
+        ],
+        "rows": [
+          {
+            "name": "delays: Observable<never>",
+            "description": ""
+          }
+        ]
+      }
+    },
+    {
+      "title": "Method",
+      "componentSelector": "table",
+      "data": {
+        "columns": [
+          {
+            "componentSelector": "markdown",
+            "header": "Name",
+            "id": "name",
+            "property": "name"
+          },
+          {
+            "header": "Description",
+            "id": "description",
+            "property": "description"
+          }
+        ],
+        "rows": [
+          {
+            "name": "addDelay: void",
+            "description": "\nfunction addDelay(delay: Observable<any>): void"
+          },
+          {
+            "name": "cancel: void",
+            "description": "\nfunction cancel(): void"
+          }
+        ]
+      }
+    }
+  ],
+  "docType": "class"
+}

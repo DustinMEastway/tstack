@@ -1,0 +1,35 @@
+{
+  "title": "TskNavMenuModule",
+  "description": "",
+  "sections": [
+    {
+      "title": "Declaration(s)",
+      "componentSelector": "table",
+      "data": {
+        "columns": [
+          {
+            "id": "name",
+            "header": "Name",
+            "componentSelector": "link",
+            "property": "name"
+          },
+          {
+            "id": "description",
+            "header": "Description",
+            "property": "description"
+          }
+        ],
+        "rows": [
+          {
+            "description": "create a menu used for navigation",
+            "name": {
+              "text": "TskNavMenuComponent",
+              "url": "/client/TskNavMenuComponent"
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "docType": "ngmodule"
+}

@@ -1,0 +1,46 @@
+{
+  "title": "TskOption",
+  "description": "used for elements like the autocomeplete that display options",
+  "sections": [
+    {
+      "title": "Decorator(s)",
+      "componentSelector": "markdown",
+      "data": "```typescript\n\n```",
+      "display": false
+    },
+    {
+      "title": "Properties",
+      "componentSelector": "table",
+      "data": {
+        "columns": [
+          {
+            "componentSelector": "markdown",
+            "header": "Name",
+            "id": "name",
+            "property": "name"
+          },
+          {
+            "header": "Description",
+            "id": "description",
+            "property": "description"
+          }
+        ],
+        "rows": [
+          {
+            "name": "disabled: boolean",
+            "description": ""
+          },
+          {
+            "name": "viewValue: string",
+            "description": ""
+          },
+          {
+            "name": "value: T",
+            "description": ""
+          }
+        ]
+      }
+    }
+  ],
+  "docType": "class"
+}

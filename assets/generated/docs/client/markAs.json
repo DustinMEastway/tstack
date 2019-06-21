@@ -1,0 +1,35 @@
+{
+  "title": "markAs",
+  "description": "marks a control and all of its sub-controls as a given type",
+  "sections": [
+    {
+      "title": "Parameter(s)",
+      "componentSelector": "table",
+      "data": {
+        "columns": [
+          {
+            "header": "Name",
+            "id": "name",
+            "property": "name"
+          },
+          {
+            "header": "Description",
+            "id": "description",
+            "property": "description"
+          }
+        ],
+        "rows": [
+          {
+            "name": "control",
+            "description": "control to mark as a given type (usually a FormGroup or FormArray)"
+          },
+          {
+            "name": "type",
+            "description": "type to mark control and sub-controls as"
+          }
+        ]
+      }
+    }
+  ],
+  "docType": "function"
+}

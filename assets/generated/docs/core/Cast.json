@@ -1,0 +1,35 @@
+{
+  "title": "Cast",
+  "description": "Property/Accessor decorator that casts input values before setting them (optionally set and id when set is called)",
+  "sections": [
+    {
+      "title": "Parameter(s)",
+      "componentSelector": "table",
+      "data": {
+        "columns": [
+          {
+            "header": "Name",
+            "id": "name",
+            "property": "name"
+          },
+          {
+            "header": "Description",
+            "id": "description",
+            "property": "description"
+          }
+        ],
+        "rows": [
+          {
+            "name": "castType",
+            "description": "castType with a cast method used to convert set values to type the needed type"
+          },
+          {
+            "name": "idConfig",
+            "description": "idConfig used to set an id when set is called"
+          }
+        ]
+      }
+    }
+  ],
+  "docType": "function"
+}

@@ -1,0 +1,40 @@
+{
+  "title": "areEqual",
+  "description": "areSame determines if two arrays contain the same values in the same order",
+  "sections": [
+    {
+      "title": "Parameter(s)",
+      "componentSelector": "table",
+      "data": {
+        "columns": [
+          {
+            "header": "Name",
+            "id": "name",
+            "property": "name"
+          },
+          {
+            "header": "Description",
+            "id": "description",
+            "property": "description"
+          }
+        ],
+        "rows": [
+          {
+            "name": "items1",
+            "description": "items1 array of items to compare with items2"
+          },
+          {
+            "name": "items2",
+            "description": "items2 array of items to compare with items1"
+          }
+        ]
+      }
+    },
+    {
+      "title": "Returns",
+      "componentSelector": "markdown",
+      "data": "whether the two arrays contain the same values in the same order"
+    }
+  ],
+  "docType": "function"
+}

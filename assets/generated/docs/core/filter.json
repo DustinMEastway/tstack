@@ -1,0 +1,48 @@
+{
+  "title": "filter",
+  "description": "filters an array of values",
+  "sections": [
+    {
+      "title": "Parameter(s)",
+      "componentSelector": "table",
+      "data": {
+        "columns": [
+          {
+            "header": "Name",
+            "id": "name",
+            "property": "name"
+          },
+          {
+            "header": "Description",
+            "id": "description",
+            "property": "description"
+          }
+        ],
+        "rows": [
+          {
+            "name": "items",
+            "description": "items to filter"
+          },
+          {
+            "name": "filterValue",
+            "description": "filterValue used to determine whether an item should be kept or not"
+          },
+          {
+            "name": "property",
+            "description": "property to compare with for each item"
+          },
+          {
+            "name": "config",
+            "description": "config used to determine how to filter the values"
+          }
+        ]
+      }
+    },
+    {
+      "title": "Returns",
+      "componentSelector": "markdown",
+      "data": "filtered items"
+    }
+  ],
+  "docType": "function"
+}

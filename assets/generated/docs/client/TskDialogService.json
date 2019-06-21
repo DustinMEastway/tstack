@@ -1,0 +1,38 @@
+{
+  "title": "TskDialogService",
+  "description": "service to quickly and easily open dialogs",
+  "sections": [
+    {
+      "title": "Decorator(s)",
+      "componentSelector": "markdown",
+      "data": "```typescript\n@Injectable( )\n```",
+      "display": true
+    },
+    {
+      "title": "Method",
+      "componentSelector": "table",
+      "data": {
+        "columns": [
+          {
+            "componentSelector": "markdown",
+            "header": "Name",
+            "id": "name",
+            "property": "name"
+          },
+          {
+            "header": "Description",
+            "id": "description",
+            "property": "description"
+          }
+        ],
+        "rows": [
+          {
+            "name": "open: TskDialogComponent<any, ResultT>",
+            "description": "a new dialog"
+          }
+        ]
+      }
+    }
+  ],
+  "docType": "injectable"
+}

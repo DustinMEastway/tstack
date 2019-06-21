@@ -1,0 +1,40 @@
+{
+  "title": "sort",
+  "description": "sort an array",
+  "sections": [
+    {
+      "title": "Parameter(s)",
+      "componentSelector": "table",
+      "data": {
+        "columns": [
+          {
+            "header": "Name",
+            "id": "name",
+            "property": "name"
+          },
+          {
+            "header": "Description",
+            "id": "description",
+            "property": "description"
+          }
+        ],
+        "rows": [
+          {
+            "name": "items",
+            "description": "items array to sort"
+          },
+          {
+            "name": "sortProperties",
+            "description": "sortProperties used to determine which item in the array is larger"
+          }
+        ]
+      }
+    },
+    {
+      "title": "Returns",
+      "componentSelector": "markdown",
+      "data": "the sorted array"
+    }
+  ],
+  "docType": "function"
+}

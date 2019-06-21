@@ -1,0 +1,54 @@
+{
+  "title": "TskDialogActionButton",
+  "description": "action button typically used at the bottom of a dialog",
+  "sections": [
+    {
+      "title": "Decorator(s)",
+      "componentSelector": "markdown",
+      "data": "```typescript\n\n```",
+      "display": false
+    },
+    {
+      "title": "Properties",
+      "componentSelector": "table",
+      "data": {
+        "columns": [
+          {
+            "componentSelector": "markdown",
+            "header": "Name",
+            "id": "name",
+            "property": "name"
+          },
+          {
+            "header": "Description",
+            "id": "description",
+            "property": "description"
+          }
+        ],
+        "rows": [
+          {
+            "name": "action: (result: ResultT) => void",
+            "description": "to proform when button is clicked (default is to close the dialog)"
+          },
+          {
+            "name": "color: ThemePalette",
+            "description": "of the button (based on theme)"
+          },
+          {
+            "name": "type: 'raised' | 'stroked'",
+            "description": "of button to use (uses mat-button if no type is specified)"
+          },
+          {
+            "name": "viewValue: string",
+            "description": "to display within the button"
+          },
+          {
+            "name": "value: ResultT",
+            "description": "to pass to action if specified or to close the dialog if not"
+          }
+        ]
+      }
+    }
+  ],
+  "docType": "interface"
+}

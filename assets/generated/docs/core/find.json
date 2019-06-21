@@ -1,0 +1,60 @@
+{
+  "title": "find",
+  "description": "finds the first item in an array of items with its nested property set to the value to find",
+  "sections": [
+    {
+      "title": "Call(s)",
+      "componentSelector": "table",
+      "data": {
+        "columns": [
+          {
+            "id": "call"
+          }
+        ],
+        "rows": [
+          "function find(items: T[], valueToFind: T): T,",
+          "function find(items: T[], valueToFind: T[K], property: K): T,",
+          "function find(items: T[], valueToFind: any, property?: string): T"
+        ]
+      }
+    },
+    {
+      "title": "Parameter(s)",
+      "componentSelector": "table",
+      "data": {
+        "columns": [
+          {
+            "header": "Name",
+            "id": "name",
+            "property": "name"
+          },
+          {
+            "header": "Description",
+            "id": "description",
+            "property": "description"
+          }
+        ],
+        "rows": [
+          {
+            "name": "items",
+            "description": "items to search through for the value"
+          },
+          {
+            "name": "valueToFind",
+            "description": "valueToFind"
+          },
+          {
+            "name": "property",
+            "description": "property to look at when searching to the value to find"
+          }
+        ]
+      }
+    },
+    {
+      "title": "Returns",
+      "componentSelector": "markdown",
+      "data": "found value (or null if not found)"
+    }
+  ],
+  "docType": "function"
+}

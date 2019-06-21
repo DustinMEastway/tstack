@@ -1,0 +1,55 @@
+{
+  "title": "pluck",
+  "description": "gets the value at a given property off of each element in an array",
+  "sections": [
+    {
+      "title": "Call(s)",
+      "componentSelector": "table",
+      "data": {
+        "columns": [
+          {
+            "id": "call"
+          }
+        ],
+        "rows": [
+          "function pluck(items: T[], property: K): T[K][],",
+          "function pluck(items: any[], property: string): T[]"
+        ]
+      }
+    },
+    {
+      "title": "Parameter(s)",
+      "componentSelector": "table",
+      "data": {
+        "columns": [
+          {
+            "header": "Name",
+            "id": "name",
+            "property": "name"
+          },
+          {
+            "header": "Description",
+            "id": "description",
+            "property": "description"
+          }
+        ],
+        "rows": [
+          {
+            "name": "items",
+            "description": "items to get values from"
+          },
+          {
+            "name": "property",
+            "description": "property get off of each item"
+          }
+        ]
+      }
+    },
+    {
+      "title": "Returns",
+      "componentSelector": "markdown",
+      "data": "the value at the given property for each item in items"
+    }
+  ],
+  "docType": "function"
+}

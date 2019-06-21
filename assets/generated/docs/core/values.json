@@ -1,0 +1,51 @@
+{
+  "title": "values",
+  "description": "gets the values of all of the keys on the given item",
+  "sections": [
+    {
+      "title": "Call(s)",
+      "componentSelector": "table",
+      "data": {
+        "columns": [
+          {
+            "id": "call"
+          }
+        ],
+        "rows": [
+          "function values(item: T): T[K][],",
+          "function values(item: any): T[]"
+        ]
+      }
+    },
+    {
+      "title": "Parameter(s)",
+      "componentSelector": "table",
+      "data": {
+        "columns": [
+          {
+            "header": "Name",
+            "id": "name",
+            "property": "name"
+          },
+          {
+            "header": "Description",
+            "id": "description",
+            "property": "description"
+          }
+        ],
+        "rows": [
+          {
+            "name": "item",
+            "description": "item to pull values from"
+          }
+        ]
+      }
+    },
+    {
+      "title": "Returns",
+      "componentSelector": "markdown",
+      "data": "values of each property on the item"
+    }
+  ],
+  "docType": "function"
+}

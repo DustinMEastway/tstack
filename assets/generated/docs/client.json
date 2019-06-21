@@ -1,0 +1,364 @@
+{
+  "title": "@tstack/client",
+  "description": "The client module aims to make setting up an Angular app as painless as possible. That means that instead of spending time setting up a filter algorithm for your autocomplete, you can focus on things like page layout and business logic.\n\nThis module uses [Angular Material](https://material.angular.io) for its design and animations and in many cases will simply extend what they already have. As it is a peer dependency, use of the material components should be available for use after importing the appropriate modules.\n",
+  "sections": [
+    {
+      "title": "NgModule(s)",
+      "componentSelector": "table",
+      "data": {
+        "columns": [
+          {
+            "id": "name",
+            "header": "Name",
+            "componentSelector": "link",
+            "property": "name"
+          },
+          {
+            "id": "description",
+            "header": "Description",
+            "property": "description"
+          }
+        ],
+        "rows": [
+          {
+            "name": {
+              "text": "TskAutocompleteModule",
+              "url": "/client/TskAutocompleteModule"
+            },
+            "description": ""
+          },
+          {
+            "name": {
+              "text": "TskDynamicContentModule",
+              "url": "/client/TskDynamicContentModule"
+            },
+            "description": ""
+          },
+          {
+            "name": {
+              "text": "TskDialogModule",
+              "url": "/client/TskDialogModule"
+            },
+            "description": ""
+          },
+          {
+            "name": {
+              "text": "TskNavMenuModule",
+              "url": "/client/TskNavMenuModule"
+            },
+            "description": ""
+          },
+          {
+            "name": {
+              "text": "TskReadonlyFieldModule",
+              "url": "/client/TskReadonlyFieldModule"
+            },
+            "description": ""
+          },
+          {
+            "name": {
+              "text": "TskSparkleModule",
+              "url": "/client/TskSparkleModule"
+            },
+            "description": ""
+          },
+          {
+            "name": {
+              "text": "TskThemeModule",
+              "url": "/client/TskThemeModule"
+            },
+            "description": ""
+          }
+        ]
+      }
+    },
+    {
+      "title": "Component(s)",
+      "componentSelector": "table",
+      "data": {
+        "columns": [
+          {
+            "id": "name",
+            "header": "Name",
+            "componentSelector": "link",
+            "property": "name"
+          },
+          {
+            "id": "description",
+            "header": "Description",
+            "property": "description"
+          }
+        ],
+        "rows": [
+          {
+            "name": {
+              "text": "TskAutocompleteComponent",
+              "url": "/client/TskAutocompleteComponent"
+            },
+            "description": "used to display an autocomplete with some features (such as several filter types) built in"
+          },
+          {
+            "name": {
+              "text": "TskDynamicContentComponent",
+              "url": "/client/TskDynamicContentComponent"
+            },
+            "description": "used to dynamically create Angular entry components"
+          },
+          {
+            "name": {
+              "text": "TskDialogComponent",
+              "url": "/client/TskDialogComponent"
+            },
+            "description": "used within a material dialog to display content"
+          },
+          {
+            "name": {
+              "text": "TskNavMenuComponent",
+              "url": "/client/TskNavMenuComponent"
+            },
+            "description": "create a menu used for navigation"
+          },
+          {
+            "name": {
+              "text": "TskReadonlyFieldComponent",
+              "url": "/client/TskReadonlyFieldComponent"
+            },
+            "description": "The tsk-readonly-field component is used to display readonly information in a manor that is consistant with mat-form-field.\n"
+          },
+          {
+            "name": {
+              "text": "TskThemeSelectComponent",
+              "url": "/client/TskThemeSelectComponent"
+            },
+            "description": "used to change themes that exist in the theme selection service"
+          }
+        ]
+      }
+    },
+    {
+      "title": "Directive(s)",
+      "componentSelector": "table",
+      "data": {
+        "columns": [
+          {
+            "id": "name",
+            "header": "Name",
+            "componentSelector": "link",
+            "property": "name"
+          },
+          {
+            "id": "description",
+            "header": "Description",
+            "property": "description"
+          }
+        ],
+        "rows": [
+          {
+            "name": {
+              "text": "TskSparkleDirective",
+              "url": "/client/TskSparkleDirective"
+            },
+            "description": "used to make the component that the directive is attached to sparkle"
+          }
+        ]
+      }
+    },
+    {
+      "title": "Service(s)",
+      "componentSelector": "table",
+      "data": {
+        "columns": [
+          {
+            "id": "name",
+            "header": "Name",
+            "componentSelector": "link",
+            "property": "name"
+          },
+          {
+            "id": "description",
+            "header": "Description",
+            "property": "description"
+          }
+        ],
+        "rows": [
+          {
+            "name": {
+              "text": "TskDialogService",
+              "url": "/client/TskDialogService"
+            },
+            "description": "service to quickly and easily open dialogs"
+          },
+          {
+            "name": {
+              "text": "TskThemeSelectionService",
+              "url": "/client/TskThemeSelectionService"
+            },
+            "description": "used to keep track of available themes and the currently selected theme"
+          }
+        ]
+      }
+    },
+    {
+      "title": "Class(s)",
+      "componentSelector": "table",
+      "data": {
+        "columns": [
+          {
+            "id": "name",
+            "header": "Name",
+            "componentSelector": "link",
+            "property": "name"
+          },
+          {
+            "id": "description",
+            "header": "Description",
+            "property": "description"
+          }
+        ],
+        "rows": [
+          {
+            "name": {
+              "text": "EntityComponent",
+              "url": "/client/EntityComponent"
+            },
+            "description": "component used to add, edit & view an entity"
+          },
+          {
+            "name": {
+              "text": "TskOption",
+              "url": "/client/TskOption"
+            },
+            "description": "used for elements like the autocomeplete that display options"
+          },
+          {
+            "name": {
+              "text": "TskBaseApiService",
+              "url": "/client/TskBaseApiService"
+            },
+            "description": "base api for application services to extend"
+          },
+          {
+            "name": {
+              "text": "TskBaseGraphqlService",
+              "url": "/client/TskBaseGraphqlService"
+            },
+            "description": "base GraphQL api for application services to extend"
+          }
+        ]
+      }
+    },
+    {
+      "title": "Interface(s)",
+      "componentSelector": "table",
+      "data": {
+        "columns": [
+          {
+            "id": "name",
+            "header": "Name",
+            "componentSelector": "link",
+            "property": "name"
+          },
+          {
+            "id": "description",
+            "header": "Description",
+            "property": "description"
+          }
+        ],
+        "rows": [
+          {
+            "name": {
+              "text": "TskDialogActionButton",
+              "url": "/client/TskDialogActionButton"
+            },
+            "description": "action button typically used at the bottom of a dialog"
+          },
+          {
+            "name": {
+              "text": "TskDialogConfig",
+              "url": "/client/TskDialogConfig"
+            },
+            "description": "cofiguration of a dialog component"
+          },
+          {
+            "name": {
+              "text": "TskNavMenuConfig",
+              "url": "/client/TskNavMenuConfig"
+            },
+            "description": "menu configuration for the tsk-nav-menu component"
+          },
+          {
+            "name": {
+              "text": "TskSparkleParticle",
+              "url": "/client/TskSparkleParticle"
+            },
+            "description": "object used to track a sparkle particle on the screen"
+          },
+          {
+            "name": {
+              "text": "TskSparkleConfig",
+              "url": "/client/TskSparkleConfig"
+            },
+            "description": "configuration for the tskSparkle directive"
+          }
+        ]
+      }
+    },
+    {
+      "title": "Function(s)",
+      "componentSelector": "table",
+      "data": {
+        "columns": [
+          {
+            "id": "name",
+            "header": "Name",
+            "componentSelector": "link",
+            "property": "name"
+          },
+          {
+            "id": "description",
+            "header": "Description",
+            "property": "description"
+          }
+        ],
+        "rows": [
+          {
+            "name": {
+              "text": "markAs",
+              "url": "/client/markAs"
+            },
+            "description": "marks a control and all of its sub-controls as a given type"
+          }
+        ]
+      }
+    },
+    {
+      "title": "Enumerable(s)",
+      "componentSelector": "table",
+      "data": {
+        "columns": [
+          {
+            "id": "name",
+            "header": "Name",
+            "componentSelector": "link",
+            "property": "name"
+          },
+          {
+            "id": "description",
+            "header": "Description",
+            "property": "description"
+          }
+        ],
+        "rows": [
+          {
+            "name": {
+              "text": "EntityComponentMode",
+              "url": "/client/EntityComponentMode"
+            },
+            "description": "modes available for displaying an EntityComponent"
+          }
+        ]
+      }
+    }
+  ],
+  "docType": "module"
+}

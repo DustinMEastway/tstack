@@ -1,0 +1,42 @@
+{
+  "title": "CastDecoratorIdConfig",
+  "description": "",
+  "sections": [
+    {
+      "title": "Decorator(s)",
+      "componentSelector": "markdown",
+      "data": "```typescript\n\n```",
+      "display": false
+    },
+    {
+      "title": "Properties",
+      "componentSelector": "table",
+      "data": {
+        "columns": [
+          {
+            "componentSelector": "markdown",
+            "header": "Name",
+            "id": "name",
+            "property": "name"
+          },
+          {
+            "header": "Description",
+            "id": "description",
+            "property": "description"
+          }
+        ],
+        "rows": [
+          {
+            "name": "getId: string",
+            "description": "{string} getId deepkeyof the set object to get the id property from"
+          },
+          {
+            "name": "setId: string",
+            "description": "{string} setId deepkeyof the decorated object (target) to set the id property on"
+          }
+        ]
+      }
+    }
+  ],
+  "docType": "interface"
+}

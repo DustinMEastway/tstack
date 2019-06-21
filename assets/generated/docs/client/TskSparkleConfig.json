@@ -1,0 +1,54 @@
+{
+  "title": "TskSparkleConfig",
+  "description": "configuration for the tskSparkle directive",
+  "sections": [
+    {
+      "title": "Decorator(s)",
+      "componentSelector": "markdown",
+      "data": "```typescript\n\n```",
+      "display": false
+    },
+    {
+      "title": "Properties",
+      "componentSelector": "table",
+      "data": {
+        "columns": [
+          {
+            "componentSelector": "markdown",
+            "header": "Name",
+            "id": "name",
+            "property": "name"
+          },
+          {
+            "header": "Description",
+            "id": "description",
+            "property": "description"
+          }
+        ],
+        "rows": [
+          {
+            "name": "color: string | string[]",
+            "description": "(or colors) used to generate sparkles (use 'rainbow' for an assortment of colors)"
+          },
+          {
+            "name": "count: number",
+            "description": "number of sparkle particles to create"
+          },
+          {
+            "name": "overlap: number",
+            "description": "number of pixles out of the sparkling component to allow sparkles to be created"
+          },
+          {
+            "name": "sparkling: boolean",
+            "description": "whether the component should be sparkling"
+          },
+          {
+            "name": "speed: number",
+            "description": "how fast to fade sparkles in and out"
+          }
+        ]
+      }
+    }
+  ],
+  "docType": "interface"
+}

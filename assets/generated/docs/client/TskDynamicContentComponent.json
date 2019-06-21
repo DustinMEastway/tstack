@@ -1,0 +1,79 @@
+{
+  "title": "TskDynamicContentComponent",
+  "description": "used to dynamically create Angular entry components",
+  "sections": [
+    {
+      "title": "Decorator(s)",
+      "componentSelector": "markdown",
+      "data": "```typescript\n@Component({\n    selector: 'tsk-dynamic-content',\n    template: ''\n})\n```",
+      "display": true
+    },
+    {
+      "title": "Properties",
+      "componentSelector": "table",
+      "data": {
+        "columns": [
+          {
+            "componentSelector": "markdown",
+            "header": "Name",
+            "id": "name",
+            "property": "name"
+          },
+          {
+            "header": "Description",
+            "id": "description",
+            "property": "description"
+          }
+        ],
+        "rows": [
+          {
+            "name": "content: ComponentRef<ComponentT>",
+            "description": ""
+          },
+          {
+            "name": "@Output( )\n\ncontentChange: Observable<ComponentRef<ComponentT>>",
+            "description": ""
+          },
+          {
+            "name": "@Input( )\n\ncomponentType: Type<ComponentT>",
+            "description": ""
+          },
+          {
+            "name": "@Output( )\n\ncomponentTypeChange: Observable<Type<ComponentT>>",
+            "description": ""
+          }
+        ]
+      }
+    },
+    {
+      "title": "Method",
+      "componentSelector": "table",
+      "data": {
+        "columns": [
+          {
+            "componentSelector": "markdown",
+            "header": "Name",
+            "id": "name",
+            "property": "name"
+          },
+          {
+            "header": "Description",
+            "id": "description",
+            "property": "description"
+          }
+        ],
+        "rows": [
+          {
+            "name": "clearContent: void",
+            "description": "of the dynamic component"
+          },
+          {
+            "name": "updateContent: ComponentRef<T>",
+            "description": "using the given component type"
+          }
+        ]
+      }
+    }
+  ],
+  "docType": "component"
+}

@@ -1,0 +1,121 @@
+{
+  "title": "TskReadonlyFieldComponent",
+  "description": "The tsk-readonly-field component is used to display readonly information in a manor that is consistant with mat-form-field.\n",
+  "sections": [
+    {
+      "title": "Decorator(s)",
+      "componentSelector": "markdown",
+      "data": "```typescript\n@Component({\n    selector: 'tsk-readonly-field',\n    templateUrl: './readonly-field.component.html',\n    styleUrls: ['./readonly-field.component.scss']\n})\n```",
+      "display": true
+    },
+    {
+      "title": "Properties",
+      "componentSelector": "table",
+      "data": {
+        "columns": [
+          {
+            "componentSelector": "markdown",
+            "header": "Name",
+            "id": "name",
+            "property": "name"
+          },
+          {
+            "header": "Description",
+            "id": "description",
+            "property": "description"
+          }
+        ],
+        "rows": [
+          {
+            "name": "@HostBinding('class.mat-form-field')\n@HostBinding('class.mat-form-field-can-float')\n@HostBinding('class.mat-form-field-should-float')\n\n_addMatFormFieldClass: true",
+            "description": ""
+          },
+          {
+            "name": "@HostBinding('class.mat-form-field-appearance-standard')\n\n_addMatStandardAppearanceClass: boolean",
+            "description": ""
+          },
+          {
+            "name": "@HostBinding('class.mat-form-field-appearance-fill')\n\n_addMatFillAppearanceClass: boolean",
+            "description": ""
+          },
+          {
+            "name": "@HostBinding('class.mat-form-field-appearance-outline')\n\n_addMatOutlineAppearanceClass: boolean",
+            "description": ""
+          },
+          {
+            "name": "@HostBinding('class.mat-form-field-appearance-legacy')\n\n_addMatLegacyAppearanceClass: boolean",
+            "description": ""
+          },
+          {
+            "name": "@Input( )\n\nappearance: MatFormFieldAppearance",
+            "description": ""
+          },
+          {
+            "name": "@Input( )\n\ndisplayWith: ((value: ValueT) => string) | string",
+            "description": ""
+          },
+          {
+            "name": "displayWithFunction: (value: ValueT) => string",
+            "description": ""
+          },
+          {
+            "name": "outlineGapWidth: number",
+            "description": ""
+          },
+          {
+            "name": "outlineGapStart: number",
+            "description": ""
+          },
+          {
+            "name": "@Input( )\n\nplaceholder: string",
+            "description": ""
+          },
+          {
+            "name": "@Input( )\n\nvalue: ValueT | ValueT[]",
+            "description": ""
+          },
+          {
+            "name": "valueArray: ValueT[]",
+            "description": ""
+          }
+        ]
+      }
+    },
+    {
+      "title": "Method",
+      "componentSelector": "table",
+      "data": {
+        "columns": [
+          {
+            "componentSelector": "markdown",
+            "header": "Name",
+            "id": "name",
+            "property": "name"
+          },
+          {
+            "header": "Description",
+            "id": "description",
+            "property": "description"
+          }
+        ],
+        "rows": [
+          {
+            "name": "ngOnInit: void",
+            "description": "\nfunction ngOnInit(): void"
+          }
+        ]
+      }
+    },
+    {
+      "title": "Example(s)"
+    },
+    {
+      "componentSelector": "markdown",
+      "data": "Four appearance options are available to match the associated mat-form-field appearance options."
+    },
+    {
+      "componentSelector": "examples/client/readonly-field-appearance"
+    }
+  ],
+  "docType": "component"
+}

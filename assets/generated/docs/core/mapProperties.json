@@ -1,0 +1,44 @@
+{
+  "title": "mapProperties",
+  "description": "gets each property from the source and sets them on the target",
+  "sections": [
+    {
+      "title": "Parameter(s)",
+      "componentSelector": "table",
+      "data": {
+        "columns": [
+          {
+            "header": "Name",
+            "id": "name",
+            "property": "name"
+          },
+          {
+            "header": "Description",
+            "id": "description",
+            "property": "description"
+          }
+        ],
+        "rows": [
+          {
+            "name": "target",
+            "description": "target object to map values to"
+          },
+          {
+            "name": "source",
+            "description": "source object to get values from"
+          },
+          {
+            "name": "overwrite",
+            "description": "overwrite non-null values of target it true"
+          }
+        ]
+      }
+    },
+    {
+      "title": "Returns",
+      "componentSelector": "markdown",
+      "data": "target object after the mapping has occurred"
+    }
+  ],
+  "docType": "function"
+}

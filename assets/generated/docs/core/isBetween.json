@@ -1,0 +1,43 @@
+{
+  "title": "isBetween",
+  "description": "checks if a value is between two other values",
+  "sections": [
+    {
+      "title": "Parameter(s)",
+      "componentSelector": "table",
+      "data": {
+        "columns": [
+          {
+            "header": "Name",
+            "id": "name",
+            "property": "name"
+          },
+          {
+            "header": "Description",
+            "id": "description",
+            "property": "description"
+          }
+        ],
+        "rows": [
+          {
+            "name": "value",
+            "description": "value checked to see if it is between min and max"
+          },
+          {
+            "name": "min",
+            "description": "min value that value must be greater than (or equal too depending on config.endpoints)"
+          },
+          {
+            "name": "max",
+            "description": "max value that value must be less than (or equal too depending on config.endpoints)"
+          },
+          {
+            "name": "config",
+            "description": "config used to determine if the value is between min and max @see IsBetweenConfig"
+          }
+        ]
+      }
+    }
+  ],
+  "docType": "function"
+}

@@ -1,0 +1,63 @@
+{
+  "title": "TskDialogModule",
+  "description": "",
+  "sections": [
+    {
+      "title": "Declaration(s)",
+      "componentSelector": "table",
+      "data": {
+        "columns": [
+          {
+            "id": "name",
+            "header": "Name",
+            "componentSelector": "link",
+            "property": "name"
+          },
+          {
+            "id": "description",
+            "header": "Description",
+            "property": "description"
+          }
+        ],
+        "rows": [
+          {
+            "description": "used within a material dialog to display content",
+            "name": {
+              "text": "TskDialogComponent",
+              "url": "/client/TskDialogComponent"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "title": "Provider(s)",
+      "componentSelector": "table",
+      "data": {
+        "columns": [
+          {
+            "id": "name",
+            "header": "Name",
+            "componentSelector": "link",
+            "property": "name"
+          },
+          {
+            "id": "description",
+            "header": "Description",
+            "property": "description"
+          }
+        ],
+        "rows": [
+          {
+            "description": "service to quickly and easily open dialogs",
+            "name": {
+              "text": "TskDialogService",
+              "url": "/client/TskDialogService"
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "docType": "ngmodule"
+}

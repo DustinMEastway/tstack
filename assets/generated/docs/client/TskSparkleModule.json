@@ -1,0 +1,35 @@
+{
+  "title": "TskSparkleModule",
+  "description": "",
+  "sections": [
+    {
+      "title": "Declaration(s)",
+      "componentSelector": "table",
+      "data": {
+        "columns": [
+          {
+            "id": "name",
+            "header": "Name",
+            "componentSelector": "link",
+            "property": "name"
+          },
+          {
+            "id": "description",
+            "header": "Description",
+            "property": "description"
+          }
+        ],
+        "rows": [
+          {
+            "description": "used to make the component that the directive is attached to sparkle",
+            "name": {
+              "text": "TskSparkleDirective",
+              "url": "/client/TskSparkleDirective"
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "docType": "ngmodule"
+}

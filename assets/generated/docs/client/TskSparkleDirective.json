@@ -1,0 +1,75 @@
+{
+  "title": "TskSparkleDirective",
+  "description": "used to make the component that the directive is attached to sparkle",
+  "sections": [
+    {
+      "title": "Decorator(s)",
+      "componentSelector": "markdown",
+      "data": "```typescript\n@Directive({\n    selector: '[tskSparkle]'\n})\n```",
+      "display": true
+    },
+    {
+      "title": "Properties",
+      "componentSelector": "table",
+      "data": {
+        "columns": [
+          {
+            "componentSelector": "markdown",
+            "header": "Name",
+            "id": "name",
+            "property": "name"
+          },
+          {
+            "header": "Description",
+            "id": "description",
+            "property": "description"
+          }
+        ],
+        "rows": [
+          {
+            "name": "@HostBinding('class.tsk-sparkle')\n\naddTskSparkle: boolean",
+            "description": ""
+          },
+          {
+            "name": "overlapChange: Observable<number>",
+            "description": ""
+          },
+          {
+            "name": "@Input('tskSparkle')\n\nsettings: TskSparkleConfig",
+            "description": ""
+          },
+          {
+            "name": "sparklingChange: Observable<boolean>",
+            "description": ""
+          }
+        ]
+      }
+    },
+    {
+      "title": "Method",
+      "componentSelector": "table",
+      "data": {
+        "columns": [
+          {
+            "componentSelector": "markdown",
+            "header": "Name",
+            "id": "name",
+            "property": "name"
+          },
+          {
+            "header": "Description",
+            "id": "description",
+            "property": "description"
+          }
+        ],
+        "rows": [
+          {
+            "name": "ngOnInit: void",
+            "description": "\nfunction ngOnInit(): void"
+          }
+        ]
+      }
+    }
+  ],
+  "docType": "directive"
+}

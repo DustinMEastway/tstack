@@ -1,0 +1,51 @@
+{
+  "title": "deepCopy",
+  "description": "create a copy of the given item (resulting object will be a json object without methods)",
+  "sections": [
+    {
+      "title": "Call(s)",
+      "componentSelector": "table",
+      "data": {
+        "columns": [
+          {
+            "id": "call"
+          }
+        ],
+        "rows": [
+          "function deepCopy(item: any): T,",
+          "function deepCopy(item: any): any"
+        ]
+      }
+    },
+    {
+      "title": "Parameter(s)",
+      "componentSelector": "table",
+      "data": {
+        "columns": [
+          {
+            "header": "Name",
+            "id": "name",
+            "property": "name"
+          },
+          {
+            "header": "Description",
+            "id": "description",
+            "property": "description"
+          }
+        ],
+        "rows": [
+          {
+            "name": "item",
+            "description": "item to copy"
+          }
+        ]
+      }
+    },
+    {
+      "title": "Returns",
+      "componentSelector": "markdown",
+      "data": "a copy of the provided item"
+    }
+  ],
+  "docType": "function"
+}

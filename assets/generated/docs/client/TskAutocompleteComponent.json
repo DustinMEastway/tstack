@@ -1,0 +1,207 @@
+{
+  "title": "TskAutocompleteComponent",
+  "description": "used to display an autocomplete with some features (such as several filter types) built in",
+  "sections": [
+    {
+      "title": "Decorator(s)",
+      "componentSelector": "markdown",
+      "data": "```typescript\n@Component({\n    selector: 'tsk-autocomplete',\n    templateUrl: './autocomplete.component.html',\n    styleUrls: ['./autocomplete.component.scss'],\n    providers: [\n        {\n            provide: NG_VALUE_ACCESSOR,\n            useExisting: forwardRef(() => TskAutocompleteComponent),\n            multi: true\n        }\n    ]\n})\n```",
+      "display": true
+    },
+    {
+      "title": "Properties",
+      "componentSelector": "table",
+      "data": {
+        "columns": [
+          {
+            "componentSelector": "markdown",
+            "header": "Name",
+            "id": "name",
+            "property": "name"
+          },
+          {
+            "header": "Description",
+            "id": "description",
+            "property": "description"
+          }
+        ],
+        "rows": [
+          {
+            "name": "@Input( )\n\nappearance: MatFormFieldAppearance",
+            "description": "the type of form field to display"
+          },
+          {
+            "name": "@ViewChild(MatAutocomplete)\n\nmatAutocomplete: MatAutocomplete",
+            "description": "the material autocomplete"
+          },
+          {
+            "name": "@Input( )\n\nplaceholder: string",
+            "description": "displayed in the input of the autocomplete"
+          },
+          {
+            "name": "@Input( )\n\nautoSelect: boolean",
+            "description": "whether typing can select the matching option or if options must be clicked"
+          },
+          {
+            "name": "@Input( )\n\ncaseSensitive: boolean",
+            "description": "whether the filter and auto select is case sensitive"
+          },
+          {
+            "name": "@Output( )\n\ncaseSensitiveChange: Observable<boolean>",
+            "description": "emits when case sensitivity changes"
+          },
+          {
+            "name": "@Input( )\n\ndisabled: boolean",
+            "description": "whether the input can be interacted with in the UI"
+          },
+          {
+            "name": "@Input( )\n\nfilter: string",
+            "description": "value used to filter options, update value if auto select is active and update the autocomplete's input's value"
+          },
+          {
+            "name": "@Output( )\n\nfilterChange: Observable<string>",
+            "description": "emits when the filter value changes"
+          },
+          {
+            "name": "filterConfig: TskFilterConfig",
+            "description": "full configuration used to filter options"
+          },
+          {
+            "name": "@Output( )\n\nfilterConfigChange: Observable<TskFilterConfig>",
+            "description": "emits when any aspect of the filters configuration is updated"
+          },
+          {
+            "name": "@Input( )\n\nfilterType: 'contains' | 'startsWith'",
+            "description": "type of filter used to determine which options should be displayed"
+          },
+          {
+            "name": "@Output( )\n\nfilterTypeChange: Observable<'contains' | 'startsWith'>",
+            "description": "emits when filter type is changed"
+          },
+          {
+            "name": "filterTypeIcon: 'format_align_center' | 'format_align_left'",
+            "description": "mat icon ligature used to represent the current filter type in the filter type button"
+          },
+          {
+            "name": "@Output( )\n\nfilteredOptions: Observable<TskOption<OptionValueT>[]>",
+            "description": "emits when the filtered options change"
+          },
+          {
+            "name": "filteredOptionsExist: boolean",
+            "description": "whether there are any options that match the current filter"
+          },
+          {
+            "name": "getViewOfValue: (value: OptionValueT) => string",
+            "description": "function used to get the view value of a value"
+          },
+          {
+            "name": "@Input( )\n\nmaxDisplayedOptions: number",
+            "description": "maximum number of options to display at once (-1 to display all)"
+          },
+          {
+            "name": "@Output( )\n\nmaxDisplayedOptionsChange: Observable<number>",
+            "description": "emits when maximum number of options to display is changed"
+          },
+          {
+            "name": "optionFilterControl: FormControl",
+            "description": "form control of the autocomplete's input"
+          },
+          {
+            "name": "@Input( )\n\noptionValues: OptionValueT[]",
+            "description": "values of the options of the autocomplete"
+          },
+          {
+            "name": "@Input( )\n\noptions: TskOption<OptionValueT>[]",
+            "description": "of the autocomplete"
+          },
+          {
+            "name": "selectedOption: TskOption<OptionValueT>",
+            "description": "option currently selected by the autocomplete"
+          },
+          {
+            "name": "@Input( )\n\nselectedValue: OptionValueT",
+            "description": "the value associated with the selected option"
+          },
+          {
+            "name": "@Output( )\n\nselectedValueChange: Observable<OptionValueT>",
+            "description": "emits when the selected value of the autocomplete changes"
+          },
+          {
+            "name": "@Input( )\n\nshowCaseSensitive: boolean",
+            "description": "whether the case sensitive button should be displayed"
+          },
+          {
+            "name": "@Input( )\n\nshowFilterType: boolean",
+            "description": "whether the filter type button should be displayed"
+          },
+          {
+            "name": "@Input( )\n\nvalue: OptionValueT | string",
+            "description": "selected value of the autocomplete"
+          },
+          {
+            "name": "valueChange: Observable<OptionValueT | string>",
+            "description": "emits when the value of the filter or control changes"
+          },
+          {
+            "name": "@Input( )\n\nviewProperty: string",
+            "description": "property to get off of value to display in the options and use to compare options for auto select"
+          }
+        ]
+      }
+    },
+    {
+      "title": "Method",
+      "componentSelector": "table",
+      "data": {
+        "columns": [
+          {
+            "componentSelector": "markdown",
+            "header": "Name",
+            "id": "name",
+            "property": "name"
+          },
+          {
+            "header": "Description",
+            "id": "description",
+            "property": "description"
+          }
+        ],
+        "rows": [
+          {
+            "name": "ngOnInit: void",
+            "description": "initialize the autocomplete component"
+          },
+          {
+            "name": "ngAfterViewInit: void",
+            "description": "finish itializing properties that are not available by ngOnInit"
+          },
+          {
+            "name": "onChangeFilterTypeClick: void",
+            "description": "change the filter type to the next option"
+          },
+          {
+            "name": "onFocus: void",
+            "description": "register that the form control has been touched"
+          },
+          {
+            "name": "registerOnChange: void",
+            "description": "get the method used to notify the form that the autocomplete's value has changed"
+          },
+          {
+            "name": "registerOnTouched: void",
+            "description": "get the method used to notify the form when the autocomplete is touched"
+          },
+          {
+            "name": "setDisabledState: void",
+            "description": "set the disabled state through the form"
+          },
+          {
+            "name": "writeValue: void",
+            "description": "set the value through the form"
+          }
+        ]
+      }
+    }
+  ],
+  "docType": "component"
+}

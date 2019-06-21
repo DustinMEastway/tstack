@@ -1,0 +1,71 @@
+{
+  "title": "TskNavMenuComponent",
+  "description": "create a menu used for navigation",
+  "sections": [
+    {
+      "title": "Decorator(s)",
+      "componentSelector": "markdown",
+      "data": "```typescript\n@Component({\n    selector: 'tsk-nav-menu',\n    templateUrl: './nav-menu.component.html',\n    styleUrls: ['./nav-menu.component.scss']\n})\n```",
+      "display": true
+    },
+    {
+      "title": "Properties",
+      "componentSelector": "table",
+      "data": {
+        "columns": [
+          {
+            "componentSelector": "markdown",
+            "header": "Name",
+            "id": "name",
+            "property": "name"
+          },
+          {
+            "header": "Description",
+            "id": "description",
+            "property": "description"
+          }
+        ],
+        "rows": [
+          {
+            "name": "@Output( )\n\nnavItemSelected: EventEmitter<string[]>",
+            "description": ""
+          },
+          {
+            "name": "@Input( )\n\nmenuConfig: TskNavMenuConfig",
+            "description": ""
+          },
+          {
+            "name": "@Input( )\n\nnavigate: boolean",
+            "description": ""
+          }
+        ]
+      }
+    },
+    {
+      "title": "Method",
+      "componentSelector": "table",
+      "data": {
+        "columns": [
+          {
+            "componentSelector": "markdown",
+            "header": "Name",
+            "id": "name",
+            "property": "name"
+          },
+          {
+            "header": "Description",
+            "id": "description",
+            "property": "description"
+          }
+        ],
+        "rows": [
+          {
+            "name": "onNavItemClick: void",
+            "description": "\nfunction onNavItemClick(selectedPath: string[]): void"
+          }
+        ]
+      }
+    }
+  ],
+  "docType": "component"
+}

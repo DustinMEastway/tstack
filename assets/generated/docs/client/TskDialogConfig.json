@@ -1,0 +1,54 @@
+{
+  "title": "TskDialogConfig",
+  "description": "cofiguration of a dialog component",
+  "sections": [
+    {
+      "title": "Decorator(s)",
+      "componentSelector": "markdown",
+      "data": "```typescript\n\n```",
+      "display": false
+    },
+    {
+      "title": "Properties",
+      "componentSelector": "table",
+      "data": {
+        "columns": [
+          {
+            "componentSelector": "markdown",
+            "header": "Name",
+            "id": "name",
+            "property": "name"
+          },
+          {
+            "header": "Description",
+            "id": "description",
+            "property": "description"
+          }
+        ],
+        "rows": [
+          {
+            "name": "actionButtons: (TskDialogActionButton<ResultT> | string)[]",
+            "description": "to display at the bottom of the page"
+          },
+          {
+            "name": "content: ContentT",
+            "description": "to display in the center of the dialog"
+          },
+          {
+            "name": "disableClose: boolean",
+            "description": "disables closing the dialog by clicking on the backdrop"
+          },
+          {
+            "name": "title: string",
+            "description": "at the top of the dialog"
+          },
+          {
+            "name": "type: TskDialogType",
+            "description": "of dialog used to determine the title icon and color"
+          }
+        ]
+      }
+    }
+  ],
+  "docType": "interface"
+}

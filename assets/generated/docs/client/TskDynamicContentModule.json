@@ -1,0 +1,35 @@
+{
+  "title": "TskDynamicContentModule",
+  "description": "",
+  "sections": [
+    {
+      "title": "Declaration(s)",
+      "componentSelector": "table",
+      "data": {
+        "columns": [
+          {
+            "id": "name",
+            "header": "Name",
+            "componentSelector": "link",
+            "property": "name"
+          },
+          {
+            "id": "description",
+            "header": "Description",
+            "property": "description"
+          }
+        ],
+        "rows": [
+          {
+            "description": "used to dynamically create Angular entry components",
+            "name": {
+              "text": "TskDynamicContentComponent",
+              "url": "/client/TskDynamicContentComponent"
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "docType": "ngmodule"
+}

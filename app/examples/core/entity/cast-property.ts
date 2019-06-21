@@ -15,5 +15,5 @@ const json = { firstName: 'Agent', lastName: 'Smith' };
 // cast to the Villian type to access its properties and methods
 const villian = Villian.cast(json);
 
-// outputs 'Agent Smith'
+// outputs: 'Agent Smith'
 console.log(villian.firstName);

@@ -1,0 +1,42 @@
+{
+  "title": "CastStringConfig",
+  "description": "configuration for castString method",
+  "sections": [
+    {
+      "title": "Decorator(s)",
+      "componentSelector": "markdown",
+      "data": "```typescript\n\n```",
+      "display": false
+    },
+    {
+      "title": "Properties",
+      "componentSelector": "table",
+      "data": {
+        "columns": [
+          {
+            "componentSelector": "markdown",
+            "header": "Name",
+            "id": "name",
+            "property": "name"
+          },
+          {
+            "header": "Description",
+            "id": "description",
+            "property": "description"
+          }
+        ],
+        "rows": [
+          {
+            "name": "case: 'lower' | 'same' | 'upper'",
+            "description": "to cast into after converting to string"
+          },
+          {
+            "name": "trim: boolean",
+            "description": "the string if true"
+          }
+        ]
+      }
+    }
+  ],
+  "docType": "interface"
+}

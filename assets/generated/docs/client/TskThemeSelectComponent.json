@@ -1,0 +1,46 @@
+{
+  "title": "TskThemeSelectComponent",
+  "description": "used to change themes that exist in the theme selection service",
+  "sections": [
+    {
+      "title": "Decorator(s)",
+      "componentSelector": "markdown",
+      "data": "```typescript\n@Component({\n    selector: 'tsk-theme-select',\n    templateUrl: './theme-select.component.html',\n    styleUrls: ['./theme-select.component.scss']\n})\n```",
+      "display": true
+    },
+    {
+      "title": "Properties",
+      "componentSelector": "table",
+      "data": {
+        "columns": [
+          {
+            "componentSelector": "markdown",
+            "header": "Name",
+            "id": "name",
+            "property": "name"
+          },
+          {
+            "header": "Description",
+            "id": "description",
+            "property": "description"
+          }
+        ],
+        "rows": [
+          {
+            "name": "themeClass: string",
+            "description": ""
+          },
+          {
+            "name": "themeGroups: ThemeGroup[]",
+            "description": ""
+          },
+          {
+            "name": "ungroupedThemes: Theme[]",
+            "description": ""
+          }
+        ]
+      }
+    }
+  ],
+  "docType": "component"
+}

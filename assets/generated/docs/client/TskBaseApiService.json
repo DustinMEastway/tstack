@@ -1,0 +1,13 @@
+{
+  "title": "TskBaseApiService",
+  "description": "base api for application services to extend",
+  "sections": [
+    {
+      "title": "Decorator(s)",
+      "componentSelector": "markdown",
+      "data": "```typescript\n\n```",
+      "display": false
+    }
+  ],
+  "docType": "class"
+}

@@ -1,0 +1,13 @@
+{
+  "title": "Service",
+  "description": "",
+  "sections": [
+    {
+      "title": "Decorator(s)",
+      "componentSelector": "markdown",
+      "data": "```typescript\n\n```",
+      "display": false
+    }
+  ],
+  "docType": "class"
+}

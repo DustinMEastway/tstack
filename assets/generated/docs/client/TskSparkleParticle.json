@@ -1,0 +1,58 @@
+{
+  "title": "TskSparkleParticle",
+  "description": "object used to track a sparkle particle on the screen",
+  "sections": [
+    {
+      "title": "Decorator(s)",
+      "componentSelector": "markdown",
+      "data": "```typescript\n\n```",
+      "display": false
+    },
+    {
+      "title": "Properties",
+      "componentSelector": "table",
+      "data": {
+        "columns": [
+          {
+            "componentSelector": "markdown",
+            "header": "Name",
+            "id": "name",
+            "property": "name"
+          },
+          {
+            "header": "Description",
+            "id": "description",
+            "property": "description"
+          }
+        ],
+        "rows": [
+          {
+            "name": "color: string",
+            "description": ""
+          },
+          {
+            "name": "delta: {\n    x: number;\n    y: number;\n}",
+            "description": ""
+          },
+          {
+            "name": "opacity: number",
+            "description": ""
+          },
+          {
+            "name": "position: {\n    x: number;\n    y: number;\n}",
+            "description": ""
+          },
+          {
+            "name": "style: number",
+            "description": ""
+          },
+          {
+            "name": "size: number",
+            "description": ""
+          }
+        ]
+      }
+    }
+  ],
+  "docType": "interface"
+}

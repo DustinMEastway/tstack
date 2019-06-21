@@ -1,0 +1,103 @@
+{
+  "title": "TskThemeSelectionService",
+  "description": "used to keep track of available themes and the currently selected theme",
+  "sections": [
+    {
+      "title": "Decorator(s)",
+      "componentSelector": "markdown",
+      "data": "```typescript\n@Injectable({\n    providedIn: 'root'\n})\n```",
+      "display": true
+    },
+    {
+      "title": "Properties",
+      "componentSelector": "table",
+      "data": {
+        "columns": [
+          {
+            "componentSelector": "markdown",
+            "header": "Name",
+            "id": "name",
+            "property": "name"
+          },
+          {
+            "header": "Description",
+            "id": "description",
+            "property": "description"
+          }
+        ],
+        "rows": [
+          {
+            "name": "updateOverlay: true",
+            "description": ""
+          },
+          {
+            "name": "allThemes: Theme<ThemeClassesT>[]",
+            "description": ""
+          },
+          {
+            "name": "defaultThemeClass: ThemeClassesT",
+            "description": ""
+          },
+          {
+            "name": "theme: Theme<ThemeClassesT>",
+            "description": ""
+          },
+          {
+            "name": "themeChange: Observable<Theme<ThemeClassesT>>",
+            "description": ""
+          },
+          {
+            "name": "themeClass: ThemeClassesT",
+            "description": ""
+          },
+          {
+            "name": "themeClassChange: Observable<ThemeClassesT>",
+            "description": ""
+          },
+          {
+            "name": "themeGroups: ThemeGroup<ThemeClassesT>[]",
+            "description": ""
+          },
+          {
+            "name": "ungroupedThemes: Theme<ThemeClassesT>[]",
+            "description": ""
+          }
+        ]
+      }
+    },
+    {
+      "title": "Method",
+      "componentSelector": "table",
+      "data": {
+        "columns": [
+          {
+            "componentSelector": "markdown",
+            "header": "Name",
+            "id": "name",
+            "property": "name"
+          },
+          {
+            "header": "Description",
+            "id": "description",
+            "property": "description"
+          }
+        ],
+        "rows": [
+          {
+            "name": "addTheme: void",
+            "description": "\nfunction addTheme(displayName: string, themeClass: ThemeClassesT, groupName?: string): void"
+          },
+          {
+            "name": "addThemes: void",
+            "description": "\nfunction addThemes(themes: Theme<ThemeClassesT>[], groupName?: string): void"
+          },
+          {
+            "name": "addThemeGroups: void",
+            "description": "\nfunction addThemeGroups(themeGroups: ThemeGroup<ThemeClassesT>[]): void"
+          }
+        ]
+      }
+    }
+  ],
+  "docType": "injectable"
+}

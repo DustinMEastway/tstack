@@ -1,0 +1,40 @@
+{
+  "title": "castInt",
+  "description": "casts the given item into an int",
+  "sections": [
+    {
+      "title": "Parameter(s)",
+      "componentSelector": "table",
+      "data": {
+        "columns": [
+          {
+            "header": "Name",
+            "id": "name",
+            "property": "name"
+          },
+          {
+            "header": "Description",
+            "id": "description",
+            "property": "description"
+          }
+        ],
+        "rows": [
+          {
+            "name": "value",
+            "description": "value to cast into an int"
+          },
+          {
+            "name": "config",
+            "description": "config options to determine how to cast the item into an int"
+          }
+        ]
+      }
+    },
+    {
+      "title": "Returns",
+      "componentSelector": "markdown",
+      "data": "an int value of the given item (default value or null if item is NaN)"
+    }
+  ],
+  "docType": "function"
+}

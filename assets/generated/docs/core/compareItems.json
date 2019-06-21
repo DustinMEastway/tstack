@@ -1,0 +1,48 @@
+{
+  "title": "compareItems",
+  "description": "compares two items to determine which item is larger",
+  "sections": [
+    {
+      "title": "Parameter(s)",
+      "componentSelector": "table",
+      "data": {
+        "columns": [
+          {
+            "header": "Name",
+            "id": "name",
+            "property": "name"
+          },
+          {
+            "header": "Description",
+            "id": "description",
+            "property": "description"
+          }
+        ],
+        "rows": [
+          {
+            "name": "item1",
+            "description": "item1 to compare"
+          },
+          {
+            "name": "item2",
+            "description": "item2 to compare"
+          },
+          {
+            "name": "compareProperties",
+            "description": "compareProperties array of properties that will be used to compare the two items. Set @see CompareProperty.ascending to false for"
+          }
+        ]
+      }
+    },
+    {
+      "title": "Returns",
+      "componentSelector": "markdown",
+      "data": "1 if item1 is larger, -1 if item2 is larger and 0 if they are equal"
+    },
+    {
+      "componentSelector": "markdown",
+      "data": "a descending sort on a property"
+    }
+  ],
+  "docType": "function"
+}

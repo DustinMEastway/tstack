@@ -1,0 +1,55 @@
+{
+  "title": "getValue",
+  "description": "gets a value without throwing an error if the property is not on the item",
+  "sections": [
+    {
+      "title": "Call(s)",
+      "componentSelector": "table",
+      "data": {
+        "columns": [
+          {
+            "id": "call"
+          }
+        ],
+        "rows": [
+          "function getValue(item: T, propertyToGet: K): T[K],",
+          "function getValue(item: ItemT, propertyToGet?: string): ReturnT"
+        ]
+      }
+    },
+    {
+      "title": "Parameter(s)",
+      "componentSelector": "table",
+      "data": {
+        "columns": [
+          {
+            "header": "Name",
+            "id": "name",
+            "property": "name"
+          },
+          {
+            "header": "Description",
+            "id": "description",
+            "property": "description"
+          }
+        ],
+        "rows": [
+          {
+            "name": "item",
+            "description": "item to get the value from"
+          },
+          {
+            "name": "property",
+            "description": "property to get"
+          }
+        ]
+      }
+    },
+    {
+      "title": "Returns",
+      "componentSelector": "markdown",
+      "data": "value of property pulled from the source object"
+    }
+  ],
+  "docType": "function"
+}

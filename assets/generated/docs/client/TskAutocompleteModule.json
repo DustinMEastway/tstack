@@ -1,0 +1,35 @@
+{
+  "title": "TskAutocompleteModule",
+  "description": "",
+  "sections": [
+    {
+      "title": "Declaration(s)",
+      "componentSelector": "table",
+      "data": {
+        "columns": [
+          {
+            "id": "name",
+            "header": "Name",
+            "componentSelector": "link",
+            "property": "name"
+          },
+          {
+            "id": "description",
+            "header": "Description",
+            "property": "description"
+          }
+        ],
+        "rows": [
+          {
+            "description": "used to display an autocomplete with some features (such as several filter types) built in",
+            "name": {
+              "text": "TskAutocompleteComponent",
+              "url": "/client/TskAutocompleteComponent"
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "docType": "ngmodule"
+}

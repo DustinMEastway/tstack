@@ -1,0 +1,46 @@
+{
+  "title": "TskNavMenuConfig",
+  "description": "menu configuration for the tsk-nav-menu component",
+  "sections": [
+    {
+      "title": "Decorator(s)",
+      "componentSelector": "markdown",
+      "data": "```typescript\n\n```",
+      "display": false
+    },
+    {
+      "title": "Properties",
+      "componentSelector": "table",
+      "data": {
+        "columns": [
+          {
+            "componentSelector": "markdown",
+            "header": "Name",
+            "id": "name",
+            "property": "name"
+          },
+          {
+            "header": "Description",
+            "id": "description",
+            "property": "description"
+          }
+        ],
+        "rows": [
+          {
+            "name": "name: string",
+            "description": ""
+          },
+          {
+            "name": "value: string",
+            "description": ""
+          },
+          {
+            "name": "items: {\n    name: string;\n    value: string;\n}[]",
+            "description": ""
+          }
+        ]
+      }
+    }
+  ],
+  "docType": "interface"
+}

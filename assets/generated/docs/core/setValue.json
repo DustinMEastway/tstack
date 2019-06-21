@@ -1,0 +1,44 @@
+{
+  "title": "setValue",
+  "description": "sets a value without thowing an error if the property is not on the item",
+  "sections": [
+    {
+      "title": "Parameter(s)",
+      "componentSelector": "table",
+      "data": {
+        "columns": [
+          {
+            "header": "Name",
+            "id": "name",
+            "property": "name"
+          },
+          {
+            "header": "Description",
+            "id": "description",
+            "property": "description"
+          }
+        ],
+        "rows": [
+          {
+            "name": "item",
+            "description": "item to set a value on"
+          },
+          {
+            "name": "value",
+            "description": "value to set the property on item to"
+          },
+          {
+            "name": "property",
+            "description": "property to set on the item"
+          }
+        ]
+      }
+    },
+    {
+      "title": "Returns",
+      "componentSelector": "markdown",
+      "data": "item after the property has been set to the given value"
+    }
+  ],
+  "docType": "function"
+}

@@ -1,0 +1,35 @@
+{
+  "title": "TskReadonlyFieldModule",
+  "description": "",
+  "sections": [
+    {
+      "title": "Declaration(s)",
+      "componentSelector": "table",
+      "data": {
+        "columns": [
+          {
+            "id": "name",
+            "header": "Name",
+            "componentSelector": "link",
+            "property": "name"
+          },
+          {
+            "id": "description",
+            "header": "Description",
+            "property": "description"
+          }
+        ],
+        "rows": [
+          {
+            "description": "The tsk-readonly-field component is used to display readonly information in a manor that is consistant with mat-form-field.\n",
+            "name": {
+              "text": "TskReadonlyFieldComponent",
+              "url": "/client/TskReadonlyFieldComponent"
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "docType": "ngmodule"
+}

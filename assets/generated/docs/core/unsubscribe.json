@@ -1,0 +1,20 @@
+{
+  "title": "unsubscribe",
+  "sections": [
+    {
+      "title": "Call(s)",
+      "componentSelector": "table",
+      "data": {
+        "columns": [
+          {
+            "id": "call"
+          }
+        ],
+        "rows": [
+          "function unsubscribe(subscriptions: Subscription | Subscription[]): void"
+        ]
+      }
+    }
+  ],
+  "docType": "function"
+}

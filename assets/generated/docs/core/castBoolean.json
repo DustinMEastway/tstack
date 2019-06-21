@@ -1,0 +1,40 @@
+{
+  "title": "castBoolean",
+  "description": "casts the given item into a boolean, empty strings and are concidered true which is needed for attribute to work property",
+  "sections": [
+    {
+      "title": "Parameter(s)",
+      "componentSelector": "table",
+      "data": {
+        "columns": [
+          {
+            "header": "Name",
+            "id": "name",
+            "property": "name"
+          },
+          {
+            "header": "Description",
+            "id": "description",
+            "property": "description"
+          }
+        ],
+        "rows": [
+          {
+            "name": "value",
+            "description": "value to cast into a boolean"
+          },
+          {
+            "name": "defaultValue",
+            "description": "defaultValue to use if value is null or undefined"
+          }
+        ]
+      }
+    },
+    {
+      "title": "Returns",
+      "componentSelector": "markdown",
+      "data": "a boolean value of the given item"
+    }
+  ],
+  "docType": "function"
+}

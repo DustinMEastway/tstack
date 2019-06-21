@@ -1,0 +1,6 @@
+{
+  "title": "EntityComponentMode",
+  "description": "modes available for displaying an EntityComponent",
+  "sections": [],
+  "docType": "enum"
+}

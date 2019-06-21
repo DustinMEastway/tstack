@@ -1,0 +1,280 @@
+{
+  "title": "@tstack/core",
+  "description": "The core module consists of common code that can be shared between multiple modules. For example, there are common functions such as sorting and filtering arrays that would be useful while building other modules.\n",
+  "sections": [
+    {
+      "title": "Class(s)",
+      "componentSelector": "table",
+      "data": {
+        "columns": [
+          {
+            "id": "name",
+            "header": "Name",
+            "componentSelector": "link",
+            "property": "name"
+          },
+          {
+            "id": "description",
+            "header": "Description",
+            "property": "description"
+          }
+        ],
+        "rows": [
+          {
+            "name": {
+              "text": "Entity",
+              "url": "/core/Entity"
+            },
+            "description": "Entity is a class that can be extended by classes that you use to represent data being pulled from your database.\n\nEntity contains methods to get json data into your application with the correct type."
+          },
+          {
+            "name": {
+              "text": "TskCancellableEvent",
+              "url": "/core/TskCancellableEvent"
+            },
+            "description": ""
+          },
+          {
+            "name": {
+              "text": "TskDelayableEvent",
+              "url": "/core/TskDelayableEvent"
+            },
+            "description": ""
+          }
+        ]
+      }
+    },
+    {
+      "title": "Interface(s)",
+      "componentSelector": "table",
+      "data": {
+        "columns": [
+          {
+            "id": "name",
+            "header": "Name",
+            "componentSelector": "link",
+            "property": "name"
+          },
+          {
+            "id": "description",
+            "header": "Description",
+            "property": "description"
+          }
+        ],
+        "rows": [
+          {
+            "name": {
+              "text": "CastDecoratorIdConfig",
+              "url": "/core/CastDecoratorIdConfig"
+            },
+            "description": ""
+          },
+          {
+            "name": {
+              "text": "CastIntConfig",
+              "url": "/core/CastIntConfig"
+            },
+            "description": "configuration for castInt method"
+          },
+          {
+            "name": {
+              "text": "CastStringConfig",
+              "url": "/core/CastStringConfig"
+            },
+            "description": "configuration for castString method"
+          },
+          {
+            "name": {
+              "text": "Castable",
+              "url": "/core/Castable"
+            },
+            "description": "type that has a cast method to create an instance of itself out of anything"
+          },
+          {
+            "name": {
+              "text": "CompareProperty",
+              "url": "/core/CompareProperty"
+            },
+            "description": ""
+          },
+          {
+            "name": {
+              "text": "FilterConfig",
+              "url": "/core/FilterConfig"
+            },
+            "description": ""
+          },
+          {
+            "name": {
+              "text": "HasDuplicatesConfig",
+              "url": "/core/HasDuplicatesConfig"
+            },
+            "description": "config for the hasDuplicates method"
+          }
+        ]
+      }
+    },
+    {
+      "title": "Function(s)",
+      "componentSelector": "table",
+      "data": {
+        "columns": [
+          {
+            "id": "name",
+            "header": "Name",
+            "componentSelector": "link",
+            "property": "name"
+          },
+          {
+            "id": "description",
+            "header": "Description",
+            "property": "description"
+          }
+        ],
+        "rows": [
+          {
+            "name": {
+              "text": "Cast",
+              "url": "/core/Cast"
+            },
+            "description": "Property/Accessor decorator that casts input values before setting them (optionally set and id when set is called)"
+          },
+          {
+            "name": {
+              "text": "areEqual",
+              "url": "/core/areEqual"
+            },
+            "description": "areSame determines if two arrays contain the same values in the same order"
+          },
+          {
+            "name": {
+              "text": "filter",
+              "url": "/core/filter"
+            },
+            "description": "filters an array of values"
+          },
+          {
+            "name": {
+              "text": "find",
+              "url": "/core/find"
+            },
+            "description": "finds the first item in an array of items with its nested property set to the value to find"
+          },
+          {
+            "name": {
+              "text": "findIndex",
+              "url": "/core/findIndex"
+            },
+            "description": "finds the index of the first item in an array of items with its nested property set to the value to find"
+          },
+          {
+            "name": {
+              "text": "hasDuplicates",
+              "url": "/core/hasDuplicates"
+            },
+            "description": "hasDuplicates determines if the array contains any duplicate values (must be sortable values like strings or numbers)"
+          },
+          {
+            "name": {
+              "text": "pluck",
+              "url": "/core/pluck"
+            },
+            "description": "gets the value at a given property off of each element in an array"
+          },
+          {
+            "name": {
+              "text": "sort",
+              "url": "/core/sort"
+            },
+            "description": "sort an array"
+          },
+          {
+            "name": {
+              "text": "camelCase",
+              "url": "/core/camelCase"
+            },
+            "description": "converts the case of the given string into camel case"
+          },
+          {
+            "name": {
+              "text": "castBoolean",
+              "url": "/core/castBoolean"
+            },
+            "description": "casts the given item into a boolean, empty strings and are concidered true which is needed for attribute to work property"
+          },
+          {
+            "name": {
+              "text": "castInt",
+              "url": "/core/castInt"
+            },
+            "description": "casts the given item into an int"
+          },
+          {
+            "name": {
+              "text": "castString",
+              "url": "/core/castString"
+            },
+            "description": "casts the given item into a string if possible, if not, an empty string is returned"
+          },
+          {
+            "name": {
+              "text": "compareItems",
+              "url": "/core/compareItems"
+            },
+            "description": "compares two items to determine which item is larger"
+          },
+          {
+            "name": {
+              "text": "deepCopy",
+              "url": "/core/deepCopy"
+            },
+            "description": "create a copy of the given item (resulting object will be a json object without methods)"
+          },
+          {
+            "name": {
+              "text": "getValue",
+              "url": "/core/getValue"
+            },
+            "description": "gets a value without throwing an error if the property is not on the item"
+          },
+          {
+            "name": {
+              "text": "isBetween",
+              "url": "/core/isBetween"
+            },
+            "description": "checks if a value is between two other values"
+          },
+          {
+            "name": {
+              "text": "mapProperties",
+              "url": "/core/mapProperties"
+            },
+            "description": "gets each property from the source and sets them on the target"
+          },
+          {
+            "name": {
+              "text": "setValue",
+              "url": "/core/setValue"
+            },
+            "description": "sets a value without thowing an error if the property is not on the item"
+          },
+          {
+            "name": {
+              "text": "values",
+              "url": "/core/values"
+            },
+            "description": "gets the values of all of the keys on the given item"
+          },
+          {
+            "name": {
+              "text": "unsubscribe",
+              "url": "/core/unsubscribe"
+            },
+            "description": ""
+          }
+        ]
+      }
+    }
+  ],
+  "docType": "module"
+}

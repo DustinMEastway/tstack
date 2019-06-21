@@ -1,0 +1,42 @@
+{
+  "title": "HasDuplicatesConfig",
+  "description": "config for the hasDuplicates method",
+  "sections": [
+    {
+      "title": "Decorator(s)",
+      "componentSelector": "markdown",
+      "data": "```typescript\n\n```",
+      "display": false
+    },
+    {
+      "title": "Properties",
+      "componentSelector": "table",
+      "data": {
+        "columns": [
+          {
+            "componentSelector": "markdown",
+            "header": "Name",
+            "id": "name",
+            "property": "name"
+          },
+          {
+            "header": "Description",
+            "id": "description",
+            "property": "description"
+          }
+        ],
+        "rows": [
+          {
+            "name": "property: K",
+            "description": "to pull the value used to compare items from"
+          },
+          {
+            "name": "comparator: Comparator<T>",
+            "description": "function used determine if an item's value is less than, greater than or equal to another item's value"
+          }
+        ]
+      }
+    }
+  ],
+  "docType": "interface"
+}

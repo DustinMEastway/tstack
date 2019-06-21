@@ -1,0 +1,42 @@
+{
+  "title": "EntityComponent",
+  "description": "component used to add, edit & view an entity",
+  "sections": [
+    {
+      "title": "Decorator(s)",
+      "componentSelector": "markdown",
+      "data": "```typescript\n\n```",
+      "display": false
+    },
+    {
+      "title": "Properties",
+      "componentSelector": "table",
+      "data": {
+        "columns": [
+          {
+            "componentSelector": "markdown",
+            "header": "Name",
+            "id": "name",
+            "property": "name"
+          },
+          {
+            "header": "Description",
+            "id": "description",
+            "property": "description"
+          }
+        ],
+        "rows": [
+          {
+            "name": "@Input( )\n\nentity: Entity",
+            "description": "to add, edit or view"
+          },
+          {
+            "name": "@Input( )\n\nmode: EntityComponentMode",
+            "description": "to interact with the entity in"
+          }
+        ]
+      }
+    }
+  ],
+  "docType": "class"
+}

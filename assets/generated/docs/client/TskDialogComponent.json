@@ -1,0 +1,107 @@
+{
+  "title": "TskDialogComponent",
+  "description": "used within a material dialog to display content",
+  "sections": [
+    {
+      "title": "Decorator(s)",
+      "componentSelector": "markdown",
+      "data": "```typescript\n@Component({\n    selector: 'tsk-dialog',\n    templateUrl: './dialog.component.html',\n    styleUrls: ['./dialog.component.scss']\n})\n```",
+      "display": true
+    },
+    {
+      "title": "Properties",
+      "componentSelector": "table",
+      "data": {
+        "columns": [
+          {
+            "componentSelector": "markdown",
+            "header": "Name",
+            "id": "name",
+            "property": "name"
+          },
+          {
+            "header": "Description",
+            "id": "description",
+            "property": "description"
+          }
+        ],
+        "rows": [
+          {
+            "name": "@ViewChild(TskDynamicContentComponent)\n\ndynamicContent: TskDynamicContentComponent<ContentT>",
+            "description": ""
+          },
+          {
+            "name": "dialogRef: MatDialogRef<TskDialogComponent<ContentT, ResultT>, ResultT>",
+            "description": ""
+          },
+          {
+            "name": "dialogType: TskDialogType",
+            "description": ""
+          },
+          {
+            "name": "title: string",
+            "description": ""
+          },
+          {
+            "name": "actionButtons: TskDialogActionButton<ResultT>[]",
+            "description": ""
+          },
+          {
+            "name": "afterClose: Observable<ResultT>",
+            "description": ""
+          },
+          {
+            "name": "content: ContentT",
+            "description": ""
+          },
+          {
+            "name": "isContentString: boolean",
+            "description": ""
+          },
+          {
+            "name": "titleColorClass: string",
+            "description": ""
+          },
+          {
+            "name": "titleIcon: string",
+            "description": ""
+          }
+        ]
+      }
+    },
+    {
+      "title": "Method",
+      "componentSelector": "table",
+      "data": {
+        "columns": [
+          {
+            "componentSelector": "markdown",
+            "header": "Name",
+            "id": "name",
+            "property": "name"
+          },
+          {
+            "header": "Description",
+            "id": "description",
+            "property": "description"
+          }
+        ],
+        "rows": [
+          {
+            "name": "close: void",
+            "description": "dialog using associated dialog reference"
+          },
+          {
+            "name": "createContent: void",
+            "description": "to fill the center of the dialog"
+          },
+          {
+            "name": "onActionClick: void",
+            "description": "performs the associated action for the selected action button"
+          }
+        ]
+      }
+    }
+  ],
+  "docType": "component"
+}

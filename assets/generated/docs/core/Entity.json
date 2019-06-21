@@ -1,0 +1,13 @@
+{
+  "title": "Entity",
+  "description": "Entity is a class that can be extended by classes that you use to represent data being pulled from your database.\n\nEntity contains methods to get json data into your application with the correct type.",
+  "sections": [
+    {
+      "title": "Decorator(s)",
+      "componentSelector": "markdown",
+      "data": "```typescript\n\n```",
+      "display": false
+    }
+  ],
+  "docType": "class"
+}
