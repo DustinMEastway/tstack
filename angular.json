@@ -30,7 +30,7 @@
             "assets": [
               "src/favicon.ico",
               "src/assets",
-              "src/app/examples"
+              "src/404.html"
             ],
             "styles": [
               "src/styles.scss"
@@ -88,7 +88,7 @@
             "assets": [
               "src/assets",
               "src/favicon.ico",
-              "404.html"
+              "src/404.html"
             ]
           }
         },
