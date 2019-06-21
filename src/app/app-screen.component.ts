@@ -31,7 +31,7 @@ export class AppScreenComponent implements OnInit {
 
 	private initializeAppToolbar(): void {
 		// add the git icon to the icon registry
-		this._matIconRegistry.addSvgIcon('github', this._domSanitizer.bypassSecurityTrustResourceUrl('../assets/github.svg'));
+		this._matIconRegistry.addSvgIcon('github', this._domSanitizer.bypassSecurityTrustResourceUrl('assets/github.svg'));
 
 		// add the available themes
 		this._tskThemeSelectionService.addTheme('Mat Pink Bluegrey', 'mat-pink-bluegrey-theme', 'Dark');
