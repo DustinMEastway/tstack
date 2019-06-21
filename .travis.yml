@@ -79,7 +79,7 @@ jobs:
   - stage: github pages
     if: branch = master
     before_deploy:
-    - ng build --prod --base-href 'https://dustinmeastway.github.io/tstack/'
+    - ng build --prod --base-href '/tstack/'
     deploy:
       provider: pages
       email: Dustin.Eastway@gmail.com

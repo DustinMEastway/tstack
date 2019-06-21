@@ -86,9 +86,9 @@
             ],
             "scripts": [],
             "assets": [
-              "src/favicon.ico",
               "src/assets",
-              "src/app/examples"
+              "src/favicon.ico",
+              "404.html"
             ]
           }
         },
