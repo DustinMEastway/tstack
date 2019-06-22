@@ -63,6 +63,11 @@ describe('isBetween', () => {
 		expect(isBetween(max + 1, min, max)).toEqual(false);
 	});
 
+	it('should return true when value is equal to min which is equal to max', () => {
+		// arrange / act / assert
+		expect(isBetween(min, min, min)).toEqual(true);
+	});
+
 	describe('config.comparator', () => {
 		const minObj: Temp = { id: min };
 		const maxObj: Temp = { id: max };
@@ -186,6 +191,23 @@ describe('isBetween', () => {
 		it('should return false for a value over max', () => {
 			// arrange / act / assert
 			expect(isBetween(max + 1, min, max, config)).toEqual(false);
+		});
+	});
+
+	describe('swapped min and max', () => {
+		it('should return true when value is between min and max', () => {
+			// arrange / act / assert
+			expect(isBetween((min + max) / 2, max, min)).toEqual(true);
+		});
+
+		it('should return false when value is under min', () => {
+			// arrange / act / assert
+			expect(isBetween(min - 1, max, min)).toEqual(false);
+		});
+
+		it('should return false when value is over max', () => {
+			// arrange / act / assert
+			expect(isBetween(max + 1, max, min)).toEqual(false);
 		});
 	});
 });

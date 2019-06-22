@@ -159,7 +159,7 @@ export function getValue<ReturnT = any, ItemT = any>(item: ItemT, propertyToGet
 }
 
 /**
- * checks if a value is between two other values
+ * checks if a value is between two other values (swaps min & max if min is greater than max)
  * @param value checked to see if it is between min and max
  * @param min value that value must be greater than (or equal too depending on config.endpoints)
  * @param max value that value must be less than (or equal too depending on config.endpoints)
@@ -170,6 +170,10 @@ export function isBetween<T = any>(value: T, min: T, max: T, config?: IsBetweenC
 		comparator: compareItems,
 		endpoints: 'both'
 	}, config);
+
+	if (config.comparator(min, max) > 0) {
+		[ min, max ] = [ max, min ];
+	}
 
 	const minComparison = config.comparator(value, min);
 	const maxComparison = config.comparator(value, max);
