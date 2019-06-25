@@ -230,10 +230,10 @@ export class TskAutocompleteComponent<OptionValueT = any> implements AfterViewIn
 	}
 	set selectedValue(selectedValue: OptionValueT) {
 		if (this.selectedValue !== selectedValue) {
-			this._selectedValueChange.next(selectedValue);
 			this.value = selectedValue;
 			this.setSelectedMatOption(selectedValue);
 			this._registerValueChange(selectedValue);
+			this._selectedValueChange.next(selectedValue);
 		}
 	}
 

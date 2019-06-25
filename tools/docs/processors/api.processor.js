@@ -12,10 +12,10 @@ module.exports = function apiProcessor() {
 			docs.push(apiDoc);
 
 			apiDoc.data = {
-				api: docs.map(doc => ({
+				apis: docs.map(doc => ({
 					docType: doc.docType,
 					name: doc.data.title,
-					path: doc.outputPath
+					path: doc.outputPath.replace(/\.\w+$/, '')
 				}))
 			};
 		},
