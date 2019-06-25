@@ -12,6 +12,7 @@ import { TskAutocompleteModule, TskThemeModule } from '@tstack/client';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppScreenComponent } from './app-screen.component';
+import { DocNotFoundComponent } from './doc-not-found/doc-not-found.component';
 import { DocumentationModule } from './documentation/documentation.module';
 import { ExamplesModule } from './examples/examples.module';
 import { ScreenComponent } from './screen/screen.component';
@@ -33,6 +34,7 @@ import { ScreenComponent } from './screen/screen.component';
 	],
 	declarations: [
 		AppScreenComponent,
+		DocNotFoundComponent,
 		ScreenComponent
 	],
 	bootstrap: [ AppScreenComponent ]
