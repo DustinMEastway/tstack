@@ -11,6 +11,15 @@
 				<div class="flex-space"></div>
 				<!-- theme selector -->
 				<tsk-theme-select></tsk-theme-select>
+				<tsk-autocomplete
+					class="search-input"
+					maxDisplayedOptions="7"
+					placeholder="Search:"
+					viewProperty="name"
+					[formControl]="searchControl"
+					[optionValues]="apiList$ | async"
+					(selectedValueChange)="onSearch($event)">
+				</tsk-autocomplete>
 				<a mat-button href="https://github.com/DustinMEastway/tstack">
 					<mat-icon svgIcon="github"></mat-icon>
 					GitHub
