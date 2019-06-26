@@ -4,6 +4,9 @@ import { isBetween } from '@tstack/core';
 import { combineLatest, Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 
+import { DynamicComponent } from 'app/decorators';
+
+@DynamicComponent({ selector: 'examples/core/object-is-between' })
 @Component({
 	selector: 'app-object-is-between',
 	templateUrl: './object-is-between.component.html'
