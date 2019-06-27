@@ -1,6 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { MatFormFieldAppearance } from '@angular/material';
+import { MatFormFieldAppearance } from '@angular/material/form-field';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { getValue } from '@tstack/core';
 import { Subject } from 'rxjs';
@@ -36,7 +36,7 @@ class Foo {
 		</tsk-autocomplete>`
 })
 class TestHostComponent {
-	@ViewChild(TskAutocompleteComponent) component: TskAutocompleteComponent<Foo>;
+	@ViewChild(TskAutocompleteComponent, { static: false }) component: TskAutocompleteComponent<Foo>;
 	appearance: MatFormFieldAppearance = 'fill';
 	autoSelect = true;
 	caseSensitive = false;

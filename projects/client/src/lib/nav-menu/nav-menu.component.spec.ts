@@ -12,7 +12,7 @@ import { TskNavMenuModule } from './nav-menu.module';
 	template: '<tsk-nav-menu (navItemSelected)="onNavItemSelected($event)" [menuConfig]="menuConfig" [navigate]="navigate"></tsk-nav-menu>'
 })
 class TestHostComponent {
-	@ViewChild(TskNavMenuComponent) component: TskNavMenuComponent;
+	@ViewChild(TskNavMenuComponent, { static: false }) component: TskNavMenuComponent;
 	menuConfig: TskNavMenuConfig;
 	navigate: boolean;
 
