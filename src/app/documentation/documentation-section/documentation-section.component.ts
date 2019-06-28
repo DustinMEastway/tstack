@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, Input, ViewChild } from '@angular/core';
 import { TskDynamicContentComponent } from '@tstack/client';
 import { BehaviorSubject } from 'rxjs';
 
@@ -10,8 +10,8 @@ import { DynamicContentService } from 'app/services';
 	templateUrl: './documentation-section.component.html',
 	styleUrls: ['./documentation-section.component.scss']
 })
-export class DocumentationSectionComponent implements OnInit {
-	@ViewChild(TskDynamicContentComponent) componentContainer: TskDynamicContentComponent;
+export class DocumentationSectionComponent implements AfterViewInit {
+	@ViewChild(TskDynamicContentComponent, { static: false }) componentContainer: TskDynamicContentComponent;
 	private _section = new BehaviorSubject<DocumentationSection>(null);
 
 	get isDisplayed(): boolean {
@@ -28,7 +28,7 @@ export class DocumentationSectionComponent implements OnInit {
 
 	constructor(private _dynamicContentService: DynamicContentService) {}
 
-	ngOnInit(): void {
+	ngAfterViewInit(): void {
 		this._section.subscribe(section => {
 			if (this.isDisplayed && section.componentSelector) {
 				this._dynamicContentService.setComponentBySelector(

@@ -6,6 +6,7 @@ import { getTestObjectWithHost, Page } from '@tstack/client/testing';
 import { getValue } from '@tstack/core';
 
 import { TskReadonlyFieldComponent } from './readonly-field.component';
+import { TskReadonlyFieldModule } from './readonly-field.module';
 
 class Foo {
 	fooId: number;
@@ -45,7 +46,7 @@ class TestPage extends Page<TestHostComponent> {
 	constructor(protected _fixture: ComponentFixture<TestHostComponent>) { super(); }
 }
 
-describe('AutocompleteComponent', () => {
+describe('ReadonlyFieldComponent', () => {
 	let component: TskReadonlyFieldComponent;
 	let fixture: ComponentFixture<TestHostComponent>;
 	let host: TestHostComponent;
@@ -54,10 +55,10 @@ describe('AutocompleteComponent', () => {
 	beforeEach(async(() => {
 		TestBed.configureTestingModule({
 			imports: [
-				NoopAnimationsModule
+				NoopAnimationsModule,
+				TskReadonlyFieldModule
 			],
 			declarations: [
-				TskReadonlyFieldComponent,
 				TestHostComponent
 			]
 		}).compileComponents();
@@ -65,8 +66,6 @@ describe('AutocompleteComponent', () => {
 
 	beforeEach(() => {
 		({ component, fixture, host, page } = getTestObjectWithHost(TestHostComponent, 'component', TestPage));
-
-		fixture.detectChanges();
 	});
 
 	afterEach(() => {

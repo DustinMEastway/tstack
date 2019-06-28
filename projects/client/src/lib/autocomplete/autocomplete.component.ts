@@ -47,7 +47,7 @@ export class TskAutocompleteComponent<OptionValueT = any> implements AfterViewIn
 	/** @prop the type of form field to display */
 	@Input() appearance: MatFormFieldAppearance;
 	/** @prop the material autocomplete */
-	@ViewChild(MatAutocomplete) matAutocomplete: MatAutocomplete;
+	@ViewChild(MatAutocomplete, { static: false }) matAutocomplete: MatAutocomplete;
 	/** @prop placeholder displayed in the input of the autocomplete */
 	@Input() placeholder: string;
 	private _autoSelect = false;

@@ -15,7 +15,7 @@ import { TskDialogType } from './dialog-type';
 	styleUrls: ['./dialog.component.scss']
 })
 export class TskDialogComponent<ContentT = any, ResultT = any> {
-	@ViewChild(TskDynamicContentComponent) dynamicContent: TskDynamicContentComponent<ContentT>;
+	@ViewChild(TskDynamicContentComponent, { static: false }) dynamicContent: TskDynamicContentComponent<ContentT>;
 	dialogRef: MatDialogRef<TskDialogComponent<ContentT, ResultT>, ResultT>;
 	dialogType: TskDialogType;
 	title: string;

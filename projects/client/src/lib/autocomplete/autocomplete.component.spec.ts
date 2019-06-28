@@ -2,10 +2,10 @@ import { Component, ViewChild } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatFormFieldAppearance } from '@angular/material/form-field';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { getTestObjectWithHost, Page } from '@tstack/client/testing';
 import { getValue } from '@tstack/core';
 import { Subject } from 'rxjs';
 
-import { getTestObjectWithHost, Page } from '../../../testing';
 import { TskOption } from '../option/option';
 
 import { TskAutocompleteComponent } from './autocomplete.component';
@@ -110,8 +110,6 @@ describe('AutocompleteComponent', () => {
 	beforeEach(() => {
 		TskAutocompleteComponent.maxDisplayedOptions = 50;
 		({ component, fixture, host, page } = getTestObjectWithHost(TestHostComponent, 'component', TestPage));
-
-		fixture.detectChanges();
 	});
 
 	afterEach(() => {

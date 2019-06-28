@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, Input, ViewChild } from '@angular/core';
 import { TskDynamicContentComponent, TskReadonlyFieldComponent } from '@tstack/client';
 import { getValue } from '@tstack/core';
 import { combineLatest, BehaviorSubject } from 'rxjs';
@@ -11,8 +11,8 @@ import { DynamicContentService } from 'app/services';
 	templateUrl: './table-cell.component.html',
 	styleUrls: ['./table-cell.component.scss']
 })
-export class TableCellComponent implements OnInit {
-	@ViewChild(TskDynamicContentComponent) dynamicContent: TskDynamicContentComponent;
+export class TableCellComponent implements AfterViewInit {
+	@ViewChild(TskDynamicContentComponent, { static: false }) dynamicContent: TskDynamicContentComponent;
 	private _column$ = new BehaviorSubject<TableColumn>(null);
 	private _rowData$ = new BehaviorSubject<any>(null);
 
@@ -34,7 +34,7 @@ export class TableCellComponent implements OnInit {
 
 	constructor(private _dynamicContentService: DynamicContentService) {}
 
-	ngOnInit(): void {
+	ngAfterViewInit(): void {
 		combineLatest(this._column$, this._rowData$).subscribe(([column, rowData]) => {
 			if (column.componentSelector) {
 				this._dynamicContentService.setComponentBySelector(
