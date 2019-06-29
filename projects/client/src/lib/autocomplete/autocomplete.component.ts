@@ -234,7 +234,9 @@ export class TskAutocompleteComponent<OptionValueT = any> implements AfterViewIn
 		if (this.selectedValue !== selectedValue) {
 			this.value = selectedValue;
 			this.setSelectedMatOption(selectedValue);
-			this._registerValueChange(selectedValue);
+			if (typeof this._registerValueChange === 'function') {
+				this._registerValueChange(selectedValue);
+			}
 			this._selectedValueChange.next(selectedValue);
 		}
 	}
@@ -325,7 +327,9 @@ export class TskAutocompleteComponent<OptionValueT = any> implements AfterViewIn
 
 	/** @method onFocus register that the form control has been touched */
 	onFocus(): void {
-		this._registerTouch();
+		if (typeof this._registerTouch === 'function') {
+			this._registerTouch();
+		}
 	}
 
 	/** @method registerOnChange get the method used to notify the form that the autocomplete's value has changed */

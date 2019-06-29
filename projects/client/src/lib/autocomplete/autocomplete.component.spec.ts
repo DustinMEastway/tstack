@@ -518,5 +518,15 @@ describe('AutocompleteComponent', () => {
 			expect(options.length).toEqual(1);
 			expect(options).toEqual(expectedStartsWithOptions);
 		});
+
+		it('should allow setting value without a formControl', () => {
+			// arrange / act / assert
+			expect(() => component.selectedValue = component.optionValues[0]).not.toThrow();
+		});
+
+		it('should allow focusing without a formControl', () => {
+			// arrange / act / assert
+			expect(() => component.onFocus()).not.toThrow();
+		});
 	});
 });
