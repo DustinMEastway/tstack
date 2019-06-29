@@ -1,8 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { Router } from '@angular/router';
-
-import { getTestObjectWithHost, Page } from '../../../testing';
+import { getTestObjectWithHost, Page } from '@tstack/client/testing';
 
 import { TskNavMenuConfig } from './nav-menu-config';
 import { TskNavMenuComponent } from './nav-menu.component';
@@ -12,7 +11,7 @@ import { TskNavMenuModule } from './nav-menu.module';
 	template: '<tsk-nav-menu (navItemSelected)="onNavItemSelected($event)" [menuConfig]="menuConfig" [navigate]="navigate"></tsk-nav-menu>'
 })
 class TestHostComponent {
-	@ViewChild(TskNavMenuComponent) component: TskNavMenuComponent;
+	@ViewChild(TskNavMenuComponent, { static: false }) component: TskNavMenuComponent;
 	menuConfig: TskNavMenuConfig;
 	navigate: boolean;
 
@@ -50,7 +49,7 @@ class MockRouter {
 	navigateByUrl(): void {}
 }
 
-describe('AutocompleteComponent', () => {
+describe('NavMenuComponent', () => {
 	let component: TskNavMenuComponent;
 	let fixture: ComponentFixture<TestHostComponent>;
 	let host: TestHostComponent;
@@ -74,7 +73,6 @@ describe('AutocompleteComponent', () => {
 	beforeEach(() => {
 		({ component, fixture, host, page } = getTestObjectWithHost(TestHostComponent, 'component', TestPage));
 
-		fixture.detectChanges();
 		router = TestBed.get(Router);
 	});
 

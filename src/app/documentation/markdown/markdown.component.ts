@@ -1,4 +1,4 @@
-import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, Input, ViewChild } from '@angular/core';
 import { parse } from 'marked';
 import { BehaviorSubject } from 'rxjs';
 
@@ -10,8 +10,8 @@ import { DynamicComponent } from 'app/decorators';
 	templateUrl: './markdown.component.html',
 	styleUrls: ['./markdown.component.scss']
 })
-export class MarkdownComponent implements OnInit {
-	@ViewChild('markdownContainer') element: ElementRef<HTMLDivElement>;
+export class MarkdownComponent implements AfterViewInit {
+	@ViewChild('markdownContainer', { static: false }) element: ElementRef<HTMLDivElement>;
 	private _content = new BehaviorSubject<string>('');
 
 	@Input()
@@ -22,7 +22,7 @@ export class MarkdownComponent implements OnInit {
 		this._content.next(content);
 	}
 
-	ngOnInit(): void {
+	ngAfterViewInit(): void {
 		this._content.subscribe(content => {
 			parse(content, (error, result) => {
 				if (error) {

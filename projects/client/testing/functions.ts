@@ -85,6 +85,7 @@ export function getTestObjectWithHost<HostT, ComponentT, PageT>
 	(hostType: Type<HostT>, componentProperty: string = 'component', pageType?: Type<PageT, ComponentFixture<HostT>>):
 	TestObject<ComponentT, HostT> & { host: HostT, page: PageT } {
 	const hostTestObject = getTestObject(hostType, pageType);
+	hostTestObject.fixture.detectChanges();
 
 	return {
 		...hostTestObject,

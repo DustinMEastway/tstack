@@ -3,9 +3,10 @@
   "version": "0.1.2-alpha.14",
   "private": false,
   "peerDependencies": {
-    "@angular/common": "^7.0.0-rc.0 || ^7.0.0",
-    "@angular/core": "^7.0.0-rc.0 || ^7.0.0",
-    "@angular/material": "^7.0.0",
-    "@tstack/core": "^0.1.2-alpha.14"
+    "@angular/common": "^8.0.3",
+    "@angular/core": "^8.0.3",
+    "@angular/material": "^8.0.1",
+    "@tstack/core": "^0.1.2-alpha.14",
+    "rxjs": "^6.5.2"
   }
 }

@@ -1,5 +1,5 @@
-import { Component, ElementRef, HostBinding, Input, OnInit, ViewChild } from '@angular/core';
-import { MatFormFieldAppearance } from '@angular/material';
+import { AfterViewInit, Component, ElementRef, HostBinding, Input, ViewChild } from '@angular/core';
+import { MatFormFieldAppearance } from '@angular/material/form-field';
 import { getValue } from '@tstack/core';
 
 const floatingLabelScale = 0.75;
@@ -17,7 +17,7 @@ const outlineGapPadding = 5;
 	templateUrl: './readonly-field.component.html',
 	styleUrls: [ './readonly-field.component.scss' ]
 })
-export class TskReadonlyFieldComponent<ValueT = any> implements OnInit {
+export class TskReadonlyFieldComponent<ValueT = any> implements AfterViewInit {
 	@HostBinding('class.mat-form-field')
 	@HostBinding('class.mat-form-field-can-float')
 	@HostBinding('class.mat-form-field-should-float')
@@ -26,8 +26,8 @@ export class TskReadonlyFieldComponent<ValueT = any> implements OnInit {
 	@HostBinding('class.mat-form-field-appearance-fill') public _addMatFillAppearanceClass: boolean;
 	@HostBinding('class.mat-form-field-appearance-outline') public _addMatOutlineAppearanceClass: boolean;
 	@HostBinding('class.mat-form-field-appearance-legacy') public _addMatLegacyAppearanceClass: boolean;
-	@ViewChild('connectionContainer') private _connectionContainerRef: ElementRef<HTMLDivElement>;
-	@ViewChild('label') private _label: ElementRef<HTMLLabelElement>;
+	@ViewChild('connectionContainer', { static: false }) private _connectionContainerRef: ElementRef<HTMLDivElement>;
+	@ViewChild('label', { static: false }) private _label: ElementRef<HTMLLabelElement>;
 	private _appearance: MatFormFieldAppearance;
 	private _displayWithFunction: (value: ValueT) => string;
 	private _outlineGapWidth = 0;
@@ -100,7 +100,7 @@ export class TskReadonlyFieldComponent<ValueT = any> implements OnInit {
 		this._displayWithFunction = (value) => getValue(value);
 	}
 
-	ngOnInit(): void {
+	ngAfterViewInit(): void {
 		this.updateOutlineGap();
 	}
 

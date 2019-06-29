@@ -17,7 +17,9 @@ import {
 	ViewChild
 } from '@angular/core';
 import { ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { MatAutocomplete, MatFormFieldAppearance, MatOption } from '@angular/material';
+import { MatAutocomplete } from '@angular/material/autocomplete';
+import { MatOption } from '@angular/material/core';
+import { MatFormFieldAppearance } from '@angular/material/form-field';
 import { castString, find, getValue, pluck, CastStringConfig } from '@tstack/core';
 import { combineLatest, BehaviorSubject, Observable } from 'rxjs';
 import { distinctUntilChanged, map, startWith } from 'rxjs/operators';
@@ -45,7 +47,7 @@ export class TskAutocompleteComponent<OptionValueT = any> implements AfterViewIn
 	/** @prop the type of form field to display */
 	@Input() appearance: MatFormFieldAppearance;
 	/** @prop the material autocomplete */
-	@ViewChild(MatAutocomplete) matAutocomplete: MatAutocomplete;
+	@ViewChild(MatAutocomplete, { static: false }) matAutocomplete: MatAutocomplete;
 	/** @prop placeholder displayed in the input of the autocomplete */
 	@Input() placeholder: string;
 	private _autoSelect = false;
