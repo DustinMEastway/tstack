@@ -43,9 +43,11 @@ export class TableCellComponent implements AfterViewInit {
 					getValue(rowData, column.property)
 				);
 			} else {
-				const component = this.dynamicContent.updateContent(TskReadonlyFieldComponent).instance;
+				const content = this.dynamicContent.updateContent(TskReadonlyFieldComponent);
+				const component = content.instance;
 				component.value = rowData;
 				component.displayWith = column.property;
+				content.changeDetectorRef.detectChanges();
 			}
 		});
 	}
