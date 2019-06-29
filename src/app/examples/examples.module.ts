@@ -8,11 +8,15 @@ import { MatSelectModule } from '@angular/material/select';
 import { TskReadonlyFieldModule } from '@tstack/client';
 
 import { ReadonlyFieldAppearanceComponent } from './client/readonly-field-appearance/readonly-field-appearance.component';
+import { CancellableEventComponent } from './core/cancellable-event/cancellable-event.component';
+import { DelayableEventComponent } from './core/delayable-event/delayable-event.component';
 import { HasDuplicatesObjectsComponent } from './core/has-duplicates-objects/has-duplicates-objects.component';
 import { HasDuplicatesPrimativesComponent } from './core/has-duplicates-primatives/has-duplicates-primatives.component';
 import { ObjectIsBetweenComponent } from './core/object-is-between/object-is-between.component';
 
 export const exampleComponents = [
+	CancellableEventComponent,
+	DelayableEventComponent,
 	HasDuplicatesObjectsComponent,
 	HasDuplicatesPrimativesComponent,
 	ObjectIsBetweenComponent,
