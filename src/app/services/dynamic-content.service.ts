@@ -36,11 +36,14 @@ export class DynamicContentService {
 		const foundComponentType = componentType != null;
 
 		if (foundComponentType) {
-			const component = dynamicComponent.updateContent<DynamicComponent>(componentType).instance;
+			const content = dynamicComponent.updateContent<DynamicComponent>(componentType);
+			const component = content.instance;
 
 			if (typeof component.setData === 'function') {
 				component.setData(data);
 			}
+
+			content.changeDetectorRef.detectChanges();
 		}
 
 		return foundComponentType;
