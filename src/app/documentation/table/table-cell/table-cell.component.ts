@@ -35,7 +35,7 @@ export class TableCellComponent implements AfterViewInit {
 	constructor(private _dynamicContentService: DynamicContentService) {}
 
 	ngAfterViewInit(): void {
-		combineLatest(this._column$, this._rowData$).subscribe(([column, rowData]) => {
+		combineLatest([ this._column$, this._rowData$ ]).subscribe(([column, rowData]) => {
 			if (column.componentSelector) {
 				this._dynamicContentService.setComponentBySelector(
 					this.dynamicContent,

@@ -1,0 +1,11 @@
+<div *ngFor="let menuItem of menuItems">
+	<button *ngIf="!menuItem.items?.length" mat-menu-item (click)="onItemClick(menuItem.value)">
+		{{ menuItem.name }}
+	</button>
+	<button *ngIf="menuItem.items?.length" mat-menu-item [matMenuTriggerFor]="subMenu">
+		{{ menuItem.name }}
+	</button>
+	<mat-menu #subMenu>
+		<tsk-nav-menu-content [menuItems]="menuItem.items" (itemClick)="onItemClick(menuItem.value, $event)"></tsk-nav-menu-content>
+	</mat-menu>
+</div>

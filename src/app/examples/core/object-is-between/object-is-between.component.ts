@@ -39,13 +39,13 @@ export class ObjectIsBetweenComponent implements OnInit {
 		const maxControl = this._form.get('max');
 		const minControl = this._form.get('min');
 		const valueControl = this._form.get('value');
-		this._codeDisplay$ = combineLatest(
+		this._codeDisplay$ = combineLatest([
 			includeMaxControl.valueChanges.pipe(startWith(includeMaxControl.value)),
 			includeMinControl.valueChanges.pipe(startWith(includeMinControl.value)),
 			maxControl.valueChanges.pipe(startWith(maxControl.value)),
 			minControl.valueChanges.pipe(startWith(minControl.value)),
 			valueControl.valueChanges.pipe(startWith(valueControl.value))
-		).pipe(
+		]).pipe(
 			map(([includeMax, includeMin, max, min, value]) => {
 				const endpoints = (includeMax ? (includeMin ? 'both' : 'max') : (includeMin ? 'min' : 'neither'));
 				let config = '';

@@ -6,7 +6,9 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { TskReadonlyFieldModule } from '@tstack/client';
+import { TskNavMenuModule } from 'app/../../projects/client/src/lib/nav-menu/nav-menu.module';
 
+import { NavMenuNestingComponent } from './client/nav-menu-nesting/nav-menu-nesting.component';
 import { ReadonlyFieldAppearanceComponent } from './client/readonly-field-appearance/readonly-field-appearance.component';
 import { CancellableEventComponent } from './core/cancellable-event/cancellable-event.component';
 import { DelayableEventComponent } from './core/delayable-event/delayable-event.component';
@@ -19,6 +21,7 @@ export const exampleComponents = [
 	DelayableEventComponent,
 	HasDuplicatesObjectsComponent,
 	HasDuplicatesPrimativesComponent,
+	NavMenuNestingComponent,
 	ObjectIsBetweenComponent,
 	ReadonlyFieldAppearanceComponent
 ];
@@ -31,6 +34,7 @@ export const exampleComponents = [
 		MatInputModule,
 		MatSelectModule,
 		ReactiveFormsModule,
+		TskNavMenuModule,
 		TskReadonlyFieldModule
 	],
 	declarations: [
