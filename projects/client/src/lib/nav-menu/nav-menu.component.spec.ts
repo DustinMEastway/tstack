@@ -8,7 +8,12 @@ import { TskNavMenuComponent } from './nav-menu.component';
 import { TskNavMenuModule } from './nav-menu.module';
 
 @Component({
-	template: '<tsk-nav-menu (navItemSelected)="onNavItemSelected($event)" [menuConfig]="menuConfig" [navigate]="navigate"></tsk-nav-menu>'
+	template: `
+		<tsk-nav-menu
+			(navItemSelected)="onNavItemSelected($event)"
+			[menuConfig]="menuConfig"
+			[navigate]="navigate">
+		</tsk-nav-menu>`
 })
 class TestHostComponent {
 	@ViewChild(TskNavMenuComponent, { static: false }) component: TskNavMenuComponent;
@@ -22,7 +27,11 @@ class TestHostComponent {
 			items: [
 				{
 					name: 'SubFoo',
-					value: 'sub-foo'
+					value: 'sub-foo',
+					items: [
+						{ name: 'SubFoo 1', value: '1' },
+						{ name: 'SubFoo 2', value: '2' }
+					]
 				},
 				{
 					name: 'Bar',
@@ -38,9 +47,9 @@ class TestHostComponent {
 }
 
 class TestPage extends Page {
-	get primaryNavLink(): HTMLAnchorElement { return this.query('div a'); }
+	get primaryNavLink(): HTMLAnchorElement { return this.query('div.button-group button'); }
 
-	get menuButton(): HTMLBaseElement { return this.query('div button'); }
+	get menuButton(): HTMLBaseElement { return this.query('div.button-group .thin-button'); }
 
 	constructor(protected _fixture: ComponentFixture<TestHostComponent>) { super(); }
 }
@@ -131,7 +140,7 @@ describe('NavMenuComponent', () => {
 			component.navigate = true;
 
 			// act
-			component.onNavItemClick([ 'foo', 'bar' ]);
+			component.onNavItemClick([ 'bar' ]);
 
 			// assert
 			expect(navigateByUrlSpy).toHaveBeenCalledWith('foo/bar');
@@ -152,24 +161,24 @@ describe('NavMenuComponent', () => {
 		it('should emit when a nav item is selected', () => {
 			// arrange
 			const onNavItemSelectedSpy = spyOn(host, 'onNavItemSelected');
-			const navParams = [ 'foo', 'bar' ];
+			const navParams = [ 'bar' ];
 
 			// act
 			component.onNavItemClick(navParams);
 
 			// assert
-			expect(onNavItemSelectedSpy).toHaveBeenCalledWith(navParams);
+			expect(onNavItemSelectedSpy).toHaveBeenCalledWith([ host.menuConfig.value ].concat(navParams));
 		});
 
 		it('should call onNavItemClick when the primary link is clicked', () => {
 			// arrange
-			const onNavItemClickSpy = spyOn(component, 'onNavItemClick');
+			const onNavItemSelectedSpy = spyOn(host, 'onNavItemSelected');
 
 			// act
 			page.primaryNavLink.click();
 
 			// assert
-			expect(onNavItemClickSpy).toHaveBeenCalledWith([ host.menuConfig.value ]);
+			expect(onNavItemSelectedSpy).toHaveBeenCalledWith([ host.menuConfig.value ]);
 		});
 	});
 });

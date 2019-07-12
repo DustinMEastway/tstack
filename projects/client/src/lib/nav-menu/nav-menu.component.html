@@ -1,13 +1,11 @@
 <div *ngIf="menuConfig" class="button-group">
-	<a mat-button (click)="onNavItemClick([menuConfig.value])">
+	<button mat-button (click)="onNavItemClick()">
 		{{ menuConfig.name }}
-	</a>
+	</button>
 	<button *ngIf="menuConfig.items?.length" mat-button class="thin-button" type="text" [matMenuTriggerFor]="tskMenu">
 		<mat-icon>keyboard_arrow_down</mat-icon>
 	</button>
 </div>
-<mat-menu #tskMenu overlapTrigger="false">
-	<a *ngFor="let item of menuConfig.items" mat-menu-item (click)="onNavItemClick([menuConfig.value, item.value])">
-		{{ item.name }}
-	</a>
+<mat-menu #tskMenu>
+	<tsk-nav-menu-content [menuItems]="menuConfig.items" (itemClick)="onNavItemClick($event)"></tsk-nav-menu-content>
 </mat-menu>

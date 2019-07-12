@@ -4,7 +4,12 @@ import { castBoolean } from '@tstack/core';
 
 import { TskNavMenuConfig } from './nav-menu-config';
 
-/** create a menu used for navigation */
+/**
+ * create a menu used for navigation
+ *
+ * @title Demo(s)
+ * @dynamicComponent examples/client/nav-menu-nesting
+ */
 @Component({
 	selector: 'tsk-nav-menu',
 	templateUrl: './nav-menu.component.html',
@@ -26,12 +31,14 @@ export class TskNavMenuComponent {
 	constructor(private _router: Router) {}
 
 	// called when a navigation anchor tag is clicked
-	onNavItemClick(selectedPath: string[]): void {
+	onNavItemClick(itemValues?: string[]): void {
+		const values = [ this.menuConfig.value ].concat(itemValues || []);
+
 		if (this.navigate) {
 			// create the url by joining them together with '/' characters
-			this._router.navigateByUrl(selectedPath.join('/'));
+			this._router.navigateByUrl(values.join('/'));
 		}
 
-		this.navItemSelected.next(selectedPath);
+		this.navItemSelected.next(values);
 	}
 }

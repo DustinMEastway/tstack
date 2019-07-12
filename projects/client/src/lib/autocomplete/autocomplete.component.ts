@@ -353,13 +353,13 @@ export class TskAutocompleteComponent<OptionValueT = any> implements AfterViewIn
 	}
 
 	private setFilteredOptions(): void {
-		this._filteredOptions = combineLatest(
+		this._filteredOptions = combineLatest([
 			this._optionsChange.pipe(startWith(this.options)),
 			this.caseSensitiveChange,
 			this.filterChange,
 			this.filterTypeChange,
 			this.maxDisplayedOptionsChange
-		).pipe(
+		]).pipe(
 			map(([options, caseSensitive, filter, filterType, maxDisplayedOptions]) => {
 				const castStringConfig: Partial<CastStringConfig> = { case: (caseSensitive) ? 'same' : 'upper' };
 				const castFilter = castString(filter, castStringConfig);
