@@ -26,7 +26,7 @@ export class EntityBase {
 	 * @param source to cast into type this or this[] depending on its type
 	 * @returns souce after being cast
 	 */
- 	static cast<ThisT extends EntityBase = any>(source: any): ThisT;
+ 	static cast<ThisT extends EntityBase = any>(source: null | undefined): ThisT;
  	static cast<ThisT extends EntityBase = any>(source: any[]): ThisT[];
  	static cast<ReturnT extends EntityBase | EntityBase[] = any>(source: any): ReturnT;
 	static cast<ThisT extends EntityBase = any>(source: any): ThisT | ThisT[] {
