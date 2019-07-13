@@ -1,4 +1,4 @@
-import { zip, Observable } from 'rxjs';
+import { of, zip, Observable, ObservableInput } from 'rxjs';
 
 import { TskCancellableEvent } from './cancellable-event';
 
@@ -16,23 +16,18 @@ import { TskCancellableEvent } from './cancellable-event';
  * @dynamicComponent examples/core/delayable-event
  */
 export class TskDelayableEvent extends TskCancellableEvent {
-	protected _delays: Observable<any>[] = [];
+	protected _delays: ObservableInput<any>[] = [];
 
 	/** @property observable that emits after all delays emit */
 	get delays(): Observable<never> {
-		return zip(...this._delays) as Observable<never>;
+		return ((this._delays.length) ? zip(...this._delays) : of(null)) as Observable<never>;
 	}
 
 	/**
 	 * add a delay to the event
 	 * @param delay to wait for prior to continuing with the event
 	 */
-	addDelay(delay: Observable<any>): void {
-		if (delay instanceof Observable) {
-			this._delays.push(delay);
-		} else if (delay != null) {
-			console.error('TskDelayableEvent.addDelay: Non-observable delay was added to a delayable event');
-			console.error(delay);
-		}
+	addDelay(delay: ObservableInput<any>): void {
+		this._delays.push(delay);
 	}
 }
