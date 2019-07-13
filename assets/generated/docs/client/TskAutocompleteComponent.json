@@ -31,7 +31,7 @@
             "description": "the type of form field to display"
           },
           {
-            "name": "@ViewChild(MatAutocomplete)\n\nmatAutocomplete: MatAutocomplete",
+            "name": "@ViewChild(MatAutocomplete, { static: false })\n\nmatAutocomplete: MatAutocomplete",
             "description": "the material autocomplete"
           },
           {

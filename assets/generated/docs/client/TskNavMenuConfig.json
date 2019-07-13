@@ -35,7 +35,7 @@
             "description": ""
           },
           {
-            "name": "items: {\n    name: string;\n    value: string;\n}[]",
+            "name": "items: TskNavMenuConfig[]",
             "description": ""
           }
         ]

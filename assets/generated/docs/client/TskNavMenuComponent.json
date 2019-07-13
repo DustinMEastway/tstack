@@ -1,6 +1,6 @@
 {
   "title": "TskNavMenuComponent",
-  "description": "create a menu used for navigation",
+  "description": "create a menu used for navigation\n",
   "sections": [
     {
       "title": "Decorator(s)",
@@ -61,10 +61,16 @@
         "rows": [
           {
             "name": "onNavItemClick: void",
-            "description": "\nfunction onNavItemClick(selectedPath: string[]): void"
+            "description": "\nfunction onNavItemClick(itemValues?: string[]): void"
           }
         ]
       }
+    },
+    {
+      "title": "Demo(s)"
+    },
+    {
+      "componentSelector": "examples/client/nav-menu-nesting"
     }
   ],
   "docType": "component"

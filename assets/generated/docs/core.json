@@ -32,14 +32,14 @@
               "text": "TskCancellableEvent",
               "url": "/core/TskCancellableEvent"
             },
-            "description": ""
+            "description": "used to cancel a process synchronously by emitting the event, then checking the `cancelled` property before proceeding\n"
           },
           {
             "name": {
               "text": "TskDelayableEvent",
               "url": "/core/TskDelayableEvent"
             },
-            "description": ""
+            "description": "used to delay the action of an event, or cancel it asynchronously\n"
           }
         ]
       }
@@ -242,7 +242,7 @@
               "text": "isBetween",
               "url": "/core/isBetween"
             },
-            "description": "checks if a value is between two other values"
+            "description": "checks if a value is between two other values (swaps min & max if min is greater than max)"
           },
           {
             "name": {

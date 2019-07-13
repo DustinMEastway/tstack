@@ -27,7 +27,7 @@
         ],
         "rows": [
           {
-            "name": "@ViewChild(TskDynamicContentComponent)\n\ndynamicContent: TskDynamicContentComponent<ContentT>",
+            "name": "@ViewChild(TskDynamicContentComponent, { static: false })\n\ndynamicContent: TskDynamicContentComponent<ContentT>",
             "description": ""
           },
           {

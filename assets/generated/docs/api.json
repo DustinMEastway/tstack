@@ -1,0 +1,334 @@
+{
+  "apis": [
+    {
+      "docType": "module",
+      "name": "@tstack/client",
+      "path": "client"
+    },
+    {
+      "docType": "component",
+      "name": "TskAutocompleteComponent",
+      "path": "client/TskAutocompleteComponent"
+    },
+    {
+      "docType": "ngmodule",
+      "name": "TskAutocompleteModule",
+      "path": "client/TskAutocompleteModule"
+    },
+    {
+      "docType": "component",
+      "name": "TskDynamicContentComponent",
+      "path": "client/TskDynamicContentComponent"
+    },
+    {
+      "docType": "ngmodule",
+      "name": "TskDynamicContentModule",
+      "path": "client/TskDynamicContentModule"
+    },
+    {
+      "docType": "interface",
+      "name": "TskDialogActionButton",
+      "path": "client/TskDialogActionButton"
+    },
+    {
+      "docType": "interface",
+      "name": "TskDialogConfig",
+      "path": "client/TskDialogConfig"
+    },
+    {
+      "docType": "component",
+      "name": "TskDialogComponent",
+      "path": "client/TskDialogComponent"
+    },
+    {
+      "docType": "ngmodule",
+      "name": "TskDialogModule",
+      "path": "client/TskDialogModule"
+    },
+    {
+      "docType": "injectable",
+      "name": "TskDialogService",
+      "path": "client/TskDialogService"
+    },
+    {
+      "docType": "class",
+      "name": "EntityComponent",
+      "path": "client/EntityComponent"
+    },
+    {
+      "docType": "enum",
+      "name": "EntityComponentMode",
+      "path": "client/EntityComponentMode"
+    },
+    {
+      "docType": "function",
+      "name": "markAs",
+      "path": "client/markAs"
+    },
+    {
+      "docType": "interface",
+      "name": "TskNavMenuConfig",
+      "path": "client/TskNavMenuConfig"
+    },
+    {
+      "docType": "component",
+      "name": "TskNavMenuComponent",
+      "path": "client/TskNavMenuComponent"
+    },
+    {
+      "docType": "ngmodule",
+      "name": "TskNavMenuModule",
+      "path": "client/TskNavMenuModule"
+    },
+    {
+      "docType": "class",
+      "name": "TskOption",
+      "path": "client/TskOption"
+    },
+    {
+      "docType": "component",
+      "name": "TskReadonlyFieldComponent",
+      "path": "client/TskReadonlyFieldComponent"
+    },
+    {
+      "docType": "ngmodule",
+      "name": "TskReadonlyFieldModule",
+      "path": "client/TskReadonlyFieldModule"
+    },
+    {
+      "docType": "class",
+      "name": "TskBaseApiService",
+      "path": "client/TskBaseApiService"
+    },
+    {
+      "docType": "class",
+      "name": "TskBaseGraphqlService",
+      "path": "client/TskBaseGraphqlService"
+    },
+    {
+      "docType": "interface",
+      "name": "TskSparkleParticle",
+      "path": "client/TskSparkleParticle"
+    },
+    {
+      "docType": "interface",
+      "name": "TskSparkleConfig",
+      "path": "client/TskSparkleConfig"
+    },
+    {
+      "docType": "directive",
+      "name": "TskSparkleDirective",
+      "path": "client/TskSparkleDirective"
+    },
+    {
+      "docType": "ngmodule",
+      "name": "TskSparkleModule",
+      "path": "client/TskSparkleModule"
+    },
+    {
+      "docType": "component",
+      "name": "TskThemeSelectComponent",
+      "path": "client/TskThemeSelectComponent"
+    },
+    {
+      "docType": "injectable",
+      "name": "TskThemeSelectionService",
+      "path": "client/TskThemeSelectionService"
+    },
+    {
+      "docType": "ngmodule",
+      "name": "TskThemeModule",
+      "path": "client/TskThemeModule"
+    },
+    {
+      "docType": "module",
+      "name": "@tstack/core",
+      "path": "core"
+    },
+    {
+      "docType": "function",
+      "name": "Cast",
+      "path": "core/Cast"
+    },
+    {
+      "docType": "interface",
+      "name": "CastDecoratorIdConfig",
+      "path": "core/CastDecoratorIdConfig"
+    },
+    {
+      "docType": "class",
+      "name": "Entity",
+      "path": "core/Entity"
+    },
+    {
+      "docType": "class",
+      "name": "TskCancellableEvent",
+      "path": "core/TskCancellableEvent"
+    },
+    {
+      "docType": "class",
+      "name": "TskDelayableEvent",
+      "path": "core/TskDelayableEvent"
+    },
+    {
+      "docType": "function",
+      "name": "areEqual",
+      "path": "core/areEqual"
+    },
+    {
+      "docType": "function",
+      "name": "filter",
+      "path": "core/filter"
+    },
+    {
+      "docType": "function",
+      "name": "find",
+      "path": "core/find"
+    },
+    {
+      "docType": "function",
+      "name": "findIndex",
+      "path": "core/findIndex"
+    },
+    {
+      "docType": "function",
+      "name": "hasDuplicates",
+      "path": "core/hasDuplicates"
+    },
+    {
+      "docType": "function",
+      "name": "pluck",
+      "path": "core/pluck"
+    },
+    {
+      "docType": "function",
+      "name": "sort",
+      "path": "core/sort"
+    },
+    {
+      "docType": "function",
+      "name": "camelCase",
+      "path": "core/camelCase"
+    },
+    {
+      "docType": "function",
+      "name": "castBoolean",
+      "path": "core/castBoolean"
+    },
+    {
+      "docType": "function",
+      "name": "castInt",
+      "path": "core/castInt"
+    },
+    {
+      "docType": "function",
+      "name": "castString",
+      "path": "core/castString"
+    },
+    {
+      "docType": "function",
+      "name": "compareItems",
+      "path": "core/compareItems"
+    },
+    {
+      "docType": "function",
+      "name": "deepCopy",
+      "path": "core/deepCopy"
+    },
+    {
+      "docType": "function",
+      "name": "getValue",
+      "path": "core/getValue"
+    },
+    {
+      "docType": "function",
+      "name": "isBetween",
+      "path": "core/isBetween"
+    },
+    {
+      "docType": "function",
+      "name": "mapProperties",
+      "path": "core/mapProperties"
+    },
+    {
+      "docType": "function",
+      "name": "setValue",
+      "path": "core/setValue"
+    },
+    {
+      "docType": "function",
+      "name": "values",
+      "path": "core/values"
+    },
+    {
+      "docType": "function",
+      "name": "unsubscribe",
+      "path": "core/unsubscribe"
+    },
+    {
+      "docType": "interface",
+      "name": "CastIntConfig",
+      "path": "core/CastIntConfig"
+    },
+    {
+      "docType": "interface",
+      "name": "CastStringConfig",
+      "path": "core/CastStringConfig"
+    },
+    {
+      "docType": "interface",
+      "name": "Castable",
+      "path": "core/Castable"
+    },
+    {
+      "docType": "interface",
+      "name": "CompareProperty",
+      "path": "core/CompareProperty"
+    },
+    {
+      "docType": "interface",
+      "name": "FilterConfig",
+      "path": "core/FilterConfig"
+    },
+    {
+      "docType": "interface",
+      "name": "HasDuplicatesConfig",
+      "path": "core/HasDuplicatesConfig"
+    },
+    {
+      "docType": "module",
+      "name": "@tstack/server",
+      "path": "server"
+    },
+    {
+      "docType": "class",
+      "name": "Controller",
+      "path": "server/Controller"
+    },
+    {
+      "docType": "class",
+      "name": "SqlRepository",
+      "path": "server/SqlRepository"
+    },
+    {
+      "docType": "class",
+      "name": "Service",
+      "path": "server/Service"
+    },
+    {
+      "docType": "const",
+      "name": "fileSystem",
+      "path": "server/fileSystem"
+    },
+    {
+      "docType": "module",
+      "name": "@tstack",
+      "path": "index"
+    },
+    {
+      "docType": "api",
+      "path": "api"
+    }
+  ],
+  "docType": "api"
+}

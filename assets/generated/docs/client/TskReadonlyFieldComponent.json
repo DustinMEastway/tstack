@@ -100,8 +100,8 @@
         ],
         "rows": [
           {
-            "name": "ngOnInit: void",
-            "description": "\nfunction ngOnInit(): void"
+            "name": "ngAfterViewInit: void",
+            "description": "\nfunction ngAfterViewInit(): void"
           }
         ]
       }

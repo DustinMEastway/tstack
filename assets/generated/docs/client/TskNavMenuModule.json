@@ -21,10 +21,17 @@
         ],
         "rows": [
           {
-            "description": "create a menu used for navigation",
+            "description": "create a menu used for navigation\n",
             "name": {
               "text": "TskNavMenuComponent",
               "url": "/client/TskNavMenuComponent"
+            }
+          },
+          {
+            "description": "",
+            "name": {
+              "text": "TskNavMenuContentComponent",
+              "url": null
             }
           }
         ]

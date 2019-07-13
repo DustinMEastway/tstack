@@ -1,6 +1,6 @@
 {
   "title": "@tstack/server",
-  "description": "The server module houses NodeJS server side functionality.\n",
+  "description": "The server module will house NodeJS server side functionality, but for now it is empty.\n",
   "sections": [
     {
       "title": "Class(s)",

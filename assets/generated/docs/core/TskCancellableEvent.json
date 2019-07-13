@@ -1,6 +1,6 @@
 {
   "title": "TskCancellableEvent",
-  "description": "",
+  "description": "used to cancel a process synchronously by emitting the event, then checking the `cancelled` property before proceeding\n",
   "sections": [
     {
       "title": "Decorator(s)",
@@ -28,7 +28,7 @@
         "rows": [
           {
             "name": "cancelled: boolean",
-            "description": ""
+            "description": "whether the event is cancelled"
           }
         ]
       }
@@ -53,10 +53,16 @@
         "rows": [
           {
             "name": "cancel: void",
-            "description": "\nfunction cancel(): void"
+            "description": "s the event"
           }
         ]
       }
+    },
+    {
+      "title": "Example(s)"
+    },
+    {
+      "componentSelector": "examples/core/cancellable-event"
     }
   ],
   "docType": "class"
