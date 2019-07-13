@@ -219,6 +219,7 @@ var tstackDocsPackage = new Package('tstack-docs', tstackDependencies)
 		DOC_TYPES_TO_RENDER.map(docTypeToRender => docTypeToRender.docType)
 	);
 })
+.processor(require('./processors/api.processor'))
 .processor(require('./processors/class.processor'))
 .processor(require('./processors/const.processor'))
 .processor(require('./processors/decorator.processor'))

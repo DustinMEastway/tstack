@@ -1,11 +1,11 @@
 import { Component, ViewChild } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { MatFormFieldAppearance } from '@angular/material';
+import { MatFormFieldAppearance } from '@angular/material/form-field';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { getTestObjectWithHost, Page } from '@tstack/client/testing';
 import { getValue } from '@tstack/core';
 import { Subject } from 'rxjs';
 
-import { getTestObjectWithHost, Page } from '../../../testing';
 import { TskOption } from '../option/option';
 
 import { TskAutocompleteComponent } from './autocomplete.component';
@@ -36,7 +36,7 @@ class Foo {
 		</tsk-autocomplete>`
 })
 class TestHostComponent {
-	@ViewChild(TskAutocompleteComponent) component: TskAutocompleteComponent<Foo>;
+	@ViewChild(TskAutocompleteComponent, { static: false }) component: TskAutocompleteComponent<Foo>;
 	appearance: MatFormFieldAppearance = 'fill';
 	autoSelect = true;
 	caseSensitive = false;
@@ -110,8 +110,6 @@ describe('AutocompleteComponent', () => {
 	beforeEach(() => {
 		TskAutocompleteComponent.maxDisplayedOptions = 50;
 		({ component, fixture, host, page } = getTestObjectWithHost(TestHostComponent, 'component', TestPage));
-
-		fixture.detectChanges();
 	});
 
 	afterEach(() => {
@@ -519,6 +517,16 @@ describe('AutocompleteComponent', () => {
 			component.filterType = 'startsWith';
 			expect(options.length).toEqual(1);
 			expect(options).toEqual(expectedStartsWithOptions);
+		});
+
+		it('should allow setting value without a formControl', () => {
+			// arrange / act / assert
+			expect(() => component.selectedValue = component.optionValues[0]).not.toThrow();
+		});
+
+		it('should allow focusing without a formControl', () => {
+			// arrange / act / assert
+			expect(() => component.onFocus()).not.toThrow();
 		});
 	});
 });

@@ -1,4 +1,4 @@
-import { ThemePalette } from '@angular/material';
+import { ThemePalette } from '@angular/material/core';
 
 /** action button typically used at the bottom of a dialog */
 export interface TskDialogActionButton<ResultT = any> {

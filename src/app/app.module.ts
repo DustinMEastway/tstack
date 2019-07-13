@@ -1,17 +1,16 @@
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import {
-	MatButtonModule,
-	MatIconModule,
-	MatToolbarModule
-} from '@angular/material';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatToolbarModule } from '@angular/material/toolbar';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { TskThemeModule } from '@tstack/client';
+import { TskAutocompleteModule, TskThemeModule } from '@tstack/client';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppScreenComponent } from './app-screen.component';
+import { DocNotFoundComponent } from './doc-not-found/doc-not-found.component';
 import { DocumentationModule } from './documentation/documentation.module';
 import { ExamplesModule } from './examples/examples.module';
 import { ScreenComponent } from './screen/screen.component';
@@ -23,15 +22,17 @@ import { ScreenComponent } from './screen/screen.component';
 		DocumentationModule,
 		ExamplesModule,
 		HttpClientModule,
-		FormsModule,
 		MatButtonModule,
 		MatIconModule,
 		MatToolbarModule,
+		ReactiveFormsModule,
+		TskAutocompleteModule,
 		TskThemeModule,
 		AppRoutingModule
 	],
 	declarations: [
 		AppScreenComponent,
+		DocNotFoundComponent,
 		ScreenComponent
 	],
 	bootstrap: [ AppScreenComponent ]

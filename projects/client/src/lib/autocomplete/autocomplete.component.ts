@@ -17,7 +17,9 @@ import {
 	ViewChild
 } from '@angular/core';
 import { ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { MatAutocomplete, MatFormFieldAppearance, MatOption } from '@angular/material';
+import { MatAutocomplete } from '@angular/material/autocomplete';
+import { MatOption } from '@angular/material/core';
+import { MatFormFieldAppearance } from '@angular/material/form-field';
 import { castString, find, getValue, pluck, CastStringConfig } from '@tstack/core';
 import { combineLatest, BehaviorSubject, Observable } from 'rxjs';
 import { distinctUntilChanged, map, startWith } from 'rxjs/operators';
@@ -45,7 +47,7 @@ export class TskAutocompleteComponent<OptionValueT = any> implements AfterViewIn
 	/** @prop the type of form field to display */
 	@Input() appearance: MatFormFieldAppearance;
 	/** @prop the material autocomplete */
-	@ViewChild(MatAutocomplete) matAutocomplete: MatAutocomplete;
+	@ViewChild(MatAutocomplete, { static: false }) matAutocomplete: MatAutocomplete;
 	/** @prop placeholder displayed in the input of the autocomplete */
 	@Input() placeholder: string;
 	private _autoSelect = false;
@@ -230,10 +232,12 @@ export class TskAutocompleteComponent<OptionValueT = any> implements AfterViewIn
 	}
 	set selectedValue(selectedValue: OptionValueT) {
 		if (this.selectedValue !== selectedValue) {
-			this._selectedValueChange.next(selectedValue);
 			this.value = selectedValue;
 			this.setSelectedMatOption(selectedValue);
-			this._registerValueChange(selectedValue);
+			if (typeof this._registerValueChange === 'function') {
+				this._registerValueChange(selectedValue);
+			}
+			this._selectedValueChange.next(selectedValue);
 		}
 	}
 
@@ -323,7 +327,9 @@ export class TskAutocompleteComponent<OptionValueT = any> implements AfterViewIn
 
 	/** @method onFocus register that the form control has been touched */
 	onFocus(): void {
-		this._registerTouch();
+		if (typeof this._registerTouch === 'function') {
+			this._registerTouch();
+		}
 	}
 
 	/** @method registerOnChange get the method used to notify the form that the autocomplete's value has changed */
@@ -347,13 +353,13 @@ export class TskAutocompleteComponent<OptionValueT = any> implements AfterViewIn
 	}
 
 	private setFilteredOptions(): void {
-		this._filteredOptions = combineLatest(
+		this._filteredOptions = combineLatest([
 			this._optionsChange.pipe(startWith(this.options)),
 			this.caseSensitiveChange,
 			this.filterChange,
 			this.filterTypeChange,
 			this.maxDisplayedOptionsChange
-		).pipe(
+		]).pipe(
 			map(([options, caseSensitive, filter, filterType, maxDisplayedOptions]) => {
 				const castStringConfig: Partial<CastStringConfig> = { case: (caseSensitive) ? 'same' : 'upper' };
 				const castFilter = castString(filter, castStringConfig);

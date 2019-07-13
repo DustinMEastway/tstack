@@ -1,7 +1,10 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { MatButtonModule, MatIconModule, MatMenuModule } from '@angular/material';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatMenuModule } from '@angular/material/menu';
 
+import { TskNavMenuContentComponent } from './nav-menu-content.component';
 import { TskNavMenuComponent } from './nav-menu.component';
 
 @NgModule({
@@ -12,7 +15,8 @@ import { TskNavMenuComponent } from './nav-menu.component';
 		MatMenuModule
 	],
 	declarations: [
-		TskNavMenuComponent
+		TskNavMenuComponent,
+		TskNavMenuContentComponent
 	],
 	exports: [
 		TskNavMenuComponent
