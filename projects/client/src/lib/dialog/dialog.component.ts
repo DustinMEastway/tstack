@@ -15,12 +15,12 @@ import { TskDialogType } from './dialog-type';
 	styleUrls: ['./dialog.component.scss']
 })
 export class TskDialogComponent<ContentT = any, ResultT = any> {
-	@ViewChild(TskDynamicContentComponent, { static: false }) dynamicContent: TskDynamicContentComponent<ContentT>;
+	@ViewChild(TskDynamicContentComponent, { static: true }) dynamicContent: TskDynamicContentComponent<ContentT>;
 	dialogRef: MatDialogRef<TskDialogComponent<ContentT, ResultT>, ResultT>;
 	dialogType: TskDialogType;
 	title: string;
-	private _actionButtons: TskDialogActionButton<ResultT>[];
-	private _content: ContentT;
+	protected _actionButtons: TskDialogActionButton<ResultT>[];
+	protected _content: ContentT;
 
 	get actionButtons(): TskDialogActionButton<ResultT>[] {
 		return this._actionButtons;
@@ -89,7 +89,9 @@ export class TskDialogComponent<ContentT = any, ResultT = any> {
 		if (content instanceof Array) {
 			this._content = content;
 		} else if (content != null) {
-			this._content = this.dynamicContent.updateContent(content).instance;
+			const componentRef = this.dynamicContent.updateContent(content);
+			componentRef.changeDetectorRef.detectChanges();
+			this._content = componentRef.instance;
 		}
 	}
 

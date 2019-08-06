@@ -27,7 +27,6 @@ module.exports = {
 		// add calls to content
 		const callDocs = (doc.overloads.length) ? doc.overloads : [ doc ];
 		doc.content += callDocs.map(callDoc => {
-			// TODO: add doc.typeParameters when it is available on overloads
 			const parameters = callDoc.parameters.join(', ');
 
 			return `\n@call function ${doc.name}(${parameters}): ${callDoc.type}`;
