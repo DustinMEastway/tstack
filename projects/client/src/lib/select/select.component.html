@@ -1,0 +1,19 @@
+<mat-form-field [appearance]="appearance">
+	<mat-label>{{ placeholder }}</mat-label>
+	<mat-select
+		#matAutocomplete
+		class="tsk-autocomplete"
+		(focus)="onFocus()"
+		(selectionChange)="selectedValue = $event.value"
+		[formControl]="selectControl">
+		<mat-option
+			*ngFor="let option of options"
+			[disabled]="option.disabled"
+			[value]="option.value">
+			{{ option.viewValue }}
+		</mat-option>
+		<mat-option *ngIf="!options.length" disabled>
+			No options to display
+		</mat-option>
+	</mat-select>
+</mat-form-field>
