@@ -34,11 +34,23 @@ export class EntityBase {
 	}
 
 	/**
-	 * clones the properties from the source object onto this object
+	 * assigns the properties from the source object onto this object
 	 * @param source to clone the properties of
 	 * @returns this after taking the properties of souce
 	 */
-	clone(source: any): this {
+	assign<T = any>(source: Partial<T>): this {
 		return Object.assign(this, source);
+	}
+
+	/**
+	 * clones the properties from the source object onto this object
+	 * @param source to clone the properties of
+	 * @returns this after taking the properties of souce
+	 *
+	 * @depricated use assign
+	 */
+	clone(source: any): this {
+		console.warn('EntityBase.clone is depricated, please use EntityBase.assign instead');
+		return this.assign(source);
 	}
 }

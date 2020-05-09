@@ -135,6 +135,14 @@ export function deepCopy(item: any): any {
 	return JSON.parse(JSON.stringify(item));
 }
 
+export function getPropertiesByValue<T>(item: T, valueToGet: any): (keyof(T))[] {
+	return keyValuePairs(item).filter(keyValuePair =>
+		keyValuePair.value === valueToGet
+	).map(keyValuePair =>
+		keyValuePair.key
+	);
+}
+
 /**
  * gets a value without throwing an error if the property is not on the item
  * @param item to get the value from
@@ -187,6 +195,14 @@ export function isBetween<T = any>(value: T, min: T, max: T, config?: IsBetweenC
 		|| (maxComparison === 0 && (config.endpoints === 'both' || config.endpoints === 'max'));
 }
 
+export function keyValuePairs<T = any>(item: T): { key: keyof(T), value: T[keyof(T)] }[] {
+	return (item == null) ? [] : (Object.keys(item) as (keyof(T))[]).map(key => ({ key, value: item[key] }));
+}
+
+export function keys<T = any>(item: T): (keyof(T))[] {
+	return keyValuePairs(item).map(keyValuePair => keyValuePair.key);
+}
+
 /**
  * gets each property from the source and sets them on the target
  * @param target object to map values to
@@ -237,8 +253,8 @@ export function setValue<ItemT>(item: ItemT, value: any, property: string): Item
  * @param item to pull values from
  * @returns values of each property on the item
  */
-export function values<T, K extends keyof(T)>(item: T): T[K][];
+export function values<T>(item: T): T[keyof(T)][];
 export function values<T = any>(item: any): T[];
-export function values<T, K extends keyof(T)>(item: T): T[K][] {
-	return (item == null) ? [] : Object.keys(item).map(key => item[key as K]);
+export function values<T>(item: T): T[keyof(T)][] {
+	return keyValuePairs(item).map(keyValuePair => keyValuePair.value);
 }

@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, ElementRef, HostBinding, Input, ViewChild } from '@angular/core';
-import { MatFormFieldAppearance } from '@angular/material/form-field';
+import { MatFormField, MatFormFieldAppearance } from '@angular/material/form-field';
 import { getValue } from '@tstack/core';
 
 const floatingLabelScale = 0.75;
@@ -18,6 +18,8 @@ const outlineGapPadding = 5;
 	styleUrls: [ './readonly-field.component.scss' ]
 })
 export class TskReadonlyFieldComponent<ValueT = any> implements AfterViewInit {
+	/** whether the form field syles being loaded has already been checked */
+	protected static _formFieldStylesAreVerified = false;
 	@HostBinding('class.mat-form-field')
 	@HostBinding('class.mat-form-field-can-float')
 	@HostBinding('class.mat-form-field-should-float')
@@ -98,8 +100,29 @@ export class TskReadonlyFieldComponent<ValueT = any> implements AfterViewInit {
 		this.appearance = 'legacy';
 		// initialized here instead of with its declaration due to tslint concidering it a method instead of a field
 		this._displayWithFunction = (value) => getValue(value);
+		// verify that styles have been loaded
+		TskReadonlyFieldComponent._verifyFormFieldStyles();
 	}
 
+	/** verifies that the MatFormField styles are in the dom, adds them if they are not */
+	protected static _verifyFormFieldStyles(): void {
+		if (this._formFieldStylesAreVerified) {
+			return;
+		}
+
+		this._formFieldStylesAreVerified = true;
+		const matFormFieldStylesLoaded = Array.from(document.querySelectorAll('style') || []).some(script =>
+			script.innerText.startsWith('.mat-form-field{')
+		);
+
+		if (!matFormFieldStylesLoaded) {
+			const styleElement = document.createElement('style');
+			styleElement.innerText = getValue(MatFormField, 'decorators.0.args.0.styles.0');
+			document.head.appendChild(styleElement);
+		}
+	}
+
+	/** @inheritdoc */
 	ngAfterViewInit(): void {
 		this.updateOutlineGap();
 	}

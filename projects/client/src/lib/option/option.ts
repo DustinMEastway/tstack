@@ -6,12 +6,18 @@ export class TskOption<T> {
 	viewValue: string;
 	value: T;
 
-	static createOptions<T>(values: T[], viewProperty: string): TskOption<T>[] {
+	static createOptions<T>(values: T[], viewProperty: string): TskOption<T>[];
+	static createOptions<T>(values: T[], viewValueGetter: (value: T) => string): TskOption<T>[];
+	static createOptions<T>(values: T[], viewProperty: string | ((value: T) => string)): TskOption<T>[] {
 		if (!(values instanceof Array)) { return []; }
+
+		const viewValueGetter = (typeof viewProperty === 'function')
+			? viewProperty
+			: (value: T) => getValue(value, viewProperty);
 
 		return values.map((value) => {
 			const option = new TskOption<T>();
-			option.viewValue = getValue(value, viewProperty);
+			option.viewValue = viewValueGetter(value);
 			option.value = value;
 
 			return option;
