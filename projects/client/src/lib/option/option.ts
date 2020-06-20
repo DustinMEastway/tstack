@@ -6,8 +6,6 @@ export class TskOption<T> {
 	viewValue: string;
 	value: T;
 
-	static createOptions<T>(values: T[], viewProperty: string): TskOption<T>[];
-	static createOptions<T>(values: T[], viewValueGetter: (value: T) => string): TskOption<T>[];
 	static createOptions<T>(values: T[], viewProperty: string | ((value: T) => string)): TskOption<T>[] {
 		if (!(values instanceof Array)) { return []; }
 
