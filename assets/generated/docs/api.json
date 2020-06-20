@@ -96,6 +96,16 @@
       "path": "client/TskReadonlyFieldModule"
     },
     {
+      "docType": "component",
+      "name": "TskSelectComponent",
+      "path": "client/TskSelectComponent"
+    },
+    {
+      "docType": "ngmodule",
+      "name": "TskSelectModule",
+      "path": "client/TskSelectModule"
+    },
+    {
       "docType": "class",
       "name": "TskBaseApiService",
       "path": "client/TskBaseApiService"
@@ -237,6 +247,11 @@
     },
     {
       "docType": "function",
+      "name": "getPropertiesByValue",
+      "path": "core/getPropertiesByValue"
+    },
+    {
+      "docType": "function",
       "name": "getValue",
       "path": "core/getValue"
     },
@@ -244,6 +259,16 @@
       "docType": "function",
       "name": "isBetween",
       "path": "core/isBetween"
+    },
+    {
+      "docType": "function",
+      "name": "keyValuePairs",
+      "path": "core/keyValuePairs"
+    },
+    {
+      "docType": "function",
+      "name": "keys",
+      "path": "core/keys"
     },
     {
       "docType": "function",

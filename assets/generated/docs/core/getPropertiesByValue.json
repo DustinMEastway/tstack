@@ -1,0 +1,6 @@
+{
+  "title": "getPropertiesByValue",
+  "description": "get all properties with values equal to the provided value",
+  "sections": [],
+  "docType": "function"
+}

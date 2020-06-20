@@ -1,0 +1,6 @@
+{
+  "title": "keyValuePairs",
+  "description": "gets the key (property)/value (property value) pairs off of the object",
+  "sections": [],
+  "docType": "function"
+}

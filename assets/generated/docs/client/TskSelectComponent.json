@@ -1,0 +1,103 @@
+{
+  "title": "TskSelectComponent",
+  "description": "",
+  "sections": [
+    {
+      "title": "Decorator(s)",
+      "componentSelector": "markdown",
+      "data": "```typescript\n@Component({\n    selector: 'tsk-select',\n    templateUrl: './select.component.html',\n    styleUrls: ['./select.component.scss'],\n    providers: [\n        {\n            provide: NG_VALUE_ACCESSOR,\n            useExisting: forwardRef(() => TskSelectComponent),\n            multi: true\n        }\n    ]\n})\n```",
+      "display": true
+    },
+    {
+      "title": "Properties",
+      "componentSelector": "table",
+      "data": {
+        "columns": [
+          {
+            "componentSelector": "markdown",
+            "header": "Name",
+            "id": "name",
+            "property": "name"
+          },
+          {
+            "header": "Description",
+            "id": "description",
+            "property": "description"
+          }
+        ],
+        "rows": [
+          {
+            "name": "@Input( )\n\nappearance: MatFormFieldAppearance",
+            "description": "the type of form field to display"
+          },
+          {
+            "name": "@Input( )\n\nplaceholder: string",
+            "description": "to display in the field"
+          },
+          {
+            "name": "@Input( )\n\noptionValues: OptionValueT[]",
+            "description": "values of the options (only use with string option values or viewProperty)"
+          },
+          {
+            "name": "@Input( )\n\noptions: TskOption<OptionValueT>[]",
+            "description": "available to select"
+          },
+          {
+            "name": "@Input( )\n\nselectedValue: OptionValueT",
+            "description": "selected value"
+          },
+          {
+            "name": "@Output( )\n\nselectionChange: Observable<OptionValueT>",
+            "description": "emits when the selected value of the autocomplete changes"
+          },
+          {
+            "name": "selectControl: FormControl",
+            "description": "form control of the select"
+          },
+          {
+            "name": "@Input( )\n\nviewProperty: string",
+            "description": "property to get off of value to display in the options and use to compare options for auto select"
+          }
+        ]
+      }
+    },
+    {
+      "title": "Method",
+      "componentSelector": "table",
+      "data": {
+        "columns": [
+          {
+            "componentSelector": "markdown",
+            "header": "Name",
+            "id": "name",
+            "property": "name"
+          },
+          {
+            "header": "Description",
+            "id": "description",
+            "property": "description"
+          }
+        ],
+        "rows": [
+          {
+            "name": "onFocus: void",
+            "description": "register that the form control has been touched"
+          },
+          {
+            "name": "registerOnChange: void",
+            "description": "get the method used to notify the form that the value has changed"
+          },
+          {
+            "name": "registerOnTouched: void",
+            "description": "get the method used to notify the form when the form field is touched"
+          },
+          {
+            "name": "writeValue: void",
+            "description": "set the value through the form"
+          }
+        ]
+      }
+    }
+  ],
+  "docType": "component"
+}

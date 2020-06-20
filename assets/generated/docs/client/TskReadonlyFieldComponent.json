@@ -101,7 +101,7 @@
         "rows": [
           {
             "name": "ngAfterViewInit: void",
-            "description": "\nfunction ngAfterViewInit(): void"
+            "description": "@inheritdoc"
           }
         ]
       }

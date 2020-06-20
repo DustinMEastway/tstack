@@ -12,7 +12,7 @@
           }
         ],
         "rows": [
-          "function values(item: T): T[K][],",
+          "function values(item: T): T[keyof (T)][],",
           "function values(item: any): T[]"
         ]
       }

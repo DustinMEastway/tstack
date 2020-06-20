@@ -57,6 +57,13 @@
           },
           {
             "name": {
+              "text": "TskSelectModule",
+              "url": "/client/TskSelectModule"
+            },
+            "description": ""
+          },
+          {
+            "name": {
               "text": "TskSparkleModule",
               "url": "/client/TskSparkleModule"
             },
@@ -124,6 +131,13 @@
               "url": "/client/TskReadonlyFieldComponent"
             },
             "description": "The tsk-readonly-field component is used to display readonly information in a manor that is consistant with mat-form-field.\n"
+          },
+          {
+            "name": {
+              "text": "TskSelectComponent",
+              "url": "/client/TskSelectComponent"
+            },
+            "description": ""
           },
           {
             "name": {

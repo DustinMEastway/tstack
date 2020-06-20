@@ -1,0 +1,6 @@
+{
+  "title": "keys",
+  "description": "gets the property keys from the provided object",
+  "sections": [],
+  "docType": "function"
+}

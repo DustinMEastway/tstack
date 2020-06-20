@@ -232,6 +232,13 @@
           },
           {
             "name": {
+              "text": "getPropertiesByValue",
+              "url": "/core/getPropertiesByValue"
+            },
+            "description": "get all properties with values equal to the provided value"
+          },
+          {
+            "name": {
               "text": "getValue",
               "url": "/core/getValue"
             },
@@ -243,6 +250,20 @@
               "url": "/core/isBetween"
             },
             "description": "checks if a value is between two other values (swaps min & max if min is greater than max)"
+          },
+          {
+            "name": {
+              "text": "keyValuePairs",
+              "url": "/core/keyValuePairs"
+            },
+            "description": "gets the key (property)/value (property value) pairs off of the object"
+          },
+          {
+            "name": {
+              "text": "keys",
+              "url": "/core/keys"
+            },
+            "description": "gets the property keys from the provided object"
           },
           {
             "name": {

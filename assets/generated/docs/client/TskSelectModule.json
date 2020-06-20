@@ -1,0 +1,35 @@
+{
+  "title": "TskSelectModule",
+  "description": "",
+  "sections": [
+    {
+      "title": "Declaration(s)",
+      "componentSelector": "table",
+      "data": {
+        "columns": [
+          {
+            "id": "name",
+            "header": "Name",
+            "componentSelector": "link",
+            "property": "name"
+          },
+          {
+            "id": "description",
+            "header": "Description",
+            "property": "description"
+          }
+        ],
+        "rows": [
+          {
+            "description": "",
+            "name": {
+              "text": "TskSelectComponent",
+              "url": "/client/TskSelectComponent"
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "docType": "ngmodule"
+}

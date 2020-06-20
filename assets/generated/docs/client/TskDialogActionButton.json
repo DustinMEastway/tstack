@@ -28,11 +28,15 @@
         "rows": [
           {
             "name": "action: (result: ResultT) => void",
-            "description": "to proform when button is clicked (default is to close the dialog)"
+            "description": "to proform when button is clicked"
           },
           {
             "name": "color: ThemePalette",
             "description": "of the button (based on theme)"
+          },
+          {
+            "name": "closeOnClick: boolean",
+            "description": "whether the button should close the dialog (defaults to true)"
           },
           {
             "name": "type: 'raised' | 'stroked'",
