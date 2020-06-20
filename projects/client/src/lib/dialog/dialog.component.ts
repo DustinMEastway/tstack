@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, ViewChild } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Type } from '@tstack/core';
 import { Observable } from 'rxjs';
@@ -66,8 +66,6 @@ export class TskDialogComponent<ContentT = any, ResultT = any> {
 		 		return '';
 		 }
 	}
-
-	constructor(protected _changeDetectorRef: ChangeDetectorRef) {}
 
 	/**
 	 * @method close dialog using associated dialog reference

@@ -135,12 +135,9 @@ export function deepCopy(item: any): any {
 	return JSON.parse(JSON.stringify(item));
 }
 
+/** get all properties with values equal to the provided value */
 export function getPropertiesByValue<T>(item: T, valueToGet: any): (keyof(T))[] {
-	return keyValuePairs(item).filter(keyValuePair =>
-		keyValuePair.value === valueToGet
-	).map(keyValuePair =>
-		keyValuePair.key
-	);
+	return keyValuePairs(item).filter(({ value }) => value === valueToGet).map(({ key }) => key);
 }
 
 /**
@@ -195,12 +192,14 @@ export function isBetween<T = any>(value: T, min: T, max: T, config?: IsBetweenC
 		|| (maxComparison === 0 && (config.endpoints === 'both' || config.endpoints === 'max'));
 }
 
+/** gets the key (property)/value (property value) pairs off of the object */
 export function keyValuePairs<T = any>(item: T): { key: keyof(T), value: T[keyof(T)] }[] {
 	return (item == null) ? [] : (Object.keys(item) as (keyof(T))[]).map(key => ({ key, value: item[key] }));
 }
 
+/** gets the property keys from the provided object */
 export function keys<T = any>(item: T): (keyof(T))[] {
-	return keyValuePairs(item).map(keyValuePair => keyValuePair.key);
+	return keyValuePairs(item).map(({ key }) => key);
 }
 
 /**
@@ -256,5 +255,5 @@ export function setValue<ItemT>(item: ItemT, value: any, property: string): Item
 export function values<T>(item: T): T[keyof(T)][];
 export function values<T = any>(item: any): T[];
 export function values<T>(item: T): T[keyof(T)][] {
-	return keyValuePairs(item).map(keyValuePair => keyValuePair.value);
+	return keyValuePairs(item).map(({ value }) => value);
 }
