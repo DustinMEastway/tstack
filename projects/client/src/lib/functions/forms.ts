@@ -12,7 +12,8 @@ export type MarkAsType = 'dirty' | 'pristine' | 'touched' | 'untouched';
  */
 export function markAs(
 	control: AbstractControl & { controls?: { [key: string]: AbstractControl } | AbstractControl[] },
-	type: MarkAsType): void {
+	type: MarkAsType
+): void {
 	if (!control || !type) { return; }
 
 	control['markAs' + type.substr(0, 1).toUpperCase() + type.substr(1) as MarkAsMethod]();

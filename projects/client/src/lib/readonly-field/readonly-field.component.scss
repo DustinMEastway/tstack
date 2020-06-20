@@ -1,7 +1,7 @@
-.mat-form-field-autofill-control {
-	min-height: 1.125em;
-}
+:host {
+	display: inline-block;
+	position: relative;
 
-.mat-form-field-wrapper .mat-form-field-flex .mat-form-field-outline {
-	opacity: 100;
+	// To avoid problems with text-align.
+	text-align: left;
 }

@@ -48,7 +48,7 @@ export class TskDialogComponent<ContentT = any, ResultT = any> {
 		 	case 'warn':
 	 			return 'tsk-accent-background';
  			case 'info':
- 				return 'tsk-background-20';
+ 				return 'tsk-background-20-less';
 		 	default:
 		 		return 'tsk-primary-background';
 		 }
@@ -102,7 +102,9 @@ export class TskDialogComponent<ContentT = any, ResultT = any> {
 	onActionClick(actionButton: TskDialogActionButton<ResultT> = null): void {
 		if (actionButton && typeof actionButton.action === 'function') {
 			actionButton.action(actionButton.value);
-		} else {
+		}
+
+		if (actionButton.closeOnClick !== false) {
 			this.close(actionButton ? actionButton.value : null);
 		}
 	}

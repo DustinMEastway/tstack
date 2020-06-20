@@ -66,9 +66,15 @@
 		color: $foreground-text-color;
 	}
 
-	.tsk-background-20 {
+	.tsk-background-20-less {
 		$amount: 20%;
 		background-color: if($is-dark, lighten($background-color, $amount), darken($background-color, $amount));
 		color: if($is-dark, lighten($foreground-text-color, $amount), darken($foreground-text-color, $amount));
+	}
+
+	.tsk-background-20-more {
+		$amount: 20%;
+		background-color: if($is-dark, darken($background-color, $amount), lighten($background-color, $amount));
+		color: if($is-dark, darken($foreground-text-color, $amount), lighten($foreground-text-color, $amount));
 	}
 }

@@ -6,6 +6,7 @@ export * from './functions/index';
 export * from './nav-menu/index';
 export * from './option/index';
 export * from './readonly-field/index';
+export * from './select/index';
 export * from './services/index';
 export * from './sparkle/index';
 export * from './theme/index';

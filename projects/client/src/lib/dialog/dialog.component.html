@@ -10,7 +10,7 @@
 		<div *ngFor="let stringContent of content">{{ stringContent }}</div>
 	</div>
 </mat-dialog-content>
-<mat-dialog-actions fxLayoutAlign="end">
+<mat-dialog-actions *ngIf="actionButtons.length" fxLayoutAlign="end">
 	<div *ngFor="let actionButton of actionButtons">
 		<div [ngSwitch]="actionButton.type">
 			<button *ngSwitchCase="'raised'" mat-raised-button type="button" [color]="actionButton.color" (click)="onActionClick(actionButton)">
