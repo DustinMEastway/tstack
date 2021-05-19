@@ -1,32 +1,13 @@
 <!doctype html>
 <html lang="en">
-	<head>
-		<meta charset="utf-8">
-		<title>TStack</title>
-		<base href="/">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-		<link rel="icon" type="image/x-icon" href="favicon.ico">
-	</head>
-	<body>
-		<script>
-			/**
-			 * Found on:
-			 * https://shermandigital.com/blog/fix-404-errors-from-angular-projects-hosted-on-github-pages/
-			 *
-			 * used to bring a user that was sent to 404.html to the appropriate route, because
-			 * Github Pages sends users to 404 when they reload on a route other than '/'
-			 */
-			(function () {
-				var redirect = sessionStorage.redirect;
-				delete sessionStorage.redirect;
-
-				// redirect if value existed in session storage
-				if (redirect && redirect != location.href) {
-					history.replaceState(null, null, redirect);
-				}
-			})();
-		</script>
-		<app-root></app-root>
-	</body>
+<head>
+  <meta charset="utf-8">
+  <title>Tstack</title>
+  <base href="/">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+</head>
+<body>
+  <app-root></app-root>
+</body>
 </html>

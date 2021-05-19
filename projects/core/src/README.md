@@ -1,1 +1,0 @@
-The core module consists of common code that can be shared between multiple modules. For example, there are common functions such as sorting and filtering arrays that would be useful while building other modules.
