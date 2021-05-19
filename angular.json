@@ -85,6 +85,9 @@
           "options": {
             "browserTarget": "tstack:build"
           }
+        },
+        "test": {
+          "builder": "@angular-builders/jest:run"
         }
       }
     }
