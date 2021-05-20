@@ -1,13 +1,15 @@
 {
   "name": "tstack",
-  "version": "2.0.0",
+  "version": "2.0.0-beta.0",
   "description": "A fully TypeScript based stack library to be used used with Angular & Express",
   "author": "Dustin M. Eastway <Dustin.Eastway@gmail.com>",
   "repository": "github:DustinMEastway/tstack",
   "homepage": "https://dustinmeastway.github.io/tstack",
   "license": "MIT",
   "scripts": {
-    "build": "ng build",
+    "build": "npm run build/core && npm run build/tstack",
+    "build/core": "npm --prefix projects/core run build",
+    "build/tstack": "ng build tstack",
     "start": "ng serve --open",
     "test": "ng test tstack"
   },
@@ -24,6 +26,7 @@
     "@angular/platform-browser": "~12.0.0",
     "@angular/platform-browser-dynamic": "~12.0.0",
     "@angular/router": "~12.0.0",
+    "ng-packagr": "^12.0.0",
     "rxjs": "~6.6.0",
     "tslib": "^2.1.0",
     "zone.js": "~0.11.4"

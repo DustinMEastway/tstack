@@ -22,7 +22,12 @@
     ],
     "types": [
       "jest"
-    ]
+    ],
+    "paths": {
+      "@tstack/*": [
+        "dist/*"
+      ]
+    }
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
