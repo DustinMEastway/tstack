@@ -1,0 +1,32 @@
+{
+  "compilerOptions": {
+    "baseUrl": "./",
+    "outDir": "../../dist/angular/schematics",
+    "rootDir": "schematics",
+    "declaration": true,
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "skipDefaultLibCheck": true,
+    "skipLibCheck": true,
+    "sourceMap": true,
+    "target": "es6",
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "lib": [
+      "es2018",
+      "dom"
+    ],
+    "types": [
+      "jest",
+      "node"
+    ]
+  },
+  "include": [
+    "schematics/**/*"
+  ],
+  "exclude": [
+    "schematics/*/files/**/*"
+  ]
+}

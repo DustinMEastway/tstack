@@ -2,7 +2,13 @@
   "name": "@tstack/angular",
   "version": "2.0.0-beta.0",
   "scripts": {
-    "build": "ng build angular"
+    "build": "ng build angular",
+    "postbuild": "npm run copy-files",
+    "copy-files": "copyfiles schematics/*/schema.json schematics/*/files/** schematics/collection.json ../../dist/angular/"
+  },
+  "schematics": "./schematics/collection.json",
+  "ng-add": {
+    "save": "dependencies"
   },
   "peerDependencies": {
     "@angular/common": "^12.0.0",
