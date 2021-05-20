@@ -116,6 +116,32 @@
           "builder": "@angular-builders/jest:run"
         }
       }
+    },
+    "angular": {
+      "projectType": "library",
+      "root": "projects/angular",
+      "sourceRoot": "projects/angular/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/angular/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/angular/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/angular/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-builders/jest:run"
+        }
+      }
     }
   },
   "defaultProject": "tstack"

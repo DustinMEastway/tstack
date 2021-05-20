@@ -7,7 +7,8 @@
   "homepage": "https://dustinmeastway.github.io/tstack",
   "license": "MIT",
   "scripts": {
-    "build": "npm run build/core && npm run build/tstack",
+    "build": "npm run build/core && npm run build/angular && npm run build/tstack",
+    "build/angular": "npm --prefix projects/angular run build",
     "build/core": "npm --prefix projects/core run build",
     "build/tstack": "ng build tstack",
     "lint": "eslint \"**/*.ts\"",
@@ -27,7 +28,6 @@
     "@angular/platform-browser": "~12.0.0",
     "@angular/platform-browser-dynamic": "~12.0.0",
     "@angular/router": "~12.0.0",
-    "ng-packagr": "^12.0.0",
     "rxjs": "~6.6.0",
     "tslib": "^2.1.0",
     "zone.js": "~0.11.4"
@@ -46,6 +46,7 @@
     "@typescript-eslint/parser": "^4.24.0",
     "eslint": "^7.26.0",
     "jest": "^26.6.3",
+    "ng-packagr": "^12.0.0",
     "typescript": "~4.2.3"
   },
   "keywords": [
