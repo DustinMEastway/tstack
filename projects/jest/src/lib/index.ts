@@ -1,1 +1,1 @@
-export const name = '@tstack/jest';
+export * from './functions';
