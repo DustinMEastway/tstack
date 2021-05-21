@@ -1,4 +1,4 @@
-import { testWithData } from './test-with-data';
+import { testWithData } from '@tstack/jest';
 
 type MockTestRecord = [ number, string, boolean ];
 const mockTestRecords: MockTestRecord[] = [

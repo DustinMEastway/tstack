@@ -4,6 +4,7 @@
   "compilerOptions": {
     "outDir": "./out-tsc/spec",
     "esModuleInterop": true,
+    "allowJs": true,
     "types": [
       "jest"
     ]

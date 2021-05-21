@@ -1,6 +1,6 @@
 {
-  "name": "jest",
-  "version": "0.0.1",
+  "name": "@tstack/jest",
+  "version": "2.0.0-beta.0",
   "scripts": {
     "build": "ng build jest"
   },
