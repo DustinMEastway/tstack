@@ -1,0 +1,9 @@
+<div *ngIf="form" [formGroup]="form">
+  <div class="label">User</div>
+  <app-input [control]="form.get('name')"></app-input>
+  <div *ngIf="managerControl?.value" class="sub-control-container">
+    <div class="label">Manager</div>
+    <app-user [form]="managerControl!"></app-user>
+  </div>
+  <button *ngIf="!managerControl?.value" (click)="onAddManagerClick()">Add Manager</button>
+</div>

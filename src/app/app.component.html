@@ -1,8 +1,10 @@
 <div>
   <h1>Welcome to {{title}}!</h1>
-  <form [formGroup]="form">
-    <input type="text" formControlName="name">
-    <div>{{ form.get('name')?.errors | tskValidationMessage : form.get('name') }}</div>
+  <form [formGroup]="form" (submit)="onSubmit()">
+    <app-user [form]="form"></app-user>
+    <hr />
+    <button type="submit">Submit</button>
+    <pre>{{ user | json }}</pre>
   </form>
   <router-outlet></router-outlet>
 </div>

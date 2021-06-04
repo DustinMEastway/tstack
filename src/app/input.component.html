@@ -1,0 +1,5 @@
+<div *ngIf="typedControl">
+  <label>{{ controlName }} ({{ typedControl.touched }})</label>
+  <input type="text" [formControl]="typedControl">
+  <div *ngIf="typedControl.touched" class="error-label">{{ control?.errors | tskValidationMessage : control }}</div>
+</div>
