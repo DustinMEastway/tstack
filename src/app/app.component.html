@@ -1,4 +1,8 @@
 <div>
   <h1>Welcome to {{title}}!</h1>
+  <form [formGroup]="form">
+    <input type="text" formControlName="name">
+    <div>{{ form.get('name')?.errors | tskValidationMessage : form.get('name') }}</div>
+  </form>
   <router-outlet></router-outlet>
 </div>
