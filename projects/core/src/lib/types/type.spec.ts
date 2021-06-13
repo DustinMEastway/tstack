@@ -43,3 +43,18 @@ test('type with constructor args', () => {
   expect(fakeObj1).toBeInstanceOf(FakeClassWithParams);
   expect(fakeObj2).toBeInstanceOf(FakeClassWithParams);
 });
+
+test('use as a function argument', () => {
+  // arrange
+  function createObj<T, ArgsT extends any[]>(type: Type<T, ArgsT>, ...args: ArgsT): T {
+    return new type(...args);
+  }
+
+  // act
+  const fakeObj1 = createObj(FakeEmptyClass);
+  const fakeObj2 = createObj(FakeClassWithParams, 12, 'Foo');
+
+  // assert
+  expect(fakeObj1).toBeInstanceOf(FakeEmptyClass);
+  expect(fakeObj2).toBeInstanceOf(FakeClassWithParams);
+});
