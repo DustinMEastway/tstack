@@ -1,11 +1,11 @@
 /** JSON array. */
-export type JsonArray = JsonPrimative[];
+export type JsonArray = JsonValue[];
 
 /** JSON object. */
-export type JsonObject = Record<string, JsonPrimative>;
+export type JsonObject = { [key: string]: JsonValue; };
 
 /** JSON primative. */
-export type JsonPrimative = string | number | boolean | null;
+export type JsonPrimative = string | number | boolean | null | undefined;
 
 /** JSON value. */
 export type JsonValue = JsonArray | JsonObject | JsonPrimative;
