@@ -1,7 +1,5 @@
+import { toJson, JsonPrimative } from '@tstack/core';
 import { testWithData } from '@tstack/jest';
-
-import { JsonPrimative } from '../types';
-import { toJson } from './to-json';
 
 const getExpectedJson = (value: PrimativeLike | [ PrimativeLike ] | { value: PrimativeLike }): JsonPrimative => {
   const jsonStr = JSON.stringify(value);

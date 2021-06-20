@@ -1,5 +1,4 @@
-import { JsonAdd } from './json-add';
-import { JsonObject, JsonValue, ObjectBase } from '../types';
+import { JsonAdd, JsonObject, JsonValue, ObjectBase } from '@tstack/core';
 
 describe('basic object', () => {
   class FakeClass extends ObjectBase {

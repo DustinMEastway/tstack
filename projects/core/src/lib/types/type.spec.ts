@@ -1,4 +1,4 @@
-import { Type } from './type';
+import { Type } from '@tstack/core';
 
 class FakeEmptyClass {
   constructor() {

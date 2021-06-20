@@ -1,5 +1,4 @@
-import { ObjectBase } from '../types';
-import { Cast } from './cast';
+import { Cast, ObjectBase } from '@tstack/core';
 
 class FakePropertyClass extends ObjectBase {
   @Cast(FakePropertyClass)

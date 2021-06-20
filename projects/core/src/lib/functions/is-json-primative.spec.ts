@@ -1,7 +1,5 @@
+import { isJsonPrimative, JsonPrimative } from '@tstack/core';
 import { testWithData } from '@tstack/jest';
-
-import { JsonPrimative } from '../types';
-import { isJsonPrimative } from './is-json-primative';
 
 const jsonPrimatives: [ JsonPrimative ][] = [
   '',

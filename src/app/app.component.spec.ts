@@ -1,15 +1,24 @@
 import { TestBed } from '@angular/core/testing';
+import { ReactiveFormsModule } from '@angular/forms';
 import { RouterTestingModule } from '@angular/router/testing';
+
 import { AppComponent } from './app.component';
+import { InputComponent } from './input.component';
+import { TskValidationMessagePipe } from './tstack-validation';
+import { UserComponent } from './user.component';
 
 describe('AppComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [
+        ReactiveFormsModule,
         RouterTestingModule
       ],
       declarations: [
-        AppComponent
+        AppComponent,
+        InputComponent,
+        TskValidationMessagePipe,
+        UserComponent
       ],
     }).compileComponents();
   });
