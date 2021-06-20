@@ -1,4 +1,5 @@
-import { jsonConfigSym, CustomJsonConfig, CustomJsonType } from '../types';
+import { toJson } from '../functions';
+import { jsonConfigSym, CustomJsonConfig, CustomJsonType, JsonObject } from '../types';
 
 /** Create an empty @see CustomJsonConfig for a @see CustomJsonType. */
 export function initCustomJsonType<T extends CustomJsonType>(target: T): CustomJsonConfig {
@@ -6,10 +7,19 @@ export function initCustomJsonType<T extends CustomJsonType>(target: T): CustomJ
     return target[jsonConfigSym]!;
   }
 
-  const targetToJson = target.toJSON;
-  target.toJSON = function (this: T) {
-    const baseJson = targetToJson && targetToJson.call(this) || {};
+  // use the base toJSON method to start things off or use the default toJson method.
+  const targetToJson = (typeof target.toJSON === 'function')
+    ? target.toJSON
+    : (function (this: T) { return toJson(this) as JsonObject; });
+
+  target.toJSON = function (this: T): JsonObject {
+    const baseJson = targetToJson.call(this);
+    if (baseJson == null || typeof baseJson !== 'object') {
+      return baseJson;
+    }
+
     const config = target[jsonConfigSym];
+    // add properties that have been configured to be added
     config?.add.forEach(addProp => {
       baseJson[addProp] = this[addProp as keyof(T)] as any;
     });

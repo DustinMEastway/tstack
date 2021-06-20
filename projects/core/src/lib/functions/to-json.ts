@@ -17,10 +17,11 @@ export function toJson<T>(value: T): JsonValue {
       const itemJson = toJson(item)
       return (itemJson === undefined) ? null : itemJson;
     });
-  } else if (typeof value === 'function') {
+  } else if (typeof value === 'function' || typeof value === 'symbol') {
     return undefined;
   } else if (typeof value !== 'object') {
-    // value that the method does not know how to map (e.g. a function in an array)
+    // value that the method does not know how to map
+    console.error('@tstack/core/toJson does not know how to turn value into JSON:', value);
     return null;
   }
 

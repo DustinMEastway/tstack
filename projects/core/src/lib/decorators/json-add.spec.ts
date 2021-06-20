@@ -33,6 +33,11 @@ describe('basic object', () => {
     expect(jsonObj.field).toBe(fakeObj.field);
   });
 
+  test('adding non-decorated field', () => {
+    // arrange / act / assert
+    expect(jsonObj.propertyValue).toBe(fakeObj.propertyValue);
+  });
+
   test('adding a getter property', () => {
     // arrange / act / assert
     expect(jsonObj.getterProperty).toBe(fakeObj.getterProperty);
@@ -47,6 +52,7 @@ describe('basic object', () => {
 describe('custom toJSON object', () => {
   class FakeClassWithToJson extends ObjectBase {
     static readonly additionalName = 'temp';
+    leftOutProp = 'foobar';
 
     @JsonAdd()
     get getterProperty(): number {
@@ -70,6 +76,7 @@ describe('custom toJSON object', () => {
   test('adding a getter property', () => {
     // arrange / act / assert
     expect(jsonObj.getterProperty).toBe(fakeObj.getterProperty);
+    expect(jsonObj.leftOutProp).toBe(undefined);
     expect(jsonObj.additionalName).toBe(FakeClassWithToJson.additionalName);
   });
 });
