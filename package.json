@@ -38,7 +38,7 @@
     "@angular/platform-browser-dynamic": "^8.2.14",
     "@angular/router": "^8.2.14",
     "core-js": "^2.6.10",
-    "marked": "^0.7.0",
+    "marked": "^4.0.10",
     "rxjs": "^6.5.3",
     "tsickle": "^0.37.0",
     "zone.js": "~0.9.1"
